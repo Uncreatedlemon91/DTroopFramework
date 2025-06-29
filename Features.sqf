@@ -7,6 +7,7 @@ Gameplay features
 - Vehicles 
 - Wrecks 
 - 5 lives per player
+- Recover player lives whenever a body is recovered to Maxwell
 
 -- Game World 
 - Alive feeling
