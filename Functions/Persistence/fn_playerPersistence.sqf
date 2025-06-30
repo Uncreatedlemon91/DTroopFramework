@@ -23,8 +23,7 @@ _unit setPosATL (_data select 0);
 _unit setDir (_data select 1);
 _unit setUnitLoadout (_data select 2);
 _unit setVariable ["livesLeft", _data select 3];
-_medicalState = (_data select 4);
-[_unit, _medicalState] call ace_medical_fnc_deserializeState
+[_unit, (_data select 4)] call ace_medical_fnc_deserializeState;
 _unit setVariable ["BulletsFired", _firedData];
 systemChat "Player Loaded";
 

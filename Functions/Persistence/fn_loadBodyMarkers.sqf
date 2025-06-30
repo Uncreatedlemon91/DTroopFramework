@@ -12,8 +12,8 @@ systemChat format ["%1", _markers];
 	_mkr setMarkerTypeLocal (_x select 1); 
 	_mkr setMarkerColorLocal (_x select 2);
 	_mkr setMarkerText (_x select 3);
-	_mkr setMarkerAlphaLocal 1;
+	_mkr setMarkerAlphaLocal 0;
 	if (debugMode) then {
-		_mkr setMarkerAlpha 0;
+		_mkr setMarkerAlpha 1;
 	};
 } forEach _markers;
