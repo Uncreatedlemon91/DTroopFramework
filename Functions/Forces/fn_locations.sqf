@@ -1,27 +1,51 @@
 // Locations are listed on the map 
-_locations = nearestLocations [[0,0,0], ["", "", ""], worldsize * 4];
+_lowPriority = [
+	"Mount",
+	"NameLocal",
+	"NameVillage",
+	"Name",
+	"VegetationBroadleaf"
+];
+_midPriority = [
+	"Hill",
+	"ViewPoint",
+	"Strategic"
+];
+_highPriority = [
+	"Airport",
+	"NameMarine",
+	"StrongpointArea"
+];
+
+_allLocations pushBack _lowPriority;
+_allLocations pushback _midPriority;
+_allLocations pushback _highPriority;
+
+_locations = nearestLocations [[0,0,0], _allLocations, worldsize * 4];
 {
 	_mkr = createMarkerLocal [text _x, position _x];
 	_mkr setMarkerType "hd_flag";
-	_mkr setMarkerColor "COLORRED";
+	if (type _x in _lowPriority) then {
+		_mkr setMarkerColor "ColorBlue";
+	};
+	if (type _x in _midPriority) then {
+		_mkr setMarkerColor "ColorYellow";
+	};
+	if (type _x in _highPriority) then {
+		_mkr setMarkerColor "ColorRed";
+	};
 	_mkr setMarkerText (type _x);
 } forEach _locations;
 
-_locations2 = nearestLocations [[0,0,0], ["", "", "", ""], worldsize * 4];
-{
-	_mkr = createMarkerLocal [format ["%1-%2", text _x, position _x], position _x];
-	_mkr setMarkerType "hd_flag";
-	_mkr setMarkerColor "COLORBLUE";
-	_mkr setMarkerText (type _x);
-} forEach _locations2;
+
 
 /*
 // Low Priority Objectives 
 "Mount"
 "NameLocal"
-NameVillage
-Name
-VegetationBroadleaf
+"NameVillage"
+"Name"
+"VegetationBroadleaf"
 
 // Medium Priority 
 "Hill"
