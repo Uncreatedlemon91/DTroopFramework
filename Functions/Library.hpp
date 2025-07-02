@@ -5,6 +5,7 @@ class CfgFunctions
 		class Forces
 		{
 			class PAVN {};
+			class locations {};
 		};
 		
 		class Persistence
