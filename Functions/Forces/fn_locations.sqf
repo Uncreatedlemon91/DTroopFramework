@@ -41,10 +41,7 @@ _locations = nearestLocations [[0,0,0], _allLocations, worldsize * 4];
 	};
 
 	// Get previous location variables - or save new variables if old ones don't exist.
-	_locSecurity = missionProfileNameSpace getVariable [format ["%1-%2-Security", type _x, position _x], random 100];
-	_locPriority = missionProfileNameSpace getVariable [format ["%1-%2-Priority", type _x, position _x], _priority];
-	_locTroops = missionProfileNameSpace getVariable [format ["%1-%2-TroopStrength", type _x, position _x], random 3];
-	_locControl = missionProfileNameSpace getVariable [format ["%1-%2-ControlledBy", type _x, position _x], selectRandom [0, 1, 2]];
+	_locData = missionProfileNameSpace getVariable [format ["%1-%2-Data", type _x, position _x], [random 100, _priority, random 3, round (Random 3)]];
 	SaveMissionProfileNameSpace;
 
 	// Create a Trigger on the location 
@@ -54,7 +51,7 @@ _locations = nearestLocations [[0,0,0], _allLocations, worldsize * 4];
 	_trg setVariable ["attachedLocation", _x];
 	_trg setTriggerStatements [
 		"this", 
-		"[thisTrigger] lmn_fnc_ActivateLoc",
+		"[thisTrigger] remoteExec ['lmn_fnc_ActivateLoc', 2]",
 		""
 	];
 } forEach _locations;
