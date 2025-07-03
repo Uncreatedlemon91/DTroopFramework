@@ -8,12 +8,8 @@ _saveLoop = 15;
 
 // Get data of the player, if it exists 
 _data = missionProfileNamespace getVariable [format ["%1-%2", _uid, missionName], []];
-_firedData = missionProfileNameSpace getVariable [format ["%1-%2-BulletsFired", _uid, missionname], 0];
 
 // Database administration
-if (resetBulletCounts) then {
-	_firedData = missionProfileNameSpace setVariable [format ["%1-%2-BulletsFired", _uid, missionName], 0];
-};
 if (resetPlayerData) then {
 	_data = missionProfileNameSpace setVariable [format ["%1-%2", _uid, missionName], nil];
 };
@@ -24,7 +20,6 @@ _unit setDir (_data select 1);
 _unit setUnitLoadout (_data select 2);
 _unit setVariable ["livesLeft", _data select 3];
 [_unit, (_data select 4)] call ace_medical_fnc_deserializeState;
-_unit setVariable ["BulletsFired", _firedData];
 systemChat "Player Loaded";
 
 sleep 5;

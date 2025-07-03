@@ -45,7 +45,7 @@ _locations = nearestLocations [[0,0,0], _allLocations, worldsize * 4];
 	};
 
 	// Get previous location variables - or save new variables if old ones don't exist.
-	_locData = missionProfileNameSpace getVariable [format ["%1-%2-Data", type _x, position _x], [random 100, _priority, random 3, round (Random 3)]];
+	_locData = MissionProfileNameSpace getVariable [format ["%1-%2-Data", type _x, position _x], [random 100, _priority, random 3, round (Random 3)]];
 	SaveMissionProfileNameSpace;
 
 	// Create a Trigger on the location 
@@ -59,46 +59,5 @@ _locations = nearestLocations [[0,0,0], _allLocations, worldsize * 4];
 		"[thisTrigger] remoteExec ['lmn_fnc_ActivateLoc', 2]",
 		"thisTrigger setVariable ['Active', false]"
 	];
+	sleep 0.3;
 } forEach _locations;
-
-/*
-// Low Priority Objectives 
-"Mount"
-"NameLocal"
-"NameVillage"
-"Name"
-"VegetationBroadleaf"
-
-// Medium Priority 
-"Hill"
-"ViewPoint"
-"Strategic"
-
-// High Priority 
-Airport
-NameMarine
-StrongpointArea
-
-// Not Used 
-"HistoricalSite"
-"CivilDefense"
-"RockArea"
-"SafetyZone"
-CityCenter
-CulturalProperty
-Area
-BorderCrossing
-DangerousForces
-BorderCrossing
-Flag
-FlatArea
-FlatAreaCity
-FlatAreaCitySmall
-Invisible
-NameCity
-NameCityCapital
-SafetyZone
-VegetationFir
-RockArea
-VegetationPalm
-VegetationVineyard

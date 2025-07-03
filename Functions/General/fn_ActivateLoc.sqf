@@ -2,14 +2,13 @@
 params ["_trg"];
 _active = _trg getVariable "Active";
 _loc = _trg getVariable "AttachedLocation";
+_locData = MissionProfileNameSpace getVariable format ["%1-%2-Data", type _loc, position _loc];
 
 if !(_active) then {
 	_trg setVariable ["Active", true];
 	// Debug 
 	systemChat format ["%1-%2 Activated!", text _loc, type _loc];
 
-	// Get Variables 
-	_locData = missionProfileNameSpace getVariable format ["%1-%2-Data", type _loc, position _loc];
 	_locSecurity = _locData select 0;
 
 	// Define what should happen at the site. 
