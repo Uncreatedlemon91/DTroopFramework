@@ -4,7 +4,7 @@ if (resetBodyMarkers) then {
 	saveMissionProfileNameSpace;
 };
 
-_markers = missionProfileNameSpace getVariable "bodyMarkers";
+_markers = missionProfileNameSpace getVariable ["bodyMarkers", []];
 systemChat format ["%1", _markers];
 {
 	// Current result is saved in variable _x

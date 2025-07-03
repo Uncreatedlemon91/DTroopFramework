@@ -3,6 +3,9 @@ params ["_trg"];
 if !(triggerActivated _trg) then {
 	_loc = _trg getVariable "AttachedLocation";
 
+	// Debug 
+	systemChat format ["%1-%2 Activated!", text _loc, type _loc];
+
 	// Get Variables 
 	_locData = missionProfileNameSpace getVariable format ["%1-%2-Data", type _loc, position _loc];
 	_locSecurity = _locData select 0;
@@ -27,5 +30,5 @@ if !(triggerActivated _trg) then {
 	} forEach _functions;
 } else {
 	// Debugging tool 
-	systemChat "Trigger is already activated";
+	// systemChat "Trigger is already activated";
 };

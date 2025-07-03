@@ -4,8 +4,12 @@ class CfgFunctions
 	{
 		class Forces
 		{
-			class PAVN {};
 			class locations {};
+		};
+		
+		class General
+		{
+			class ActivateLoc {};
 		};
 		
 		class Persistence

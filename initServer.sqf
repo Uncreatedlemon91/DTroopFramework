@@ -14,10 +14,5 @@ resetPlayerData = false;
 // Load saved data 
 [] call lmn_fnc_loadBodyMarkers;
 
-// Start simulation of PAVN 
-_pavnCount = 6;
-for "_i" from 1 to _PavnCount do {
-    // [] call lmn_fnc_PAVN;
-};
-
-[] call lmn_fnc_locations;
+// Start simulation
+[] remoteExec ["lmn_fnc_locations", 2];

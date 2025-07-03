@@ -1,4 +1,6 @@
 // Locations are listed on the map 
+systemChat "Running Locations";
+_allLocations = [];
 _lowPriority = [
 	"Mount",
 	"NameLocal",
@@ -17,10 +19,11 @@ _highPriority = [
 	"StrongpointArea"
 ];
 
-_allLocations pushBack _lowPriority;
-_allLocations pushback _midPriority;
-_allLocations pushback _highPriority;
+_allLocations append _lowPriority; 
+_allLocations append _midPriority;
+_allLocations append _highPriority;
 
+systemchat format ["%1", _allLocations];
 // Scan and setup the markers for each location as well as their variables.
 _locations = nearestLocations [[0,0,0], _allLocations, worldsize * 4];
 {
@@ -45,7 +48,7 @@ _locations = nearestLocations [[0,0,0], _allLocations, worldsize * 4];
 	SaveMissionProfileNameSpace;
 
 	// Create a Trigger on the location 
-	_trg = ["EmptyDetector", position _x];
+	_trg = createTrigger ["EmptyDetector", position _x];
 	_trg setTriggerArea [600, 600, 0, false, 200];
 	_trg setTriggerActivation ["ANYPLAYER", "PRESENT", true];
 	_trg setVariable ["attachedLocation", _x];
@@ -55,7 +58,6 @@ _locations = nearestLocations [[0,0,0], _allLocations, worldsize * 4];
 		""
 	];
 } forEach _locations;
-
 
 /*
 // Low Priority Objectives 
