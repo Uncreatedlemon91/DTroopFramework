@@ -1,8 +1,10 @@
 // Activates a Location 
 params ["_trg"];
-if !(triggerActivated _trg) then {
-	_loc = _trg getVariable "AttachedLocation";
+_active = _trg getVariable "Active";
+_loc = _trg getVariable "AttachedLocation";
 
+if !(_active) then {
+	_trg setVariable ["Active", true];
 	// Debug 
 	systemChat format ["%1-%2 Activated!", text _loc, type _loc];
 

@@ -24,11 +24,12 @@ _allLocations append _midPriority;
 _allLocations append _highPriority;
 
 systemchat format ["%1", _allLocations];
+
 // Scan and setup the markers for each location as well as their variables.
 _locations = nearestLocations [[0,0,0], _allLocations, worldsize * 4];
 {
 	_priority = 0;
-	_mkr = createMarkerLocal [text _x, position _x];
+	_mkr = createMarkerLocal [format ["%1-%2",text _x, position _x], position _x];
 	_mkr setMarkerType "hd_flag";
 	if (type _x in _lowPriority) then {
 		_mkr setMarkerColor "ColorBlue";
@@ -52,10 +53,11 @@ _locations = nearestLocations [[0,0,0], _allLocations, worldsize * 4];
 	_trg setTriggerArea [600, 600, 0, false, 200];
 	_trg setTriggerActivation ["ANYPLAYER", "PRESENT", true];
 	_trg setVariable ["attachedLocation", _x];
+	_trg setVariable ["Active", false];
 	_trg setTriggerStatements [
 		"this", 
 		"[thisTrigger] remoteExec ['lmn_fnc_ActivateLoc', 2]",
-		""
+		"thisTrigger setVariable ['Active', false]"
 	];
 } forEach _locations;
 
