@@ -1,5 +1,10 @@
 [] remoteExec ["lmn_fnc_addActions", 0, true];
 
+addMissionEventHandler ["HandleDisconnect", {
+	params ["_unit"];
+	[_unit] remoteExec ["lmn_fnc_savePlayer", 2];
+}];
+
 // Load the save game 
 // Vehicles 
 _vehicleDatabase = ["new", format ["Player Vehicles %1 %2", missionName, worldName]] call oo_inidbi;

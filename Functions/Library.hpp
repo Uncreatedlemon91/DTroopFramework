@@ -12,8 +12,10 @@ class CfgFunctions
 		class persistence
 		{
 			class saveVehicle {};
+			class savePlayer {};
 			class loadVehicles {};
 			class loadLocations {};
+			class loadPlayer {};
 		};
 		
 		class logi

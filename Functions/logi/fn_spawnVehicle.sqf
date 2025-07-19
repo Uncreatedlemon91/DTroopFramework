@@ -9,5 +9,9 @@ _veh = _class createVehicle _spawnPos;
 _veh setDamage 0.2;
 _veh setFuel 0.1;
 _veh setDir (random 360);
+clearBackpackCargoGlobal _veh;
+clearItemCargoGlobal _veh;
+clearMagazineCargoGlobal _veh;
+clearWeaponCargoGlobal _veh;
 
 [_veh] remoteExec ["lmn_fnc_setupVehicle", 2];
