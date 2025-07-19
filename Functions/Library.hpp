@@ -7,6 +7,7 @@ class CfgFunctions
 			class addActions {};
 			class setupVehicle {};
 			class createLocations {};
+			class setupPlayer {};
 		};
 
 		class persistence

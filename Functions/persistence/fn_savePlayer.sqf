@@ -15,3 +15,5 @@ _medical = [_player] call ace_medical_fnc_serializeState;
 // Save to database
 _data = [_name, _pos, _dir, _uid, _loadout, _medical];
 ["write", [_uid, "Player Info", _data]] call _db;
+
+systemChat "[DB] Player Saved";

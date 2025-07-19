@@ -5,14 +5,15 @@ _uid = getplayeruid _player;
 _db = ["new", format ["Player Profiles %1 %2", missionName, worldName]] call oo_inidbi;
 
 _data = ["read", [_uid, "Player Info"]] call _db;
-if (isNil "_data") then {
-	_player setPosAtl (_data select 1);
-	_player setDir (_data select 2);
-	_player setUnitLoadout (_data select 4);
-	[_player, (_data select 5)] call ace_medical_fnc_deserializeState;
+// systemChat format ["%1", _data];
+_pos = _data select 1;
+_dir = _data select 2;
+_loadout = _data select 4;
+_medical = _data select 5;
 
-	systemChat format ["Welcome back %1", (_data select 0)];
-} else {
-	[player] remoteExec ["lmn_fnc_savePlayer", 2];
-	systemChat format ["Welcome to the Server %1, your profile is created!", name player];
-};
+_player setPosAtl _pos;
+_player setDir _dir;
+_player setUnitLoadout _loadout;
+[_player, _medical] call ace_medical_fnc_deserializeState;
+
+systemChat format ["Welcome back %1", (_data select 0)];
