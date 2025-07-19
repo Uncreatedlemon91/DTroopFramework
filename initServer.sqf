@@ -1,18 +1,20 @@
-// Loads the mission file on server side 
-// Admin / Debug stuff 
-debugMode = false;
-resetBodyMarkers = false;
-resetPlayerLives = false;
-resetBulletCounts = false;
-resetPlayerData = false;
+[] remoteExec ["lmn_fnc_addActions", 0, true];
 
-// Disable Dogtags on factions 
-"CIV_F" call ace_dogtags_fnc_disableFactionDogtags;
-"O_VC" call ace_dogtags_fnc_disableFactionDogtags;
-"O_PAVN" call ace_dogtags_fnc_disableFactionDogtags;
+// Load the save game 
+// Vehicles 
+_vehicleDatabase = ["new", format ["Player Vehicles %1 %2", missionName, worldName]] call oo_inidbi;
+_vehicleDatabaseExists = "exists" call _vehicleDatabase;
+if (_vehicleDatabaseExists) then {
+    [] remoteExec ["lmn_fnc_loadVehicles", 2];
+};
 
-// Load saved data 
-[] call lmn_fnc_loadBodyMarkers;
-
-// Start simulation
-[] remoteExec ["lmn_fnc_locations", 2];
+// Locations 
+_locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_inidbi;
+_locDBExists = "exists" call _locDB;
+if (_locDBExists) then {
+    [] remoteExec ["lmn_fnc_loadLocations", 2];
+    systemchat "[DB] Locations Loaded";
+} else {
+    [] remoteExec ["lmn_fnc_CreateLocations", 2];
+    systemchat "[DB] Locations Created";
+};

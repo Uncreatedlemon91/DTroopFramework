@@ -2,25 +2,23 @@ class CfgFunctions
 {
 	class Lmn
 	{
-		class Forces
+		class general 
 		{
-			class locations {};
-		};
-		
-		class General
-		{
-			class ActivateLoc {};
-		};
-		
-		class Persistence
-		{
-			class PlayerPersistence {};
-			class loadBodyMarkers {};
+			class addActions {};
+			class setupVehicle {};
+			class createLocations {};
 		};
 
-		class Player
+		class persistence
 		{
-			class handleDeath {};
+			class saveVehicle {};
+			class loadVehicles {};
+			class loadLocations {};
+		};
+		
+		class logi
+		{
+			class spawnVehicle {};
 		};
 	};
 };
