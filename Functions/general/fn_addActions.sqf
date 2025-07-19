@@ -9,6 +9,6 @@ _spawnJeep = [
     {true}
 ] call ace_interact_menu_fnc_createAction;
 
-[logiPoint, 0, ["ACE_MainActions"], _spawnJeep] call ace_interact_menu_fnc_addActionToObject;
 
-systemChat "Actions Added";
+
+[logiPoint, 0, ["ACE_MainActions"], _spawnJeep] call ace_interact_menu_fnc_addActionToObject;

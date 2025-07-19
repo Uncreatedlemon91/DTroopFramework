@@ -1,25 +1,29 @@
+// Add interaction items 
 [] remoteExec ["lmn_fnc_addActions", 0, true];
 
+// Add event handlers
 addMissionEventHandler ["HandleDisconnect", {
 	params ["_unit"];
 	[_unit] remoteExec ["lmn_fnc_savePlayer", 2];
 }];
 
-// Load the save game 
-// Vehicles 
-_vehicleDatabase = ["new", format ["Player Vehicles %1 %2", missionName, worldName]] call oo_inidbi;
-_vehicleDatabaseExists = "exists" call _vehicleDatabase;
+//// Load the save game 
+// Recall Databases
+_vehDB = ["new", format ["Player Vehicles %1 %2", missionName, worldName]] call oo_inidbi;
+_locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_inidbi;
+
+// Check if the database exists 
+_vehicleDatabaseExists = "exists" call _vehDB;
+_locDBExists = "exists" call _locDB;
+
+// Load the databases
 if (_vehicleDatabaseExists) then {
     [] remoteExec ["lmn_fnc_loadVehicles", 2];
+    systemChat "[DB] Vehicles Loaded";
 };
 
 // Locations 
-_locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_inidbi;
-_locDBExists = "exists" call _locDB;
 if (_locDBExists) then {
     [] remoteExec ["lmn_fnc_loadLocations", 2];
     systemchat "[DB] Locations Loaded";
-} else {
-    [] remoteExec ["lmn_fnc_CreateLocations", 2];
-    systemchat "[DB] Locations Created";
 };
