@@ -5,27 +5,27 @@ class CfgFunctions
 		class general 
 		{
 			class addActions {};
-			class setupVehicle {};
 			class createLocations {};
+			class setupItems {};
 			class setupPlayer {};
+			class setupVehicle {};
+		};
+
+		class logi
+		{
+			class spawnSupply {};
+			class spawnVehicle {};
 		};
 
 		class persistence
 		{
-			class saveVehicle {};
-			class savePlayer {};
-			class loadVehicles {};
+			class deleteItem {};
 			class loadLocations {};
 			class loadPlayer {};
-		};
-		
-		class logi
-		{
-			class spawnVehicle {};
-		};
-
-		class roles {
-			class rifleman {};
+			class loadVehicles {};
+			class saveItem {};
+			class savePlayer {};
+			class saveVehicle {};
 		};
 	};
 };

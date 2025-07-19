@@ -101,32 +101,21 @@ _spawnAh1g = [
     {true}
 ] call ace_interact_menu_fnc_createAction;
 
-//..... LOADOUTS 
-_loadouts = [
-    "loadouts",
-    "Loadouts",
-    "",
-    {},
-    {true}
-] call ace_interact_menu_fnc_createAction;
-
-// Infantry 
-_infantry = [
-    "infantry",
-    "Infantry",
-    "",
-    {},
-    {true}
-] call ace_interact_menu_fnc_createAction;
-
-_rifleman = [
-    "loadoutRifleman", 
-    "Rifleman Loadout", 
+// ------ Supplies 
+// Ammunition Supplies 
+_supplies = [
+    "supplies", 
+    "Supplies", 
     "", 
-    {
-        params ["_target", "_player", "_params"];
-        [_player] remoteExec ["lmn_fnc_rifleman", 2];
-    },
+    {}, 
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+_m16Box = [
+    "m16Box", 
+    "M16 Ammo Box", 
+    "", 
+    {["m16Box"] remoteExec ["lmn_fnc_spawnSupply", 2]}, 
     {true}
 ] call ace_interact_menu_fnc_createAction;
 
@@ -147,8 +136,8 @@ _rifleman = [
 [logiPoint, 0, ["ACE_MainActions", "spawnVehicle", "spawnHeli"], _spawnHuey1d] call ace_interact_menu_fnc_addActionToObject;
 [logiPoint, 0, ["ACE_MainActions", "spawnVehicle", "spawnHeli"], _spawnLoach] call ace_interact_menu_fnc_addActionToObject;
 [logiPoint, 0, ["ACE_MainActions", "spawnVehicle", "spawnHeli"], _spawnAh1g] call ace_interact_menu_fnc_addActionToObject;
-// Loadouts 
-[logiPoint, 0, ["ACE_MainActions"], _loadouts] call ace_interact_menu_fnc_addActionToObject;
-// Infantry Roles 
-[logiPoint, 0, ["ACE_MainActions", "loadouts"], _infantry] call ace_interact_menu_fnc_addActionToObject;
-[logiPoint, 0, ["ACE_MainActions", "loadouts", "infantry"], _rifleman] call ace_interact_menu_fnc_addActionToObject;
+// Supplies 
+[logiPoint, 0, ["ACE_MainActions"], _supplies] call ace_interact_menu_fnc_addActionToObject;
+// Ammunition 
+[logiPoint, 0, ["ACE_MainActions", "supplies"], _infantry] call ace_interact_menu_fnc_addActionToObject;
+[logiPoint, 0, ["ACE_MainActions", "supplies", "infantry"], _rifleman] call ace_interact_menu_fnc_addActionToObject;

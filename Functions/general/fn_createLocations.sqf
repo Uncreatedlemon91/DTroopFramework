@@ -54,13 +54,13 @@ _locations = nearestLocations [[0,0,0], _allLocations, worldsize * 4];
     _turrets = round (random 10);
     _armor = round (random 4);
     _forces = [_infantry, _aa, _turrets, _armor];
-        
+    _position = position _x;
     _allegiance = "North";
     if ((position _x) inArea "SouthAO") then {
         _allegiance = "South";
     };
 
-	["write", [_x, "Location", _x]] call _locDB;
+	["write", [_x, "Pos", _position]] call _locDB;
     ["write", [_x, "Allegiance", _allegiance]] call _locDB;
     ["write", [_x, "Munitions", _munitions]] call _locDB;
     ["write", [_x, "Fuel", _fuel]] call _locDB;
@@ -71,7 +71,7 @@ _locations = nearestLocations [[0,0,0], _allLocations, worldsize * 4];
 
     // Create a Trigger on the location 
 	_trg = createTrigger ["EmptyDetector", position _x];
-	_trg setTriggerArea [600, 600, 0, false, 200];
+	_trg setTriggerArea [800, 800, 0, false, 400];
 	_trg setTriggerActivation ["ANYPLAYER", "PRESENT", true];
 	_trg setVariable ["attachedLocation", _x];
 	_trg setVariable ["Active", false];
