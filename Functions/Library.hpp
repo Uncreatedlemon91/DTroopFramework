@@ -23,5 +23,9 @@ class CfgFunctions
 		{
 			class spawnVehicle {};
 		};
+
+		class roles {
+			class rifleman {};
+		};
 	};
 };

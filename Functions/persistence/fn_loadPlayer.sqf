@@ -5,7 +5,6 @@ _uid = getplayeruid _player;
 _db = ["new", format ["Player Profiles %1 %2", missionName, worldName]] call oo_inidbi;
 
 _data = ["read", [_uid, "Player Info"]] call _db;
-// systemChat format ["%1", _data];
 _pos = _data select 1;
 _dir = _data select 2;
 _loadout = _data select 4;
