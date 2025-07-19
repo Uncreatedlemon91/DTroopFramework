@@ -1,7 +1,6 @@
 // Sets up the player with event handlers and such 
 params ["_player"];
 
-systemChat "[SETUP] Starting Player Setup...";
 // Event Handlers 
 _player addEventHandler ["GetInMan", {
 	params ["_unit", "_role", "_vehicle", "_turret"];
@@ -32,5 +31,3 @@ _player addEventHandler ["MagazineReloading", {
 	params ["_unit", "_weapon", "_muzzle", "_magazine", "_magazineClass", "_ammoCount", "_magazineID", "_magazineCreator"];
 	[_unit] remoteExec ["lmn_fnc_savePlayer", 2];
 }];
-
-systemChat "[SETUP] Player Setup";
