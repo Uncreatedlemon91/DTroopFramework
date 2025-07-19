@@ -4,7 +4,7 @@ _sections = "getSections" call _locDB;
 
 {
 	// Current result is saved in variable _x
-	_location = ["read", [_x, "Location"]] call _locDB;
+	_pos = ["read", [_x, "Pos"]] call _locDB;
 	_allegiance = ["read", [_x, "Allegiance"]] call _locDB;
     _munitions = ["read", [_x, "Munitions"]] call _locDB;
     _fuel = ["read", [_x, "Fuel"]] call _locDB;
@@ -14,8 +14,8 @@ _sections = "getSections" call _locDB;
     _priority = ["read", [_x, "Priority"]] call _locDB;
 
 	// Create a Trigger on the location 
-	_trg = createTrigger ["EmptyDetector", position _x];
-	_trg setTriggerArea [600, 600, 0, false, 200];
+	_trg = createTrigger ["EmptyDetector", _pos];
+	_trg setTriggerArea [800, 800, 0, false, 400];
 	_trg setTriggerActivation ["ANYPLAYER", "PRESENT", true];
 	_trg setVariable ["attachedLocation", _x];
 	_trg setVariable ["Active", false];
