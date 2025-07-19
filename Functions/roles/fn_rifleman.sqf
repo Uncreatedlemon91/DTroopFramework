@@ -13,7 +13,6 @@ removeGoggles _unit;
 comment "Add weapons";
 _unit addWeapon "vn_m16";
 _unit addPrimaryWeaponItem "vn_b_m16";
-_unit addPrimaryWeaponItem "vn_m16_20_mag";
 
 comment "Add containers";
 _unit forceAddUniform "U_Simc_TCU_mk3_trop";
