@@ -2,6 +2,7 @@ _db = ["new", format ["Player Items %1 %2", missionName, worldName]] call oo_ini
 _sections = "getSections" call _db;
 
 // Debug
+systemChat "Loading Items";
 // apply saved vehicle locations back to the server 
 {
 	_data = ["read", [_x, "Item Info"]] call _db;
@@ -53,3 +54,5 @@ _sections = "getSections" call _db;
 	[_item] remoteExec ["lmn_fnc_saveItem", 2];
 	_item allowDamage true;
 } forEach _sections;
+
+systemChat "[DB] Items Loaded";

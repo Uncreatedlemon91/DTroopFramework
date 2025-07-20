@@ -88,3 +88,5 @@ _locations = nearestLocations [[0,0,0], _allLocations, worldsize * 4];
 		"thisTrigger setVariable ['Active', false]"
 	];
 } forEach _locations;
+
+systemChat "[DB] Locations Generated";

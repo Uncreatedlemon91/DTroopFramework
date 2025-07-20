@@ -56,3 +56,5 @@ _sections = "getSections" call _db;
 	[_veh] remoteExec ["lmn_fnc_saveVehicle", 2];
 	_veh allowDamage true;
 } forEach _sections;
+
+systemChat "[DB] Vehicles Loaded";

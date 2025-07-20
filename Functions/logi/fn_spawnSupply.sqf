@@ -53,7 +53,6 @@ switch (_type) do {
 	case "Medical": {
 		_model = "ACE_medicalSupplyCrate";
 		_content = [
-			["ACE_adenosine", 10],
 			["ACE_elasticBandage", 50],
 			["ACE_packingBandage", 50],
 			["ACE_quickClot", 50],
@@ -69,15 +68,17 @@ switch (_type) do {
 			["ACE_plasmaIV_500", 15],
 			["ACE_SurgicalKit", 5],
 			["ACE_suture", 20],
+			["ACE_splint", 20],
 			["ACE_tourniquet", 50]
 		];
 	};
-	default { };
 };
 
 // Spawn the box 
-_spawnPos = [position LogiPoint, 2, 20, 5, 0, 10, 0] call BIS_fnc_findSafePos;
+_spawnPos = [position LogiPoint, 2, 5, 5, 0, 10, 0] call BIS_fnc_findSafePos;
 _box = _model createVehicle _spawnPos;
+
+// Clear items it spawns with
 clearItemCargoGlobal _box;
 clearWeaponCargoGlobal _box;
 clearMagazineCargoGlobal _box;
@@ -88,5 +89,5 @@ clearMagazineCargoGlobal _box;
 } forEach _content;
 
 // Setup the box
-[_box] remoteExec ["lmn_fnc_setupItem", 2];
+[_box] remoteExec ["lmn_fnc_setupItems", 2];
 

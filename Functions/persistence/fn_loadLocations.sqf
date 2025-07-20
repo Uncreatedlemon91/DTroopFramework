@@ -33,7 +33,7 @@ _sections = "getSections" call _locDB;
 	];
 
 	// Create a marker
-	_mkr = createMarkerLocal [format ["%1-%2",text _x, position _x], position _x];
+	_mkr = createMarkerLocal [format ["%1-%2",text _x, _pos], _pos];
 	_mkr setMarkerType "hd_flag";
 	if (_priority == 0) then {
 		_mkr setMarkerColor "ColorBlue";
@@ -45,3 +45,5 @@ _sections = "getSections" call _locDB;
 		_mkr setMarkerColor "ColorRed";
 	};
 } forEach _sections;
+
+systemChat "[DB] Locations Loaded";

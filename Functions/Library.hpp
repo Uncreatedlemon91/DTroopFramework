@@ -20,6 +20,7 @@ class CfgFunctions
 		class persistence
 		{
 			class deleteItem {};
+			class loadItems {};
 			class loadLocations {};
 			class loadPlayer {};
 			class loadVehicles {};

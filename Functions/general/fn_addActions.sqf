@@ -115,7 +115,39 @@ _m16Box = [
     "m16Box", 
     "M16 Ammo Box", 
     "", 
-    {["m16Box"] remoteExec ["lmn_fnc_spawnSupply", 2]}, 
+    {["M16Ammo"] remoteExec ["lmn_fnc_spawnSupply", 2]}, 
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+_M60Ammo = [
+    "M60Ammo", 
+    "M60 Ammo Box", 
+    "", 
+    {["M60Ammo"] remoteExec ["lmn_fnc_spawnSupply", 2]}, 
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+_M79Ammo = [
+    "M79Ammo", 
+    "M79 Ammo Box", 
+    "", 
+    {["M79Ammo"] remoteExec ["lmn_fnc_spawnSupply", 2]}, 
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+_grenades = [
+    "Grenades", 
+    "Grenades Box", 
+    "", 
+    {["Grenades"] remoteExec ["lmn_fnc_spawnSupply", 2]}, 
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+_medical = [
+    "Medical", 
+    "Medical Box", 
+    "", 
+    {["Medical"] remoteExec ["lmn_fnc_spawnSupply", 2]}, 
     {true}
 ] call ace_interact_menu_fnc_createAction;
 
@@ -139,5 +171,10 @@ _m16Box = [
 // Supplies 
 [logiPoint, 0, ["ACE_MainActions"], _supplies] call ace_interact_menu_fnc_addActionToObject;
 // Ammunition 
-[logiPoint, 0, ["ACE_MainActions", "supplies"], _infantry] call ace_interact_menu_fnc_addActionToObject;
-[logiPoint, 0, ["ACE_MainActions", "supplies", "infantry"], _rifleman] call ace_interact_menu_fnc_addActionToObject;
+[logiPoint, 0, ["ACE_MainActions", "supplies"], _m16Box] call ace_interact_menu_fnc_addActionToObject;
+[logiPoint, 0, ["ACE_MainActions", "supplies"], _M60Ammo] call ace_interact_menu_fnc_addActionToObject;
+[logiPoint, 0, ["ACE_MainActions", "supplies"], _M79Ammo] call ace_interact_menu_fnc_addActionToObject;
+[logiPoint, 0, ["ACE_MainActions", "supplies"], _grenades] call ace_interact_menu_fnc_addActionToObject;
+[logiPoint, 0, ["ACE_MainActions", "supplies"], _medical] call ace_interact_menu_fnc_addActionToObject;
+
+
