@@ -32,5 +32,6 @@ if (_itemDBExists) then {
 // Add event handlers
 addMissionEventHandler ["HandleDisconnect", {
 	params ["_unit"];
-	[_unit] remoteExec ["lmn_fnc_savePlayer", 2];
+    _uid = getPlayerUID _unit;
+	[_unit, _uid] remoteExec ["lmn_fnc_savePlayer", 2];
 }];
