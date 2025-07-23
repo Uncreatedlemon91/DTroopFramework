@@ -151,6 +151,22 @@ _medical = [
     {true}
 ] call ace_interact_menu_fnc_createAction;
 
+_repairKits = [
+    "RepairKits", 
+    "Repair Kits", 
+    "", 
+    {["RepairKits"] remoteExec ["lmn_fnc_spawnSupply", 2]}, 
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+_fluids = [
+    "Fluids",
+    "Medical Fluids",
+    "",
+    {["Fluids"] remoteExec ["lmn_fnc_spawnSupply", 2]},
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
 // Addactions to logistics point
 // Vehicles 
 [logiPoint, 0, ["ACE_MainActions"], _spawnVehicles] call ace_interact_menu_fnc_addActionToObject;
@@ -176,5 +192,5 @@ _medical = [
 [logiPoint, 0, ["ACE_MainActions", "supplies"], _M79Ammo] call ace_interact_menu_fnc_addActionToObject;
 [logiPoint, 0, ["ACE_MainActions", "supplies"], _grenades] call ace_interact_menu_fnc_addActionToObject;
 [logiPoint, 0, ["ACE_MainActions", "supplies"], _medical] call ace_interact_menu_fnc_addActionToObject;
-
-
+[logiPoint, 0, ["ACE_MainActions", "supplies"], _repairKits] call ace_interact_menu_fnc_addActionToObject;
+[logiPoint, 0, ["ACE_MainActions", "supplies"], _fluids] call ace_interact_menu_fnc_addActionToObject;

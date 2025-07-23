@@ -1,3 +1,6 @@
+// Add interaction items 
+// [] remoteExec ["lmn_fnc_addActions", 0, true];
+
 //// Load the save game 
 // Recall Databases
 _vehDB = ["new", format ["Player Vehicles %1 %2", missionName, worldName]] call oo_inidbi;
@@ -26,12 +29,3 @@ if (_itemDBExists) then {
     systemchat "[DB] Items Loading...";
 };
 
-// Add interaction items 
-[] remoteExec ["lmn_fnc_addActions", 0];
-
-// Add event handlers
-addMissionEventHandler ["HandleDisconnect", {
-	params ["_unit"];
-    _uid = getPlayerUID _unit;
-	[_unit, _uid] remoteExec ["lmn_fnc_savePlayer", 2];
-}];

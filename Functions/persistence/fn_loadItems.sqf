@@ -10,10 +10,9 @@ systemChat "Loading Items";
 	_pos = _data select 1;
 	_dir = _data select 2;
 	_dmg = _data select 3;
-	_mags = _data select 5;
-	_items = _data select 6;
-	_ammo = _data select 7;
-	_weps = _data select 8;
+	_items = _data select 4;
+	_ammo = _data select 5;
+	_weps = _data select 6;
 
 	// Spawn vehicle replica 
 	_item = _type createVehicle _pos;
@@ -24,14 +23,6 @@ systemChat "Loading Items";
 	clearWeaponCargoGlobal _item;
 	_item setDir _dir;
 	_item setDamage [_dmg, false, objNull, objNull];
-	// add Ammo
-	{
-		_mag = _x select 0;
-		_turret = _x select 1;
-		_magCount = _x select 2;
-		_item removeMagazinesTurret [_mag, _turret];
-		_item addMagazineTurret [_mag, _turret, _magCount];
-	} forEach _mags;
 
 	// Add cargo / Inventory of the vehicle back 
 	_items params ["_classes","_count"];

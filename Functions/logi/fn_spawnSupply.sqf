@@ -56,20 +56,28 @@ switch (_type) do {
 			["ACE_elasticBandage", 50],
 			["ACE_packingBandage", 50],
 			["ACE_quickClot", 50],
-			["ACE_bloodIV", 15],
-			["ACE_bloodIV_250", 15],
-			["ACE_bloodIV_500", 15],
 			["ACE_bodybag", 20],
 			["ACE_epinephrine", 20],
 			["ACE_morphine", 20],
 			["ACE_personalAidKit", 20],
-			["ACE_plasmaIV", 15],
-			["ACE_plasmaIV_250", 15],
-			["ACE_plasmaIV_500", 15],
 			["ACE_SurgicalKit", 5],
 			["ACE_suture", 20],
 			["ACE_splint", 20],
 			["ACE_tourniquet", 50]
+		];
+	};
+	case "Fluids": {
+		_model = "ACE_medicalSupplyCrate";
+		_content = [
+			["ACE_salineIV", 15],
+			["ACE_salineIV_250", 15],
+			["ACE_salineIV_500", 15]
+		];
+	};
+	case "RepairKits": {
+		_model = "vn_b_ammobox_04";
+		_content = [
+			["vn_b_item_toolkit", 20]
 		];
 	};
 };
@@ -85,7 +93,9 @@ clearMagazineCargoGlobal _box;
 
 // Add desired contents to the box 
 {
-	_box addMagazineCargoGlobal _x;
+	//_box addMagazineCargoGlobal _x;
+	_box addItemCargoGlobal _x;
+	//_box addWeaponCargoGlobal _x;
 } forEach _content;
 
 // Setup the box
