@@ -3,7 +3,7 @@
 [] call lmn_fnc_addActions;
 
 // Send the player to be loaded 
-[player] remoteExec ["lmn_fnc_loadPlayer", 2];
+[player, clientOwner] remoteExec ["lmn_fnc_getPlayerData", 2];
 
 // Wait a while before the loop starts 
 sleep 20;

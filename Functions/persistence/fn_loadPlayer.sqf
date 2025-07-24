@@ -1,8 +1,5 @@
 // Load the player from the database 
-params ["_player"];
-
-_uid = getplayeruid _player;
-_db = ["new", format ["Player Profiles %1 %2", missionName, worldName]] call oo_inidbi;
+params ["_data"];
 
 _data = ["read", [_uid, "Player Info"]] call _db;
 _pos = _data select 1;
