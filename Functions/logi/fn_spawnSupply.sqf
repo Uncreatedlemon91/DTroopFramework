@@ -99,5 +99,5 @@ clearMagazineCargoGlobal _box;
 } forEach _content;
 
 // Setup the box
-[_box] remoteExec ["lmn_fnc_setupItems", 2];
+[_box] remoteExec ["lmn_fnc_setupItems", 0, true];
 

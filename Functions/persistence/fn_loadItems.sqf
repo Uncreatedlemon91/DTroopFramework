@@ -41,7 +41,7 @@ systemChat "Loading Items";
 	};
 	
 	["deleteSection", _x] call _db;
-	[_item] remoteExec ["lmn_fnc_setupItems", 2];
+	[_item] remoteExec ["lmn_fnc_setupItems", 0, true];
 	[_item] remoteExec ["lmn_fnc_saveItem", 2];
 	_item allowDamage true;
 } forEach _sections;

@@ -25,8 +25,8 @@ _boxSave = [
     {true}
 ] call ace_interact_menu_fnc_createAction;
 
-[_box, 0, ["ACE_MainActions"], _boxDelete] remoteExec ["ace_interact_menu_fnc_addActionToObject", 0, true];
-[_box, 0, ["ACE_MainActions"], _boxSave] remoteExec ["ace_interact_menu_fnc_addActionToObject", 0, true];
+[_box, 0, ["ACE_MainActions"], _boxDelete] call ace_interact_menu_fnc_addActionToObject;
+[_box, 0, ["ACE_MainActions"], _boxSave] call ace_interact_menu_fnc_addActionToObject;
 
 // Event Handlers 
 _box addEventHandler ["Hit", {
