@@ -5,10 +5,15 @@ class CfgFunctions
 		class general 
 		{
 			class addActions {};
-			class createLocations {};
 			class setupItems {};
 			class setupPlayer {};
 			class setupVehicle {};
+		};
+
+		class locations 
+		{
+			class createLocations {};
+			class activateLoc {};
 		};
 
 		class logi

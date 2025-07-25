@@ -1,7 +1,6 @@
 // Load the player from the database 
-params ["_data"];
+params ["_data", "_player"];
 
-_data = ["read", [_uid, "Player Info"]] call _db;
 _pos = _data select 1;
 _dir = _data select 2;
 _loadout = _data select 4;
