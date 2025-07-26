@@ -42,7 +42,7 @@ _locations = nearestLocations [[0,0,0], _allLocations, worldsize * 4];
     _allegiance = "North";
 	_mkr setMarkerType "vn_flag_pavn";
     if ((position _x) inArea "SouthAO") then {
-        _allegiance = selectRandom ["USA", "ROK", "AUS", "NZ"];
+        _allegiance = selectRandomWeighted ["USA", 0.5, "ROK", 0.3, "AUS", 0.2, "NZ", 0.1];
     };
 	if ((position _x) inArea "Base") then {
 		_allegiance = "USA";
