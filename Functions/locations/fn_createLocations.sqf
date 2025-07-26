@@ -1,7 +1,7 @@
 // Locations are listed on the map 
 _allLocations = [];
 _lowPriority = [
-	// "Mount",
+	"Mount",
 	"NameLocal",
 	"NameVillage",
 	"Name",
@@ -9,6 +9,7 @@ _lowPriority = [
 ];
 _midPriority = [
 	"Hill",
+	"NameMarine",
 	"ViewPoint",
 	"Strategic"
 ];
@@ -29,12 +30,15 @@ _locations = nearestLocations [[0,0,0], _allLocations, worldsize * 4];
 	_priority = 0;
 	_mkr = createMarkerLocal [format ["%1-%2",text _x, position _x], position _x];
 	if (type _x in _lowPriority) then {
+		_mkr setMarkerSizeLocal [20,20];
 		_priority = 0;
 	};
 	if (type _x in _midPriority) then {
+		_mkr setMarkerSizeLocal [40,40];
 		_priority = 1;
 	};
 	if (type _x in _highPriority) then {
+		_mkr setMarkerSizeLocal [80,80];
 		_priority = 2;
 	};
 
@@ -67,8 +71,6 @@ _locations = nearestLocations [[0,0,0], _allLocations, worldsize * 4];
 	_trg setTriggerActivation ["ANYPLAYER", "PRESENT", true];
 	_trg setVariable ["attachedLocation", _x];
 	_trg setVariable ["Active", false];
-    _trg setVariable ["Allegiance", _allegiance];
-    _trg setVariable ["Priority", _priority];
 	_trg setTriggerStatements [
 		"this", 
 		"[thisTrigger] remoteExec ['lmn_fnc_ActivateLoc', 2]",
