@@ -1,5 +1,5 @@
 // Add interaction items 
-// [] remoteExec ["lmn_fnc_addActions", 0, true];
+[] call lmn_fnc_setFactions;
 
 //// Load the save game 
 // Recall Databases

@@ -5,6 +5,7 @@ class CfgFunctions
 		class general 
 		{
 			class addActions {};
+			class setFactions {};
 			class setupItems {};
 			class setupPlayer {};
 			class setupVehicle {};
@@ -14,6 +15,8 @@ class CfgFunctions
 		{
 			class createLocations {};
 			class activateLoc {};
+			class spawnAmbush {};
+			class despawnAmbush {};
 		};
 
 		class logi
