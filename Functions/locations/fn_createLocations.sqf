@@ -65,12 +65,20 @@ _locations = nearestLocations [[0,0,0], _allLocations, worldsize * 4];
     // Create a Trigger on the location 
 	[_x] remoteExec ["lmn_fnc_createLocTrigger", 2];
 
+	// Set the population 
+	// Get the amount of houses in the area.
+	_houseCount = count (nearestTerrainObjects [position _x, ["HOUSE"], 800]);
+	// Divide the amount of houses by X in order to get population count. 
+	_population = _houseCount / 2;
+
 	// Save the location 
 	["write", [_x, "Name", text _x]] call _locDB;
 	["write", [_x, "Pos", position _x]] call _locDB;
+	["write", [_x, "Population", _population]] call _locDB;
 	["write", [_x, "Priority", _priority]] call _locDB;
     ["write", [_x, "Allegiance", _allegiance]] call _locDB;
 	["write", [_x, "Loyalty", round(random 100)]] call _locDB;
+	["write", [_x, "dayEvent", selectRandom lmn_events]] call _locDB;
 } forEach _locations;
 
 systemChat "[DB] Locations Generated";

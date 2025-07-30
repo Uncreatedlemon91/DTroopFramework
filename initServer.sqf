@@ -1,4 +1,5 @@
-// Add interaction items 
+// Precompile the variables used in the mission 
+[] call lmn_fnc_setEvents;
 [] call lmn_fnc_setFactions;
 
 //// Load the save game 
