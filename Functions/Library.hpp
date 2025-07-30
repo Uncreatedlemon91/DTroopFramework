@@ -13,8 +13,9 @@ class CfgFunctions
 
 		class locations 
 		{
-			class createLocations {};
 			class activateLoc {};
+			class createLocations {};
+			class createLocTrigger {};
 			class spawnAmbush {};
 			class despawnAmbush {};
 		};

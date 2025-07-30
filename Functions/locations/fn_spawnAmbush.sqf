@@ -62,7 +62,3 @@ if (_hasEmplacement) then {
 	];
 };
 
-// Set the mine/s
-if (_hasMine) then {
-	
-};
