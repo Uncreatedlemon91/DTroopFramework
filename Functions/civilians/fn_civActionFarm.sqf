@@ -5,7 +5,7 @@ params ["_unit", "_loc", "_grp"];
 (_grp) setSpeedMode "LIMITED";
 
 // Find a nearby Tree 
-_tree = nearestTerrainObjects [position _unit, ["TREE"], 100, false, true];
+_tree = nearestTerrainObjects [position _loc, ["TREE"], 100, false, true];
 
 // Set the waypoint to move to the tree 
 _wp1 = _grp addWaypoint [position _tree, 0, 1];

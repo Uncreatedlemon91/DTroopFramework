@@ -13,6 +13,7 @@ _population = ["read", [_loc, "Population"]] call _locDB;
 
 // Spawn civilians 
 for "_i" from 1 to _population do {
+	[_trg] remoteExec ["lmn_fnc_prepCiv", 2];
 	[_trg] remoteExec ["lmn_fnc_spawnCiv", 2];
 	sleep 1;
 };

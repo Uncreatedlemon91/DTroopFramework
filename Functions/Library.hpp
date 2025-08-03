@@ -6,6 +6,7 @@ class CfgFunctions
 		{
 			class civActionFarm {};
 			class civActionWalk {};
+			class prepCiv {};
 			class spawnCiv {};
 		};
 		
@@ -25,8 +26,6 @@ class CfgFunctions
 			class activateLoc {};
 			class createLocations {};
 			class createLocTrigger {};
-			class spawnAmbush {};
-			class despawnAmbush {};
 		};
 
 		class logi
