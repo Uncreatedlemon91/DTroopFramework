@@ -46,5 +46,9 @@ class CfgFunctions
 			class savePlayer {};
 			class saveVehicle {};
 		};
+
+		class sites {
+			class prepAmbush {};
+		};
 	};
 };

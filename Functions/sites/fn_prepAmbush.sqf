@@ -1,12 +1,11 @@
-// Prepares the civilians triggers and movements to spawn in
+// Prepares the trigger and information for an ambush 
 params ["_trg"];
 _loc = _trg getVariable "attachedLocation";
-_pos = [[_trg]] call BIS_fnc_randomPos;
+_pos = position (selectRandom (nearestTerrainObjects [_trg, ["ROAD", "TRAIL"]]));
 
-// Debug marker 
 _mkr = createMarker [format ["%1-%2", _trg, _pos], _pos];
 _mkr setMarkerType "hd_dot";
-_mkr setMarkerColor "COLORGREEN";
+_mkr setMarkerColor "COLORRED";
 
 _prep = createTrigger["EmptyDetector", _pos];
 _prep setTriggerActivation ["ANYPLAYER", "PRESENT", true];
@@ -15,6 +14,6 @@ _prep setVariable ["attachedLocation", _loc];
 _prep setVariable ["Active", false];
 _prep setTriggerStatements [
 	"this",
-	"[thisTrigger] remoteExec ['lmn_fnc_spawnCiv', 2]",
+	"[thisTrigger] remoteExec ['lmn_fnc_spawnAmbush', 2]",
 	""
 ];
