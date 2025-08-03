@@ -14,12 +14,14 @@ _midPriority = [
 	"Hill",
 	"NameMarine",
 	"ViewPoint",
-	"Strategic"
+	"Strategic",
+	"NameCity"
 ];
 _highPriority = [
 	"Airport",
 	"NameMarine",
-	"StrongpointArea"
+	"StrongpointArea",
+	"NameCityCapital"
 ];
 
 _allLocations append _lowPriority; 
@@ -49,10 +51,13 @@ _locations = nearestLocations [[0,0,0], _allLocations, worldsize * 4];
     _allegiance = "North";
 	_mkr setMarkerType "vn_flag_pavn";
     if ((position _x) inArea "SouthAO") then {
-        _allegiance = selectRandomWeighted ["USA", 0.5, "ROK", 0.3, "AUS", 0.2, "NZ", 0.1];
+        _allegiance = selectRandomWeighted ["USA", 0.3, "ROK", 0.5, "AUS", 0.2, "NZ", 0.1];
     };
-	if ((position _x) inArea "Base") then {
+	if (((position _x) inArea "Base") OR ((position _x) inArea "AirBase")) then {
 		_allegiance = "USA";
+	};
+	if ((position _x) inArea "Saigon") then {
+		_allegiance = "ROK";
 	};
 
 	switch (_allegiance) do {
@@ -67,9 +72,12 @@ _locations = nearestLocations [[0,0,0], _allLocations, worldsize * 4];
 
 	// Set the population 
 	// Get the amount of houses in the area.
-	_houseCount = count (nearestTerrainObjects [position _x, ["HOUSE"], 800]);
-	// Divide the amount of houses by X in order to get population count. 
-	_population = _houseCount / 2;
+	_houses = nearestTerrainObjects [position _x, ["HOUSE"], 800];
+	_houseCount = count _houses;
+	_population = round (_houseCount / 4);
+	if (_houseCount > 25) then {
+		_population = 25;
+	};
 
 	// Save the location 
 	["write", [_x, "Name", text _x]] call _locDB;

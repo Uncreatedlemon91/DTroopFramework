@@ -2,9 +2,18 @@ class CfgFunctions
 {
 	class Lmn
 	{
+		class civilians 
+		{
+			class civActionFarm {};
+			class civActionWalk {};
+			class spawnCiv {};
+		};
+		
 		class general 
 		{
 			class addActions {};
+			class setCivActions {};
+			class setEvents {};
 			class setFactions {};
 			class setupItems {};
 			class setupPlayer {};
