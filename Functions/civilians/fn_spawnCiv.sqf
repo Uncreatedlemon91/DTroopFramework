@@ -18,7 +18,7 @@ _unit setVariable ["loyalty", random [(_loyalty - 25), _loyalty, (_loyalty + 25)
 
 // Give the civilian something to do 
 _action = selectRandom lmn_civActions;
-[_unit, _loc] remoteExec [_action, 2];
+[_unit, _loc, _grp] remoteExec [_action, 2];
 
 // Add the civilian to curator 
 zeus addCuratorEditableObjects [[_unit], true];
