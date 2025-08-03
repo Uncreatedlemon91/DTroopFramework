@@ -30,19 +30,6 @@ _action = selectRandom lmn_civActions;
 // Add the civilian to curator 
 zeus addCuratorEditableObjects [[_unit], true];
 
-// Wait until players are no longer nearby 
-while {alive _unit} do {
-	sleep 5;
-	_nearPlayers = 0;
-	{
-		_dist = _unit distance _x;
-		if (_dist <= 200) then {
-			_nearPlayers = _nearPlayers + 1;
-		};
-	} forEach allPlayers;
+// Check the nearby players to see if any are close to the unit
+[_unit, _trg] remoteExec ["lmn_fnc_despawnAI", 2];
 
-	if (_nearPlayers == 0) then {
-		deleteVehicle _unit;
-		_trg setVariable ["Active", false];
-	};
-};
