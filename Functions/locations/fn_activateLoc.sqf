@@ -1,5 +1,10 @@
 // Activated when players enter the trigger zone 
 params ["_trg"];
+_active = _trg getVariable "Active";
+if (_active) exitwith {
+	// Exit the code as the trigger is active already
+	systemchat "Trigger already Active";
+};
 
 // Get Database 
 _locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_inidbi;
@@ -14,5 +19,4 @@ _population = ["read", [_loc, "Population"]] call _locDB;
 // Spawn civilians 
 for "_i" from 1 to _population do {
 	[_trg] remoteExec ["lmn_fnc_prepCiv", 2];
-	sleep 1;
 };

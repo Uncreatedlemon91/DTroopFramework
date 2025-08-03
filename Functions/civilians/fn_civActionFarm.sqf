@@ -5,14 +5,22 @@ params ["_unit", "_loc", "_grp"];
 (_grp) setSpeedMode "LIMITED";
 
 // Find a nearby Tree 
-_tree = nearestTerrainObjects [position _loc, ["TREE"], 100, false, true];
+_tree = selectRandom (nearestTerrainObjects [position _unit, ["TREE"], 100, false, true]);
 
 // Set the waypoint to move to the tree 
-_wp1 = _grp addWaypoint [position _tree, 0, 1];
-_wp1 setWaypointCompletionRadius 2;
+_dest = getpos _tree;
+_dest = [(_dest select 0), (_dest select 1), 0];
+_wp1 = _grp addWaypoint [_dest, 0, 1];
 
 // Wait until the civ is near the tree 
-waitUntil {(sleep 3; _unit distance _tree) < 2};
+_dist = _unit distance _tree;
+while {_dist > 10} do {
+	_dist = _unit distance _tree;
+	systemChat format ["Distance: %1", _dist];
+	sleep 4;
+};
+
+systemChat "Starting animation";
 
 // Set animation
 _faceDir = _unit getRelDir _tree;
