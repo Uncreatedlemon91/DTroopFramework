@@ -49,6 +49,7 @@ class CfgFunctions
 
 		class sites {
 			class prepAmbush {};
+			class spawnAmbush {};
 		};
 	};
 };
