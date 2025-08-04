@@ -12,7 +12,7 @@ while {alive _unit} do {
 		};
 	} forEach allPlayers;
 
-	if (_nearPlayers == 0) then {
+	if (_nearPlayers == 0) exitwith {
 		deleteVehicle _unit;
 		_trg setVariable ["Active", false];
 	};

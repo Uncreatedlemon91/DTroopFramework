@@ -69,15 +69,11 @@ _locations = nearestLocations [[0,0,0], _allLocations, worldsize * 4];
 
     // Create a Trigger on the location 
 	[_x] remoteExec ["lmn_fnc_createLocTrigger", 2];
-
 	// Set the population 
 	// Get the amount of houses in the area.
 	_houses = nearestTerrainObjects [position _x, ["HOUSE"], 800];
 	_houseCount = count _houses;
 	_population = round (_houseCount / 4);
-	if (_houseCount > 25) then {
-		_population = 25;
-	};
 
 	// Save the location 
 	["write", [_x, "Name", text _x]] call _locDB;
@@ -85,8 +81,12 @@ _locations = nearestLocations [[0,0,0], _allLocations, worldsize * 4];
 	["write", [_x, "Population", _population]] call _locDB;
 	["write", [_x, "Priority", _priority]] call _locDB;
     ["write", [_x, "Allegiance", _allegiance]] call _locDB;
-	["write", [_x, "Loyalty", round(random 100)]] call _locDB;
+	["write", [_x, "Stability", round(random 100)]] call _locDB;
 	["write", [_x, "dayEvent", selectRandom lmn_events]] call _locDB;
+	["write", [_x, "AmbushCount", round(random 5)]] call _locDB;
+	["write", [_x, "GarrisonSize", round(random 5)]] call _locDB;
+	["write", [_x, "MortarSites", round(random 2)]] call _locDB;
+	["write", [_x, "MinefieldSites", round(random 2)]] call _locDB;
 } forEach _locations;
 
 systemChat "[DB] Locations Generated";

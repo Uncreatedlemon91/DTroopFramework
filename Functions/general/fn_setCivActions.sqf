@@ -4,7 +4,6 @@ _farmArea = "lmn_fnc_CivActionFarm";
 
 // Compile the actions
 lmn_civActions = [
-	_walkAroundTown, 
-	_farmArea
+	_walkAroundTown
 ];
 

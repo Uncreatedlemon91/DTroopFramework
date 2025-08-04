@@ -13,6 +13,7 @@ class CfgFunctions
 		class general 
 		{
 			class addActions {};
+			class despawnAI {};
 			class setCivActions {};
 			class setEvents {};
 			class setFactions {};

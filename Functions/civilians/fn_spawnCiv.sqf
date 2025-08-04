@@ -13,7 +13,7 @@ _locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_ini
 
 // Get details about the location
 _loc = _trg getVariable "attachedLocation";
-_loyalty = ["read", [_loc, "Loyalty"]] call _locDB;
+_stability = ["read", [_loc, "Stability"]] call _locDB;
 
 // Spawn the civilian 
 _class = selectRandom (lmn_Civilians select 0);
@@ -21,7 +21,7 @@ _grp = createGroup Civilian;
 _unit = _grp createUnit [_class, position _trg, [], 4, "FORM"];
 
 // Give the civilian variables 
-_unit setVariable ["loyalty", random [(_loyalty - 25), _loyalty, (_loyalty + 25)]];
+_unit setVariable ["Stability", random [(_stability - 25), _stability, (_stability + 25)]];
 
 // Give the civilian something to do 
 _action = selectRandom lmn_civActions;
