@@ -10,6 +10,7 @@ _vehDB = ["new", format ["Player Vehicles %1 %2", missionName, worldName]] call 
 _locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_inidbi;
 _itemDB = ["new", format ["Player Items %1 %2", missionName, worldName]] call oo_inidbi;
 _treeDB = ["new", format ["Removed Trees %1 %2", missionName, worldName]] call oo_inidbi;
+_envDB = ["new", format ["World Environment %1 %2", missionName, worldName]] call oo_inidbi;
 
 
 // Check if the database exists 
@@ -17,6 +18,7 @@ _vehicleDatabaseExists = "exists" call _vehDB;
 _locDBExists = "exists" call _locDB;
 _itemDBExists = "exists" call _itemDB;
 _treeDBExists = "exists" call _treeDB;
+_envDBExists = "exists" call _envDB;
 
 // Load the databases
 if (_vehicleDatabaseExists) then {
@@ -37,4 +39,6 @@ if (_itemDBExists) then {
 if (_treeDBExists) then {
     [] remoteExec ["lmn_fnc_loadTrees", 2];
 };
-
+if (_envDBExists) then {
+    [] remoteExec ["lmn_fnc_loadEnvironment", 2];
+};

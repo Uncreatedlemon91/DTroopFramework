@@ -74,6 +74,9 @@ _locations = nearestLocations [[0,0,0], _allLocations, worldsize * 4];
 	_houses = nearestTerrainObjects [position _x, ["HOUSE"], 800];
 	_houseCount = count _houses;
 	_population = round (_houseCount / 4);
+	if (_population > 30) then {
+		_population = 30;
+	};
 
 	// Save the location 
 	["write", [_x, "Name", text _x]] call _locDB;

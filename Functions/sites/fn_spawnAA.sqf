@@ -11,15 +11,14 @@ _loc = _trg getVariable "attachedLocation";
 if (_active) exitWith {};
 
 // Make the unit  
-_pos = position (selectRandom (nearestTerrainObjects [position _trg, ["TREE", "BUSH"], 50, false, false]));
-_grp = [_pos, _side, _groupClass] call BIS_fnc_spawnGroup;
+_pos = position _trg;
+_aa = [_pos, random 360, _groupClass, _side] call BIS_fnc_spawnVehicle;
 
 {
 	// Check for nearby players 
 	[_x, _trg] remoteExec ["lmn_fnc_despawnAI", 2];
-} forEach units _grp;
+} forEach units _aa select 2;
 
 // Give the unit orders to defend the point  
-[_grp, position _trg] call BIS_fnc_taskDefend;
 _grp setCombatMode "RED";
 _trg setVariable ["Active", true];

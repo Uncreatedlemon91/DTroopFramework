@@ -1,15 +1,17 @@
-// Prepares the trigger and information for an ambush 
+// Prepares AA sites within the location 
 params ["_trg", "_faction"];
-_loc = _trg getVariable "attachedLocation";
-_pos = position (selectRandom (nearestTerrainObjects [_trg, ["ROAD", "TRAIL", "MAIN ROAD"], 500, false, false]));
 
-// Determine faction details 
+_loc = _trg getVariable "attachedLocation";
+_pos = position (selectRandom ((nearestTerrainObjects [_trg, ["ROAD", "TRAIL", "MAIN ROAD"], 500, false, false])+([position _trg, 0, 400, 10, 0, 10, 0] call BIS_fnc_findSafePos;)));
+
+// Setup the AA Site 
 _side = "";
-_groupClass = [];
+_class = [];
+
 switch (_faction) do {
 	case "USA": {
 		_side = west; 
-		_groupClass = selectRandom [
+		_class = selectRandom [
 			(configfile >> "CfgGroups" >> "West" >> "VN_MACV" >> "vn_b_group_men_army" >> "vn_b_group_men_army_03"),
 			(configfile >> "CfgGroups" >> "West" >> "VN_MACV" >> "vn_b_group_men_army" >> "vn_b_group_men_army_02"),
 			(configfile >> "CfgGroups" >> "West" >> "VN_MACV" >> "vn_b_group_men_army" >> "vn_b_group_men_army_01"),
@@ -19,7 +21,7 @@ switch (_faction) do {
 	};
 	case "North": {
 		_side = east;
-		_groupClass = selectRandom [
+		_class = selectRandom [
 			(configfile >> "CfgGroups" >> "East" >> "VN_PAVN" >> "vn_o_group_men_nva_dc" >> "vn_o_group_men_nva_dc_02"),
 			(configfile >> "CfgGroups" >> "East" >> "VN_PAVN" >> "vn_o_group_men_nva_dc" >> "vn_o_group_men_nva_dc_01"),
 			(configfile >> "CfgGroups" >> "East" >> "VN_PAVN" >> "vn_o_group_men_nva_65_field" >> "vn_o_group_men_nva_65_field_01"),
@@ -34,7 +36,7 @@ switch (_faction) do {
 	};
 	case "AUS": {
 		_side = west;
-		_groupClass = selectRandom [
+		_class = selectRandom [
 			(configfile >> "CfgGroups" >> "West" >> "VN_AUS" >> "vn_b_group_men_aus_army_68" >> "vn_b_group_men_aus_army_68_01"),
 			(configfile >> "CfgGroups" >> "West" >> "VN_AUS" >> "vn_b_group_men_aus_army_68" >> "vn_b_group_men_aus_army_68_02"),
 			(configfile >> "CfgGroups" >> "West" >> "VN_AUS" >> "vn_b_group_men_aus_army_68" >> "vn_b_group_men_aus_army_68_03"),
@@ -43,7 +45,7 @@ switch (_faction) do {
 	};
 	case "ROK": {
 		_side = independent;
-		_groupClass = selectRandom [
+		_class = selectRandom [
 			(configfile >> "CfgGroups" >> "Indep" >> "VN_ARVN" >> "vn_i_group_men_army" >> "vn_i_group_men_army_01"),
 			(configfile >> "CfgGroups" >> "Indep" >> "VN_ARVN" >> "vn_i_group_men_army" >> "vn_i_group_men_army_02"),
 			(configfile >> "CfgGroups" >> "Indep" >> "VN_ARVN" >> "vn_i_group_men_army" >> "vn_i_group_men_army_03"),
@@ -52,7 +54,7 @@ switch (_faction) do {
 	};
 	case "NZ": {
 		_side = west;
-		_groupClass = selectRandom [
+		_class = selectRandom [
 			(configfile >> "CfgGroups" >> "West" >> "VN_NZ" >> "vn_b_group_men_nz_army_68" >> "vn_b_group_men_nz_army_68_01"),
 			(configfile >> "CfgGroups" >> "West" >> "VN_NZ" >> "vn_b_group_men_nz_army_68" >> "vn_b_group_men_nz_army_68_02"),
 			(configfile >> "CfgGroups" >> "West" >> "VN_NZ" >> "vn_b_group_men_nz_army_68" >> "vn_b_group_men_nz_army_68_03")
@@ -60,23 +62,21 @@ switch (_faction) do {
 	};
 };
 
-
-// Setup a Marker
+// Setup Marker
 _mkr = createMarker [format ["%1-%2", _trg, _pos], _pos];
 _mkr setMarkerType "hd_dot";
-_mkr setMarkerColor "COLORRED";
+_mkr setMarkerColor "COLORYELLOW";
 
-_prep = createTrigger["EmptyDetector", _pos];
-_prep setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-_prep setTriggerArea [150, 150, 0, false, 200];
-_prep setTriggerStatements [
+// Setup the Trigger 
+_aaSite = createTrigger ["EmptyDetector", _pos];
+_aaSite setTriggerActivation ["ANYPLAYER", "PRESENT", true];
+_aaSite setTriggerArea [1200, 1200, 0, false, 1200];
+_aaSite setTriggerStatements [
 	"this",
-	"[thisTrigger] remoteExec ['lmn_fnc_spawnAmbush', 2]",
+	"[thisTrigger] remoteExec ['lmn_fnc_spawnAA', 2];",
 	""
 ];
-
-_prep setVariable ["attachedLocation", _loc];
-_prep setVariable ["faction", _faction];
-_prep setVariable ["Active", false];
-_prep setVariable ["ToSpawn", _groupClass];
-_prep setVariable ["FactionSide", _side];
+_aaSite setVariable ["Active", false];
+_aaSite setVariable ["FactionSide", _side];
+_aaSite setVariable ["attachedLocation", _loc];
+_aaSite setVariable ["ToSpawn", _class];
