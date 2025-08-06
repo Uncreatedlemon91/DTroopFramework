@@ -23,7 +23,15 @@ _sections = "getSections" call _db;
 	clearBackpackCargoGlobal _veh;
 	clearWeaponCargoGlobal _veh;
 	_veh setDir _dir;
-	_veh setDamage [_dmg, false, objNull, objNull];
+	_hitPointNames = _dmg select 0;
+	_hitPointValues = _dmg select 3;
+	_hitPointCount = count _hitPointNames;
+	for "_i" from 0 to _hitPointCount do {
+		_hitPointName = _hitPointNames select _i;
+		_hitPointValue = _hitPointValue select _1;
+		_veh setHitPointDamage [_hitPointName, _hitPointValue];
+	};
+	// _veh setDamage [_dmg, false, objNull, objNull];
 	_veh setFuel _fuel;
 
 	// add Ammo

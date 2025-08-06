@@ -7,7 +7,7 @@ _pvic = ["new", format ["Player Vehicles %1 %2", missionName, worldName]] call o
 // Get details
 _pos = getPosATL _veh;
 _dir = getDir _veh;
-_dmg = damage _veh;
+_dmg = getAllHitPointsDamage _veh;
 _fuel = fuel _veh;
 _type = typeOf _veh;
 _netId = netId _veh;
