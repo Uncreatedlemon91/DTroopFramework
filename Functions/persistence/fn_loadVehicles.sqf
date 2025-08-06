@@ -57,4 +57,4 @@ _sections = "getSections" call _db;
 	_veh allowDamage true;
 } forEach _sections;
 
-systemChat "[DB] Vehicles Loaded";
+// systemChat "[DB] Vehicles Loaded";

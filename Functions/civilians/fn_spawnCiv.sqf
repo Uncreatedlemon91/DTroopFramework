@@ -32,4 +32,3 @@ zeus addCuratorEditableObjects [[_unit], true];
 
 // Check the nearby players to see if any are close to the unit
 [_unit, _trg] remoteExec ["lmn_fnc_despawnAI", 2];
-

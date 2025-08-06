@@ -3,7 +3,7 @@ params ["_loc"];
 
 _trg = createTrigger ["EmptyDetector", position _loc];
 _trg setTriggerArea [800, 800, 0, false, 400];
-_trg setTriggerActivation ["ANYPLAYER", "PRESENT", true];
+_trg setTriggerActivation ["ANYPLAYER", "PRESENT", false];
 _trg setVariable ["attachedLocation", _loc];
 _trg setVariable ["Active", false];
 _trg setTriggerStatements [

@@ -1,7 +1,7 @@
 // Prepares the trigger and information for an ambush 
 params ["_trg", "_faction"];
 _loc = _trg getVariable "attachedLocation";
-_pos = position (selectRandom (nearestTerrainObjects [_trg, ["ROAD", "TRAIL"], 500, false, false]));
+_pos = position (selectRandom (nearestTerrainObjects [_trg, ["ROAD", "TRAIL", "MAIN ROAD"], 500, false, false]));
 
 _mkr = createMarker [format ["%1-%2", _trg, _pos], _pos];
 _mkr setMarkerType "hd_dot";

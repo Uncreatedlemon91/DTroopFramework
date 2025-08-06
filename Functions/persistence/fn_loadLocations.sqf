@@ -33,4 +33,4 @@ _sections = "getSections" call _locDB;
 	};
 } forEach _sections;
 
-systemChat "[DB] Locations Loaded";
+// systemChat "[DB] Locations Loaded";

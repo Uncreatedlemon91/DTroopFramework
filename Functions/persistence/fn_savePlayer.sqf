@@ -10,11 +10,12 @@ _dir = getDir _player;
 _name = name _player;
 _loadout = getUnitLoadout _player;
 _medical = [_player] call ace_medical_fnc_serializeState;
+_weapon = currentWeapon player;;
 
 if (isNil "_uid") then {
 	_uid = getPlayerUID _player;
 };
 
 // Save to database
-_data = [_name, _pos, _dir, _uid, _loadout, _medical];
+_data = [_name, _pos, _dir, _uid, _loadout, _medical, _weapon];
 ["write", [_uid, "Player Info", _data]] call _db;

@@ -1,8 +1,6 @@
 _db = ["new", format ["Player Items %1 %2", missionName, worldName]] call oo_inidbi;
 _sections = "getSections" call _db;
 
-// Debug
-systemChat "Loading Items";
 // apply saved vehicle locations back to the server 
 {
 	_data = ["read", [_x, "Item Info"]] call _db;
@@ -46,4 +44,4 @@ systemChat "Loading Items";
 	_item allowDamage true;
 } forEach _sections;
 
-systemChat "[DB] Items Loaded";
+// systemChat "[DB] Items Loaded";

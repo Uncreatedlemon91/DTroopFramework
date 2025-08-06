@@ -18,7 +18,6 @@ class CfgFunctions
 			class setEvents {};
 			class setFactions {};
 			class setupItems {};
-			class setupPlayer {};
 			class setupVehicle {};
 		};
 
@@ -42,13 +41,22 @@ class CfgFunctions
 			class loadItems {};
 			class loadLocations {};
 			class loadPlayer {};
+			class loadTrees {};
 			class loadVehicles {};
 			class saveItem {};
 			class savePlayer {};
+			class saveTree {};
 			class saveVehicle {};
 		};
+		
+		class players 
+		{
+			class actionTreeRemoval {};
+			class setupPlayerSelf {};
+		};
 
-		class sites {
+		class sites 
+		{
 			class prepAmbush {};
 			class spawnAmbush {};
 		};
