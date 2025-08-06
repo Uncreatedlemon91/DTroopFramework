@@ -16,7 +16,7 @@ _grp = [_pos, _side, _groupClass] call BIS_fnc_spawnGroup;
 
 {
 	// Check for nearby players 
-	[_x, _trg] remoteExec ["lmn_fnc_despawnAI", 2];
+	[_x, _trg, "Ambush"] remoteExec ["lmn_fnc_despawnAI", 2];
 } forEach units _grp;
 
 // Give the unit orders to defend the point  

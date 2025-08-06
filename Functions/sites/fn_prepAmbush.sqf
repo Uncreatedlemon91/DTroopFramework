@@ -2,6 +2,7 @@
 params ["_trg", "_faction"];
 _loc = _trg getVariable "attachedLocation";
 _pos = position (selectRandom (nearestTerrainObjects [_trg, ["ROAD", "TRAIL", "MAIN ROAD"], 500, false, false]));
+_alpha = 0;
 
 // Determine faction details 
 _side = "";
@@ -65,10 +66,11 @@ switch (_faction) do {
 _mkr = createMarker [format ["%1-%2", _trg, _pos], _pos];
 _mkr setMarkerType "hd_dot";
 _mkr setMarkerColor "COLORRED";
+_mkr setMarkerAlpha _alpha;
 
 _prep = createTrigger["EmptyDetector", _pos];
 _prep setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-_prep setTriggerArea [150, 150, 0, false, 200];
+_prep setTriggerArea [250, 250, 0, false, 200];
 _prep setTriggerStatements [
 	"this",
 	"[thisTrigger] remoteExec ['lmn_fnc_spawnAmbush', 2]",

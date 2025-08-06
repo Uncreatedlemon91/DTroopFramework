@@ -80,6 +80,12 @@ switch (_type) do {
 			["vn_b_item_toolkit", 20]
 		];
 	};
+	case "Wheels": {
+		_model = "vn_b_ammobox_15";
+		_content = [
+			["ACE_Wheel", 10]
+		];
+	};
 };
 
 // Spawn the box 

@@ -1,14 +1,21 @@
 // Checks for nearby players then removes the AI and resets the trigger  
-params ["_unit", "_trg"];
+params ["_unit", "_trg", "_type"];
 
 _grp = group _unit;
+_dist = 200;
+switch (_type) do {
+	case "Civilian": {_dist = 200};
+	case "Ambush": {_dist = 300};
+	case "AA": {_dist = 1300};
+	case "Garrison": {_dist = 600};
+};
 // Wait until players are no longer nearby 
 while {alive _unit} do {
 	sleep 10;
 	_nearPlayers = 0;
 	{
-		_dist = _unit distance _x;
-		if (_dist <= 200) then {
+		_distDiff = _unit distance _x;
+		if (_distDiff <= _dist) then {
 			_nearPlayers = _nearPlayers + 1;
 		};
 	} forEach allPlayers;

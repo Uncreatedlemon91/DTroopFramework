@@ -2,11 +2,14 @@
 params ["_trg"];
 _loc = _trg getVariable "attachedLocation";
 _pos = [[_trg]] call BIS_fnc_randomPos;
+_alpha = 0;
 
 // Debug marker 
 _mkr = createMarker [format ["%1-%2", _trg, _pos], _pos];
 _mkr setMarkerType "hd_dot";
 _mkr setMarkerColor "COLORGREEN";
+_mkr setMarkerAlpha _alpha;
+
 
 _prep = createTrigger["EmptyDetector", _pos];
 _prep setTriggerActivation ["ANYPLAYER", "PRESENT", true];

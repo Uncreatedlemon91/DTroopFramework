@@ -42,3 +42,7 @@ if (_treeDBExists) then {
 if (_envDBExists) then {
     [] remoteExec ["lmn_fnc_loadEnvironment", 2];
 };
+
+
+// Run ongoing Scripts 
+[] remoteExec ["lmn_fnc_saveEnvironment", 2];

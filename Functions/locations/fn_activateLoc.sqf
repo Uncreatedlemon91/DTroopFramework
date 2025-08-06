@@ -17,6 +17,8 @@ _allegiance = ["read", [_loc, "Allegiance"]] call _locDB;
 _priority = ["read", [_loc, "Priority"]] call _locDB;
 _population = ["read", [_loc, "Population"]] call _locDB;
 _ambushes = ["read", [_loc, "AmbushCount"]] call _locDB;
+_aaSites = ["read", [_loc, "AAsites"]] call _locDB;
+_garrisons = ["read", [_loc, "GarrisonSize"]] call _locDB;
 
 // Spawn civilians 
 for "_i" from 1 to _population do {
@@ -26,4 +28,14 @@ for "_i" from 1 to _population do {
 // Spawn ambush locations 
 for "_i" from 1 to _ambushes do {
 	[_trg, _allegiance] remoteExec ["lmn_fnc_prepAmbush", 2];
+};
+
+// Spawn AA site Locations 
+for "_i" from 1 to _aaSites do {
+	[_trg, _allegiance] remoteExec ["lmn_fnc_prepAA", 2];
+};
+
+// Spawn Garrison site Locations 
+for "_i" from 1 to _garrisons do {
+	[_trg, _allegiance] remoteExec ["lmn_fnc_prepGarrison", 2];
 };

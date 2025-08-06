@@ -90,6 +90,7 @@ _locations = nearestLocations [[0,0,0], _allLocations, worldsize * 4];
 	["write", [_x, "GarrisonSize", round(random 5)]] call _locDB;
 	["write", [_x, "MortarSites", round(random 2)]] call _locDB;
 	["write", [_x, "MinefieldSites", round(random 2)]] call _locDB;
+	["write", [_x, "AAsites", round(random 4)]] call _locDB;
 } forEach _locations;
 
 systemChat "[DB] Locations Generated";

@@ -38,11 +38,13 @@ class CfgFunctions
 		{
 			class deleteItem {};
 			class getPlayerData {};
+			class loadEnvironment {};
 			class loadItems {};
 			class loadLocations {};
 			class loadPlayer {};
 			class loadTrees {};
 			class loadVehicles {};
+			class saveEnvironment {};
 			class saveItem {};
 			class savePlayer {};
 			class saveTree {};
@@ -57,8 +59,12 @@ class CfgFunctions
 
 		class sites 
 		{
+			class prepAA {};
 			class prepAmbush {};
+			class prepGarrison {};
+			class spawnAA {};
 			class spawnAmbush {};
+			class spawnGarrison {};
 		};
 	};
 };
