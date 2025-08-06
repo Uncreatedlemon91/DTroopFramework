@@ -5,9 +5,9 @@ _grp = group _unit;
 _dist = 200;
 switch (_type) do {
 	case "Civilian": {_dist = 200};
-	case "Ambush": {_dist = 300};
-	case "AA": {_dist = 1300};
-	case "Garrison": {_dist = 600};
+	case "Ambush": {_dist = 250};
+	case "AA": {_dist = 800};
+	case "Garrison": {_dist = 500};
 };
 // Wait until players are no longer nearby 
 while {alive _unit} do {
