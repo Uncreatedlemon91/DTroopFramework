@@ -15,6 +15,9 @@ _sections = "getSections" call _db;
 	_ammo = _data select 7;
 	_weps = _data select 8;
 
+	// filter hit names 
+	_ignoreHitNames = ["#l_svetlo","#p_svetlo","#l_svetlo","#p_svetlo"];
+
 	// Spawn vehicle replica 
 	_veh = _type createVehicle _pos;
 	_veh allowDamage false;
@@ -24,12 +27,14 @@ _sections = "getSections" call _db;
 	clearWeaponCargoGlobal _veh;
 	_veh setDir _dir;
 	_hitPointNames = _dmg select 0;
-	_hitPointValues = _dmg select 3;
+	_hitPointValues = _dmg select 2;
 	_hitPointCount = count _hitPointNames;
 	for "_i" from 0 to _hitPointCount do {
 		_hitPointName = _hitPointNames select _i;
-		_hitPointValue = _hitPointValue select _1;
-		_veh setHitPointDamage [_hitPointName, _hitPointValue];
+		_hitPointValue = _hitPointValues select _i;
+		if !(_hitPointName in _ignoreHitNames) then {
+			_veh setHitPointDamage [_hitPointName, _hitPointValue];
+		}
 	};
 	// _veh setDamage [_dmg, false, objNull, objNull];
 	_veh setFuel _fuel;
