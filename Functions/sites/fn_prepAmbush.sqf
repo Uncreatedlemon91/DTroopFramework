@@ -2,7 +2,7 @@
 params ["_trg", "_faction"];
 _loc = _trg getVariable "attachedLocation";
 _pos = position (selectRandom (nearestTerrainObjects [_trg, ["ROAD", "TRAIL", "MAIN ROAD"], 500, false, false]));
-_alpha = 0;
+_alpha = 1;
 
 // Determine faction details 
 _side = "";
@@ -12,7 +12,7 @@ switch (_faction) do {
 		_side = west; 
 		_groupClass = selectRandom [
 			(configfile >> "CfgGroups" >> "West" >> "VN_MACV" >> "vn_b_group_men_army" >> "vn_b_group_men_army_02"),
-			(configfile >> "CfgGroups" >> "West" >> "VN_MACV" >> "vn_b_group_men_army" >> "vn_b_group_men_army_01"),
+			(configfile >> "CfgGroups" >> "West" >> "VN_MACV" >> "vn_b_group_men_army" >> "vn_b_group_men_army_01")
 		];
 	};
 	case "North": {
@@ -48,7 +48,7 @@ switch (_faction) do {
 		_side = west;
 		_groupClass = selectRandom [
 			(configfile >> "CfgGroups" >> "West" >> "VN_NZ" >> "vn_b_group_men_nz_army_68" >> "vn_b_group_men_nz_army_68_01"),
-			(configfile >> "CfgGroups" >> "West" >> "VN_NZ" >> "vn_b_group_men_nz_army_68" >> "vn_b_group_men_nz_army_68_02"),
+			(configfile >> "CfgGroups" >> "West" >> "VN_NZ" >> "vn_b_group_men_nz_army_68" >> "vn_b_group_men_nz_army_68_02")
 		];
 	};
 };
@@ -74,5 +74,3 @@ _prep setVariable ["faction", _faction];
 _prep setVariable ["Active", false];
 _prep setVariable ["ToSpawn", _groupClass];
 _prep setVariable ["FactionSide", _side];
-
-_site = [_prep, _mkr];

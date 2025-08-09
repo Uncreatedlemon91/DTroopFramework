@@ -3,7 +3,7 @@ params ["_trg", "_faction"];
 
 _loc = _trg getVariable "attachedLocation";
 _pos = position (selectRandom (nearestTerrainObjects [_trg, ["HOUSE", "HOSPITAL", "BUILDING", "BUNKER", "FORTRESS"], 500, false, false]));
-_alpha = 0;
+_alpha = 1;
 
 // Determine faction details 
 _side = "";
@@ -70,5 +70,3 @@ _garrisonTrg setVariable ["Active", false];
 _garrisonTrg setVariable ["FactionSide", _side];
 _garrisonTrg setVariable ["attachedLocation", _loc];
 _garrisonTrg setVariable ["ToSpawn", _groupClass];
-
-_site = [_garrisonTrg, _mkr];

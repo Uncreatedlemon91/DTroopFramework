@@ -12,5 +12,5 @@ while {true} do {
 	["write", ["Info", "Waves", waves]] call _db;
 	["write", ["Info", "Humidity", humidity]] call _db;
 	["write", ["Info", "Date", date]] call _db;
-	sleep 300;
+	sleep 30;
 };
