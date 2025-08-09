@@ -17,7 +17,7 @@ _sections = "getSections" call _db;
 	_weps = _data select 9;
 
 	// filter hit names 
-	_ignoreHitNames = ["#l_svetlo","#p_svetlo","#l_svetlo","#p_svetlo"];
+	// _ignoreHitNames = ["#l_svetlo","#p_svetlo","#l_svetlo","#p_svetlo"];
 
 	// Spawn vehicle replica 
 	_veh = _type createVehicle _pos;
@@ -27,15 +27,17 @@ _sections = "getSections" call _db;
 	clearBackpackCargoGlobal _veh;
 	clearWeaponCargoGlobal _veh;
 	_veh setDir _dir;
-	_hitPointNames = _dmg1
-	_hitPointValues = _dmg2
+	_veh allowDamage true;
+	_hitPointNames = _dmg1;
+	_hitPointValues = _dmg2;
 	_hitPointCount = count _hitPointNames;
 	for "_i" from 0 to _hitPointCount do {
 		_hitPointName = _hitPointNames select _i;
 		_hitPointValue = _hitPointValues select _i;
-		if !(_hitPointName in _ignoreHitNames) then {
-			_veh setHitIndex [_hitPointName, _hitPointValue, false];
-		}
+		if (_hitpointName == "hitengine") then {
+			systemChat format ["%1-%2", _hitPointName, _hitPointValue];
+		};
+		_veh setHitPointDamage [_hitPointName, _hitPointValue, false];
 	};
 	// _veh setDamage [_dmg, false, objNull, objNull];
 	_veh setFuel _fuel;
@@ -68,7 +70,6 @@ _sections = "getSections" call _db;
 	["deleteSection", _x] call _db;
 	[_veh] remoteExec ["lmn_fnc_setupVehicle", 2];
 	[_veh] remoteExec ["lmn_fnc_saveVehicle", 2];
-	_veh allowDamage true;
 } forEach _sections;
 
 // systemChat "[DB] Vehicles Loaded";
