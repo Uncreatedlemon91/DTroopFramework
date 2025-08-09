@@ -7,7 +7,8 @@ _pvic = ["new", format ["Player Vehicles %1 %2", missionName, worldName]] call o
 // Get details
 _pos = getPosATL _veh;
 _dir = getDir _veh;
-_dmg = getAllHitPointsDamage _veh;
+_dmg1 = (getAllHitPointsDamage _veh) select 0;
+_dmg2 = (getAllHitPointsDamage _veh) select 1;
 _fuel = fuel _veh;
 _type = typeOf _veh;
 _netId = netId _veh;
@@ -21,5 +22,5 @@ _ammo = getMagazineCargo _veh;
 _weps = getWeaponCargo _veh;
 
 // Save to database
-_data = [_type, _pos, _dir, _dmg, _fuel, _mags, _items, _ammo, _weps];
+_data = [_type, _pos, _dir, _dmg1, _dmg2, _fuel, _mags, _items, _ammo, _weps];
 ["write", [_netId, "Vehicle Info", _data]] call _pVic;

@@ -8,12 +8,13 @@ _sections = "getSections" call _db;
 	_type = _data select 0;
 	_pos = _data select 1;
 	_dir = _data select 2;
-	_dmg = _data select 3;
-	_fuel = _data select 4;
-	_mags = _data select 5;
-	_items = _data select 6;
-	_ammo = _data select 7;
-	_weps = _data select 8;
+	_dmg1 = _data select 3;
+	_dmg2 = _data select 4;
+	_fuel = _data select 5;
+	_mags = _data select 6;
+	_items = _data select 7;
+	_ammo = _data select 8;
+	_weps = _data select 9;
 
 	// filter hit names 
 	_ignoreHitNames = ["#l_svetlo","#p_svetlo","#l_svetlo","#p_svetlo"];
@@ -26,14 +27,14 @@ _sections = "getSections" call _db;
 	clearBackpackCargoGlobal _veh;
 	clearWeaponCargoGlobal _veh;
 	_veh setDir _dir;
-	_hitPointNames = _dmg select 0;
-	_hitPointValues = _dmg select 2;
+	_hitPointNames = _dmg1
+	_hitPointValues = _dmg2
 	_hitPointCount = count _hitPointNames;
 	for "_i" from 0 to _hitPointCount do {
 		_hitPointName = _hitPointNames select _i;
 		_hitPointValue = _hitPointValues select _i;
 		if !(_hitPointName in _ignoreHitNames) then {
-			_veh setHitPointDamage [_hitPointName, _hitPointValue];
+			_veh setHitIndex [_hitPointName, _hitPointValue, false];
 		}
 	};
 	// _veh setDamage [_dmg, false, objNull, objNull];
