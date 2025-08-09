@@ -20,22 +20,52 @@ _ambushes = ["read", [_loc, "AmbushCount"]] call _locDB;
 _aaSites = ["read", [_loc, "AAsites"]] call _locDB;
 _garrisons = ["read", [_loc, "GarrisonSize"]] call _locDB;
 
+// Save arrays of sites 
+_civSites = [];
+_ambushSites = [];
+_aaSites = [];
+_garrisonSites = [];
+
 // Spawn civilians 
 for "_i" from 1 to _population do {
-	[_trg] remoteExec ["lmn_fnc_prepCiv", 2];
+	_newSite = [_trg] remoteExec ["lmn_fnc_prepCiv", 2];
+	_civSites pushback _newsite;
 };
 
 // Spawn ambush locations 
 for "_i" from 1 to _ambushes do {
-	[_trg, _allegiance] remoteExec ["lmn_fnc_prepAmbush", 2];
+	_newSite = [_trg, _allegiance] remoteExec ["lmn_fnc_prepAmbush", 2];
+	_ambushSites pushback _newSite;
 };
 
 // Spawn AA site Locations 
 for "_i" from 1 to _aaSites do {
-	[_trg, _allegiance] remoteExec ["lmn_fnc_prepAA", 2];
+	_newSite = [_trg, _allegiance] remoteExec ["lmn_fnc_prepAA", 2];
+	_aaSites pushback _newSite;
 };
 
 // Spawn Garrison site Locations 
 for "_i" from 1 to _garrisons do {
-	[_trg, _allegiance] remoteExec ["lmn_fnc_prepGarrison", 2];
+	_newSite = [_trg, _allegiance] remoteExec ["lmn_fnc_prepGarrison", 2];
+	_garrisonSites pushback _newSite;
+};
+
+// Cleanup Site when no players nearby. 
+_dist = 800;
+while {_active} do {
+	sleep 10;
+	_nearPlayers = 0;
+	{
+		_distDiff = _trg distance _x;
+		if (_distDiff <= _dist) then {
+			_nearPlayers = _nearPlayers + 1;
+		};
+
+		if (_newPlayers == 0) then {
+			{
+				deleteVehicle (_x select 0);
+				deleteMarker (_x select 1);
+			} forEach _civSites + _ambushSites + _aaSites + _garrisonSites;
+		};
+	} forEach allPlayers;
 };

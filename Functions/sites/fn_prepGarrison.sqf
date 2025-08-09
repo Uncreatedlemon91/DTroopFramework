@@ -70,3 +70,5 @@ _garrisonTrg setVariable ["Active", false];
 _garrisonTrg setVariable ["FactionSide", _side];
 _garrisonTrg setVariable ["attachedLocation", _loc];
 _garrisonTrg setVariable ["ToSpawn", _groupClass];
+
+_site = [_garrisonTrg, _mkr];

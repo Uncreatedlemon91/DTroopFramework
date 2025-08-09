@@ -21,3 +21,5 @@ _prep setTriggerStatements [
 	"[thisTrigger] remoteExec ['lmn_fnc_spawnCiv', 2]",
 	""
 ];
+
+_site = [_prep, _mkr];

@@ -66,3 +66,5 @@ _aaSite setVariable ["Active", false];
 _aaSite setVariable ["FactionSide", _side];
 _aaSite setVariable ["attachedLocation", _loc];
 _aaSite setVariable ["ToSpawn", _class];
+
+_site = [_aaSite, _mkr];

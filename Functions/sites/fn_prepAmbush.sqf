@@ -82,3 +82,5 @@ _prep setVariable ["faction", _faction];
 _prep setVariable ["Active", false];
 _prep setVariable ["ToSpawn", _groupClass];
 _prep setVariable ["FactionSide", _side];
+
+_site = [_prep, _mkr];
