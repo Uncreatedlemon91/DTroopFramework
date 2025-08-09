@@ -2,7 +2,7 @@
 params ["_trg", "_faction"];
 _loc = _trg getVariable "attachedLocation";
 _pos = position (selectRandom (nearestTerrainObjects [_trg, ["ROAD", "TRAIL", "MAIN ROAD"], 500, false, false]));
-_alpha = 0;
+_alpha = 1;
 
 // Determine faction details 
 _side = "";
@@ -74,5 +74,3 @@ _prep setVariable ["faction", _faction];
 _prep setVariable ["Active", false];
 _prep setVariable ["ToSpawn", _groupClass];
 _prep setVariable ["FactionSide", _side];
-
-_site = [_prep, _mkr];

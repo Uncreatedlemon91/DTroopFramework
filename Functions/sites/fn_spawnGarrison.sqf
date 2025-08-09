@@ -20,5 +20,7 @@ _grp = [_pos, _side, _groupClass] call BIS_fnc_spawnGroup;
 
 // Give the unit orders to defend the point  
 [_grp, _trg] call CBA_fnc_taskSearchArea;
+_grp setSpeedMode "LIMITED";
+_grp setCombatMode "BLUE";
 
 _trg setVariable ["Active", true];

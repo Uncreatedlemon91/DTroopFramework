@@ -3,7 +3,7 @@ params ["_trg", "_faction"];
 
 _loc = _trg getVariable "attachedLocation";
 _pos = [_trg, 0, 500, 10, 0, 10, 0] call BIS_fnc_findSafePos;
-_alpha = 0;
+_alpha = 1;
 
 // Setup the AA Site 
 _side = "";
@@ -66,5 +66,3 @@ _aaSite setVariable ["Active", false];
 _aaSite setVariable ["FactionSide", _side];
 _aaSite setVariable ["attachedLocation", _loc];
 _aaSite setVariable ["ToSpawn", _class];
-
-_site = [_aaSite, _mkr];

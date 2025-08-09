@@ -16,9 +16,6 @@ _sections = "getSections" call _db;
 	_ammo = _data select 8;
 	_weps = _data select 9;
 
-	// filter hit names 
-	// _ignoreHitNames = ["#l_svetlo","#p_svetlo","#l_svetlo","#p_svetlo"];
-
 	// Spawn vehicle replica 
 	_veh = _type createVehicle _pos;
 	_veh allowDamage false;
@@ -34,9 +31,6 @@ _sections = "getSections" call _db;
 	for "_i" from 0 to _hitPointCount do {
 		_hitPointName = _hitPointNames select _i;
 		_hitPointValue = _hitPointValues select _i;
-		if (_hitpointName == "hitengine") then {
-			systemChat format ["%1-%2", _hitPointName, _hitPointValue];
-		};
 		_veh setHitPointDamage [_hitPointName, _hitPointValue, false];
 	};
 	// _veh setDamage [_dmg, false, objNull, objNull];
