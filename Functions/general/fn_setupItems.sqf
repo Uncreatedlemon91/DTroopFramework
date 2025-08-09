@@ -1,6 +1,5 @@
 // Sets up saving mechanisms to the boxes 
 params ["_box"];
-systemChat "[DB] Setting up Box";
 
 // Actions to save and delete 
 _boxDelete = [

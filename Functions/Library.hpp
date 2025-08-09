@@ -44,11 +44,13 @@ class CfgFunctions
 			class loadPlayer {};
 			class loadTrees {};
 			class loadVehicles {};
+			class loadWrecks {};
 			class saveEnvironment {};
 			class saveItem {};
 			class savePlayer {};
 			class saveTree {};
 			class saveVehicle {};
+			class saveWreck {};
 		};
 		
 		class players 
