@@ -8,19 +8,15 @@ removeBackpack player;
 removeHeadgear player;
 removeGoggles player;
 
-comment "Add weapons";
-player addWeapon "vn_m127";
-player addSecondaryWeaponItem "vn_m127_mag";
-player addWeapon "vn_m1911";
-player addHandgunItem "vn_m1911_mag";
 
-comment "Add containers";
-player forceAddUniform "U_Simc_TCU_mk3_tuck_nom";
-player addVest "vn_b_vest_aircrew_03";
-player addHeadgear "vn_b_helmet_svh4_02_01";
-player addGoggles "G_Nomex_desu_cut";
+// Set the player role variable for future use 
+player setVariable ["playerRole", "Pilot"];
 
-comment "Add items";
-player linkItem "vn_b_item_map";
-player linkItem "vn_b_item_compass";
-player linkItem "vn_b_item_watch";
+// Define items for the arsenal 
+_items = [
+
+];
+
+// Open the Arsenal to allow customization 
+[ArsenalBox, player] call ace_arsenal_fnc_openBox;
+[ArsenalBox, _items] call ace_arsenal_fnc_addVirtualItems;
