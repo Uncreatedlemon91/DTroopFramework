@@ -2,7 +2,7 @@
 // Define the databases being used 
 _locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_inidbi;
 
-_allLocations = [];
+lmn_locations = [];
 _lowPriority = [
 	// "Mount",
 	"NameLocal",
@@ -24,12 +24,12 @@ _highPriority = [
 	"NameCityCapital"
 ];
 
-_allLocations append _lowPriority; 
-_allLocations append _midPriority;
-_allLocations append _highPriority;
+lmn_locations append _lowPriority; 
+lmn_locations append _midPriority;
+lmn_locations append _highPriority;
 
 // Scan and setup the markers for each location as well as their variables.
-_locations = nearestLocations [[0,0,0], _allLocations, worldsize * 4];
+_locations = nearestLocations [[0,0,0], lmn_locations, worldsize * 4];
 {
 	// Set priority of the location
 	_priority = 1;
