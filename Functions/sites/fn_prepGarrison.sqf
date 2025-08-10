@@ -3,7 +3,7 @@ params ["_trg", "_faction"];
 
 _loc = _trg getVariable "attachedLocation";
 _pos = position (selectRandom (nearestTerrainObjects [_trg, ["HOUSE", "HOSPITAL", "BUILDING", "BUNKER", "FORTRESS"], 500, false, false]));
-_alpha = 1;
+_alpha = 0;
 
 // Determine faction details 
 _side = "";
