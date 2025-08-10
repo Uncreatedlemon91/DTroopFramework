@@ -60,7 +60,7 @@ _mkr setMarkerAlpha _alpha;
 // Setup the Trigger 
 _garrisonTrg = createTrigger ["EmptyDetector", _pos];
 _garrisonTrg setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-_garrisonTrg setTriggerArea [500, 500, 0, false, 500];
+_garrisonTrg setTriggerArea [300, 300, 0, false, 500];
 _garrisonTrg setTriggerStatements [
 	"this",
 	"[thisTrigger] remoteExec ['lmn_fnc_spawnGarrison', 2];",

@@ -62,7 +62,7 @@ _mkr setMarkerAlpha _alpha;
 
 _prep = createTrigger["EmptyDetector", _pos];
 _prep setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-_prep setTriggerArea [250, 250, 0, false, 200];
+_prep setTriggerArea [250, 250, 0, false, 100];
 _prep setTriggerStatements [
 	"this",
 	"[thisTrigger] remoteExec ['lmn_fnc_spawnAmbush', 2]",

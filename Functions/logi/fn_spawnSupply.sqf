@@ -81,9 +81,8 @@ switch (_type) do {
 		];
 	};
 	case "Wheels": {
-		_model = "vn_b_ammobox_15";
+		_model = "ACE_Wheel";
 		_content = [
-			["ACE_Wheel", 10]
 		];
 	};
 };
