@@ -139,13 +139,6 @@ clearItemCargoGlobal _box;
 clearWeaponCargoGlobal _box;
 clearMagazineCargoGlobal _box;
 
-// Setup ACE Stuff 
-[_box, true, [0, 2, 0], 20] call ace_dragging_fnc_setDraggable;
-[_box, true, [0, 3, 1], 10] call ace_dragging_fnc_setCarryable;
-if (_model == "Land_vn_tent_mash_01_02") then {
-	_box setVariable ["ace_medical_isMedicalVehicle", true, true];
-};
-
 // Add desired contents to the box 
 {
 	//_box addMagazineCargoGlobal _x;

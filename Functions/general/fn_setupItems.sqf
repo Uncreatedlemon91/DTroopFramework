@@ -27,6 +27,13 @@ _boxSave = [
 [_box, 0, ["ACE_MainActions"], _boxDelete] call ace_interact_menu_fnc_addActionToObject;
 [_box, 0, ["ACE_MainActions"], _boxSave] call ace_interact_menu_fnc_addActionToObject;
 
+// Setup ACE Stuff 
+[_box, true, [0, 2, 0], 20] call ace_dragging_fnc_setDraggable;
+[_box, true, [0, 3, 1], 10] call ace_dragging_fnc_setCarryable;
+if (_model == "Land_vn_tent_mash_01_02") then {
+	_box setVariable ["ace_medical_isMedicalVehicle", true, true];
+};
+
 // Event Handlers 
 _box addEventHandler ["Hit", {
 	params ["_unit", "_source", "_damage", "_instigator"];
