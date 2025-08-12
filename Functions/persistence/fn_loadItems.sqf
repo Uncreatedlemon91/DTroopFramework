@@ -22,6 +22,12 @@ _sections = "getSections" call _db;
 	_item setDir _dir;
 	_item setDamage [_dmg, false, objNull, objNull];
 
+	// Setup ACE stuff 
+	[_item, true, [0, 2, 0], 20] call ace_dragging_fnc_setDraggable;
+	[_item, true, [0, 3, 1], 10] call ace_dragging_fnc_setCarryable;
+	if (_type == "Land_vn_tent_mash_01_02") then {
+		_item setVariable ["ace_medical_isMedicalVehicle", true, true];
+	};
 	// Add cargo / Inventory of the vehicle back 
 	_items params ["_classes","_count"];
 	for "_i" from 0 to count _classes - 1 do {

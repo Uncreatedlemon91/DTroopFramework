@@ -1,6 +1,4 @@
 // Sets up the player with event handlers and such 
-systemchat "ADDACTION";
-
 params ["_player"];
 
 // Setup tree removal 
@@ -16,5 +14,3 @@ _treeRemovalAction = [
 ] call ace_interact_menu_fnc_createAction;
 
 [_player, 1, ["ACE_SelfActions"], _treeRemovalAction] call ace_interact_menu_fnc_addActionToObject;
-
-systemchat "ADDED ADDACTION";

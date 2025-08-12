@@ -14,10 +14,15 @@ if (_active) exitWith {};
 _pos = position _trg;
 _aa = [_pos, random 360, _groupClass, _side] call BIS_fnc_spawnVehicle;
 
+/*
 {
 	// Check for nearby players 
 	[_x, _trg, "AA"] remoteExec ["lmn_fnc_despawnAI", 2];
 } forEach units (_aa select 2);
+*/ 
+
+// Check for nearby players 
+[leader _grp, _trg, "AA"] remoteExec ["lmn_fnc_despawnAI", 2];
 
 // Give the unit orders to defend the point  
 (_aa select 2) setCombatMode "RED";

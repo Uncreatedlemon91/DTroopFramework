@@ -175,6 +175,104 @@ _wheels = [
     {true}
 ] call ace_interact_menu_fnc_createAction;
 
+// ITEMS TO SPAWN 
+_items = [
+    "items", 
+    "Items", 
+    "", 
+    {}, 
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+_helipad = [
+    "Helipad",
+    "Helipad",
+    "",
+    {["Helipad"] remoteExec ["lmn_fnc_spawnSupply", 2]},
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+_medicalTent = [
+    "medicalTent",
+    "Medical Tent",
+    "",
+    {["medicalTent"] remoteExec ["lmn_fnc_spawnSupply", 2]},
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+_radio = [
+    "radio",
+    "Radio",
+    "",
+    {["radio"] remoteExec ["lmn_fnc_spawnSupply", 2]},
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+_wBuffalo = [
+    "Buffalo",
+    "Buffalo",
+    "",
+    {["Buffalo"] remoteExec ["lmn_fnc_spawnSupply", 2]},
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+_fuelDrum = [
+    "fuelDrum",
+    "Fuel Drum",
+    "",
+    {["fuelDrum"] remoteExec ["lmn_fnc_spawnSupply", 2]},
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+_target = [
+    "target",
+    "Target",
+    "",
+    {["target"] remoteExec ["lmn_fnc_spawnSupply", 2]},
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+_revetment = [
+    "Revetment",
+    "Revetment",
+    "",
+    {["Revetment"] remoteExec ["lmn_fnc_spawnSupply", 2]},
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+_Sandbags = [
+    "Sandbags",
+    "Sandbags",
+    "",
+    {["Sandbags"] remoteExec ["lmn_fnc_spawnSupply", 2]},
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+_SandbagsRounded = [
+    "SandbagsRounded",
+    "Sandbags Rounded",
+    "",
+    {["SandbagsRounded"] remoteExec ["lmn_fnc_spawnSupply", 2]},
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+_Lamp = [
+    "Lamp",
+    "Lamp",
+    "",
+    {["Lamp"] remoteExec ["lmn_fnc_spawnSupply", 2]},
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+_Lantern = [
+    "SLanternandbagsRounded",
+    "Lantern",
+    "",
+    {["Lantern"] remoteExec ["lmn_fnc_spawnSupply", 2]},
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+
 // Addactions to logistics point
 // Vehicles 
 [logiPoint, 0, ["ACE_MainActions"], _spawnVehicles] call ace_interact_menu_fnc_addActionToObject;
@@ -203,3 +301,16 @@ _wheels = [
 [logiPoint, 0, ["ACE_MainActions", "supplies"], _repairKits] call ace_interact_menu_fnc_addActionToObject;
 [logiPoint, 0, ["ACE_MainActions", "supplies"], _fluids] call ace_interact_menu_fnc_addActionToObject;
 [logiPoint, 0, ["ACE_MainActions", "supplies"], _wheels] call ace_interact_menu_fnc_addActionToObject;
+// Items 
+[logiPoint, 0, ["ACE_MainActions"], _items] call ace_interact_menu_fnc_addActionToObject;
+[logiPoint, 0, ["ACE_MainActions", "items"], _helipad] call ace_interact_menu_fnc_addActionToObject;
+[logiPoint, 0, ["ACE_MainActions", "items"], _medicalTent] call ace_interact_menu_fnc_addActionToObject;
+[logiPoint, 0, ["ACE_MainActions", "items"], _radio] call ace_interact_menu_fnc_addActionToObject;
+[logiPoint, 0, ["ACE_MainActions", "items"], _wBuffalo] call ace_interact_menu_fnc_addActionToObject;
+[logiPoint, 0, ["ACE_MainActions", "items"], _fuelDrum] call ace_interact_menu_fnc_addActionToObject;
+[logiPoint, 0, ["ACE_MainActions", "items"], _target] call ace_interact_menu_fnc_addActionToObject;
+[logiPoint, 0, ["ACE_MainActions", "items"], _revetment] call ace_interact_menu_fnc_addActionToObject;
+[logiPoint, 0, ["ACE_MainActions", "items"], _Sandbags] call ace_interact_menu_fnc_addActionToObject;
+[logiPoint, 0, ["ACE_MainActions", "items"], _SandbagsRounded] call ace_interact_menu_fnc_addActionToObject;
+[logiPoint, 0, ["ACE_MainActions", "items"], _Lamp] call ace_interact_menu_fnc_addActionToObject;
+[logiPoint, 0, ["ACE_MainActions", "items"], _Lantern] call ace_interact_menu_fnc_addActionToObject;

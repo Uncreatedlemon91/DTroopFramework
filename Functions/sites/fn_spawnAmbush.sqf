@@ -14,12 +14,18 @@ if (_active) exitWith {};
 _pos = position (selectRandom (nearestTerrainObjects [position _trg, ["TREE", "BUSH"], 50, false, false]));
 _grp = [_pos, _side, _groupClass] call BIS_fnc_spawnGroup;
 
+/*
 {
 	// Check for nearby players 
 	[_x, _trg, "Ambush"] remoteExec ["lmn_fnc_despawnAI", 2];
 } forEach units _grp;
+*/
+
+// Check for nearby players 
+[leader _grp, _trg, "Ambush"] remoteExec ["lmn_fnc_despawnAI", 2];
 
 // Give the unit orders to defend the point  
-[_grp, position _trg] call BIS_fnc_taskDefend;
+[_grp, 500] spawn lambs_wp_fnc_taskCreep;
 _grp setCombatMode "RED";
+_grp setBehaviour "SAFE";
 _trg setVariable ["Active", true];

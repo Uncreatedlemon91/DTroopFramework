@@ -57,10 +57,8 @@ switch (_stance) do {
 
 	case "Guerilla": {
 		selectRandom [
-			"Hunters", 
-			""
+			"Hunters"
 		]
-	}
-	default { };
+	};
 };
 // Save location to the database, will be triggered later on 

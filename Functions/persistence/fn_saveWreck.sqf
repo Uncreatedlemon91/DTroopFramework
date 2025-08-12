@@ -11,6 +11,12 @@ _type = typeOf _wreck;
 _dir = direction _wreck;
 _netID = netId _wreck;
 
+// Add delete options to the wreck 
+_loaded = _wreck getVariable ["Loaded", false];
+if (_loaded == false) then {
+	[_wreck] remoteExec ["lmn_fnc_setupWrecks", 0];
+};
+
 // Save to the wreck DB 
 _data = [_pos, _type, _dir];
 ["write", [_netId, "Wreck Info", _data]] call _wDB;

@@ -82,8 +82,51 @@ switch (_type) do {
 	};
 	case "Wheels": {
 		_model = "ACE_Wheel";
-		_content = [
-		];
+		_content = [];
+	};
+	case "Helipad":{
+		_model = "Land_vn_b_helipad_01";
+		_content = [];
+	};
+	case "medicalTent": {
+		_model = "Land_vn_tent_mash_01_02";
+		_content = [];
+	};
+	case "Buffalo": {
+		_model = "Land_vn_b_prop_m149";
+		_content = [];
+	};
+	case "radio": {
+		_model = "Land_vn_radio";
+		_content = [];
+	};
+	case "fuelDrum": {
+		_model = "Land_vn_b_prop_fueldrum_01";
+		_content = [];
+	};
+	case "target": {
+		_model = "vn_targetp_inf_f";
+		_content = [];
+	};
+	case "Lamp": {
+		_model = "Land_vn_lampshabby_f_4xdir_normal";
+		_content = [];
+	};
+	case "Lantern": {
+		_model = "Land_vn_us_common_lantern_01";
+		_content = [];
+	};
+	case "Revetment": {
+		_model = "Land_vn_usaf_revetment_01";
+		_content = [];
+	};
+	case "Sandbags": {
+		_model = "Land_vn_bagfence_short_f";
+		_content = [];
+	};
+	case "Sandbags Rounded": {
+		_model = "Land_vn_bagfence_round_f";
+		_content = [];
 	};
 };
 
@@ -95,6 +138,13 @@ _box = _model createVehicle _spawnPos;
 clearItemCargoGlobal _box;
 clearWeaponCargoGlobal _box;
 clearMagazineCargoGlobal _box;
+
+// Setup ACE Stuff 
+[_box, true, [0, 2, 0], 20] call ace_dragging_fnc_setDraggable;
+[_box, true, [0, 3, 1], 10] call ace_dragging_fnc_setCarryable;
+if (_model == "Land_vn_tent_mash_01_02") then {
+	_box setVariable ["ace_medical_isMedicalVehicle", true, true];
+};
 
 // Add desired contents to the box 
 {

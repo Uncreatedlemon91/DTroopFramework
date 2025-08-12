@@ -17,6 +17,7 @@ class CfgFunctions
 			class setFactions {};
 			class setupItems {};
 			class setupVehicle {};
+			class setupWrecks {};
 		};
 
 		class locations 
@@ -36,6 +37,7 @@ class CfgFunctions
 		class persistence
 		{
 			class deleteItem {};
+			class deleteWreck {};
 			class getPlayerData {};
 			class loadEnvironment {};
 			class loadItems {};

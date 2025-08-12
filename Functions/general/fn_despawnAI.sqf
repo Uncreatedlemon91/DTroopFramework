@@ -3,16 +3,22 @@ params ["_unit", "_trg", "_type"];
 
 _grp = group _unit;
 _dist = 200;
+_dbType = "";
+_statics = ["AAsites"];
+_destroyed = false;
+
 switch (_type) do {
-	case "Civilian": {_dist = 200};
-	case "Ambush": {_dist = 250};
-	case "AA": {_dist = 800};
-	case "Garrison": {_dist = 500};
+	case "Civilian": {_dist = 200; _dbType = "Population"};
+	case "Ambush": {_dist = 250; _dbType = "AmbushCount"};
+	case "AA": {_dist = 800; _dbType = "AAsites"};
+	case "Garrison": {_dist = 500; _dbType = "GarrisonSize"};
 };
+
 // Wait until players are no longer nearby 
 while {alive _unit} do {
 	sleep 10;
 	_nearPlayers = 0;
+	_groupCount = count (units _grp);
 	{
 		_distDiff = _unit distance _x;
 		if (_distDiff <= _dist) then {
@@ -20,9 +26,20 @@ while {alive _unit} do {
 		};
 	} forEach allPlayers;
 
+	// Routinely check if AI Group is smaller than 2, in which case, it is 'destroyed'.
+	if ((_groupCount <= 2) AND !(side _unit == civilian) AND !(_dbType in _statics) AND (_destroyed == false)) then {
+		_section = _trg getVariable "attachedLocation";
+		_locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_inidbi;
+		_currentCount = ["read", [_section, _dbType]] call _locDB;
+		_newCount = _currentCount - 1;
+		_destroyed = true;
+		["write", [_section, _dbType, _newCount]] call _locDB;
+		systemChat format ["%1 has been removed!", _dbType];
+	};
+
+	// Delete units if no players nearby 
 	if (_nearPlayers == 0) exitwith {
 		deleteVehicle _unit;
-		_groupCount = count (units _grp);
 		if (_groupCount < 2) then {
 			_vehs = [_grp, true] call BIS_fnc_groupVehicles;
 			{
