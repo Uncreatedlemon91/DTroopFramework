@@ -37,7 +37,7 @@ _spawnAmmoTruck = [
 
 _spawnRepairTruck = [
     "spawnRepairTruck",
-    "Ammo Truck",
+    "Repair Truck",
     "",
     {["vn_b_wheeled_m54_repair"] remoteExec ["lmn_fnc_spawnVehicle", 2]},
     {true}

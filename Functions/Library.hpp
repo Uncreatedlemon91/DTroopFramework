@@ -57,6 +57,7 @@ class CfgFunctions
 		class players 
 		{
 			class actionTreeRemoval {};
+			class recordDeath {};
 			class setupPlayerSelf {};
 		};
 

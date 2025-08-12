@@ -14,3 +14,9 @@ _treeRemovalAction = [
 ] call ace_interact_menu_fnc_createAction;
 
 [_player, 1, ["ACE_SelfActions"], _treeRemovalAction] call ace_interact_menu_fnc_addActionToObject;
+
+_player addEventHandler ["Respawn", {
+	params ["_unit", "_corpse"];
+    [_unit] remoteExec ["lmn_fnc_savePlayer", 2];
+    [_unit] remoteExec ["lmn_fnc_recordDeath", 2];
+}];

@@ -1,5 +1,10 @@
 // Load the player from the database 
-params ["_data", "_player"];
+params ["_data", "_player", "_isDead"];
+
+if !(_isDead == false) exitWith {
+	["You have already died today!"] remoteExec ["SystemChat", _clientOwner];
+	["Initialize", [_player]] call BIS_fnc_EGSpectator;
+};
 
 _pos = _data select 1;
 _dir = _data select 2;
