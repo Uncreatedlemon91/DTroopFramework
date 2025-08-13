@@ -14,6 +14,7 @@ _sections = "getSections" call _locDB;
 
 	// Create a marker
 	_mkr = createMarkerLocal [format ["%1-%2",text _x, _pos], _pos];
+	_mkr setMarkerAlpha 0.4;
 	if (_priority == 1) then {
 		_mkr setMarkerSizeLocal [0.8,0.8];
 	};

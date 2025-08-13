@@ -51,3 +51,4 @@ if (_wreckDBExists) then {
 
 // Run ongoing Scripts 
 [] remoteExec ["lmn_fnc_saveEnvironment", 2];
+// [] remoteExec ["lmn_fnc_eventChanges", 2]; - Still in development

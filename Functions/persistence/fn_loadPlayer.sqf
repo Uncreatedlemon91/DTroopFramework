@@ -1,8 +1,9 @@
 // Load the player from the database 
 params ["_data", "_player", "_isDead"];
 
-if !(_isDead == false) exitWith {
-	["You have already died today!"] remoteExec ["SystemChat", _clientOwner];
+systemChat format ["%1", _isDead];
+if (_isDead == "Killed in Action") exitWith {
+	["You have already died today!"] remoteExec ["SystemChat", _player];
 	["Initialize", [_player]] call BIS_fnc_EGSpectator;
 };
 

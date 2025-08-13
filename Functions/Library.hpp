@@ -4,7 +4,6 @@ class CfgFunctions
 	{
 		class civilians 
 		{
-			class civActionFarm {};
 			class civActionWalk {};
 		};
 		
@@ -57,6 +56,7 @@ class CfgFunctions
 		class players 
 		{
 			class actionTreeRemoval {};
+			class checkDeath {};
 			class recordDeath {};
 			class setupPlayerSelf {};
 		};

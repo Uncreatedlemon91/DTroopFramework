@@ -1,4 +1,5 @@
 // Adapts the locations once every real time day. 
+sleep 10;
 _savedTime = [];
 while {true} do {
 	_time = [(systemTime select 2), (systemTime select 1), (systemTime select 0)];
@@ -14,6 +15,8 @@ while {true} do {
 			_locFaction = ["read", [_x, "Allegiance"]] call _locDB;
 			_alliedFactions = [];
 			_northFactions = [];
+			_targetLocations = [];
+			_alliedLocations = [];
 			_locGarrisonSize = ["read", [_x, "GarrisonSize"]] call _locDB;
 			{
 				// Current result is saved in variable _x
@@ -62,9 +65,11 @@ while {true} do {
 
 			["write", [_x, "dayEvent", _missionDecision]] call _locDB;
 			sleep 0.5;	
+			systemChat format ["New event loaded for %1", text _x];
 		} forEach _sections;
 		
 		_savedTime = [(systemTime select 2), (systemTime select 1), (systemTime select 0)];
 	};
+	
 	sleep 1800;
 };

@@ -50,6 +50,7 @@ _locations = nearestLocations [[0,0,0], lmn_locations, worldsize * 4];
 	// Set the allegiance of the location 
     _allegiance = "North";
 	_mkr setMarkerType "vn_flag_pavn";
+	_mkr setMarkerAlpha 0.4;
     if ((position _x) inArea "SouthAO") then {
         _allegiance = selectRandomWeighted ["USA", 0.3, "ROK", 0.5, "AUS", 0.2, "NZ", 0.1];
     };
@@ -79,17 +80,38 @@ _locations = nearestLocations [[0,0,0], lmn_locations, worldsize * 4];
 	};
 
 	// Get nearby locations 
-	_neighbors = nearestLocations [position _x, _allLocations, 1000];
+	_locs = nearestLocations [position _x, [
+		"NameLocal",
+		"NameVillage",
+		"Name",
+		"VegetationBroadleaf",
+		"Hill",
+		"NameMarine",
+		"ViewPoint",
+		"Strategic",
+		"NameCity",
+		"Airport",
+		"NameMarine",
+		"StrongpointArea",
+		"NameCityCapital"
+	], 2000];
+	_nearLocs = [];
+	{
+		// Current result is saved in variable _x
+		_nearLocs pushback (str _x);
+	} forEach _locs;
+	_nearLocs deleteAt 0;
+	systemChat format ["NearLocs:%1", _nearLocs];
 
 	// Save the location 
 	["write", [_x, "Name", text _x]] call _locDB;
 	["write", [_x, "Pos", position _x]] call _locDB;
 	["write", [_x, "Population", _population]] call _locDB;
-	["write", [_x, "NearLocations", _neighbors]] call _locDB;
+	["write", [_x, "NearLocations", _nearLocs]] call _locDB;
 	["write", [_x, "Priority", _priority]] call _locDB;
     ["write", [_x, "Allegiance", _allegiance]] call _locDB;
 	["write", [_x, "Stability", round(random 100)]] call _locDB;
-	["write", [_x, "dayEvent", selectRandom lmn_events]] call _locDB;
+	["write", [_x, "dayEvent", ""]] call _locDB;
 	["write", [_x, "AmbushCount", round(random 5)]] call _locDB;
 	["write", [_x, "GarrisonSize", round(random 5)]] call _locDB;
 	["write", [_x, "MortarSites", round(random 2)]] call _locDB;

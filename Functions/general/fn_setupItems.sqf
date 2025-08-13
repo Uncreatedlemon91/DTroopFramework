@@ -30,7 +30,7 @@ _boxSave = [
 // Setup ACE Stuff 
 [_box, true, [0, 2, 0], 20] call ace_dragging_fnc_setDraggable;
 [_box, true, [0, 3, 1], 10] call ace_dragging_fnc_setCarryable;
-if (_model == "Land_vn_tent_mash_01_02") then {
+if (typeOf _box == "Land_vn_tent_mash_01_02") then {
 	_box setVariable ["ace_medical_isMedicalVehicle", true, true];
 };
 

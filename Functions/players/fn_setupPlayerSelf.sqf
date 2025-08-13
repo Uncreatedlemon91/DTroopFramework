@@ -18,5 +18,10 @@ _treeRemovalAction = [
 _player addEventHandler ["Respawn", {
 	params ["_unit", "_corpse"];
     [_unit] remoteExec ["lmn_fnc_savePlayer", 2];
+    [_unit] remoteExec ["lmn_fnc_checkDeath", 2];
+}];
+
+_player addEventHandler ["Killed", {
+    params ["_unit", "_killer", "_instigator", "_useEffects"];
     [_unit] remoteExec ["lmn_fnc_recordDeath", 2];
 }];
