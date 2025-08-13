@@ -1,64 +1,70 @@
 // Adapts the locations once every real time day. 
-params ["_loc"];
+_savedTime = [];
+while {true} do {
+	_time = [(systemTime select 2), (systemTime select 1), (systemTime select 0)];
+	if (_time != _savedTime) then {
+		// Get the Database Entry 
+		_locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_inidbi;
+		_sections = "getSections" call _locDB;
+		_allies = ["USA", "ROK", "AUS", "NZ"];
 
-// Get the Database Entry 
-_locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_inidbi;
+		{
+			_currentEvent = ["read", [_x, "dayEvent"]] call _locDB;
+			_nearLocs = ["read", [_x, "NearLocations"]] call _locDB;
+			_locFaction = ["read", [_x, "Allegiance"]] call _locDB;
+			_alliedFactions = [];
+			_northFactions = [];
+			_locGarrisonSize = ["read", [_x, "GarrisonSize"]] call _locDB;
+			{
+				// Current result is saved in variable _x
+				_faction = ["read", [_x, "Allegiance"]] call _locDB;
+				if (_faction == "North") then {
+					_northFactions pushback _x;
+				};
+				if (_faction in _allies) then {
+					_alliedFactions pushback _x;
+				};
+			} forEach _nearLocs;
 
-// Get the event current location 
-_event = ["read", [_loc, "dayEvent"]] call _locDB;
-_locFaction = ["read", [_loc, "Allegiance"]] call _locDB;
+			// Decision for an action 
+			if (_locFaction == "North") then {
+				_targetLocations = _alliedFactions;
+				_alliedLocations = _northFactions;
+			} else {
+				_targetLocations = _northFactions;
+				_alliedLocations = _alliedFactions;
+			};
 
-// Conclude the event's effects
-_chanceToSucceed = selectRandomWeighted [true, 0.4, false, 0.6];
+			_potentialTarget = [];
+			{
+				// Current result is saved in variable _x
+				_garrisonSize = ["read", [_x, "GarrisonSize"]] call _locDB;
+				if (_locGarrisonSize > _garrisonSize) then {
+					_potentialTarget pushback _x;
+				};
+			} forEach _targetLocations;
 
-// Get the locations' nearby locations and their allegiance, priority and their events 
-_nearLocs = nearestLocations [position _loc, [lmn_locations], 2000, true];
-_enemyLocs = [];
-_friendlyLocs = [];
+			_supportTarget = [];
+			{
+				// Current result is saved in variable _x
+				_garrisonSize = ["read", [_x, "GarrisonSize"]] call _locDB;
+				if (_locGarrisonSize > _garrisonSize) then {
+					_potentialTarget pushback _x;
+				};
+			} forEach _alliedLocations;
 
-{
-	// Current result is saved in variable _x
-	_faction = ["read", [_x, "Allegiance"]] call _locDB;
-	if (_faction == _locFaction) then {
-		_friendlyLocs pushback _x;
-	} else {
-		_enemyLocs pushback _x;
+			_missionDecision = [];
+			if ((count _supportTarget) > (count _potentialTarget)) then {
+				_missionDecision = selectRandomWeighted ["lmn_fnc_eventReinforce", 0.5, "lmn_fnc_eventAttack", 0.3, "lmn_fnc_eventBuild", 0.2];
+			} else {
+				_missionDecision = selectRandomWeighted ["lmn_fnc_eventReinforce", 0.5, "lmn_fnc_eventAttack", 0.3, "lmn_fnc_eventBuild", 0.2];
+			};
+
+			["write", [_x, "dayEvent", _missionDecision]] call _locDB;
+			sleep 0.5;	
+		} forEach _sections;
+		
+		_savedTime = [(systemTime select 2), (systemTime select 1), (systemTime select 0)];
 	};
-} forEach _nearLocs;
-
-// Logic to determine what a logical new event would be for this location 
-_stance = "";
-if ((count _enemyLocs) >= (count _friendlyLocs)) then {
-	_stance = selectRandomWeighted ["Aggressive", 0.5, "Defensive", 0.4, "Guerilla", 0.3, "Build", 0.2];
-} else {
-	_stance = selectRandomWeighted ["Support", 0.4, "Defensive", 0.3, "Strike", 0.2, "Build", 0.2];
+	sleep 1800;
 };
-
-switch (_stance) do {
-	case "Aggressive": {
-		selectRandom [
-			"Squad Probe",
-			"Platoon Assault", 
-			"Battalion Attack",
-			"Recon Teams",
-			"Insurgency"
-		]
-	};
-
-	case "Defensive": {
-		selectRandom [
-			"New Patrol", 
-			"Setup Defenses",
-			"Build Traps", 
-			"Hearts and Minds", 
-			"Hunters"
-		]
-	};
-
-	case "Guerilla": {
-		selectRandom [
-			"Hunters"
-		]
-	};
-};
-// Save location to the database, will be triggered later on 

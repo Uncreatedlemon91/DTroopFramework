@@ -78,10 +78,14 @@ _locations = nearestLocations [[0,0,0], lmn_locations, worldsize * 4];
 		_population = 30;
 	};
 
+	// Get nearby locations 
+	_neighbors = nearestLocations [position _x, _allLocations, 1000];
+
 	// Save the location 
 	["write", [_x, "Name", text _x]] call _locDB;
 	["write", [_x, "Pos", position _x]] call _locDB;
 	["write", [_x, "Population", _population]] call _locDB;
+	["write", [_x, "NearLocations", _neighbors]] call _locDB;
 	["write", [_x, "Priority", _priority]] call _locDB;
     ["write", [_x, "Allegiance", _allegiance]] call _locDB;
 	["write", [_x, "Stability", round(random 100)]] call _locDB;
