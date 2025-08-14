@@ -19,5 +19,5 @@ _grp = _aa select 2;
 [leader _grp, _trg, "AA"] remoteExec ["lmn_fnc_despawnAI", 2];
 
 // Give the unit orders to defend the point  
-(_aa select 2) setCombatMode "RED";
+_grp setCombatMode "RED";
 _trg setVariable ["Active", true];

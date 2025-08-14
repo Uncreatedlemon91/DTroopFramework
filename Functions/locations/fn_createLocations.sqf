@@ -112,11 +112,11 @@ _locations = nearestLocations [[0,0,0], lmn_locations, worldsize * 4];
     ["write", [_x, "Allegiance", _allegiance]] call _locDB;
 	["write", [_x, "Stability", round(random 100)]] call _locDB;
 	["write", [_x, "dayEvent", ""]] call _locDB;
-	["write", [_x, "AmbushCount", round(random 5)]] call _locDB;
-	["write", [_x, "GarrisonSize", round(random 5)]] call _locDB;
-	["write", [_x, "MortarSites", round(random 2)]] call _locDB;
+	["write", [_x, "AmbushCount", (round(random 5)) * _priority]] call _locDB;
+	["write", [_x, "GarrisonSize", (round(random 5)) * _priority]] call _locDB;
+	["write", [_x, "MortarSites", (round(random 2)) * _priority]] call _locDB;
 	["write", [_x, "MinefieldSites", round(random 2)]] call _locDB;
-	["write", [_x, "AAsites", round(random 4)]] call _locDB;
+	["write", [_x, "AAsites", (round(random 4)) * _priority]] call _locDB;
 } forEach _locations;
 
 systemChat "[DB] Locations Generated";
