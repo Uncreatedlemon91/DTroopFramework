@@ -39,13 +39,14 @@ while {alive _unit} do {
 
 	// Delete units if no players nearby 
 	if (_nearPlayers == 0) exitwith {
-		deleteVehicle _unit;
-		if (_groupCount < 2) then {
-			_vehs = [_grp, true] call BIS_fnc_groupVehicles;
-			{
-				deleteVehicle _x;
-			} forEach _vehs;
-			_trg setVariable ["Active", false];
-		};
+		{
+			// Current result is saved in variable _x
+			deleteVehicle _x;
+		} forEach units _grp;
+		_vehs = [_grp, true] call BIS_fnc_groupVehicles;
+		{
+			deleteVehicle _x;
+		} forEach _vehs;
 	};
+	_trg setVariable ["Active", false];
 };
