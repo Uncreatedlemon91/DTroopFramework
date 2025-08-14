@@ -128,6 +128,25 @@ switch (_type) do {
 		_model = "Land_vn_bagfence_round_f";
 		_content = [];
 	};
+	case "Food": {
+		_model = "Land_WoodenCrate_01_F";
+		_content = [
+			["vn_prop_food_lrrp_01_04_gh", 10],
+			["vn_prop_food_lrrp_01_01_gh", 10],
+			["vn_prop_food_lrrp_01_07_gh", 10],
+			["vn_prop_food_lrrp_01_08_gh", 10],
+			["vn_prop_food_lrrp_01_05_gh", 10],
+			["vn_prop_food_lrrp_01_06_gh", 10],
+			["vn_prop_food_lrrp_01_02_gh", 10],
+			["vn_prop_food_lrrp_01_03_gh", 10]
+		];
+	};
+	case "Radios": {
+		_model = "ACRE_RadioSupplyCrate";
+		_content = [
+			["ACRE_PRC77", 5]
+		];
+	};
 };
 
 // Spawn the box 

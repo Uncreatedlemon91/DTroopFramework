@@ -272,6 +272,22 @@ _Lantern = [
     {true}
 ] call ace_interact_menu_fnc_createAction;
 
+_food = [
+    "Food",
+    "Food",
+    "",
+    {["Food"] remoteExec ["lmn_fnc_spawnSupply", 2]},
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+_radios = [
+    "Radios",
+    "Radios",
+    "",
+    {["Radios"] remoteExec ["lmn_fnc_spawnSupply", 2]},
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
 
 // Addactions to logistics point
 // Vehicles 
@@ -300,7 +316,8 @@ _Lantern = [
 [logiPoint, 0, ["ACE_MainActions", "supplies"], _medical] call ace_interact_menu_fnc_addActionToObject;
 [logiPoint, 0, ["ACE_MainActions", "supplies"], _repairKits] call ace_interact_menu_fnc_addActionToObject;
 [logiPoint, 0, ["ACE_MainActions", "supplies"], _fluids] call ace_interact_menu_fnc_addActionToObject;
-[logiPoint, 0, ["ACE_MainActions", "supplies"], _wheels] call ace_interact_menu_fnc_addActionToObject;
+[logiPoint, 0, ["ACE_MainActions", "supplies"], _food] call ace_interact_menu_fnc_addActionToObject;
+[logiPoint, 0, ["ACE_MainActions", "supplies"], _radios] call ace_interact_menu_fnc_addActionToObject;
 // Items 
 [logiPoint, 0, ["ACE_MainActions"], _items] call ace_interact_menu_fnc_addActionToObject;
 [logiPoint, 0, ["ACE_MainActions", "items"], _helipad] call ace_interact_menu_fnc_addActionToObject;
@@ -314,3 +331,4 @@ _Lantern = [
 [logiPoint, 0, ["ACE_MainActions", "items"], _SandbagsRounded] call ace_interact_menu_fnc_addActionToObject;
 [logiPoint, 0, ["ACE_MainActions", "items"], _Lamp] call ace_interact_menu_fnc_addActionToObject;
 [logiPoint, 0, ["ACE_MainActions", "items"], _Lantern] call ace_interact_menu_fnc_addActionToObject;
+[logiPoint, 0, ["ACE_MainActions", "items"], _wheels] call ace_interact_menu_fnc_addActionToObject;
