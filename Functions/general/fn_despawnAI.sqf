@@ -15,7 +15,7 @@ switch (_type) do {
 };
 
 // Wait until players are no longer nearby 
-while {alive _unit} do {
+while {alive (leader _grp)} do {
 	sleep 10;
 	_nearPlayers = 0;
 	_groupCount = count (units _grp);
@@ -44,6 +44,5 @@ while {alive _unit} do {
 			deleteVehicle (vehicle _x);
 			deleteVehicle _x;
 		} forEach units _grp;
-		_vehs = [_grp, true] call BIS_fnc_groupVehicles;
 	};
 };

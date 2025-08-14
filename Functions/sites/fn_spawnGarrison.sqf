@@ -13,12 +13,6 @@ if (_active) exitWith {};
 
 // Make the unit  
 _grp = [_pos, _side, _groupClass] call BIS_fnc_spawnGroup;
-/*
-{
-	// Check for nearby players 
-	[_x, _trg, "Garrison"] remoteExec ["lmn_fnc_despawnAI", 2];
-} forEach units _grp;
-*/
 
 // Check for nearby players 
 [leader _grp, _trg, "Garrison"] remoteExec ["lmn_fnc_despawnAI", 2];

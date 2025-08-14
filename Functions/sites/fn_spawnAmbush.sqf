@@ -14,13 +14,6 @@ if (_active) exitWith {};
 _pos = position (selectRandom (nearestTerrainObjects [position _trg, ["TREE", "BUSH"], 50, false, false]));
 _grp = [_pos, _side, _groupClass] call BIS_fnc_spawnGroup;
 
-/*
-{
-	// Check for nearby players 
-	[_x, _trg, "Ambush"] remoteExec ["lmn_fnc_despawnAI", 2];
-} forEach units _grp;
-*/
-
 // Check for nearby players 
 [leader _grp, _trg, "Ambush"] remoteExec ["lmn_fnc_despawnAI", 2];
 
