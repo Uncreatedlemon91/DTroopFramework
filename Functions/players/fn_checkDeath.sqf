@@ -13,7 +13,6 @@ _newTime = format ["%1-%2-%3", _mm, _dd, _yy];
 _Ddb = ["new", format ["Player Deaths %1 %2", missionName, worldName]] call oo_inidbi;
 _isDead = ["read", [_uid, _newTime]] call _Ddb;
 
-if (_isDead == "Killed in Action") then {
-	["You have already died today!"] remoteExec ["SystemChat", _netID];
+if (_isDead == "Killed in Action") exitWith {
 	["Initialize", [_player]] call BIS_fnc_EGSpectator;
 };
