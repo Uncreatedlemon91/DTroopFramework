@@ -96,7 +96,6 @@ _locations = nearestLocations [[0,0,0], lmn_locations, worldsize * 4];
 		_nearLocs pushback (str _x);
 	} forEach _locs;
 	_nearLocs deleteAt 0;
-	systemChat format ["NearLocs:%1", _nearLocs];
 
 	// Set other Variables 
 	_ambushes = (round(random 5)) * _priority;
@@ -123,22 +122,22 @@ _locations = nearestLocations [[0,0,0], lmn_locations, worldsize * 4];
 
 	// Spawn civilians 
 	for "_i" from 1 to _population do {
-		_newSite = [_x] remoteExec ["lmn_fnc_prepCiv", 2];
+		_newSite = [_x, _stability, position _x] remoteExec ["lmn_fnc_prepCiv", 2];
 	};
 
 	// Spawn ambush locations 
 	for "_i" from 1 to _ambushes do {
-		_newSite = [_x, _allegiance] remoteExec ["lmn_fnc_prepAmbush", 2];
+		_newSite = [_x, _allegiance, position _x] remoteExec ["lmn_fnc_prepAmbush", 2];
 	};
 
 	// Spawn AA site Locations 
 	for "_i" from 1 to _aaSites do {
-		_newSite = [_x, _allegiance] remoteExec ["lmn_fnc_prepAA", 2];
+		_newSite = [_x, _allegiance, position _x] remoteExec ["lmn_fnc_prepAA", 2];
 	};
 
 	// Spawn Garrison site Locations 
 	for "_i" from 1 to _garrisonSize do {
-		_newSite = [_x, _allegiance] remoteExec ["lmn_fnc_prepGarrison", 2];
+		_newSite = [_x, _allegiance, position _x] remoteExec ["lmn_fnc_prepGarrison", 2];
 	};
 } forEach _locations;
 

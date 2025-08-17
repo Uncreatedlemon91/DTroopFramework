@@ -1,35 +1,66 @@
 // Spawns an ambush for the player. 
 params ["_trg"];
 
+// Check if trigger is already active
+_active = _trg getVariable "Activated";
+if (_active) exitwith {
+	systemchat "[AMBUSH] Trigger already Active";
+};
+
+// change the activated flag 
+_trg setVariable ["Activated", true, true];
+
 // Get Trigger Variables 
 _side = _trg getVariable "FactionSide";
 _groupClass = _trg getVariable "ToSpawn";
-_active = triggerActivated _trg;
 _loc = _trg getVariable "attachedLocation";
-
-// Check if trigger is already active 
-if (_active) exitWith {};
 
 // Spawn the unit 
 _pos = position (selectRandom (nearestTerrainObjects [position _trg, ["TREE", "BUSH"], 50, false, false]));
+_pos = [_pos select 0, _pos select 1, 0];
 _grp = createGroup _side;
+_destroyed = false;
+{
+	// Current result is saved in variable _x
+	_unit = _grp createUnit [_x, _pos, [], 5, "FORM"];
+	zeus addCuratorEditableObjects [[_unit], true];
+	sleep 0.2;
+} forEach _groupClass;
 
-// Give the unit orders to defend the point  
-[_grp, 500] spawn lambs_wp_fnc_taskCreep;
+// Give the unit orders to defend the point 
+_task = selectRandom ["creep", "camp", "hunt"];
+switch (_task) do {
+	case "creep": {[_grp, 500] spawn lambs_wp_fnc_taskCreep};
+	case "camp": {[_grp, _pos, 50] call lambs_wp_fnc_taskCamp};
+	case "hunt": {[_grp, 500] spawn lambs_wp_fnc_taskHunt};
+};
 _grp setCombatMode "RED";
 _grp setBehaviour "SAFE";
-_trg setVariable ["Active", true];
+_grp deleteGroupWhenEmpty true;
 
 // Update the trigger to move with the unit leader 
-_active = triggerActivated _trg;
-while {_active} do {
-	_active = triggerActivated _trg;
+while {_trg getVariable "Activated"} do {
+	sleep 1;
 	_ldr = leader _grp;
-	_trg setpos _ldr;
-	sleep 5;
+	_trg setpos (getPos _ldr);
+	_count = 0;
+	{
+		if (alive _x) then {
+			_count = _count + 1;
+		};
+	} forEach units _grp;
+	if ((_count <= 2) AND !(_destroyed == true)) then {
+		_locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_inidbi;
+		_currentCount = ["read", [_loc, "AmbushCount"]] call _locDB;
+		_newCount = _currentCount - 1;
+		_destroyed = true;
+		["write", [_loc, "AmbushCount", _newCount]] call _locDB;
+	}
 };
 
 // Despawn the AI when the trigger is no longer active
 {
 	deleteVehicle _x;
+	sleep 0.2;
 } forEach units _grp;
+deleteGroup _group;

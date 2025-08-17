@@ -87,10 +87,160 @@ lmn_Civilians = [
 // Set the US forces 
 lmn_US = [
 	// Infantry - 0
-
+	[
+		"vn_b_men_army_06",
+		"vn_b_men_army_07",
+		"vn_b_men_army_05",
+		"vn_b_men_army_15",
+		"vn_b_men_army_19",
+		"vn_b_men_army_21",
+		"vn_b_men_army_16",
+		"vn_b_men_army_02",
+		"vn_b_men_army_20",
+		"vn_b_men_army_18",
+		"vn_b_men_army_08"
+	],
 	// Recon - 1
-
+	[
+		"vn_b_men_sog_04",
+		"vn_b_men_sog_06",
+		"vn_b_men_sog_11",
+		"vn_b_men_sog_09",
+		"vn_b_men_sog_19",
+		"vn_b_men_sog_16",
+		"vn_b_men_sog_18",
+		"vn_b_men_sog_28",
+		"vn_b_men_sog_31",
+		"vn_b_men_sog_07",
+		"vn_b_men_sog_10",
+		"vn_b_men_sog_12",
+		"vn_b_men_sog_21",
+		"vn_b_men_sog_02",
+		"vn_b_men_sog_01",
+		"vn_b_men_sog_03",
+		"vn_b_men_sog_30"
+	]
 	// Vehicles - 2
 
 	// Turrets - 3
-]
+];
+
+lmn_ROK = [
+	// Infantry - 0
+	[
+		"vn_b_men_army_06",
+		"vn_b_men_army_07",
+		"vn_b_men_army_05",
+		"vn_b_men_army_15",
+		"vn_b_men_army_19",
+		"vn_b_men_army_21",
+		"vn_b_men_army_16",
+		"vn_b_men_army_02",
+		"vn_b_men_army_20",
+		"vn_b_men_army_18",
+		"vn_b_men_army_08"
+	],
+	// Recon - 1
+	[
+		"vn_b_men_sog_04",
+		"vn_b_men_sog_06",
+		"vn_b_men_sog_11",
+		"vn_b_men_sog_09",
+		"vn_b_men_sog_19",
+		"vn_b_men_sog_16",
+		"vn_b_men_sog_18",
+		"vn_b_men_sog_28",
+		"vn_b_men_sog_31",
+		"vn_b_men_sog_07",
+		"vn_b_men_sog_10",
+		"vn_b_men_sog_12",
+		"vn_b_men_sog_21",
+		"vn_b_men_sog_02",
+		"vn_b_men_sog_01",
+		"vn_b_men_sog_03",
+		"vn_b_men_sog_30"
+	]
+	// Vehicles - 2
+
+	// Turrets - 3
+];
+
+lmn_NZ = [
+	// Infantry - 0
+	[
+		"vn_b_men_army_06",
+		"vn_b_men_army_07",
+		"vn_b_men_army_05",
+		"vn_b_men_army_15",
+		"vn_b_men_army_19",
+		"vn_b_men_army_21",
+		"vn_b_men_army_16",
+		"vn_b_men_army_02",
+		"vn_b_men_army_20",
+		"vn_b_men_army_18",
+		"vn_b_men_army_08"
+	],
+	// Recon - 1
+	[
+		"vn_b_men_sog_04",
+		"vn_b_men_sog_06",
+		"vn_b_men_sog_11",
+		"vn_b_men_sog_09",
+		"vn_b_men_sog_19",
+		"vn_b_men_sog_16",
+		"vn_b_men_sog_18",
+		"vn_b_men_sog_28",
+		"vn_b_men_sog_31",
+		"vn_b_men_sog_07",
+		"vn_b_men_sog_10",
+		"vn_b_men_sog_12",
+		"vn_b_men_sog_21",
+		"vn_b_men_sog_02",
+		"vn_b_men_sog_01",
+		"vn_b_men_sog_03",
+		"vn_b_men_sog_30"
+	]
+	// Vehicles - 2
+
+	// Turrets - 3
+];
+
+lmn_AUS = [
+	// Infantry - 0
+	[
+		"vn_b_men_army_06",
+		"vn_b_men_army_07",
+		"vn_b_men_army_05",
+		"vn_b_men_army_15",
+		"vn_b_men_army_19",
+		"vn_b_men_army_21",
+		"vn_b_men_army_16",
+		"vn_b_men_army_02",
+		"vn_b_men_army_20",
+		"vn_b_men_army_18",
+		"vn_b_men_army_08"
+	],
+	// Recon - 1
+	[
+		"vn_b_men_sog_04",
+		"vn_b_men_sog_06",
+		"vn_b_men_sog_11",
+		"vn_b_men_sog_09",
+		"vn_b_men_sog_19",
+		"vn_b_men_sog_16",
+		"vn_b_men_sog_18",
+		"vn_b_men_sog_28",
+		"vn_b_men_sog_31",
+		"vn_b_men_sog_07",
+		"vn_b_men_sog_10",
+		"vn_b_men_sog_12",
+		"vn_b_men_sog_21",
+		"vn_b_men_sog_02",
+		"vn_b_men_sog_01",
+		"vn_b_men_sog_03",
+		"vn_b_men_sog_30"
+	]
+	// Vehicles - 2
+
+	// Turrets - 3
+];

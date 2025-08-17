@@ -1,8 +1,8 @@
 // Prepares AA sites within the location 
-params ["_loc", "_faction"];
+params ["_loc", "_faction", "_locPos"];
 
-_pos = [position _loc, 0, 500, 20, 0, 10, 0] call BIS_fnc_findSafePos;
-_alpha = 0;
+_pos = [_locPos, 0, 500, 20, 0, 10, 0] call BIS_fnc_findSafePos;
+_alpha = 0.5;
 
 // Setup the AA Site 
 _side = "";
@@ -55,13 +55,13 @@ _mkr setMarkerAlpha _alpha;
 // Setup the Trigger 
 _aaSite = createTrigger ["EmptyDetector", _pos];
 _aaSite setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-_aaSite setTriggerArea [800, 800, 0, false, 500];
+_aaSite setTriggerArea [2000, 2000, 0, false, 500];
 _aaSite setTriggerStatements [
 	"this",
 	"[thisTrigger] remoteExec ['lmn_fnc_spawnAA', 2];",
-	""
+	"thisTrigger setVariable ['Activated', false]"
 ];
-_aaSite setVariable ["Active", false];
+_aaSite setVariable ["Activated", false];
 _aaSite setVariable ["FactionSide", _side];
 _aaSite setVariable ["attachedLocation", _loc];
 _aaSite setVariable ["ToSpawn", _class];

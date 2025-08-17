@@ -2,11 +2,6 @@ class CfgFunctions
 {
 	class Lmn
 	{
-		class civilians 
-		{
-			class civActionWalk {};
-		};
-		
 		class general 
 		{
 			class addActions {};
@@ -21,7 +16,6 @@ class CfgFunctions
 
 		class locations 
 		{
-			class activateLoc {};
 			class createLocations {};
 			class eventChanges {};
 		};
