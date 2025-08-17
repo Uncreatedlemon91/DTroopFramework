@@ -39,24 +39,3 @@ for "_i" from 1 to _aaSites do {
 for "_i" from 1 to _garrisons do {
 	_newSite = [_trg, _allegiance] remoteExec ["lmn_fnc_prepGarrison", 2];
 };
-
-/*
-// Cleanup Site when no players nearby. 
-_dist = 800;
-while {_active} do {
-	sleep 10;
-	_nearPlayers = 0;
-	{
-		_distDiff = _trg distance _x;
-		if (_distDiff <= _dist) then {
-			_nearPlayers = _nearPlayers + 1;
-		};
-
-		if (_newPlayers == 0) then {
-			{
-				deleteVehicle (_x select 0);
-				deleteMarker (_x select 1);
-			} forEach _civSites + _ambushSites + _aaSites + _garrisonSites;
-		};
-	} forEach allPlayers;
-};

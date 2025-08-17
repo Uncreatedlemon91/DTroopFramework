@@ -1,8 +1,7 @@
 // Prepares AA sites within the location 
-params ["_trg", "_faction"];
+params ["_loc", "_faction"];
 
-_loc = _trg getVariable "attachedLocation";
-_pos = [_trg, 0, 500, 20, 0, 10, 0] call BIS_fnc_findSafePos;
+_pos = [position _loc, 0, 500, 20, 0, 10, 0] call BIS_fnc_findSafePos;
 _alpha = 0;
 
 // Setup the AA Site 
@@ -47,7 +46,7 @@ switch (_faction) do {
 };
 
 // Setup Marker
-_mkr = createMarker [format ["%1-%2", _trg, _pos], _pos];
+_mkr = createMarker [format ["%1-%2", _loc, _pos], _pos];
 _mkr setMarkerType "hd_dot";
 _mkr setMarkerColor "COLORYELLOW";
 _mkr setMarkerAlpha _alpha;

@@ -6,6 +6,7 @@ _dist = 200;
 _dbType = "";
 _statics = ["AAsites"];
 _destroyed = false;
+_active = triggerActivated _trg;
 
 switch (_type) do {
 	case "Civilian": {_dist = 200; _dbType = "Population"};
@@ -15,16 +16,8 @@ switch (_type) do {
 };
 
 // Wait until players are no longer nearby 
-while {alive (leader _grp)} do {
-	sleep 10;
-	_nearPlayers = 0;
-	_groupCount = count (units _grp);
-	{
-		_distDiff = _unit distance _x;
-		if (_distDiff <= _dist) then {
-			_nearPlayers = _nearPlayers + 1;
-		};
-	} forEach allPlayers;
+while {_active} do {
+	_trg setPos _unit;
 
 	// Routinely check if AI Group is smaller than 2, in which case, it is 'destroyed'.
 	if ((_groupCount <= 2) AND !(side _unit == civilian) AND !(_dbType in _statics) AND (_destroyed == false)) then {

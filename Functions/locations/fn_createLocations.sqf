@@ -4,7 +4,6 @@ _locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_ini
 
 lmn_locations = [];
 _lowPriority = [
-	// "Mount",
 	"NameLocal",
 	"NameVillage",
 	"Name",
@@ -68,15 +67,12 @@ _locations = nearestLocations [[0,0,0], lmn_locations, worldsize * 4];
 		case "NZ": {_mkr setMarkerType "vn_flag_nz";};
 	};
 
-    // Create a Trigger on the location 
-	[_x] remoteExec ["lmn_fnc_createLocTrigger", 2];
 	// Set the population 
-	// Get the amount of houses in the area.
 	_houses = nearestTerrainObjects [position _x, ["HOUSE"], 800];
 	_houseCount = count _houses;
 	_population = round (_houseCount / 4);
-	if (_population > 30) then {
-		_population = 30;
+	if (_population > 40) then {
+		_population = 40;
 	};
 
 	// Get nearby locations 
@@ -97,11 +93,18 @@ _locations = nearestLocations [[0,0,0], lmn_locations, worldsize * 4];
 	], 2000];
 	_nearLocs = [];
 	{
-		// Current result is saved in variable _x
 		_nearLocs pushback (str _x);
 	} forEach _locs;
 	_nearLocs deleteAt 0;
 	systemChat format ["NearLocs:%1", _nearLocs];
+
+	// Set other Variables 
+	_ambushes = (round(random 5)) * _priority;
+	_garrisonSize = (round(random 5)) * _priority;
+	_stability = round(random 100);
+	_mortarSites = (round(random 2)) * _priority;
+	_minefields = round(random 2) * _priority;
+	_aaSites = (round(random 4)) * _priority;
 
 	// Save the location 
 	["write", [_x, "Name", text _x]] call _locDB;
@@ -110,13 +113,33 @@ _locations = nearestLocations [[0,0,0], lmn_locations, worldsize * 4];
 	["write", [_x, "NearLocations", _nearLocs]] call _locDB;
 	["write", [_x, "Priority", _priority]] call _locDB;
     ["write", [_x, "Allegiance", _allegiance]] call _locDB;
-	["write", [_x, "Stability", round(random 100)]] call _locDB;
+	["write", [_x, "Stability", _stability]] call _locDB;
 	["write", [_x, "dayEvent", ""]] call _locDB;
-	["write", [_x, "AmbushCount", (round(random 5)) * _priority]] call _locDB;
-	["write", [_x, "GarrisonSize", (round(random 5)) * _priority]] call _locDB;
-	["write", [_x, "MortarSites", (round(random 2)) * _priority]] call _locDB;
-	["write", [_x, "MinefieldSites", round(random 2)]] call _locDB;
-	["write", [_x, "AAsites", (round(random 4)) * _priority]] call _locDB;
+	["write", [_x, "AmbushCount", _ambushes]] call _locDB;
+	["write", [_x, "GarrisonSize", _garrisonSize]] call _locDB;
+	["write", [_x, "MortarSites", _mortarSites]] call _locDB;
+	["write", [_x, "MinefieldSites", _minefields]] call _locDB;
+	["write", [_x, "AAsites", _aaSites]] call _locDB;
+
+	// Spawn civilians 
+	for "_i" from 1 to _population do {
+		_newSite = [_x] remoteExec ["lmn_fnc_prepCiv", 2];
+	};
+
+	// Spawn ambush locations 
+	for "_i" from 1 to _ambushes do {
+		_newSite = [_x, _allegiance] remoteExec ["lmn_fnc_prepAmbush", 2];
+	};
+
+	// Spawn AA site Locations 
+	for "_i" from 1 to _aaSites do {
+		_newSite = [_x, _allegiance] remoteExec ["lmn_fnc_prepAA", 2];
+	};
+
+	// Spawn Garrison site Locations 
+	for "_i" from 1 to _garrisonSize do {
+		_newSite = [_x, _allegiance] remoteExec ["lmn_fnc_prepGarrison", 2];
+	};
 } forEach _locations;
 
 systemChat "[DB] Locations Generated";

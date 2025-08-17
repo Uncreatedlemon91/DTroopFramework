@@ -23,7 +23,6 @@ class CfgFunctions
 		{
 			class activateLoc {};
 			class createLocations {};
-			class createLocTrigger {};
 			class eventChanges {};
 		};
 

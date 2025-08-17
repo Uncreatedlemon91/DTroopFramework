@@ -18,6 +18,9 @@ _grp = _aa select 2;
 // Check for nearby players 
 [leader _grp, _trg, "AA"] remoteExec ["lmn_fnc_despawnAI", 2];
 
+// Add to zeus 
+zeus addCuratorEditableObjects [[_unit], true];
+
 // Give the unit orders to defend the point  
 _grp setCombatMode "RED";
 _trg setVariable ["Active", true];

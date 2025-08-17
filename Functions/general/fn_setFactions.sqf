@@ -83,3 +83,14 @@ lmn_Civilians = [
 		"vn_c_men_12"
 	]
 ];
+
+// Set the US forces 
+lmn_US = [
+	// Infantry - 0
+
+	// Recon - 1
+
+	// Vehicles - 2
+
+	// Turrets - 3
+]

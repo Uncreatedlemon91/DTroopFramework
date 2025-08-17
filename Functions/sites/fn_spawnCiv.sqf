@@ -2,9 +2,8 @@
 params ["_trg"];
 
 // Check if trigger is already active
-_active = _trg getVariable "Active";
+_active = triggerActivated _trg;
 if (_active) exitwith {
-	// Exit the code as the trigger is active already
 	systemchat "Trigger already Active";
 };
 
@@ -30,5 +29,11 @@ _action = selectRandom lmn_civActions;
 // Add the civilian to curator 
 zeus addCuratorEditableObjects [[_unit], true];
 
-// Check the nearby players to see if any are close to the unit
-[_unit, _trg, "Civilian"] remoteExec ["lmn_fnc_despawnAI", 2];
+// Waiting until the trigger is no longer active, also update the trigger location
+while {_active} do {
+	sleep 5;
+	_active = triggerActivated _trg;
+	_trg setpos _unit;
+};
+
+deleteVehicle _x;
