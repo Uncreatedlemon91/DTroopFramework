@@ -1,4 +1,3 @@
 #include "Functions\Library.hpp"
 
-forceRotorLibSimulation = 1; // Forced advanced flight model
 respawnOnStart = -1; // Do not respawn when connecting

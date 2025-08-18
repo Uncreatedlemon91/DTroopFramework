@@ -98,8 +98,8 @@ _locations = nearestLocations [[0,0,0], lmn_locations, worldsize * 4];
 	_nearLocs deleteAt 0;
 
 	// Set other Variables 
-	_ambushes = (round(random 5)) * _priority;
-	_garrisonSize = (round(random 5)) * _priority;
+	_ambushes = (round(random 8)) * _priority;
+	_garrisonSize = (round(random 8)) * _priority;
 	_stability = round(random 100);
 	_mortarSites = (round(random 2)) * _priority;
 	_minefields = round(random 2) * _priority;

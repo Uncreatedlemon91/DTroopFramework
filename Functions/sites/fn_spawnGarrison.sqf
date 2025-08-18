@@ -45,7 +45,7 @@ while {_trg getVariable "Activated"} do {
 	} forEach units _grp;
 	if ((_count <= 2) AND !(_destroyed == true)) then {
 		_locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_inidbi;
-		_currentCount = ["read", [_loc, "AmbushCount"]] call _locDB;
+		_currentCount = ["read", [_loc, "GarrisonSize"]] call _locDB;
 		_newCount = _currentCount - 1;
 		_destroyed = true;
 		["write", [_loc, "AmbushCount", _newCount]] call _locDB;
