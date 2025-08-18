@@ -24,11 +24,11 @@ _destroyed = false;
 	// Current result is saved in variable _x
 	_unit = _grp createUnit [_x, _pos, [], 5, "FORM"];
 	zeus addCuratorEditableObjects [[_unit], true];
-	sleep 0.2;
+	sleep 0.5;
 } forEach _groupClass;
 
 // Give the unit orders to defend the point 
-[_grp, _trg, 50, [], true, false, -1, true] call lambs_wp_fnc_taskGarrison;
+[_grp, _trg, 50, [], true, false, -1, false] call lambs_wp_fnc_taskGarrison;
 _grp setBehaviour "SAFE";
 _grp deleteGroupWhenEmpty true;
 
@@ -43,7 +43,7 @@ while {_trg getVariable "Activated"} do {
 			_count = _count + 1;
 		};
 	} forEach units _grp;
-	if ((_count == 1) AND !(_destroyed == true)) then {
+	if ((_count <= 2) AND !(_destroyed == true)) then {
 		_locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_inidbi;
 		_currentCount = ["read", [_loc, "AmbushCount"]] call _locDB;
 		_newCount = _currentCount - 1;
@@ -58,4 +58,3 @@ while {_trg getVariable "Activated"} do {
 	sleep 0.2;
 } forEach units _grp;
 deleteGroup _grp;
-systemchat "DELETED!";

@@ -28,11 +28,12 @@ _destroyed = false;
 } forEach _groupClass;
 
 // Give the unit orders to defend the point 
-_task = selectRandom ["creep", "camp", "hunt"];
+_task = selectRandom ["creep", "camp", "hunt", "rush"];
 switch (_task) do {
 	case "creep": {[_grp, 500] spawn lambs_wp_fnc_taskCreep};
 	case "camp": {[_grp, _pos, 50] call lambs_wp_fnc_taskCamp};
 	case "hunt": {[_grp, 500] spawn lambs_wp_fnc_taskHunt};
+	case "rush": {[_grp, 500] spawn lambs_wp_fnc_taskRush};
 };
 _grp setCombatMode "RED";
 _grp setBehaviour "SAFE";
@@ -63,4 +64,4 @@ while {_trg getVariable "Activated"} do {
 	deleteVehicle _x;
 	sleep 0.2;
 } forEach units _grp;
-deleteGroup _group;
+deleteGroup _grp;

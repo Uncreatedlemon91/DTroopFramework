@@ -139,6 +139,11 @@ _locations = nearestLocations [[0,0,0], lmn_locations, worldsize * 4];
 	for "_i" from 1 to _garrisonSize do {
 		_newSite = [_x, _allegiance, position _x] remoteExec ["lmn_fnc_prepGarrison", 2];
 	};
+
+	// Spawn Artillery site locations 
+	for "_i" from 1 to _mortarSites do {
+		_newSite = [_x, _allegiance, position _x] remoteExec ["lmn_fnc_prepArty", 2];
+	};
 } forEach _locations;
 
 systemChat "[DB] Locations Generated";

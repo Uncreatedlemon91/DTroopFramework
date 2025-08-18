@@ -12,6 +12,7 @@ _sections = "getSections" call _locDB;
 	_aaSites = ["read", [_x, "AAsites"]] call _locDB;
 	_garrisonSize = ["read", [_x, "GarrisonSize"]] call _locDB;
 	_stability = ["read", [_x, "Stability"]] call _locDB;
+	_mortarSites = ["read", [_x, "MortarSites"]] call _locDB;
 
 	// Create a trigger nearestLocation
 	_location = nearestLocation [_pos, ""];
@@ -56,6 +57,11 @@ _sections = "getSections" call _locDB;
 	// Spawn Garrison site Locations 
 	for "_i" from 1 to _garrisonSize do {
 		_newSite = [_x, _allegiance, _pos] remoteExec ["lmn_fnc_prepGarrison", 2];
+	};
+
+	// Spawn Artillery site locations 
+	for "_i" from 1 to _mortarSites do {
+		_newSite = [_x, _allegiance, _pos] remoteExec ["lmn_fnc_prepArty", 2];
 	};
 } forEach _sections;
 

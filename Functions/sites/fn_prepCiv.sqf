@@ -4,7 +4,7 @@ _pos = position (selectRandom (nearestTerrainObjects [_locPos, ["HOUSE"], 400]))
 if (isnil "_pos") then {
 	_pos = [_locPos, 0, 20, 5, 0, 10, 0] call BIS_fnc_findSafePos;
 };
-_alpha = 0.5;
+_alpha = 0;
 
 // Debug marker 
 _mkr = createMarker [format ["%1-%2", _loc, _pos], _pos];

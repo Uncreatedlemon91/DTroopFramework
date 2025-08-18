@@ -58,10 +58,12 @@ class CfgFunctions
 		{
 			class prepAA {};
 			class prepAmbush {};
+			class prepArty {};
 			class prepCiv {};
 			class prepGarrison {};
 			class spawnAA {};
 			class spawnAmbush {};
+			class spawnArty {};
 			class spawnCiv {};
 			class spawnGarrison {};
 		};

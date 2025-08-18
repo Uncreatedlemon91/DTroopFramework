@@ -4,7 +4,7 @@ _pos = position (selectRandom (nearestTerrainObjects [_locPos, ["HOUSE", "HOSPIT
 if (isnil "_pos") then {
 	_pos = [_locPos, 0, 20, 5, 0, 10, 0] call BIS_fnc_findSafePos;
 };
-_alpha = 0.5;
+_alpha = 0;
 
 // Setup a Marker
 _mkr = createMarker [format ["%1-%2", _loc, _pos], _pos];
@@ -46,5 +46,5 @@ _prep setTriggerStatements [
 _prep setVariable ["attachedLocation", _loc];
 _prep setVariable ["faction", _faction];
 _prep setVariable ["Activated", false];
-_prep setVariable ["ToSpawn", _toSpawn, true];
+_prep setVariable ["ToSpawn", _toSpawn];
 _prep setVariable ["FactionSide", _side];
