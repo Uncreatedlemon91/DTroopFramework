@@ -48,7 +48,19 @@ while {_trg getVariable "Activated"} do {
 		_currentCount = ["read", [_loc, "GarrisonSize"]] call _locDB;
 		_newCount = _currentCount - 1;
 		_destroyed = true;
-		["write", [_loc, "AmbushCount", _newCount]] call _locDB;
+		["write", [_loc, "GarrisonSize", _newCount]] call _locDB;
+		if (_newCount == 0) then {
+			_allegiance = ["read", [_loc, "Allegiance"]] call _locDB;
+			_newallegiance = [];
+			switch (_allegiance) do {
+				case "USA": {_newallegiance = "North"};
+				case "ROK": {_newallegiance = "North"};
+				case "AUS": {_newallegiance = "North"};
+				case "NZ": {_newallegiance = "North"};
+				case "North": {_newallegiance = selectRandom ["USA", "ROK", "AUS", "NZ"]};
+			};
+			["write", [_loc, "Allegiance", _newallegiance]] call _locDB;
+		};
 	}
 };
 
