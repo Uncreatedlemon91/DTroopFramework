@@ -16,8 +16,9 @@ class CfgFunctions
 
 		class locations 
 		{
-			class createLocations {};
+			class createLocation {};
 			class eventChanges {};
+			class setupLocations {};
 		};
 
 		class logi

@@ -49,6 +49,8 @@ while {_trg getVariable "Activated"} do {
 		_newCount = _currentCount - 1;
 		_destroyed = true;
 		["write", [_loc, "GarrisonSize", _newCount]] call _locDB;
+
+		// Flip the location if no more garrisons are active 
 		if (_newCount == 0) then {
 			_allegiance = ["read", [_loc, "Allegiance"]] call _locDB;
 			_newallegiance = [];
@@ -59,7 +61,32 @@ while {_trg getVariable "Activated"} do {
 				case "NZ": {_newallegiance = "North"};
 				case "North": {_newallegiance = selectRandom ["USA", "ROK", "AUS", "NZ"]};
 			};
-			["write", [_loc, "Allegiance", _newallegiance]] call _locDB;
+			// Delete the old location 
+			_oldMarker = ["read", [_loc, "Marker"]] call _locDB;
+			_civTrgs = ["read", [_loc, "CivTrgs"]] call _locDB;
+			_ambushTrgs = ["read", [_loc, "AmbushTrgs"]] call _locDB;
+			_aaTrgs = ["read", [_loc, "AATrgs"]] call _locDB;
+			_garrisonTrgs = ["read", [_loc, "GarrisonTrgs"]] call _locDB;
+			_artyTrgs = ["read", [_loc, "ArtyTrgs"]] call _locDB;
+			deleteMarker _oldMarker;
+			{
+				deleteVehicle _x;
+			} forEach _civTrgs;
+			{
+				deleteVehicle _x;
+			} forEach _ambushTrgs;
+			{
+				deleteVehicle _x;
+			} forEach _aaTrgs;
+			{
+				deleteVehicle _x;
+			} forEach _garrisonTrgs;
+			{
+				deleteVehicle _x;
+			} forEach _artyTrgs;
+
+			// Rebuild the location with new allegiance
+			[_loc, _allegiance] remoteExec ["lmn_fnc_createLocation", 2];
 		};
 	}
 };

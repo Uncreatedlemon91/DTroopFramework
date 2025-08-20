@@ -30,7 +30,7 @@ if (_locDBExists) then {
     [] remoteExec ["lmn_fnc_loadLocations", 2];
     // systemchat "[DB] Locations Loading...";
 } else {
-    [] remoteExec ["lmn_fnc_createLocations", 2];
+    [] remoteExec ["lmn_fnc_setupLocations", 2];
     // systemChat "[DB] Generation Locations...";
 };
 if (_itemDBExists) then {
