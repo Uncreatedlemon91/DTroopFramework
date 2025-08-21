@@ -1,7 +1,7 @@
 // Prepares AA sites within the location 
 params ["_loc", "_faction", "_locPos"];
 
-_pos = [_locPos, 0, 500, 20, 0, 10, 0] call BIS_fnc_findSafePos;
+_pos = [_locPos, 0, 1000, 20, 0, 10, 0] call BIS_fnc_findSafePos;
 _alpha = 0;
 
 // Setup the AA Site 

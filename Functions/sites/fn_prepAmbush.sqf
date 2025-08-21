@@ -1,8 +1,8 @@
 // Prepares the trigger and information for an ambush 
 params ["_loc", "_faction", "_locPos"];
-_pos = position (selectRandom (nearestTerrainObjects [_locPos, ["ROAD", "TRAIL", "MAIN ROAD"], 800, false, false]));
+_pos = position (selectRandom (nearestTerrainObjects [_locPos, ["ROAD", "TRAIL", "MAIN ROAD", "BUSH"], 800, false, false]));
 if (isnil "_pos") then {
-	_pos = [_locPos, 0, 20, 5, 0, 10, 0] call BIS_fnc_findSafePos;
+	_pos = [_locPos, 0, 800, 5, 0, 10, 0] call BIS_fnc_findSafePos;
 };
 _alpha = 0;
 

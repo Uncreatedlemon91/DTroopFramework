@@ -1,9 +1,6 @@
 // Sets up a garrison site at a building 
 params ["_loc", "_faction", "_locPos"];
-_pos = position (selectRandom (nearestTerrainObjects [_locPos, ["HOUSE", "HOSPITAL", "BUILDING", "BUNKER", "FORTRESS"], 200, false, false]));
-if (isnil "_pos") then {
-	_pos = [_locPos, 0, 20, 5, 0, 10, 0] call BIS_fnc_findSafePos;
-};
+_pos = [_locPos, 0, 600, 5, 0, 10, 0] call BIS_fnc_findSafePos;
 _alpha = 0;
 
 // Setup a Marker
@@ -35,7 +32,7 @@ for "_i" from 1 to _infantrySize do {
 // Setup Trigger
 _prep = createTrigger["EmptyDetector", _pos, true];
 _prep setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-_prep setTriggerArea [250, 250, 0, false, 100];
+_prep setTriggerArea [500, 500, 0, false, 300];
 _prep setTriggerInterval 1;
 _prep setTriggerStatements [
 	"this",

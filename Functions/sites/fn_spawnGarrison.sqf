@@ -24,11 +24,11 @@ _destroyed = false;
 	// Current result is saved in variable _x
 	_unit = _grp createUnit [_x, _pos, [], 5, "FORM"];
 	zeus addCuratorEditableObjects [[_unit], true];
-	sleep 0.5;
+	sleep 0.2;
 } forEach _groupClass;
 
 // Give the unit orders to defend the point 
-[_grp, _trg, 50, [], true, false, -1, false] call lambs_wp_fnc_taskGarrison;
+[_grp, _trg, 200, [], true, false, -1, false] call lambs_wp_fnc_taskGarrison;
 _grp setBehaviour "SAFE";
 _grp deleteGroupWhenEmpty true;
 

@@ -32,7 +32,8 @@ _grp setCombatMode "RED";
 _grp deleteGroupWhenEmpty true;
 _trg setVariable ["Active", true];
 _destroyed = false;
-[_grp] call lambs_wp_fnc_taskArtilleryRegister;
+[_veh] call lambs_wp_fnc_taskArtilleryRegister;
+// [_grp] call lambs_wp_fnc_taskArtilleryRegister;
 
 while {_trg getVariable "Activated"} do {
 	sleep 1;

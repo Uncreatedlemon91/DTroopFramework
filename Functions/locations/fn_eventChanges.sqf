@@ -1,11 +1,11 @@
 // Adapts the locations once every real time day. 
 sleep 10;
 _savedTime = [];
+_locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_inidbi;
 while {true} do {
 	_time = [(systemTime select 2), (systemTime select 1), (systemTime select 0)];
 	if (_time != _savedTime) then {
 		// Get the Database Entry 
-		_locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_inidbi;
 		_sections = "getSections" call _locDB;
 		_allies = ["USA", "ROK", "AUS", "NZ"];
 

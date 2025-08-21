@@ -98,7 +98,7 @@ _nearLocs deleteAt 0;
 _ambushes = (round(random 8)) * _priority;
 _garrisonSize = (round(random 8)) * _priority;
 _stability = round(random 100);
-_mortarSites = (round(random 2)) * _priority;
+_mortarSites = selectRandom [0, 1, 2];
 _minefields = round(random 2) * _priority;
 _aaSites = (round(random 4)) * _priority;
 
@@ -118,14 +118,10 @@ _aaSites = (round(random 4)) * _priority;
 ["write", [_loc, "MinefieldSites", _minefields]] call _locDB;
 ["write", [_loc, "AAsites", _aaSites]] call _locDB;
 
+// All Location specifics 
 // Spawn civilians 
 for "_i" from 1 to _population do {
 	_newSite = [_loc, _stability, position _loc] remoteExec ["lmn_fnc_prepCiv", 2];
-};
-
-// Spawn ambush locations 
-for "_i" from 1 to _ambushes do {
-	_newSite = [_loc, _allegiance, position _loc] remoteExec ["lmn_fnc_prepAmbush", 2];
 };
 
 // Spawn AA site Locations 
@@ -141,4 +137,12 @@ for "_i" from 1 to _garrisonSize do {
 // Spawn Artillery site locations 
 for "_i" from 1 to _mortarSites do {
 	_newSite = [_loc, _allegiance, position _loc] remoteExec ["lmn_fnc_prepArty", 2];
+};
+
+// "NORTH" Location specifics 
+if (_allegiance == "North") then {
+	// Spawn ambush locations 
+	for "_i" from 1 to _ambushes do {
+		_newSite = [_loc, _allegiance, position _loc] remoteExec ["lmn_fnc_prepAmbush", 2];
+	};
 };
