@@ -150,8 +150,7 @@ switch (_type) do {
 };
 
 // Spawn the box 
-_spawnPos = [position LogiPoint, 2, 5, 5, 0, 10, 0] call BIS_fnc_findSafePos;
-_box = _model createVehicle _spawnPos;
+_box = _model createVehicle position itemspawn;;
 
 // Clear items it spawns with
 clearItemCargoGlobal _box;

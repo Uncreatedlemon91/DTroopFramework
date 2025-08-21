@@ -34,7 +34,7 @@ _grp deleteGroupWhenEmpty true;
 
 // Update the trigger to move with the unit leader 
 while {_trg getVariable "Activated"} do {
-	sleep 1;
+	sleep 5;
 	_ldr = leader _grp;
 	_trg setpos (getPos _ldr);
 	_count = 0;
@@ -44,14 +44,15 @@ while {_trg getVariable "Activated"} do {
 		};
 	} forEach units _grp;
 	if ((_count <= 2) AND !(_destroyed == true)) then {
+		_destroyed = true;
 		_locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_inidbi;
 		_currentCount = ["read", [_loc, "GarrisonSize"]] call _locDB;
 		_newCount = _currentCount - 1;
-		_destroyed = true;
 		["write", [_loc, "GarrisonSize", _newCount]] call _locDB;
 
 		// Flip the location if no more garrisons are active 
-		if (_newCount == 0) then {
+		if (_newCount <= 0) then {
+			systemChat format ["Flipping Location %1", _loc];
 			_allegiance = ["read", [_loc, "Allegiance"]] call _locDB;
 			_newallegiance = [];
 			switch (_allegiance) do {
@@ -61,32 +62,18 @@ while {_trg getVariable "Activated"} do {
 				case "NZ": {_newallegiance = "North"};
 				case "North": {_newallegiance = selectRandom ["USA", "ROK", "AUS", "NZ"]};
 			};
-			// Delete the old location 
-			_oldMarker = ["read", [_loc, "Marker"]] call _locDB;
-			_civTrgs = ["read", [_loc, "CivTrgs"]] call _locDB;
-			_ambushTrgs = ["read", [_loc, "AmbushTrgs"]] call _locDB;
-			_aaTrgs = ["read", [_loc, "AATrgs"]] call _locDB;
-			_garrisonTrgs = ["read", [_loc, "GarrisonTrgs"]] call _locDB;
-			_artyTrgs = ["read", [_loc, "ArtyTrgs"]] call _locDB;
-			deleteMarker _oldMarker;
-			{
-				deleteVehicle _x;
-			} forEach _civTrgs;
-			{
-				deleteVehicle _x;
-			} forEach _ambushTrgs;
-			{
-				deleteVehicle _x;
-			} forEach _aaTrgs;
-			{
-				deleteVehicle _x;
-			} forEach _garrisonTrgs;
-			{
-				deleteVehicle _x;
-			} forEach _artyTrgs;
+
+			// Get location raw data 
+			_locPos = ["read", [_loc, "Pos"]] call _locDB;
+			_loc = nearestLocation [_locPos, ""];
+
+			// Delete current location data 
+			["deleteSection", _loc] call _locDB;
+			_mkr = ["read", [_loc, "Marker"]] call _locDB;
+			deleteMarker _mkr;
 
 			// Rebuild the location with new allegiance
-			[_loc, _allegiance] remoteExec ["lmn_fnc_createLocation", 2];
+			[_loc, _allegiance, true] remoteExec ["lmn_fnc_createLocation", 2];
 		};
 	}
 };

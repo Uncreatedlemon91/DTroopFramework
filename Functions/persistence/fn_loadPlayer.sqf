@@ -1,5 +1,5 @@
 // Load the player from the database 
-params ["_data", "_player", "_isDead"];
+params ["_data", "_player"];
 
 _pos = _data select 1;
 _dir = _data select 2;
@@ -14,7 +14,3 @@ _player setUnitLoadout _loadout;
 _player selectWeapon _weapon;
 
 systemChat format ["Welcome back %1", (_data select 0)];
-
-if (_isDead == "Killed in Action") exitWith {
-	["Initialize", [_player]] call BIS_fnc_EGSpectator;
-};

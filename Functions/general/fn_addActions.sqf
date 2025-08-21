@@ -291,44 +291,44 @@ _radios = [
 
 // Addactions to logistics point
 // Vehicles 
-[logiPoint, 0, ["ACE_MainActions"], _spawnVehicles] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions"], _spawnVehicles] call ace_interact_menu_fnc_addActionToObject;
 // Utility
-[logiPoint, 0, ["ACE_MainActions", "spawnVehicle"], _spawnUtility] call ace_interact_menu_fnc_addActionToObject;
-[logiPoint, 0, ["ACE_MainActions", "spawnVehicle", "spawnUtility"], _spawnFuelTruck] call ace_interact_menu_fnc_addActionToObject;
-[logiPoint, 0, ["ACE_MainActions", "spawnVehicle", "spawnUtility"], _spawnAmmoTruck] call ace_interact_menu_fnc_addActionToObject;
-[logiPoint, 0, ["ACE_MainActions", "spawnVehicle", "spawnUtility"], _spawnRepairTruck] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "spawnVehicle"], _spawnUtility] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "spawnVehicle", "spawnUtility"], _spawnFuelTruck] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "spawnVehicle", "spawnUtility"], _spawnAmmoTruck] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "spawnVehicle", "spawnUtility"], _spawnRepairTruck] call ace_interact_menu_fnc_addActionToObject;
 // Transport
-[logiPoint, 0, ["ACE_MainActions", "spawnVehicle"], _spawnTransport] call ace_interact_menu_fnc_addActionToObject;
-[logiPoint, 0, ["ACE_MainActions", "spawnVehicle", "spawnTransport"], _spawnJeep] call ace_interact_menu_fnc_addActionToObject;
-[logiPoint, 0, ["ACE_MainActions", "spawnVehicle", "spawnTransport"], _spawnTruck] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "spawnVehicle"], _spawnTransport] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "spawnVehicle", "spawnTransport"], _spawnJeep] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "spawnVehicle", "spawnTransport"], _spawnTruck] call ace_interact_menu_fnc_addActionToObject;
 // Helicopters
-[logiPoint, 0, ["ACE_MainActions", "spawnVehicle"], _spawnHeli] call ace_interact_menu_fnc_addActionToObject;
-[logiPoint, 0, ["ACE_MainActions", "spawnVehicle", "spawnHeli"], _spawnHuey1d] call ace_interact_menu_fnc_addActionToObject;
-[logiPoint, 0, ["ACE_MainActions", "spawnVehicle", "spawnHeli"], _spawnLoach] call ace_interact_menu_fnc_addActionToObject;
-[logiPoint, 0, ["ACE_MainActions", "spawnVehicle", "spawnHeli"], _spawnAh1g] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "spawnVehicle"], _spawnHeli] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "spawnVehicle", "spawnHeli"], _spawnHuey1d] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "spawnVehicle", "spawnHeli"], _spawnLoach] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "spawnVehicle", "spawnHeli"], _spawnAh1g] call ace_interact_menu_fnc_addActionToObject;
 // Supplies 
-[logiPoint, 0, ["ACE_MainActions"], _supplies] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions"], _supplies] call ace_interact_menu_fnc_addActionToObject;
 // Ammunition 
-[logiPoint, 0, ["ACE_MainActions", "supplies"], _m16Box] call ace_interact_menu_fnc_addActionToObject;
-[logiPoint, 0, ["ACE_MainActions", "supplies"], _M60Ammo] call ace_interact_menu_fnc_addActionToObject;
-[logiPoint, 0, ["ACE_MainActions", "supplies"], _M79Ammo] call ace_interact_menu_fnc_addActionToObject;
-[logiPoint, 0, ["ACE_MainActions", "supplies"], _grenades] call ace_interact_menu_fnc_addActionToObject;
-[logiPoint, 0, ["ACE_MainActions", "supplies"], _medical] call ace_interact_menu_fnc_addActionToObject;
-[logiPoint, 0, ["ACE_MainActions", "supplies"], _repairKits] call ace_interact_menu_fnc_addActionToObject;
-[logiPoint, 0, ["ACE_MainActions", "supplies"], _fluids] call ace_interact_menu_fnc_addActionToObject;
-[logiPoint, 0, ["ACE_MainActions", "supplies"], _food] call ace_interact_menu_fnc_addActionToObject;
-[logiPoint, 0, ["ACE_MainActions", "supplies"], _radios] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "supplies"], _m16Box] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "supplies"], _M60Ammo] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "supplies"], _M79Ammo] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "supplies"], _grenades] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "supplies"], _medical] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "supplies"], _repairKits] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "supplies"], _fluids] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "supplies"], _food] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "supplies"], _radios] call ace_interact_menu_fnc_addActionToObject;
 // Items 
-[logiPoint, 0, ["ACE_MainActions"], _items] call ace_interact_menu_fnc_addActionToObject;
-[logiPoint, 0, ["ACE_MainActions", "items"], _helipad] call ace_interact_menu_fnc_addActionToObject;
-[logiPoint, 0, ["ACE_MainActions", "items"], _medicalTent] call ace_interact_menu_fnc_addActionToObject;
-[logiPoint, 0, ["ACE_MainActions", "items"], _radio] call ace_interact_menu_fnc_addActionToObject;
-[logiPoint, 0, ["ACE_MainActions", "items"], _wBuffalo] call ace_interact_menu_fnc_addActionToObject;
-[logiPoint, 0, ["ACE_MainActions", "items"], _fuelDrum] call ace_interact_menu_fnc_addActionToObject;
-[logiPoint, 0, ["ACE_MainActions", "items"], _target] call ace_interact_menu_fnc_addActionToObject;
-[logiPoint, 0, ["ACE_MainActions", "items"], _revetment] call ace_interact_menu_fnc_addActionToObject;
-[logiPoint, 0, ["ACE_MainActions", "items"], _Sandbags] call ace_interact_menu_fnc_addActionToObject;
-[logiPoint, 0, ["ACE_MainActions", "items"], _SandbagsRounded] call ace_interact_menu_fnc_addActionToObject;
-[logiPoint, 0, ["ACE_MainActions", "items"], _Lamp] call ace_interact_menu_fnc_addActionToObject;
-[logiPoint, 0, ["ACE_MainActions", "items"], _Lantern] call ace_interact_menu_fnc_addActionToObject;
-[logiPoint, 0, ["ACE_MainActions", "items"], _wheels] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions"], _items] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "items"], _helipad] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "items"], _medicalTent] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "items"], _radio] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "items"], _wBuffalo] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "items"], _fuelDrum] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "items"], _target] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "items"], _revetment] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "items"], _Sandbags] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "items"], _SandbagsRounded] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "items"], _Lamp] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "items"], _Lantern] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "items"], _wheels] call ace_interact_menu_fnc_addActionToObject;

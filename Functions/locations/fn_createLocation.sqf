@@ -1,4 +1,4 @@
-params ["_loc", "_allegiance"];
+params ["_loc", "_allegiance", "_remake"];
 
 // Define the databases being used 
 _locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_inidbi;
@@ -45,14 +45,16 @@ if (isNil "_allegiance") then {
 };
 _mkr setMarkerType "vn_flag_pavn";
 _mkr setMarkerAlpha 0.4;
-if ((position _loc) inArea "SouthAO") then {
+if (isNil "_remake") then {
+	if ((position _loc) inArea "SouthAO") then {
 	_allegiance = selectRandomWeighted ["USA", 0.3, "ROK", 0.5, "AUS", 0.2, "NZ", 0.1];
-};
-if (((position _loc) inArea "Base") OR ((position _loc) inArea "AirBase")) then {
-	_allegiance = "USA";
-};
-if ((position _loc) inArea "Saigon") then {
-	_allegiance = "ROK";
+	};
+	if (((position _loc) inArea "Base") OR ((position _loc) inArea "AirBase")) then {
+		_allegiance = "USA";
+	};
+	if ((position _loc) inArea "Saigon") then {
+		_allegiance = "ROK";
+	};
 };
 
 switch (_allegiance) do {
@@ -117,42 +119,26 @@ _aaSites = (round(random 4)) * _priority;
 ["write", [_loc, "AAsites", _aaSites]] call _locDB;
 
 // Spawn civilians 
-_civTrgs = [];
 for "_i" from 1 to _population do {
 	_newSite = [_loc, _stability, position _loc] remoteExec ["lmn_fnc_prepCiv", 2];
-	_civTrigs pushback _newSite;
 };
 
 // Spawn ambush locations 
-_ambushTrgs = [];
 for "_i" from 1 to _ambushes do {
 	_newSite = [_loc, _allegiance, position _loc] remoteExec ["lmn_fnc_prepAmbush", 2];
-	_ambushTrgs pushback _newSite;
 };
 
 // Spawn AA site Locations 
-_aaTrgs = [];
 for "_i" from 1 to _aaSites do {
 	_newSite = [_loc, _allegiance, position _loc] remoteExec ["lmn_fnc_prepAA", 2];
-	_aaTrgs pushback _newSite;
 };
 
 // Spawn Garrison site Locations 
-_garrisonTrgs = [];
 for "_i" from 1 to _garrisonSize do {
 	_newSite = [_loc, _allegiance, position _loc] remoteExec ["lmn_fnc_prepGarrison", 2];
-	_garrisonTrgs pushback _newSite;
 };
 
 // Spawn Artillery site locations 
-_artyTrgs = [];
 for "_i" from 1 to _mortarSites do {
 	_newSite = [_loc, _allegiance, position _loc] remoteExec ["lmn_fnc_prepArty", 2];
-	_artyTrgs pushback _newSite;
 };
-
-["write", [_loc, "CivTrgs", _civTrgs]] call _locDB;
-["write", [_loc, "AmbushTrgs", _ambushTrgs]] call _locDB;
-["write", [_loc, "AATrgs", _aaTrgs]] call _locDB;
-["write", [_loc, "GarrisonTrgs", _garrisonTrgs]] call _locDB;
-["write", [_loc, "ArtyTrgs", _artyTrgs]] call _locDB;

@@ -24,7 +24,7 @@ switch (_faction) do {
 };
 
 // Make the unit
-_infantrySize = random [3, 6, 10];
+_infantrySize = random [8, 12, 15];
 _reconSize = random [2, 4, 6];
 _toSpawn = [];
 

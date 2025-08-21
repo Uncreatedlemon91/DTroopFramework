@@ -128,37 +128,34 @@ lmn_US = [
 lmn_ROK = [
 	// Infantry - 0
 	[
-		"vn_b_men_army_06",
-		"vn_b_men_army_07",
-		"vn_b_men_army_05",
-		"vn_b_men_army_15",
-		"vn_b_men_army_19",
-		"vn_b_men_army_21",
-		"vn_b_men_army_16",
-		"vn_b_men_army_02",
-		"vn_b_men_army_20",
-		"vn_b_men_army_18",
-		"vn_b_men_army_08"
+		"vn_i_men_army_15",
+		"vn_i_men_army_16",
+		"vn_i_men_army_18",
+		"vn_i_men_army_19",
+		"vn_i_men_army_20",
+		"vn_i_men_army_21",
+		"vn_i_men_army_08",
+		"vn_i_men_army_09",
+		"vn_i_men_army_02",
+		"vn_i_men_army_06",
+		"vn_i_men_army_11",
+		"vn_i_men_army_04",
+		"vn_i_men_army_07",
+		"vn_i_men_army_05",
+		"vn_i_men_army_12",
+		"vn_i_men_army_17"
 	],
 	// Recon - 1
 	[
-		"vn_b_men_sog_04",
-		"vn_b_men_sog_06",
-		"vn_b_men_sog_11",
-		"vn_b_men_sog_09",
-		"vn_b_men_sog_19",
-		"vn_b_men_sog_16",
-		"vn_b_men_sog_18",
-		"vn_b_men_sog_28",
-		"vn_b_men_sog_31",
-		"vn_b_men_sog_07",
-		"vn_b_men_sog_10",
-		"vn_b_men_sog_12",
-		"vn_b_men_sog_21",
-		"vn_b_men_sog_02",
-		"vn_b_men_sog_01",
-		"vn_b_men_sog_03",
-		"vn_b_men_sog_30"
+		"vn_i_men_sf_09",
+		"vn_i_men_sf_02",
+		"vn_i_men_sf_10",
+		"vn_i_men_sf_05",
+		"vn_i_men_sf_01",
+		"vn_i_men_sf_07",
+		"vn_i_men_sf_03",
+		"vn_i_men_sf_04",
+		"vn_i_men_sf_12"
 	]
 	// Vehicles - 2
 
@@ -168,37 +165,37 @@ lmn_ROK = [
 lmn_NZ = [
 	// Infantry - 0
 	[
-		"vn_b_men_army_06",
-		"vn_b_men_army_07",
-		"vn_b_men_army_05",
-		"vn_b_men_army_15",
-		"vn_b_men_army_19",
-		"vn_b_men_army_21",
-		"vn_b_men_army_16",
-		"vn_b_men_army_02",
-		"vn_b_men_army_20",
-		"vn_b_men_army_18",
-		"vn_b_men_army_08"
+		"vn_b_men_nz_army_68_14",
+		"vn_b_men_nz_army_68_12",
+		"vn_b_men_nz_army_68_16",
+		"vn_b_men_nz_army_68_19",
+		"vn_b_men_nz_army_68_05",
+		"vn_b_men_nz_army_68_10",
+		"vn_b_men_nz_army_68_08",
+		"vn_b_men_nz_army_68_03",
+		"vn_b_men_nz_army_68_04",
+		"vn_b_men_nz_army_68_09",
+		"vn_b_men_nz_army_68_11",
+		"vn_b_men_nz_army_68_13",
+		"vn_b_men_nz_army_68_07",
+		"vn_b_men_nz_army_68_02",
+		"vn_b_men_nz_army_68_18",
+		"vn_b_men_nz_army_68_01"
 	],
 	// Recon - 1
 	[
-		"vn_b_men_sog_04",
-		"vn_b_men_sog_06",
-		"vn_b_men_sog_11",
-		"vn_b_men_sog_09",
-		"vn_b_men_sog_19",
-		"vn_b_men_sog_16",
-		"vn_b_men_sog_18",
-		"vn_b_men_sog_28",
-		"vn_b_men_sog_31",
-		"vn_b_men_sog_07",
-		"vn_b_men_sog_10",
-		"vn_b_men_sog_12",
-		"vn_b_men_sog_21",
-		"vn_b_men_sog_02",
-		"vn_b_men_sog_01",
-		"vn_b_men_sog_03",
-		"vn_b_men_sog_30"
+		"vn_b_men_nz_sas_66_09",
+		"vn_b_men_nz_sas_66_10",
+		"vn_b_men_nz_sas_66_08",
+		"vn_b_men_nz_sas_66_03",
+		"vn_b_men_nz_sas_66_11",
+		"vn_b_men_nz_sas_66_05",
+		"vn_b_men_nz_sas_66_06",
+		"vn_b_men_nz_sas_66_01",
+		"vn_b_men_nz_sas_66_13",
+		"vn_b_men_nz_sas_66_12",
+		"vn_b_men_nz_sas_66_14",
+		"vn_b_men_nz_sas_66_02"
 	]
 	// Vehicles - 2
 
@@ -208,37 +205,36 @@ lmn_NZ = [
 lmn_AUS = [
 	// Infantry - 0
 	[
-		"vn_b_men_army_06",
-		"vn_b_men_army_07",
-		"vn_b_men_army_05",
-		"vn_b_men_army_15",
-		"vn_b_men_army_19",
-		"vn_b_men_army_21",
-		"vn_b_men_army_16",
-		"vn_b_men_army_02",
-		"vn_b_men_army_20",
-		"vn_b_men_army_18",
-		"vn_b_men_army_08"
+		"vn_b_men_aus_army_68_16",
+		"vn_b_men_aus_army_68_05",
+		"vn_b_men_aus_army_68_12",
+		"vn_b_men_aus_army_68_21",
+		"vn_b_men_aus_army_68_18",
+		"vn_b_men_aus_army_68_07",
+		"vn_b_men_aus_army_68_17",
+		"vn_b_men_aus_army_68_06",
+		"vn_b_men_aus_army_68_10",
+		"vn_b_men_aus_army_68_03",
+		"vn_b_men_aus_army_68_08",
+		"vn_b_men_aus_army_68_04",
+		"vn_b_men_aus_army_68_09",
+		"vn_b_men_aus_army_68_11",
+		"vn_b_men_aus_army_68_02",
+		"vn_b_men_aus_army_68_15",
+		"vn_b_men_aus_army_68_01"
 	],
 	// Recon - 1
 	[
-		"vn_b_men_sog_04",
-		"vn_b_men_sog_06",
-		"vn_b_men_sog_11",
-		"vn_b_men_sog_09",
-		"vn_b_men_sog_19",
-		"vn_b_men_sog_16",
-		"vn_b_men_sog_18",
-		"vn_b_men_sog_28",
-		"vn_b_men_sog_31",
-		"vn_b_men_sog_07",
-		"vn_b_men_sog_10",
-		"vn_b_men_sog_12",
-		"vn_b_men_sog_21",
-		"vn_b_men_sog_02",
-		"vn_b_men_sog_01",
-		"vn_b_men_sog_03",
-		"vn_b_men_sog_30"
+		"vn_b_men_aus_sas_66_03",
+		"vn_b_men_aus_sas_66_08",
+		"vn_b_men_aus_sas_66_02",
+		"vn_b_men_aus_sas_66_09",
+		"vn_b_men_aus_sas_66_14",
+		"vn_b_men_aus_sas_66_07",
+		"vn_b_men_aus_sas_66_10",
+		"vn_b_men_aus_sas_66_06",
+		"vn_b_men_aus_sas_66_05",
+		"vn_b_men_aus_sas_66_11"
 	]
 	// Vehicles - 2
 
