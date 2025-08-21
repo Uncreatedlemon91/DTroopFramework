@@ -33,6 +33,7 @@ _boxSave = [
 if (typeOf _box == "Land_vn_tent_mash_01_02") then {
 	_box setVariable ["ace_medical_isMedicalVehicle", true, true];
 };
+[_box, 1] call ace_cargo_fnc_setSize;
 
 // Event Handlers 
 _box addEventHandler ["Hit", {
