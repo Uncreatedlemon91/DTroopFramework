@@ -17,6 +17,9 @@ _loc = _trg getVariable "attachedLocation";
 
 // Spawn the unit 
 _pos = position (selectRandom (nearestTerrainObjects [position _trg, ["HOUSE", "BUILDING"], 50, false, false]));
+if (isnil "_pos") then {
+	_pos = [position _trg, 0, 40, 5, 0, 10, 0] call BIS_fnc_findSafePos;
+};
 _pos = [_pos select 0, _pos select 1, 0];
 _grp = createGroup _side;
 _destroyed = false;
@@ -28,7 +31,13 @@ _destroyed = false;
 } forEach _groupClass;
 
 // Give the unit orders to defend the point 
-[_grp, _trg, 200, [], true, false, -1, false] call lambs_wp_fnc_taskGarrison;
+_task = selectRandom ["garrison", "camp", "patrol"];
+switch (_task) do {
+	case "garrison": {[_grp, _trg, 200, [], true, false, -1, false] call lambs_wp_fnc_taskGarrison;};
+	case "camp": {[_grp, _pos, 50] call lambs_wp_fnc_taskCamp};
+	case "patrol": {[_grp, _pos, 500] call lambs_wp_fnc_taskPatrol};
+};
+
 _grp setBehaviour "SAFE";
 _grp deleteGroupWhenEmpty true;
 

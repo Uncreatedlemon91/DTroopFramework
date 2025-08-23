@@ -145,4 +145,8 @@ if (_allegiance == "North") then {
 	for "_i" from 1 to _ambushes do {
 		_newSite = [_loc, _allegiance, position _loc] remoteExec ["lmn_fnc_prepAmbush", 2];
 	};
+
+	for "_i" from 1 to _minefields do {
+		_newSite = [_loc, _allegiance, position _loc] remoteExec ["lmn_fnc_prepTraps", 2];
+	};
 };
