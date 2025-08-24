@@ -17,10 +17,10 @@ lmn_locations = [
 ];
 
 // Scan and setup the markers for each location as well as their variables.
-_locations = nearestLocations [[0,0,0], lmn_locations, worldsize * 4];
+Missionlocations = nearestLocations [[0,0,0], lmn_locations, worldsize * 4];
 {
 	[_x] remoteExec ["lmn_fnc_createLocation", 2];
 	sleep 0.1;
-} forEach _locations;
+} forEach Missionlocations;
 
 systemChat "[DB] Locations Generated";
