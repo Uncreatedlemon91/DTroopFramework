@@ -17,6 +17,9 @@ _loc = _trg getVariable "attachedLocation";
 
 // Spawn the unit 
 _pos = position (selectRandom (nearestTerrainObjects [position _trg, ["TREE", "BUSH"], 50, false, false]));
+if (isnil "_pos") then {
+	_pos = [position _trg, 0, 40, 5, 0, 10, 0] call BIS_fnc_findSafePos;
+};
 _pos = [_pos select 0, _pos select 1, 0];
 _grp = createGroup _side;
 _destroyed = false;
@@ -38,6 +41,7 @@ switch (_task) do {
 _grp setCombatMode "RED";
 _grp setBehaviour "SAFE";
 _grp deleteGroupWhenEmpty true;
+_grp setVariable ["lambs_danger_enableGroupReinforce", true, true];
 
 // Update the trigger to move with the unit leader 
 while {_trg getVariable "Activated"} do {
