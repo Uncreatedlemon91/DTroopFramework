@@ -273,10 +273,10 @@ _Lantern = [
 ] call ace_interact_menu_fnc_createAction;
 
 _food = [
-    "Food",
-    "Food",
+    "GL Ammo",
+    "GL Ammo",
     "",
-    {["Food"] remoteExec ["lmn_fnc_spawnSupply", 2]},
+    {["GL Ammo"] remoteExec ["lmn_fnc_spawnSupply", 2]},
     {true}
 ] call ace_interact_menu_fnc_createAction;
 
