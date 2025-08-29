@@ -66,5 +66,10 @@ class CfgFunctions
 			class spawnCiv {};
 			class spawnGarrison {};
 		};
+
+		class WarDirector
+		{
+			class wd_init {};
+		};
 	};
 };
