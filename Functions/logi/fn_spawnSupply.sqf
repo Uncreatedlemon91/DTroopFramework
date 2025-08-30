@@ -128,17 +128,24 @@ switch (_type) do {
 		_model = "Land_vn_bagfence_round_f";
 		_content = [];
 	};
-	case "Food": {
+	case "GL Ammo": {
 		_model = "Land_WoodenCrate_01_F";
 		_content = [
-			["vn_prop_food_lrrp_01_04_gh", 10],
-			["vn_prop_food_lrrp_01_01_gh", 10],
-			["vn_prop_food_lrrp_01_07_gh", 10],
-			["vn_prop_food_lrrp_01_08_gh", 10],
-			["vn_prop_food_lrrp_01_05_gh", 10],
-			["vn_prop_food_lrrp_01_06_gh", 10],
-			["vn_prop_food_lrrp_01_02_gh", 10],
-			["vn_prop_food_lrrp_01_03_gh", 10]
+			["vn_40mm_m716_smoke_y_mag", 25],
+			["vn_40mm_m661_flare_g_mag", 25],
+			["vn_40mm_m680_smoke_w_mag", 25],
+			["vn_40mm_m651_cs_mag", 25],
+			["vn_40mm_m397_ab_mag", 25],
+			["vn_40mm_m433_hedp_mag", 25],
+			["vn_40mm_m662_flare_r_mag", 25],
+			["vn_40mm_m715_smoke_g_mag", 25],
+			["vn_40mm_m381_he_mag", 25],
+			["vn_40mm_m406_he_mag", 25],
+			["vn_40mm_m576_buck_mag", 25],
+			["vn_40mm_m695_flare_y_mag", 25],
+			["vn_40mm_m583_flare_w_mag", 25],
+			["vn_40mm_m717_smoke_p_mag", 25],
+			["vn_40mm_m682_smoke_r_mag", 25]
 		];
 	};
 	case "Radios": {
@@ -166,4 +173,3 @@ clearMagazineCargoGlobal _box;
 
 // Setup the box
 [_box] remoteExec ["lmn_fnc_setupItems", 0, true];
-

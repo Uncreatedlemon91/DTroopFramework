@@ -72,6 +72,10 @@ if (_population > 40) then {
 	_population = 40;
 };
 
+// Set the resource of the location 
+_resource = selectRandom ["Fuel", "Munitions", "Manpower"];
+_resourceQty = 1 * _priority;
+
 // Get nearby locations 
 _locs = nearestLocations [position _loc, [
 	"NameLocal",
@@ -107,6 +111,8 @@ _aaSites = (round(random 4)) * _priority;
 ["write", [_loc, "Pos", position _loc]] call _locDB;
 ["write", [_loc, "Marker", _mkr]] call _locDB;
 ["write", [_loc, "Population", _population]] call _locDB;
+["write", [_loc, "Resource", _resource]] call _locDB;
+["write", [_loc, "ResourceQty", _resourceQty]] call _locDB;
 ["write", [_loc, "NearLocations", _nearLocs]] call _locDB;
 ["write", [_loc, "Priority", _priority]] call _locDB;
 ["write", [_loc, "Allegiance", _allegiance]] call _locDB;

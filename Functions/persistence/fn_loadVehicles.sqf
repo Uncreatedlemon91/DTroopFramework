@@ -17,7 +17,7 @@ _sections = "getSections" call _db;
 	_weps = _data select 9;
 
 	// Spawn vehicle replica 
-	_veh = _type createVehicle _pos;
+	_veh = createVehicle [_type, _pos, [], 0, "CAN_COLLIDE"];
 	_veh allowDamage false;
 	clearItemCargoGlobal _veh;
 	clearMagazineCargoGlobal _veh;
