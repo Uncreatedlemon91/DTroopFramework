@@ -51,7 +51,6 @@ _mkr setMarkerType "hd_dot";
 _mkr setMarkerColor "COLORYELLOW";
 _mkr setMarkerAlpha _alpha;
 
-
 // Setup the Trigger 
 _aaSite = createTrigger ["EmptyDetector", _pos];
 _aaSite setTriggerActivation ["ANYPLAYER", "PRESENT", true];
