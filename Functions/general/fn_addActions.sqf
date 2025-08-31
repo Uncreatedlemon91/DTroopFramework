@@ -151,11 +151,11 @@ _medical = [
     {true}
 ] call ace_interact_menu_fnc_createAction;
 
-_repairKits = [
-    "RepairKits", 
-    "Repair Kits", 
+_tools = [
+    "Tools", 
+    "Tools", 
     "", 
-    {["RepairKits"] remoteExec ["lmn_fnc_spawnSupply", 2]}, 
+    {["Tools"] remoteExec ["lmn_fnc_spawnSupply", 2]}, 
     {true}
 ] call ace_interact_menu_fnc_createAction;
 
@@ -288,6 +288,22 @@ _radios = [
     {true}
 ] call ace_interact_menu_fnc_createAction;
 
+_personalBox = [
+    "PersonalBox",
+    "Personal Box",
+    "",
+    {["PersonalBox"] remoteExec ["lmn_fnc_spawnSupply", 2]},
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+_ropeBox = [
+    "Ropes",
+    "Ropes",
+    "",
+    {["Ropes"] remoteExec ["lmn_fnc_spawnSupply", 2]},
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
 
 // Addactions to logistics point
 // Vehicles 
@@ -314,7 +330,7 @@ _radios = [
 [ItemSpawner, 0, ["ACE_MainActions", "supplies"], _M79Ammo] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "supplies"], _grenades] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "supplies"], _medical] call ace_interact_menu_fnc_addActionToObject;
-[ItemSpawner, 0, ["ACE_MainActions", "supplies"], _repairKits] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "supplies"], _tools] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "supplies"], _fluids] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "supplies"], _food] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "supplies"], _radios] call ace_interact_menu_fnc_addActionToObject;
@@ -332,3 +348,5 @@ _radios = [
 [ItemSpawner, 0, ["ACE_MainActions", "items"], _Lamp] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "items"], _Lantern] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "items"], _wheels] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "items"], _personalBox] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "items"], _ropeBox] call ace_interact_menu_fnc_addActionToObject;

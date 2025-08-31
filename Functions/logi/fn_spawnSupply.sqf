@@ -15,7 +15,8 @@ switch (_type) do {
 	case "M60Ammo": {
 		_model = "vn_b_ammobox_02"; 
 		_content = [
-			["vn_m60_100_mag", 30]
+			["vn_m60_100_mag", 30],
+			["ACE_SpareBarrel", 5]
 		];
 	};
 	case "M79Ammo": {
@@ -38,7 +39,7 @@ switch (_type) do {
 		];
 	};
 	case "Grenades": {
-		_model = "vn_b_ammobox_10";
+		_model = "Land_vn_us_ammobox_small_01";
 		_content = [
 			["vn_m67_grenade_mag", 25],
 			["vn_m18_white_mag", 20],
@@ -74,10 +75,18 @@ switch (_type) do {
 			["ACE_salineIV_500", 15]
 		];
 	};
-	case "RepairKits": {
+	case "Tools": {
 		_model = "vn_b_ammobox_04";
 		_content = [
-			["vn_b_item_toolkit", 20]
+			["vn_b_item_toolkit", 10],
+			["ACE_EntrenchingTool", 10],
+			["ACE_Flashlight_MX991", 10],
+			["ACE_Clacker", 10],
+			["ACE_MapTools", 10],
+			["acex_intelitems_notepad", 10],
+			["ACE_wirecutter", 10],
+			["ACE_artilleryTable", 10],
+			["ACE_DefusalKit", 10]
 		];
 	};
 	case "Wheels": {
@@ -152,6 +161,45 @@ switch (_type) do {
 		_model = "ACRE_RadioSupplyCrate";
 		_content = [
 			["ACRE_PRC77", 5]
+		];
+	};
+	case "PersonalBox": {
+		_model = "Land_WoodenCrate_01_F";
+		_content = [];
+	};
+	case "Ropes": {
+		_model = "ACE_fastropingSupplyCrate";
+		_content = [
+			["ACE_rope12", 5],
+			["ACE_rope15", 5],
+			["ACE_rope18", 5],
+			["ACE_rope27", 5],
+			["ACE_rope3", 5],
+			["ACE_rope36", 5],
+			["ACE_rope6", 5]
+		];
+	};
+	case "Explosives": {
+		_model = "Land_vn_us_launchers";
+		_content = [
+			["vn_mine_m18_fuze10_mag", 10],
+			["vn_mine_m18_range_mag", 10],
+			["vn_mine_m18_mag", 10],
+			["vn_mine_m18_x3_range_mag", 10],
+			["vn_mine_m18_x3_mag", 10],
+			["vn_mine_m18_wp_fuze10_mag", 10],
+			["vn_mine_m18_wp_range_mag", 10],
+			["vn_mine_m18_wp_mag", 10],
+			["vn_mine_m14_mag", 10],
+			["vn_mine_m15_mag", 10]
+		];
+	};
+	case "LauncherAmmo": {
+		_model = "Land_vn_us_launchers";
+		_content = [
+			["vn_m72_mag", 10],
+			["vn_m20a1b1_heat_mag", 5],
+			["vn_m20a1b1_wp_mag", 5]
 		];
 	};
 };
