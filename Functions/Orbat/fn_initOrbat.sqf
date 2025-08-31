@@ -9,6 +9,3 @@ _nzDB = ["new", format ["ORBAT-NZ %1 %2", missionName, worldName]] call oo_inidb
 // Check if the databases are already populated. If so, exit script.
 _dbExists = "exists" call _nzDB;
 if (_dbExists) exitwith {};
-
-// Build US Forces 
-[_usdb, 3, 6, selectRandom ["Infantry", "Air Cavalry", "Armored", "Squadron"], selectRandom ["Aggressive", "Passive"], selectRandom [1,2,3,4,5]] call lmn_fnc_createOrbatEntry;
