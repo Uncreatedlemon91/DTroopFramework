@@ -117,42 +117,9 @@ _aaSites = (round(random 4)) * _priority;
 ["write", [_loc, "Priority", _priority]] call _locDB;
 ["write", [_loc, "Allegiance", _allegiance]] call _locDB;
 ["write", [_loc, "Stability", _stability]] call _locDB;
-["write", [_loc, "dayEvent", ""]] call _locDB;
-["write", [_loc, "AmbushCount", _ambushes]] call _locDB;
-["write", [_loc, "GarrisonSize", _garrisonSize]] call _locDB;
-["write", [_loc, "MortarSites", _mortarSites]] call _locDB;
-["write", [_loc, "MinefieldSites", _minefields]] call _locDB;
-["write", [_loc, "AAsites", _aaSites]] call _locDB;
 
 // All Location specifics 
 // Spawn civilians 
 for "_i" from 1 to _population do {
 	_newSite = [_loc, _stability, position _loc] remoteExec ["lmn_fnc_prepCiv", 2];
-};
-
-// Spawn AA site Locations 
-for "_i" from 1 to _aaSites do {
-	_newSite = [_loc, _allegiance, position _loc] remoteExec ["lmn_fnc_prepAA", 2];
-};
-
-// Spawn Garrison site Locations 
-for "_i" from 1 to _garrisonSize do {
-	_newSite = [_loc, _allegiance, position _loc] remoteExec ["lmn_fnc_prepGarrison", 2];
-};
-
-// Spawn Artillery site locations 
-for "_i" from 1 to _mortarSites do {
-	_newSite = [_loc, _allegiance, position _loc] remoteExec ["lmn_fnc_prepArty", 2];
-};
-
-// "NORTH" Location specifics 
-if (_allegiance == "North") then {
-	// Spawn ambush locations 
-	for "_i" from 1 to _ambushes do {
-		_newSite = [_loc, _allegiance, position _loc] remoteExec ["lmn_fnc_prepAmbush", 2];
-	};
-
-	for "_i" from 1 to _minefields do {
-		_newSite = [_loc, _allegiance, position _loc] remoteExec ["lmn_fnc_prepTraps", 2];
-	};
 };
