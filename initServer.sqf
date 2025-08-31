@@ -22,10 +22,7 @@ _envDBExists = "exists" call _envDB;
 _wreckDBExists = "exists" call _wreckDB;
 
 // Load the databases
-if (_vehicleDatabaseExists) then {
-    [] remoteExec ["lmn_fnc_loadVehicles", 2];
-    // systemChat "[DB] Vehicles Loading..."
-};
+
 if (_locDBExists) then {
     [] remoteExec ["lmn_fnc_loadLocations", 2];
     // systemchat "[DB] Locations Loading...";
@@ -47,7 +44,10 @@ if (_wreckDBExists) then {
     [] remoteExec ["lmn_fnc_loadWrecks", 2];
     systemChat "Loading Wrecks";
 };
-
+if (_vehicleDatabaseExists) then {
+    [] remoteExec ["lmn_fnc_loadVehicles", 2];
+    // systemChat "[DB] Vehicles Loading..."
+};
 
 // Run ongoing Scripts 
 [] remoteExec ["lmn_fnc_saveEnvironment", 2];
