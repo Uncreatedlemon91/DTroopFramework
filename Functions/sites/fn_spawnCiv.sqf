@@ -21,6 +21,7 @@ _stability = ["read", [_loc, "Stability"]] call _locDB;
 _class = selectRandom (lmn_Civilians select 0);
 _grp = createGroup Civilian;
 _unit = _grp createUnit [_class, position _trg, [], 4, "FORM"];
+_grp deleteGroupWhenEmpty true;
 
 // Give the civilian variables 
 _unit setVariable ["Stability", random [(_stability - 25), _stability, (_stability + 25)]];
@@ -54,3 +55,4 @@ while {_trg getVariable "Activated"} do {
 };
 
 deleteVehicle _unit;
+deleteGroup _grp;
