@@ -45,7 +45,7 @@ if (isNil "_allegiance") then {
 };
 _mkr setMarkerType "vn_flag_pavn";
 _mkr setMarkerAlpha 0.4;
-if (isNil "_remake") then {
+if !(isNil "_remake") then {
 	if ((position _loc) inArea "SouthAO") then {
 	_allegiance = selectRandomWeighted ["USA", 0.3, "ROK", 0.5, "AUS", 0.2, "NZ", 0.1];
 	};
