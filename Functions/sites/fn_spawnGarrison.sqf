@@ -82,7 +82,7 @@ while {_trg getVariable "Activated"} do {
 			deleteMarker _mkr;
 
 			// Rebuild the location with new allegiance
-			[_loc, _allegiance, true] remoteExec ["lmn_fnc_createLocation", 2];
+			[_loc, _newallegiance, true] remoteExec ["lmn_fnc_createLocation", 2];
 		};
 	}
 };
