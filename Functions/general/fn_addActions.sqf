@@ -304,6 +304,21 @@ _ropeBox = [
     {true}
 ] call ace_interact_menu_fnc_createAction;
 
+_LauncherAmmo = [
+    "LauncherAmmo",
+    "LauncherAmmo",
+    "",
+    {["LauncherAmmo"] remoteExec ["lmn_fnc_spawnSupply", 2]},
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+_explosives = [
+    "explosives",
+    "Explosives",
+    "",
+    {["Explosives"] remoteExec ["lmn_fnc_spawnSupply", 2]},
+    {true}
+] call ace_interact_menu_fnc_createAction;
 
 // Addactions to logistics point
 // Vehicles 
@@ -334,6 +349,8 @@ _ropeBox = [
 [ItemSpawner, 0, ["ACE_MainActions", "supplies"], _fluids] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "supplies"], _food] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "supplies"], _radios] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "supplies"], _LauncherAmmo] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "supplies"], _explosives] call ace_interact_menu_fnc_addActionToObject;
 // Items 
 [ItemSpawner, 0, ["ACE_MainActions"], _items] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "items"], _helipad] call ace_interact_menu_fnc_addActionToObject;
