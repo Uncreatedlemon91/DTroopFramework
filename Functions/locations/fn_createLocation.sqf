@@ -145,13 +145,14 @@ for "_i" from 1 to _mortarSites do {
 	_newSite = [_loc, _allegiance, position _loc] remoteExec ["lmn_fnc_prepArty", 2];
 };
 
+// Spawn Ambush Sites
+for "_i" from 1 to _ambushes do {
+	_newSite = [_loc, _allegiance, position _loc] remoteExec ["lmn_fnc_prepAmbush", 2];
+};
+
 // "NORTH" Location specifics 
 if (_allegiance == "North") then {
 	// Spawn ambush locations 
-	for "_i" from 1 to _ambushes do {
-		_newSite = [_loc, _allegiance, position _loc] remoteExec ["lmn_fnc_prepAmbush", 2];
-	};
-
 	for "_i" from 1 to _minefields do {
 		_newSite = [_loc, _allegiance, position _loc] remoteExec ["lmn_fnc_prepTraps", 2];
 	};
