@@ -39,7 +39,7 @@ switch (_type) do {
 		];
 	};
 	case "Grenades": {
-		_model = "vn_b_ammobox_02";
+		_model = "vn_b_ammobox_04";
 		_content = [
 			["vn_m67_grenade_mag", 25],
 			["vn_m18_white_mag", 20],
