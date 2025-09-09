@@ -180,7 +180,7 @@ switch (_type) do {
 		];
 	};
 	case "Explosives": {
-		_model = "Land_vn_us_launchers";
+		_model = "Land_WoodenCrate_01_F";
 		_content = [
 			["vn_mine_m18_fuze10_mag", 10],
 			["vn_mine_m18_range_mag", 10],
@@ -195,7 +195,7 @@ switch (_type) do {
 		];
 	};
 	case "LauncherAmmo": {
-		_model = "Land_vn_us_launchers";
+		_model = "Land_WoodenCrate_01_F";
 		_content = [
 			["vn_m72_mag", 10],
 			["vn_m20a1b1_heat_mag", 5],
