@@ -2,7 +2,7 @@
 params ["_item"];
 
 _section = netId _item;
-_db = ["new", format ["Player Wrecks %1 %2", missionName, worldName]] call oo_inidbi;
+_db = ["new", format ["Player Vehicles %1 %2", missionName, worldName]] call oo_inidbi;
 
 ["deleteSection", _section] call _db;
 deleteVehicle _item;

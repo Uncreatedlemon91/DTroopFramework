@@ -30,3 +30,29 @@ _veh addEventHandler ["Killed", {
 	params ["_unit", "_killer"];
 	[_unit] remoteExec ["lmn_fnc_saveWreck", 2];
 }];
+
+// Actions to save and delete 
+_vehDelete = [
+    "boxDelete", 
+    "Delete", 
+    "", 
+    {
+		params ["_target", "_player", "_params"];
+		[_target] remoteExec ["lmn_fnc_deleteVehicle", 2];
+	},
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+_vehSave = [
+    "boxSave", 
+    "Save", 
+    "", 
+    {
+		params ["_target", "_player", "_params"];
+		[_target] remoteExec ["lmn_fnc_saveVehicle", 2];
+	}, 
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+[_veh, 0, ["ACE_MainActions"], _vehDelete] call ace_interact_menu_fnc_addActionToObject;
+[_veh, 0, ["ACE_MainActions"], _vehSave] call ace_interact_menu_fnc_addActionToObject;
