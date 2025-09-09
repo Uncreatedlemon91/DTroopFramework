@@ -16,7 +16,6 @@ class CfgFunctions
 		class locations 
 		{
 			class createLocation {};
-			class eventChanges {};
 			class setupLocations {};
 		};
 
@@ -37,7 +36,6 @@ class CfgFunctions
 			class loadPlayer {};
 			class loadTrees {};
 			class loadVehicles {};
-			class loadWrecks {};
 			class saveEnvironment {};
 			class saveItem {};
 			class savePlayer {};
@@ -63,6 +61,11 @@ class CfgFunctions
 			class spawnArty {};
 			class spawnCiv {};
 			class spawnGarrison {};
+		};
+
+		class WarDirector
+		{
+			class wdStart {};
 		};
 	};
 };
