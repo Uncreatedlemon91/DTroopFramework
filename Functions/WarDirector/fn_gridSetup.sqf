@@ -52,22 +52,23 @@ for "_y" from 1 to _gridCountY do {
         // This example activates for any player, once, when present.
         // You can change this to suit your needs.
         _trigger setTriggerActivation ["ANYPLAYER", "PRESENT", false];
-        
-        // Store the grid coordinates [x, y] on the trigger itself for easy identification
-        _trigger setVariable ["gridCoords", [_x, _y], true]; // 'true' makes this variable public/global
-        _trigger setVariable ["gridFaction", _side];
-        // Add an example statement to show it's working.
-        // This will hint the coordinates to the player who activates it.
-        // REMOVE or CHANGE this for your actual mission!
-        _trigger setTriggerStatements ["this", "hint format ['You entered grid: %1', thisTrigger getVariable 'gridCoords'];", ""];
-        
+
 		// Add a map marker 
 		_mkr = createMarkerLocal [format ["Grid-%1-%2", _x, _y], _triggerPos];
 		_mkr setMarkerShape "Rectangle";
 		_mkr setMarkerSize [_gridSize / 2, _gridSize / 2];
 		_mkr setMarkerColor _mkrColor;
 		_mkr setMarkerAlpha 0.4;
-		
+        
+        // Store the grid coordinates [x, y] on the trigger itself for easy identification
+        _trigger setVariable ["gridCoords", [_x, _y], true]; // 'true' makes this variable public/global
+        _trigger setVariable ["gridFaction", _side];
+		_trigger setVariable ["gridMarker", _mkr];
+        // Add an example statement to show it's working.
+        // This will hint the coordinates to the player who activates it.
+        // REMOVE or CHANGE this for your actual mission!
+        _trigger setTriggerStatements ["this", "hint format ['You entered grid: %1', thisTrigger getVariable 'gridCoords']; (thisTrigger getVariable 'gridMarker') setMarkerAlpha 0;", ""];
+
         // Add the newly created trigger to our global array
         _GRID_TRIGGERS pushBack _trigger;
     };
