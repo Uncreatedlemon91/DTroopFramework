@@ -64,6 +64,7 @@ for "_y" from 1 to _gridCountY do {
         _trigger setVariable ["gridCoords", [_x, _y], true]; // 'true' makes this variable public/global
         _trigger setVariable ["gridFaction", _side];
 		_trigger setVariable ["gridMarker", _mkr];
+		
         // Add an example statement to show it's working.
         // This will hint the coordinates to the player who activates it.
         // REMOVE or CHANGE this for your actual mission!
