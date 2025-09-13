@@ -47,6 +47,13 @@ _gridSize = 500; // The size of each grid square in meters (width and height). 1
 	_trigger setVariable ["gridInfrastructure", _infra, true];
 	_trigger setVariable ["gridImportance", _imp]; // Random importance 1-10
 
+	// Add a map marker 
+	_mkr2 = createMarkerLocal [format ["Grid-%1 Importance", _coords], _pos];
+	_mkr2 setMarkerType "hd_dot";
+	_mkr2 setMarkerText format ["Imp: %1", _trigger getVariable "gridImportance"];
+	_mkr2 setMarkerSize [0.5, 0.5];
+	_mkr2 setMarkerColor "COLORBLACK";
+
 	// Sleep to prevent script timeout on large maps
 	sleep 0.1;
 } forEach _sections;
