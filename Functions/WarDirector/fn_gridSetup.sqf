@@ -26,8 +26,8 @@ _gridCountX = ceil (_mapSize / _gridSize);
 _gridCountY = ceil (_mapSize / _gridSize);	
 
 // Use nested loops to iterate over the map and create triggers
-for "_y" from 1 to _gridCountY do {
-    for "_x" from 1 to _gridCountX do {
+for "_y" from 0 to (_gridCountY - 1) do {
+    for "_x" from 0 to (_gridCountX -1) do {
         // Calculate the center position for the new trigger
         _posX = (_x * _gridSize) + (_gridSize / 2);
         _posY = (_y * _gridSize) + (_gridSize / 2);

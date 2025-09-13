@@ -3,7 +3,7 @@ _gridDB = ["new", format ["Grids %1 %2", missionName, worldName]] call oo_inidbi
 _sections = "getSections" call _gridDB;
 
 // --- CONFIGURATION ---
-_gridSize = 500; // The size of each grid square in meters (width and height). 1000 = 1km.
+_gridSize = 1000; // The size of each grid square in meters (width and height). 1000 = 1km.
 
 {	
 	// Load all grids from the database
