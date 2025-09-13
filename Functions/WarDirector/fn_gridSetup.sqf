@@ -38,6 +38,7 @@ for "_y" from 1 to _gridCountY do {
         
 		// Determine trigger side
 		_mkrColor = ""; 
+		_side = "";
 		if (_triggerPos inArea "SouthAO") then {
 			_side = selectRandomWeighted ["USA", 0.3, "ROK", 0.5, "AUS", 0.2, "NZ", 0.1];
 			_mkrColor = "ColorBlue";
