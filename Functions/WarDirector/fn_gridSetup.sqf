@@ -68,6 +68,13 @@ for "_y" from 1 to _gridCountY do {
 		_trigger setVariable ["gridInfrastructure", [], true];
 		_trigger setVariable ["gridImportance", round (random 9) + 1, true]; // Random importance 1-10
 
+		// Add a map marker 
+		_mkr2 = createMarkerLocal [format ["Grid-%1-%2 Importance", _x, _y], _triggerPos];
+		_mkr2 setMarkerType "hd_dot";
+		_mkr2 setMarkerText format ["Imp: %1", _trigger getVariable "gridImportance"];
+		_mkr2 setMarkerSize [0.5, 0.5];
+		_mkr2 setMarkerColor "COLORBLACK";
+
         // Add an example statement to show it's working.
         // This will hint the coordinates to the player who activates it.
         // REMOVE or CHANGE this for your actual mission!
