@@ -5,7 +5,7 @@
 */
 
 // --- CONFIGURATION ---
-_gridSize = 1000; // The size of each grid square in meters (width and height). 1000 = 1km.
+_gridSize = 500; // The size of each grid square in meters (width and height). 1000 = 1km.
 
 // --- SCRIPT LOGIC (Do not edit below) ---
 
@@ -64,11 +64,18 @@ for "_y" from 1 to _gridCountY do {
         _trigger setVariable ["gridCoords", [_x, _y], true]; // 'true' makes this variable public/global
         _trigger setVariable ["gridFaction", _side];
 		_trigger setVariable ["gridMarker", _mkr];
-		
+		_trigger setVariable ["gridForces", []];
+		_trigger setVariable ["gridInfrastructure", []];
+		_trigger setVariable ["gridImportance", round (random 9) + 1];
+
         // Add an example statement to show it's working.
         // This will hint the coordinates to the player who activates it.
         // REMOVE or CHANGE this for your actual mission!
-        _trigger setTriggerStatements ["this", "hint format ['You entered grid: %1', thisTrigger getVariable 'gridCoords']; (thisTrigger getVariable 'gridMarker') setMarkerAlpha 0;", ""];
+        _trigger setTriggerStatements [
+			"this", 
+			"hint format ['You entered grid: %1', thisTrigger getVariable 'gridCoords']; (thisTrigger getVariable 'gridMarker') setMarkerAlpha 1;",
+			""
+		];
 
         // Add the newly created trigger to our global array
         _GRID_TRIGGERS pushBack _trigger;
