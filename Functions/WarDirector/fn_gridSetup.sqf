@@ -5,7 +5,7 @@
 */
 
 // --- CONFIGURATION ---
-_gridSize = 250; // The size of each grid square in meters (width and height). 1000 = 1km.
+_gridSize = 500; // The size of each grid square in meters (width and height). 1000 = 1km.
 
 // Database 
 _gridDB = ["new", format ["Grids %1 %2", missionName, worldName]] call oo_inidbi;
