@@ -2,6 +2,7 @@
 [] call lmn_fnc_setEvents;
 [] call lmn_fnc_setFactions;
 [] call lmn_fnc_setCivActions;
+[] call lmn_fnc_gridSetup; // Setup the war director grid system
 sleep 0.5;
 
 //// Load the save game 
@@ -21,16 +22,17 @@ _envDBExists = "exists" call _envDB;
 
 // Load the databases
 
-if (_locDBExists) then {
+/*if (_locDBExists) then {
     [] remoteExec ["lmn_fnc_loadLocations", 2];
     // systemchat "[DB] Locations Loading...";
 } else {
     [] remoteExec ["lmn_fnc_setupLocations", 2];
     // systemChat "[DB] Generation Locations...";
 };
+*/
+
 if (_itemDBExists) then {
     [] remoteExec ["lmn_fnc_loadItems", 2];
-    // systemchat "[DB] Items Loading...";
 };
 if (_treeDBExists) then {
     [] remoteExec ["lmn_fnc_loadTrees", 2];
@@ -40,9 +42,8 @@ if (_envDBExists) then {
 };
 if (_vehicleDatabaseExists) then {
     [] remoteExec ["lmn_fnc_loadVehicles", 2];
-    // systemChat "[DB] Vehicles Loading..."
 };
 
 // Run ongoing Scripts 
 [] remoteExec ["lmn_fnc_saveEnvironment", 2];
-[] remoteExec ["lmn_fnc_wdStart", 2];
+// [] remoteExec ["lmn_fnc_wdStart", 2];

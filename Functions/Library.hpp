@@ -65,6 +65,7 @@ class CfgFunctions
 
 		class WarDirector
 		{
+			class gridSetup {};
 			class wdStart {};
 		};
 	};
