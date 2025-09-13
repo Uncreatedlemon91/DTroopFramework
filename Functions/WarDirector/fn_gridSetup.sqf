@@ -50,7 +50,7 @@ for "_y" from 1 to _gridCountY do {
         // Set the trigger area (a square)
         // setTriggerArea [a, b, angle, isRectangle, c]
         // For a square, 'a' and 'b' are half the width/height. 'isRectangle' is false.
-        _trigger setTriggerArea [_gridSize * 2, _gridSize * 2, 0, true, 600];
+        _trigger setTriggerArea [_gridSize / 2, _gridSize / 2, 0, true, 600];
         
         // Set basic trigger activation properties (example)
         // This example activates for any player, once, when present.

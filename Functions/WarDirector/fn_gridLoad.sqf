@@ -24,7 +24,7 @@ _gridSize = 500; // The size of each grid square in meters (width and height). 1
 	
 	// Create the trigger
     _trigger = createTrigger ["EmptyDetector", _pos, true]; // The 'false' makes it a local trigger, but it will be globalized via setVariable
-    _trigger setTriggerArea [_gridSize * 2, _gridSize * 2, 0, true, 600];
+    _trigger setTriggerArea [_gridSize / 2, _gridSize / 2, 0, true, 600];
 	_trigger setTriggerActivation ["ANYPLAYER", "PRESENT", false];
 	_trigger setTriggerStatements [
 		"this", 
