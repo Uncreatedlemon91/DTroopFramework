@@ -2,7 +2,6 @@
 [] call lmn_fnc_setEvents;
 [] call lmn_fnc_setFactions;
 [] call lmn_fnc_setCivActions;
-[] call lmn_fnc_gridSetup; // Setup the war director grid system
 sleep 0.5;
 
 //// Load the save game 
@@ -12,6 +11,7 @@ _locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_ini
 _itemDB = ["new", format ["Player Items %1 %2", missionName, worldName]] call oo_inidbi;
 _treeDB = ["new", format ["Removed Trees %1 %2", missionName, worldName]] call oo_inidbi;
 _envDB = ["new", format ["World Environment %1 %2", missionName, worldName]] call oo_inidbi;
+_gridDB = ["new", format ["Grids %1 %2", missionName, worldName]] call oo_inidbi;
 
 // Check if the database exists 
 _vehicleDatabaseExists = "exists" call _vehDB;
@@ -19,6 +19,7 @@ _locDBExists = "exists" call _locDB;
 _itemDBExists = "exists" call _itemDB;
 _treeDBExists = "exists" call _treeDB;
 _envDBExists = "exists" call _envDB;
+_gridDBExists = "exists" call _gridDB;
 
 // Load the databases
 
@@ -30,7 +31,13 @@ _envDBExists = "exists" call _envDB;
     // systemChat "[DB] Generation Locations...";
 };
 */
-
+if (_gridDBExists) then {
+    [] remoteExec ["lmn_fnc_gridLoad", 2];
+    // systemchat "[DB] Grid Loading...";
+} else {
+    [] remoteExec ["lmn_fnc_gridSetup", 2];
+    // systemChat "[DB] Generating Grid...";
+};
 if (_itemDBExists) then {
     [] remoteExec ["lmn_fnc_loadItems", 2];
 };
