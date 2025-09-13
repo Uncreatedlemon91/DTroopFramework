@@ -67,7 +67,6 @@ class CfgFunctions
 		{
 			class gridSetup {};
 			class gridLoad {};
-			class wdStart {};
 		};
 	};
 };
