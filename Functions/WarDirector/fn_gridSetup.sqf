@@ -7,6 +7,9 @@
 // --- CONFIGURATION ---
 _gridSize = 250; // The size of each grid square in meters (width and height). 1000 = 1km.
 
+// Database 
+_gridDB = ["new", format ["Grids %1 %2", missionName, worldName]] call oo_inidbi;
+
 // --- SCRIPT LOGIC (Do not edit below) ---
 
 // Log the start of the script
@@ -86,8 +89,15 @@ for "_y" from 1 to _gridCountY do {
 
         // Add the newly created trigger to our global array
         _GRID_TRIGGERS pushBack _trigger;
+
+		// Save to database
+		["write", [format ["Grid-%1-%2", _x, _y], "gridCoords", [_x, _y]]] call _gridDB;
+		["write", [format ["Grid-%1-%2", _x, _y], "gridSide", _side]] call _gridDB;
+		["write", [format ["Grid-%1-%2", _x, _y], "gridImportance", _trigger getVariable "gridImportance"]] call _gridDB;
+		["write", [format ["Grid-%1-%2", _x, _y], "gridForces", []]] call _gridDB;
+		["write", [format ["Grid-%1-%2", _x, _y], "gridInfrastructure", []]] call _gridDB;
     };
 };
 
 // Log the completion and total number of triggers created
-diag_log format ["[GRID] Finished creating %1 triggers.", count _GRID_TRIGGERS];
+systemChat format ["[GRID] Finished creating %1 triggers.", count _GRID_TRIGGERS];
