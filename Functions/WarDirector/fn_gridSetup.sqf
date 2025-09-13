@@ -97,6 +97,9 @@ for "_y" from 1 to _gridCountY do {
 		["write", [format ["Grid-%1-%2", _x, _y], "gridImportance", _trigger getVariable "gridImportance"]] call _gridDB;
 		["write", [format ["Grid-%1-%2", _x, _y], "gridForces", []]] call _gridDB;
 		["write", [format ["Grid-%1-%2", _x, _y], "gridInfrastructure", []]] call _gridDB;
+
+		// loop delay to prevent script timeout on large maps
+		sleep 0.1;
     };
 };
 
