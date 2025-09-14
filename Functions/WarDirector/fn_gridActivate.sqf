@@ -14,6 +14,6 @@ systemChat format ["Spawning %1", _trg getVariable "gridForces"];
 	_count = count _x;
 	for "_i" from 1 to _count do
 	{
-		[_trg _x] call lmn_fnc_gridSpawnForce;
+		[_trg, _x] call lmn_fnc_gridSpawnForce;
 	};
 } forEach (_trg getVariable "gridForces");

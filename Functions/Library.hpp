@@ -69,6 +69,10 @@ class CfgFunctions
 			class gridDeactivate {};
 			class gridSetup {};
 			class gridLoad {};
+			class gridReinforce {};
+			class gridUpdate {};
+			class wdTick {};
+			class gridspawnForces {};
 		};
 	};
 };

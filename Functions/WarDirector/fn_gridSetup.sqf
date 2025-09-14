@@ -27,20 +27,18 @@ for "_y" from 0 to (_gridCountY - 1) do {
         _posY = (_y * _gridSize) + (_gridSize / 2);
         _triggerPos = [_posX, _posY, 0];
 
-		// Check if it's a water based tile 
-		_waterTile = surfaceIsWater _triggerPos;
-		if (_waterTile) then {} else {
+		if (surfaceIsWater _triggerPos) then {} else {
 			// Create the trigger
 			_trigger = createTrigger ["EmptyDetector", _triggerPos, true]; // The 'false' makes it a local trigger, but it will be globalized via setVariable
 			
 			// Determine trigger side
 			_mkrColor = ""; 
 			_side = "";
-			if (_triggerPos inArea "SouthAO") then {
-				_side = west;
+			if ((_triggerPos inArea "SouthAO") OR (_triggerPos inArea "Base")) then {
+				_side = "South";
 				_mkrColor = "ColorBlue";
 			} else {
-				_side = east;
+				_side = "North";
 				_mkrColor = "ColorRed";
 			};
 
@@ -59,23 +57,22 @@ for "_y" from 0 to (_gridCountY - 1) do {
 			_mkr setMarkerShape "Rectangle";
 			_mkr setMarkerSize [_gridSize / 2, _gridSize / 2];
 			_mkr setMarkerColor _mkrColor;
-			_mkr setMarkerAlpha 0.4;
+			_mkr setMarkerAlpha 0.2;
+
+			// Variables Prep 
+			_coords = [_x, _y];
+			_forces = [];
+			_infrastructure = [];
+			_forcePower = 1;
 			
 			// Store the grid coordinates [x, y] on the trigger itself for easy identification
 			_trigger setVariable ["gridCoords", [_x, _y], true]; // 'true' makes this variable public/global
 			_trigger setVariable ["gridSide", _side, true];
 			_trigger setVariable ["gridMarker", _mkr, true];
-			_trigger setVariable ["gridForces", [], true];
-			_trigger setVariable ["gridInfrastructure", [], true];
-			_trigger setVariable ["gridImportance", round (random 9) + 1, true]; // Random importance 1-10
+			_trigger setVariable ["gridForces", _forces, true];
+			_trigger setVariable ["gridInfrastructure", _infrastructure, true];
+			_trigger setVariable ["gridForcePower", _forcePower, true];
 			_trigger setVariable ["gridActive", false, true];
-
-			// Add a map marker 
-			_mkr2 = createMarkerLocal [format ["Grid-%1-%2 Importance", _x, _y], _triggerPos];
-			_mkr2 setMarkerType "hd_dot";
-			_mkr2 setMarkerText format ["Imp: %1", _trigger getVariable "gridImportance"];
-			_mkr2 setMarkerSize [0.5, 0.5];
-			_mkr2 setMarkerColor "COLORBLACK";
 
 			// Add an example statement to show it's working.
 			// This will hint the coordinates to the player who activates it.
@@ -90,14 +87,25 @@ for "_y" from 0 to (_gridCountY - 1) do {
 			_GRID_TRIGGERS pushBack _trigger;
 
 			// Save to database
-			_data = [[_x,_y], _side, _trigger getVariable "gridImportance", [], [], _triggerPos];
-			["write", [format ["Grid-%1-%2", _x, _y], "gridData", _data]] call _gridDB;
+			_data = [
+				_coords, 
+				_side,
+				_forcePower,
+				_forces, 
+				_infrastructure, 
+				_triggerPos
+			];
+			systemchat format ["%1", _data];
+			["write", [format ["Grid-%1", _coords], "gridData", _data]] call _gridDB;
 		};
-        
-		// loop delay to prevent script timeout on large maps
-		sleep 0.01;
-    };
+	};
+	// loop delay to prevent script timeout on large maps
+	sleep 0.1;
 };
 
 // Log the completion and total number of triggers created
 systemChat format ["[GRID] Finished creating %1 triggers.", count _GRID_TRIGGERS];
+// sleep to delay logic 
+sleep 30;
+systemChat "War Director starting...";
+[] remoteExec ["lmn_fnc_wdTick", 2];
