@@ -65,6 +65,8 @@ class CfgFunctions
 
 		class WarDirector
 		{
+			class gridActivate {};
+			class gridDeactivate {};
 			class gridSetup {};
 			class gridLoad {};
 		};

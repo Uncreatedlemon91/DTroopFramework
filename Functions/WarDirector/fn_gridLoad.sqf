@@ -3,16 +3,19 @@ _gridDB = ["new", format ["Grids %1 %2", missionName, worldName]] call oo_inidbi
 _sections = "getSections" call _gridDB;
 
 // --- CONFIGURATION ---
-_gridSize = 1000; // The size of each grid square in meters (width and height). 1000 = 1km.
+_gridSize = 250; // The size of each grid square in meters (width and height). 1000 = 1km.
 
 {	
 	// Load all grids from the database
-	_coords = ["read", [_x, "gridCoords"]] call _gridDB;
-	_side = ["read", [_x, "gridSide"]] call _gridDB;
-	_imp = ["read", [_x, "gridImportance"]] call _gridDB;
-	_forces = ["read", [_x, "gridForces"]] call _gridDB;
-	_infra = ["read", [_x, "gridInfrastructure"]] call _gridDB;
-	_pos = ["read", [_x, "gridPosition"]] call _gridDB;
+	_data = ["read", [_x, "gridData"]] call _gridDB;
+
+	// _data structure: [coords, side, importance, forces, infrastructure, position]
+	_coords = _data select 0;
+	_side = _data select 1;
+	_imp = _data select 2;
+	_forces = _data select 3;
+	_infra = _data select 4;
+	_pos = _data select 5;
 	_mkrColor = "";
 
 	// Determine marker color
@@ -24,12 +27,12 @@ _gridSize = 1000; // The size of each grid square in meters (width and height). 
 	
 	// Create the trigger
     _trigger = createTrigger ["EmptyDetector", _pos, true]; // The 'false' makes it a local trigger, but it will be globalized via setVariable
-    _trigger setTriggerArea [_gridSize / 2, _gridSize / 2, 0, true, 600];
-	_trigger setTriggerActivation ["ANYPLAYER", "PRESENT", false];
+    _trigger setTriggerArea [_gridSize * 2, _gridSize * 2, 0, true, 600];
+	_trigger setTriggerActivation ["ANYPLAYER", "PRESENT", true];
 	_trigger setTriggerStatements [
 		"this", 
-		"hint format ['You entered grid: %1', thisTrigger getVariable 'gridCoords']; (thisTrigger getVariable 'gridMarker') setMarkerAlpha 1;",
-		""
+		"[thisTrigger] call lmn_fnc_gridActivate",
+		"[thisTrigger] call lmn_fnc_gridDeactivate"
 	];
 
 	// Add a map marker 
@@ -46,6 +49,7 @@ _gridSize = 1000; // The size of each grid square in meters (width and height). 
 	_trigger setVariable ["gridForces", _forces, true];
 	_trigger setVariable ["gridInfrastructure", _infra, true];
 	_trigger setVariable ["gridImportance", _imp]; // Random importance 1-10
+	_trigger setVariable ["gridActive", false, true];
 
 	// Add a map marker 
 	_mkr2 = createMarkerLocal [format ["Grid-%1 Importance", _coords], _pos];
@@ -55,6 +59,6 @@ _gridSize = 1000; // The size of each grid square in meters (width and height). 
 	_mkr2 setMarkerColor "COLORBLACK";
 
 	// Sleep to prevent script timeout on large maps
-	sleep 0.1;
+	sleep 0.01;
 } forEach _sections;
 
