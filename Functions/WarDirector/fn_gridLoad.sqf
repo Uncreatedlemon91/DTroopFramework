@@ -6,17 +6,13 @@ _sections = "getSections" call _gridDB;
 _gridSize = 250; // The size of each grid square in meters (width and height). 1000 = 1km.
 
 {	
-	// Load all grids from the database
-	_data = ["read", [_x, "gridData"]] call _gridDB;
-	systemchat format ["%1", _data];
-
-	// _data structure: [coords, side, forcePower, forces, infrastructure, position]
-	_coords = _data select 0;
-	_side = _data select 1;
-	_imp = _data select 2;
-	_forces = _data select 3;
-	_infra = _data select 4;
-	_pos = _data select 5;
+	// Read the grid data from the database
+	_coords = ["read", [_x, "Coords"]] call _gridDB;
+	_side = ["read", [_x, "Side"]] call _gridDB;
+	_forcePower = ["read", [_x, "ForcePower"]] call _gridDB;
+	_forces = ["read", [_x, "Forces"]] call _gridDB;
+	_infrastructure = ["read", [_x, "Infrastructure"]] call _gridDB;
+	_pos = ["read", [_x, "Position"]] call _gridDB;
 	
 	// Determine marker color
 	_mkrColor = "";

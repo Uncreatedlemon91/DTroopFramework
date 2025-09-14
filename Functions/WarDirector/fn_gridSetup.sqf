@@ -87,16 +87,12 @@ for "_y" from 0 to (_gridCountY - 1) do {
 			_GRID_TRIGGERS pushBack _trigger;
 
 			// Save to database
-			_data = [
-				_coords, 
-				_side,
-				_forcePower,
-				_forces, 
-				_infrastructure, 
-				_triggerPos
-			];
-			systemchat format ["%1", _data];
-			["write", [format ["Grid-%1", _coords], "gridData", _data]] call _gridDB;
+			["write", [format ["Grid-%1", _coords], "Coords", _coords]] call _gridDB;
+			["write", [format ["Grid-%1", _coords], "Side", _side]] call _gridDB;
+			["write", [format ["Grid-%1", _coords], "ForcePower", _forcePower]] call _gridDB;
+			["write", [format ["Grid-%1", _coords], "Forces", _forces]] call _gridDB;
+			["write", [format ["Grid-%1", _coords], "Infrastructure", _infrastructure]] call _gridDB;
+			["write", [format ["Grid-%1", _coords], "Position", _triggerPos]] call _gridDB;
 		};
 	};
 	// loop delay to prevent script timeout on large maps

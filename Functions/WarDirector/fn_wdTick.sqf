@@ -9,14 +9,13 @@ _grids = "getSections" call _gridDB;
 {
 	// Define Variables to use in logic
 	_isFrontline = false;
-	_data = ["read", [_x, "gridData"]] call _gridDB;
 
-	_currentSide = _data select 1;
-	_currentForcePower = _data select 2;
-	_currentForces = _data select 3;
-	_currentInfrastructure = _data select 4;
-	_triggerPos = _data select 5;
-	_currentStatus = _data select 6;
+	_currentSide = ["read", [_x, "Side"]] call _gridDB;
+	_currentForcePower = ["read", [_x, "ForcePower"]] call _gridDB;
+	_currentForces = ["read", [_x, "Forces"]] call _gridDB;
+	_currentInfrastructure = ["read", [_x, "Infrastructure"]] call _gridDB;
+	_triggerPos = ["read", [_x, "Position"]] call _gridDB;
+	_currentStatus = ["read", [_x, "Status"]] call _gridDB;
 
 	// Decision math 
 	_attack = 0;

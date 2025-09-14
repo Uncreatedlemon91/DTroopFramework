@@ -1,5 +1,9 @@
 // Activates the grid when a player is active 
 params ["_trg"];
+_active = _trg getVariable "gridActive";
+
+// Already active, do nothing
+if (_active) exitWith {}; 
 
 // Set the marker alpha to 1 (fully visible) when activated
 (_trg getVariable "gridMarker") setMarkerAlpha 1;
