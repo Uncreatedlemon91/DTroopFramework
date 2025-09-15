@@ -2,10 +2,8 @@
 params ["_dbEntry", "_side"];
 
 _gridDB = ["new", format ["Grids %1 %2", missionName, worldName]] call oo_inidbi;
-_triggerPos = ["read", [_dbEntry, "Position"]] call _gridDB;
-_trg = nearestObject [_triggerPos, "EmptyDetector"];
-_forcePower = _trg getVariable "gridForcePower";
-_forces = _trg getVariable "gridForces";
+
+_side = ["read", [_dbEntry, "Side"]] call _gridDB;
 
 switch (_side) do {
 	case "North": {
