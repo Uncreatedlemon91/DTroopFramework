@@ -94,9 +94,9 @@ for "_y" from 0 to (_gridCountY - 1) do {
 			["write", [format ["Grid-%1", _coords], "Infrastructure", _infrastructure]] call _gridDB;
 			["write", [format ["Grid-%1", _coords], "Position", _triggerPos]] call _gridDB;
 		};
+		// loop delay to prevent script timeout on large maps
+		sleep 0.1;
 	};
-	// loop delay to prevent script timeout on large maps
-	sleep 0.1;
 };
 
 // Log the completion and total number of triggers created
