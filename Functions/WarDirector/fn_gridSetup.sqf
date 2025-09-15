@@ -87,16 +87,16 @@ for "_y" from 0 to (_gridCountY - 1) do {
 			_GRID_TRIGGERS pushBack _trigger;
 
 			// Save to database
-			["write", [format ["Grid-%1", _coords], "Coords", _coords]] call _gridDB;
-			["write", [format ["Grid-%1", _coords], "Side", _side]] call _gridDB;
-			["write", [format ["Grid-%1", _coords], "ForcePower", _forcePower]] call _gridDB;
-			["write", [format ["Grid-%1", _coords], "Forces", _forces]] call _gridDB;
-			["write", [format ["Grid-%1", _coords], "Infrastructure", _infrastructure]] call _gridDB;
-			["write", [format ["Grid-%1", _coords], "Position", _triggerPos]] call _gridDB;
+			["write", [format ["Grid-%1-%2", _x, _y], "Coords", _coords]] call _gridDB;
+			["write", [format ["Grid-%1-%2", _x, _y], "Side", _side]] call _gridDB;
+			["write", [format ["Grid-%1-%2", _x, _y], "ForcePower", _forcePower]] call _gridDB;
+			["write", [format ["Grid-%1-%2", _x, _y], "Forces", _forces]] call _gridDB;
+			["write", [format ["Grid-%1-%2", _x, _y], "Infrastructure", _infrastructure]] call _gridDB;
+			["write", [format ["Grid-%1-%2", _x, _y], "Position", _triggerPos]] call _gridDB;
 		};
-		// loop delay to prevent script timeout on large maps
-		sleep 0.1;
 	};
+	// loop delay to prevent script timeout on large maps
+	sleep 0.1;
 };
 
 // Log the completion and total number of triggers created
