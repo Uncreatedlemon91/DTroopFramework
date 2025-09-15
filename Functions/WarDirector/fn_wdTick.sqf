@@ -20,7 +20,7 @@ _grids = "getSections" call _gridDB;
 	// Decision math 
 	_attack = 0;
 	_defend = 0;
-	_reinforce = 0;
+	_reinforce = 10;
 	_build = 0;
 	_probe = 0;
 	_airAttack = 0;

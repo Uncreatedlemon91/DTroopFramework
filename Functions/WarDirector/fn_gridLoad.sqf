@@ -44,8 +44,8 @@ _gridSize = 250; // The size of each grid square in meters (width and height). 1
 	_trigger setVariable ["gridSide", _side, true];
 	_trigger setVariable ["gridMarker", _mkr, true];
 	_trigger setVariable ["gridForces", _forces, true];
-	_trigger setVariable ["gridInfrastructure", _infra, true];
-	_trigger setVariable ["gridForcePower", _imp, true]; // Random importance 1-10
+	_trigger setVariable ["gridInfrastructure", _infrastructure, true];
+	_trigger setVariable ["gridForcePower", _forcePower, true]; // Random importance 1-10
 	_trigger setVariable ["gridActive", false, true];
 
 	// Sleep to prevent script timeout on large maps
