@@ -27,7 +27,7 @@ _grids = "getSections" call _gridDB;
 	_artillery = 0;
 
 	// Check current situation in the grid
-	_triggers = nearestObjects [_triggerPos, ["EmptyDetector"], 1000, true];
+	_triggers = nearestObjects [_triggerPos, ["EmptyDetector"], 1000];
 	{
 		_side = _x getVariable "gridSide";
 		if (_side == _currentSide) then {} 
