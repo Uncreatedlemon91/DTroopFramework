@@ -93,6 +93,7 @@ for "_y" from 0 to (_gridCountY - 1) do {
 			["write", [format ["Grid-%1-%2", _x, _y], "Forces", _forces]] call _gridDB;
 			["write", [format ["Grid-%1-%2", _x, _y], "Infrastructure", _infrastructure]] call _gridDB;
 			["write", [format ["Grid-%1-%2", _x, _y], "Position", _triggerPos]] call _gridDB;
+			["write", [format ["Grid-%1-%2", _x, _y], "Trigger", netid _trigger]] call _gridDB;
 		};
 	};
 	// loop delay to prevent script timeout on large maps

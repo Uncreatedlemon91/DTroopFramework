@@ -48,6 +48,9 @@ _gridSize = 250; // The size of each grid square in meters (width and height). 1
 	_trigger setVariable ["gridForcePower", _forcePower, true]; // Random importance 1-10
 	_trigger setVariable ["gridActive", false, true];
 
+	// Save the Trigger to the database 
+	["write", [_x, "Trigger", netid _trigger]] call _gridDB;
+
 	// Sleep to prevent script timeout on large maps
 	sleep 0.1;
 } forEach _sections;
