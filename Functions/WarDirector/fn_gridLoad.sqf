@@ -3,7 +3,7 @@ _gridDB = ["new", format ["Grids %1 %2", missionName, worldName]] call oo_inidbi
 _sections = "getSections" call _gridDB;
 
 // --- CONFIGURATION ---
-_gridSize = 250; // The size of each grid square in meters (width and height). 1000 = 1km.
+_gridSize = 500; // The size of each grid square in meters (width and height). 1000 = 1km.
 
 {	
 	// Read the grid data from the database
@@ -24,12 +24,12 @@ _gridSize = 250; // The size of each grid square in meters (width and height). 1
 	
 	// Create the trigger
 	_trigger = createTrigger ["EmptyDetector", _pos, true]; // The 'false' makes it a local trigger, but it will be globalized via setVariable
-	_trigger setTriggerArea [_gridSize * 2, _gridSize * 2, 0, true, 600];
+	_trigger setTriggerArea [_gridSize * 1.2, _gridSize * 1.2, 0, true, 600];
 	_trigger setTriggerActivation ["ANYPLAYER", "PRESENT", true];
 	_trigger setTriggerStatements [
 		"this", 
-		"[thisTrigger] call lmn_fnc_gridActivate",
-		"[thisTrigger] call lmn_fnc_gridDeactivate"
+		"[thisTrigger] remoteExec ['lmn_fnc_gridActivate', 2]",
+		"[thisTrigger] remoteExec ['lmn_fnc_gridDeactivate', 2]"
 	];
 
 	// Add a map marker 
@@ -47,15 +47,16 @@ _gridSize = 250; // The size of each grid square in meters (width and height). 1
 	_trigger setVariable ["gridInfrastructure", _infrastructure, true];
 	_trigger setVariable ["gridForcePower", _forcePower, true]; // Random importance 1-10
 	_trigger setVariable ["gridActive", false, true];
+	_trigger setVariable ["gridActiveGroups", [], true];
 
 	// Save the Trigger to the database 
 	["write", [_x, "Trigger", netid _trigger]] call _gridDB;
 
 	// Sleep to prevent script timeout on large maps
-	sleep 0.1;
+	sleep 0.01;
 } forEach _sections;
 
 // sleep to delay logic 
-sleep 30;
+sleep 60;
 systemChat "War Director starting...";
 [] remoteExec ["lmn_fnc_wdTick", 2];

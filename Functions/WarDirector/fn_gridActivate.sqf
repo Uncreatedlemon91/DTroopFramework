@@ -11,13 +11,8 @@ _trg setVariable ["gridActive", true, true];
 
 hint format ["You entered grid: %1", _trg getVariable "gridCoords"];
 
-systemChat format ["Spawning %1", _trg getVariable "gridForces"];
-
+systemChat format ["%1", (_trg getVariable "gridForces")];
 // Spawn the forces for this grid 
 {
-	_count = count _x;
-	for "_i" from 1 to _count do
-	{
-		[_trg, _x] call lmn_fnc_gridSpawnForce;
-	};
+	[_trg, _x] remoteExec ["lmn_fnc_gridSpawnForces", 2];
 } forEach (_trg getVariable "gridForces");

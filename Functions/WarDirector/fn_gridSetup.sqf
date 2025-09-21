@@ -1,5 +1,5 @@
 // --- CONFIGURATION ---
-_gridSize = 250; // The size of each grid square in meters (width and height). 1000 = 1km.
+_gridSize = 500; // The size of each grid square in meters (width and height). 1000 = 1km.
 
 // Database 
 _gridDB = ["new", format ["Grids %1 %2", missionName, worldName]] call oo_inidbi;
@@ -35,7 +35,7 @@ for "_y" from 0 to (_gridCountY - 1) do {
 			_mkrColor = ""; 
 			_side = "";
 			if ((_triggerPos inArea "SouthAO") OR (_triggerPos inArea "Base")) then {
-				_side = "South";
+				_side = selectRandomWeighted ["USA", 0.3, "ARVN", 0.7];
 				_mkrColor = "ColorBlue";
 			} else {
 				_side = "North";
@@ -45,7 +45,7 @@ for "_y" from 0 to (_gridCountY - 1) do {
 			// Set the trigger area (a square)
 			// setTriggerArea [a, b, angle, isRectangle, c]
 			// For a square, 'a' and 'b' are half the width/height. 'isRectangle' is false.
-			_trigger setTriggerArea [_gridSize * 2, _gridSize * 2, 0, true, 600];
+			_trigger setTriggerArea [_gridSize * 1.2, _gridSize * 1.2, 0, true, 600];
 			
 			// Set basic trigger activation properties (example)
 			// This example activates for any player, once, when present.
@@ -73,14 +73,15 @@ for "_y" from 0 to (_gridCountY - 1) do {
 			_trigger setVariable ["gridInfrastructure", _infrastructure, true];
 			_trigger setVariable ["gridForcePower", _forcePower, true];
 			_trigger setVariable ["gridActive", false, true];
+			_trigger setVariable ["gridActiveGroups", [], true];
 
 			// Add an example statement to show it's working.
 			// This will hint the coordinates to the player who activates it.
 			// REMOVE or CHANGE this for your actual mission!
 			_trigger setTriggerStatements [
 				"this", 
-				"[thisTrigger] call lmn_fnc_gridActivate",
-				"[thisTrigger] call lmn_fnc_gridDeactivate"
+				"[thisTrigger] remoteExec ['lmn_fnc_gridActivate', 2]",
+				"[thisTrigger] remoteExec ['lmn_fnc_gridDeactivate', 2]"
 			];
 
 			// Add the newly created trigger to our global array
@@ -97,11 +98,12 @@ for "_y" from 0 to (_gridCountY - 1) do {
 		};
 	};
 	// loop delay to prevent script timeout on large maps
-	sleep 0.1;
+	sleep 0.01;
 };
 
 // Log the completion and total number of triggers created
 systemChat format ["[GRID] Finished creating %1 triggers.", count _GRID_TRIGGERS];
+
 // sleep to delay logic 
 sleep 30;
 systemChat "War Director starting...";
