@@ -68,6 +68,30 @@ _spawnTruck = [
     {true}
 ] call ace_interact_menu_fnc_createAction;
 
+_spawnPatrol = [
+    "spawnPatrol", 
+    "Spawn Patrol Jeep", 
+    "", 
+    {["vn_b_wheeled_m151_mg_03"] remoteExec ["lmn_fnc_spawnVehicle", 2]}, 
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+_spawnAmbulance = [
+    "spawnAmbulance", 
+    "Spawn Ambulance", 
+    "", 
+    {["vn_b_armor_m577_02"] remoteExec ["lmn_fnc_spawnVehicle", 2]}, 
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+_spawnM113 = [
+    "spawnM113", 
+    "Spawn M113A1", 
+    "", 
+    {["vn_b_armor_m113_01"] remoteExec ["lmn_fnc_spawnVehicle", 2]}, 
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
 // Helicopter Actions 
 _spawnHeli = [
     "spawnHeli",
@@ -98,6 +122,47 @@ _spawnAh1g = [
     "Spawn Cobra", 
     "", 
     {["vn_b_air_ah1g_09"] remoteExec ["lmn_fnc_spawnVehicle", 2]}, 
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+_spawnCH47a = [
+    "spawnch47a", 
+    "Spawn CH47A", 
+    "", 
+    {["vn_b_air_ch47_03_02"] remoteExec ["lmn_fnc_spawnVehicle", 2]}, 
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+_spawnCH47am = [
+    "spawnch47am", 
+    "Spawn CH47A-Medical", 
+    "", 
+    {["vn_b_air_ch47_02_02"] remoteExec ["lmn_fnc_spawnVehicle", 2]}, 
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+// Boat Actions
+_spawnBoats = [
+    "spawnBoats",
+    "Boats",
+    "",
+    {},
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+_spawnNasty = [
+    "spawnNasty", 
+    "Spawn PTF Nasty", 
+    "", 
+    {["vn_b_boat_05_02"] remoteExec ["lmn_fnc_spawnVehicle", 2]}, 
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+_spawnPBR = [
+    "spawnPBR", 
+    "Spawn PBR", 
+    "", 
+    {["vn_b_boat_12_02"] remoteExec ["lmn_fnc_spawnVehicle", 2]}, 
     {true}
 ] call ace_interact_menu_fnc_createAction;
 
@@ -332,11 +397,20 @@ _explosives = [
 [ItemSpawner, 0, ["ACE_MainActions", "spawnVehicle"], _spawnTransport] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "spawnVehicle", "spawnTransport"], _spawnJeep] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "spawnVehicle", "spawnTransport"], _spawnTruck] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "spawnVehicle", "spawnTransport"], _spawnM113] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "spawnVehicle", "spawnTransport"], _spawnAmbulance] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "spawnVehicle", "spawnTransport"], _spawnPatrol] call ace_interact_menu_fnc_addActionToObject;
 // Helicopters
 [ItemSpawner, 0, ["ACE_MainActions", "spawnVehicle"], _spawnHeli] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "spawnVehicle", "spawnHeli"], _spawnHuey1d] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "spawnVehicle", "spawnHeli"], _spawnLoach] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "spawnVehicle", "spawnHeli"], _spawnAh1g] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "spawnVehicle", "spawnHeli"], _spawnCH47a] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "spawnVehicle", "spawnHeli"], _spawnCH47am] call ace_interact_menu_fnc_addActionToObject;
+// Boats 
+[ItemSpawner, 0, ["ACE_MainActions", "spawnVehicle"], _spawnBoats] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "spawnVehicle", "spawnBoats"], _spawnNasty] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "spawnVehicle", "spawnBoats"], _spawnPBR] call ace_interact_menu_fnc_addActionToObject;
 // Supplies 
 [ItemSpawner, 0, ["ACE_MainActions"], _supplies] call ace_interact_menu_fnc_addActionToObject;
 // Ammunition 
