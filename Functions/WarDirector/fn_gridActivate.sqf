@@ -11,7 +11,6 @@ _trg setVariable ["gridActive", true, true];
 
 hint format ["You entered grid: %1", _trg getVariable "gridCoords"];
 
-systemChat format ["%1", (_trg getVariable "gridForces")];
 // Spawn the forces for this grid 
 {
 	[_trg, _x] remoteExec ["lmn_fnc_gridSpawnForces", 2];

@@ -7,7 +7,6 @@ _grp = "";
 _comp = _type select 0;
 _side = east;
 switch (_faction) do {
-	case "North": {_side = east};
 	case "USA": {_side = west};
 	case "ARVN": {_side = independent};
 };
@@ -19,7 +18,6 @@ switch (_unitType) do {
 		// Create the group
 		_grp = createGroup _side;
 		_grp deleteGroupWhenEmpty true;
-		// systemChat format ["Spawning %1", _comp];
 
 		// Spawn the units in the area
 		_spawnPos = [position _trg, 0, 200, 1, 0, 20, 0] call BIS_fnc_findSafePos;
@@ -28,6 +26,11 @@ switch (_unitType) do {
 			zeus addCuratorEditableObjects [[_unit], true];
 			sleep 0.03;
 		} forEach _comp;
+
+		// Setup Group variables 
+		_grp setVariable ["groupType", "Infantry", true];
+		_grp setVariable ["deleteThreshold", 3, true];
+		_grp setVariable ["groupTrigger", _trg, true];
 
 		// Patrol the area 
 		[_grp, _spawnPos, 400] call lambs_wp_fnc_taskPatrol;
@@ -48,6 +51,19 @@ switch (_unitType) do {
 		[_grp, _spawnPos, 200] call lambs_wp_fnc_taskPatrol;
 	}
 };
+
+// Add event handlers to the group to record deaths and movement 
+_grp addEventHandler ["UnitKilled", {
+	params ["_group", "_unit", "_killer", "_instigator", "_useEffects"];
+	_count = count (units _group);
+	_threshold = _group getVariable "deleteThreshold";
+	if (_count <= _threshold) then {
+		_trg = _group getVariable "groupTrigger";
+		_activeGroups = _trg getVariable ["gridActiveGroups", []];
+		_activeGroups = _activeGroups - [_group];
+		_trg setVariable ["gridActiveGroups", _activeGroups, true];
+	};
+}];
 
 // Add the group to a list of the active groups in this grid
 _activeGroups = _trg getVariable ["gridActiveGroups", []];
