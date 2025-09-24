@@ -25,9 +25,4 @@ _savedForces = ["read", [_coords, "gridForces"]];
 	_forces pushback _type;
 } forEach _activeGroups;
 
-{
-	
-	
-} forEach _savedForces;
-
-["write", [_coords, "Forces", _forces]] call _db;
+["write", [format ["Grid-%1", _coords], "Forces", _forces]] call _db;

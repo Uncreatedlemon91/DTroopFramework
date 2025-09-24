@@ -57,6 +57,6 @@ _gridSize = 500; // The size of each grid square in meters (width and height). 1
 } forEach _sections;
 
 // sleep to delay logic 
-sleep 60;
+sleep 30;
 systemChat "War Director starting...";
 [] remoteExec ["lmn_fnc_wdTick", 2];

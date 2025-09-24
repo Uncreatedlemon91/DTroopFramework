@@ -23,21 +23,21 @@ _gridDBExists = "exists" call _gridDB;
 
 // Load the databases
 
-/*if (_locDBExists) then {
+if (_locDBExists) then {
     [] remoteExec ["lmn_fnc_loadLocations", 2];
     // systemchat "[DB] Locations Loading...";
 } else {
     [] remoteExec ["lmn_fnc_setupLocations", 2];
     // systemChat "[DB] Generation Locations...";
 };
-*/
-if (_gridDBExists) then {
+
+/*if (_gridDBExists) then {
     [] remoteExec ["lmn_fnc_gridLoad", 2];
     // systemchat "[DB] Grid Loading...";
 } else {
     [] remoteExec ["lmn_fnc_gridSetup", 2];
     // systemChat "[DB] Generating Grid...";
-};
+};*/
 if (_itemDBExists) then {
     [] remoteExec ["lmn_fnc_loadItems", 2];
 };

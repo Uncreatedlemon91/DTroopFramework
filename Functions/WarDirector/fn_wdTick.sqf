@@ -2,7 +2,7 @@
 // around the map, attack objectives, defend areas, etc.
 
 // Pull database 
-_gridDB = ["new", format ["Grids %1 %2", missionName, worldName]] call oo_inidbi;
+_gridDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_inidbi;
 _grids = "getSections" call _gridDB;
 
 // Main loop
