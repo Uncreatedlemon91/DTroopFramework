@@ -4,7 +4,7 @@ sleep 5;
 
 // Get Variables 
 _db = ["new", format ["Grids %1 %2", missionName, worldName]] call oo_inidbi;
-_coords = _trg getVariable "gridCoords"
+_coords = _trg getVariable "gridCoords";
 
 // Set the marker alpha back to 0.2 (semi-transparent) when deactivated
 (_trg getVariable "gridMarker") setMarkerAlpha 0.2;
@@ -14,7 +14,7 @@ hint format ["You left grid: %1", _trg getVariable "gridCoords"];
 // Deactivate forces in the area 
 _activeGroups = _trg getVariable ["gridActiveGroups", []];
 _forces = [];
-_savedForces = ["read", [_coords, "gridForces"]]
+_savedForces = ["read", [_coords, "gridForces"]];
 {
 	{
 		deleteVehicle vehicle _x;
