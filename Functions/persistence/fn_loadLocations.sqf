@@ -65,4 +65,7 @@ _sections = "getSections" call _locDB;
 	};
 } forEach _sections;
 
+// Run the War Director
+[] remoteExec ["lmn_fnc_wdTick", 2];
+
 // systemChat "[DB] Locations Loaded";

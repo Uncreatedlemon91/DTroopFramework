@@ -11,6 +11,7 @@ class CfgFunctions
 			class setFactions {};
 			class setupItems {};
 			class setupVehicle {};
+			class timeManager {};
 		};
 
 		class locations 
@@ -65,13 +66,7 @@ class CfgFunctions
 
 		class WarDirector
 		{
-			class gridActivate {};
-			class gridDeactivate {};
-			class gridSetup {};
-			class gridLoad {};
-			class gridReinforce {};
 			class wdTick {};
-			class gridspawnForces {};
 		};
 	};
 };

@@ -1,3 +1,4 @@
 #include "Functions\Library.hpp"
 
 respawnOnStart = -1; // Do not respawn when connecting
+showGPS = 0; // Disable GPS

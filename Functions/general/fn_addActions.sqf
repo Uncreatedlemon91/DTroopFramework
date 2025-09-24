@@ -257,22 +257,6 @@ _helipad = [
     {true}
 ] call ace_interact_menu_fnc_createAction;
 
-_medicalTent = [
-    "medicalTent",
-    "Medical Tent",
-    "",
-    {["medicalTent"] remoteExec ["lmn_fnc_spawnSupply", 2]},
-    {true}
-] call ace_interact_menu_fnc_createAction;
-
-_radio = [
-    "radio",
-    "Radio",
-    "",
-    {["radio"] remoteExec ["lmn_fnc_spawnSupply", 2]},
-    {true}
-] call ace_interact_menu_fnc_createAction;
-
 _wBuffalo = [
     "Buffalo",
     "Buffalo",
@@ -428,8 +412,6 @@ _explosives = [
 // Items 
 [ItemSpawner, 0, ["ACE_MainActions"], _items] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "items"], _helipad] call ace_interact_menu_fnc_addActionToObject;
-[ItemSpawner, 0, ["ACE_MainActions", "items"], _medicalTent] call ace_interact_menu_fnc_addActionToObject;
-[ItemSpawner, 0, ["ACE_MainActions", "items"], _radio] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "items"], _wBuffalo] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "items"], _fuelDrum] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "items"], _target] call ace_interact_menu_fnc_addActionToObject;

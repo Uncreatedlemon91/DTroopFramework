@@ -97,10 +97,6 @@ switch (_type) do {
 		_model = "Land_vn_b_helipad_01";
 		_content = [];
 	};
-	case "medicalTent": {
-		_model = "Land_vn_tent_mash_01_02";
-		_content = [];
-	};
 	case "Buffalo": {
 		_model = "Land_vn_b_prop_m149";
 		_content = [];

@@ -28,6 +28,7 @@ while {_active} do {
 		_destroyed = true;
 		["write", [_section, _dbType, _newCount]] call _locDB;
 		systemChat format ["%1 has been removed!", _dbType];
+		deleteVehicle _trg;
 	};
 
 	// Delete units if no players nearby 

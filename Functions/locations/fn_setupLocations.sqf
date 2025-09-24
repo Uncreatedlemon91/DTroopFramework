@@ -23,4 +23,8 @@ Missionlocations = nearestLocations [[0,0,0], lmn_locations, worldsize * 4];
 	sleep 0.1;
 } forEach Missionlocations;
 
+// Run the War Director
+[] remoteExec ["lmn_fnc_wdTick", 2];
+
+
 systemChat "[DB] Locations Generated";
