@@ -431,4 +431,4 @@ _radioTower = [
 [ItemSpawner, 0, ["ACE_MainActions", "items"], _wheels] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "items"], _personalBox] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "items"], _ropeBox] call ace_interact_menu_fnc_addActionToObject;
-[ItemSpawner, 0, ["ACE_MainActions", "items"], _radioTower] call ace_interact_menu_fnc_addActionToObject;
+// [ItemSpawner, 0, ["ACE_MainActions", "items"], _radioTower] call ace_interact_menu_fnc_addActionToObject;

@@ -128,6 +128,3 @@ _grids = "getSections" call _gridDB;
 	};
 	sleep 10;
 } forEach _grids;
-
-sleep 7200;
-[] remoteExec ["lmn_fnc_wdTick", 2];
