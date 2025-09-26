@@ -15,8 +15,9 @@ _mkr setMarkerAlpha _alpha;
 // Determine the ambush details 
 _side = west;
 _factionToSpawn = "";
+_triggerSide = east;
 switch (_faction) do {
-	case "North": {_factionToSpawn = lmn_pavn; _side = east};
+	case "North": {_factionToSpawn = lmn_pavn; _side = east; _triggerSide = west};
 	case "USA": {_factionToSpawn = lmn_US};
 	case "ROK": {_factionToSpawn = lmn_ROK};
 	case "AUS": {_factionToSpawn = lmn_AUS};
@@ -39,8 +40,8 @@ for "_i" from 1 to _reconSize do {
 
 // Setup Trigger
 _prep = createTrigger["EmptyDetector", _pos, true];
-_prep setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-_prep setTriggerArea [350, 350, 0, false, 100];
+_prep setTriggerActivation [_triggerSide, "PRESENT", true];
+_prep setTriggerArea [450, 450, 0, false, 100];
 _prep setTriggerInterval 5;
 _prep setTriggerStatements [
 	"this",

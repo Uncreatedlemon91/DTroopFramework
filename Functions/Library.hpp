@@ -67,6 +67,7 @@ class CfgFunctions
 		class WarDirector
 		{
 			class wdTick {};
+			class wdAttack {};
 		};
 	};
 };
