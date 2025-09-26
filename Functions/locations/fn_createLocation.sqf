@@ -109,6 +109,7 @@ _aaSites = (round(random 4)) * _priority;
 // Save the location 
 ["write", [_loc, "Name", text _loc]] call _locDB;
 ["write", [_loc, "Pos", position _loc]] call _locDB;
+["write", [_loc, "CreationTime", systemTime]] call _locDB;
 ["write", [_loc, "Marker", _mkr]] call _locDB;
 ["write", [_loc, "Population", _population]] call _locDB;
 ["write", [_loc, "Resource", _resource]] call _locDB;
