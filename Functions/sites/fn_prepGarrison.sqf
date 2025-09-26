@@ -32,8 +32,8 @@ for "_i" from 1 to _infantrySize do {
 // Setup Trigger
 _prep = createTrigger["EmptyDetector", _pos, true];
 _prep setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-_prep setTriggerArea [500, 500, 0, false, 300];
-_prep setTriggerInterval 1;
+_prep setTriggerArea [500, 500, 0, false, 100];
+_prep setTriggerInterval 5;
 _prep setTriggerStatements [
 	"this",
 	"[thisTrigger] remoteExec ['lmn_fnc_spawnGarrison', 2]",

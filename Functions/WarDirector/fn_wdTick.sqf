@@ -28,12 +28,13 @@ _grids = "getSections" call _gridDB;
 	// Check current situation in the grid
 	_west = ["USA", "ROK", "AUS", "NZ"];
 	_east = ["North"];
+	_target = [];
 	{
 		_side = ["read", [_x, "Allegiance"]] call _gridDB;
 		if (((_side in _west) AND (_currentSide in _west)) OR ((_side in _east) AND (_currentSide in _east))) then {
 			// Not a frontline unit, consider reinforcing or defending / setting up infra
 			_isFrontline = false;
-			_reinforce = _reinforce + 2;
+			_reinforce = _reinforce + 1;
 			_build = _build + 1;
 			_airAttack = _airAttack + 1;	
 		}
@@ -41,6 +42,7 @@ _grids = "getSections" call _gridDB;
 			_isFrontline = true;
 			_reinforce = _reinforce + 1;
 			_garrisonSize = ["read", [_x, "GarrisonSize"]] call _gridDB;
+			_target pushback _x;
 			if (_garrisonSize > _currentgarrisonSize) then {
 				// Enemy has more power, consider retreating or calling reinforcements
 				_reinforce = _reinforce + 1;
@@ -73,7 +75,7 @@ _grids = "getSections" call _gridDB;
 		case "attack": {
 			systemChat format ["Grid %1: Attacking enemy forces!", _x];
 			// Logic to move forces to attack enemy positions
-			// [_x, _currentForces] call lmn_fnc_gridAttack;
+			// [_x, _currentForces, selectRandom _target] call lmn_fnc_wdAttack;
 			["write", [_x, "dayEvent", "Attack"]] call _gridDB;
 		};
 		case "defend": {
@@ -127,5 +129,5 @@ _grids = "getSections" call _gridDB;
 	sleep 10;
 } forEach _grids;
 
-sleep 30; 
-[] remoteExec ["lmn_fnc_wdTick", 2]; // Repeat every 100 seconds
+sleep 7200;
+[] remoteExec ["lmn_fnc_wdTick", 2];

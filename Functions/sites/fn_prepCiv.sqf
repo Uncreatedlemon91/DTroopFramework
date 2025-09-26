@@ -15,7 +15,7 @@ _mkr setMarkerAlpha _alpha;
 // Create Trigger
 _prep = createTrigger["EmptyDetector", _pos, true];
 _prep setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-_prep setTriggerArea [100, 100, 0, false, 300];
+_prep setTriggerArea [200, 200, 0, false, 100];
 _prep setVariable ["attachedLocation", _loc];
 _prep setVariable ["Activated", false, true];
 _prep setTriggerStatements [

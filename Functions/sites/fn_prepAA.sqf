@@ -21,8 +21,7 @@ switch (_faction) do {
 			"vn_o_nva_static_dshkm_high_02",
 			"vn_o_nva_static_sgm_high_01",
 			"vn_o_nva_static_zgu1_01",
-			"vn_o_nva_static_zpu4",
-			"vn_sa2"
+			"vn_o_nva_static_zpu4"		
 		];
 	};
 	case "AUS": {

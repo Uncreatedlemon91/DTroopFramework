@@ -154,10 +154,14 @@ switch (_type) do {
 		];
 	};
 	case "Radios": {
-		_model = "ACRE_RadioSupplyCrate";
+		_model = "Land_PlasticCase_01_small_black_F";
 		_content = [
-			["ACRE_PRC77", 5]
+			["B_simc_rajio_flak_1", 5]
 		];
+	};
+	case "radioTower": {
+		_model = "TFAR_Land_Communication_F";
+		_content = []
 	};
 	case "PersonalBox": {
 		_model = "Land_WoodenCrate_01_F";

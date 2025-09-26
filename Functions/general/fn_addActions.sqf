@@ -369,6 +369,14 @@ _explosives = [
     {true}
 ] call ace_interact_menu_fnc_createAction;
 
+_radioTower = [
+    "radioTower",
+    "Radio Tower",
+    "",
+    {["radioTower"] remoteExec ["lmn_fnc_spawnSupply", 2]},
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
 // Addactions to logistics point
 // Vehicles 
 [ItemSpawner, 0, ["ACE_MainActions"], _spawnVehicles] call ace_interact_menu_fnc_addActionToObject;
@@ -423,3 +431,4 @@ _explosives = [
 [ItemSpawner, 0, ["ACE_MainActions", "items"], _wheels] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "items"], _personalBox] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "items"], _ropeBox] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "items"], _radioTower] call ace_interact_menu_fnc_addActionToObject;

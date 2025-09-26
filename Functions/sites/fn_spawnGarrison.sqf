@@ -25,16 +25,16 @@ _grp = createGroup _side;
 _destroyed = false;
 {
 	// Current result is saved in variable _x
-	_unit = _grp createUnit [_x, _pos, [], 5, "FORM"];
+	_unit = _grp createUnit [_x, _pos, [], 15, "FORM"];
+	_unit setVariable ["lambs_danger_dangerRadio", true];
 	zeus addCuratorEditableObjects [[_unit], true];
 	sleep 0.2;
 } forEach _groupClass;
 
 // Give the unit orders to defend the point 
-_task = selectRandom ["garrison", "camp", "patrol"];
+_task = selectRandom ["garrison", "patrol"];
 switch (_task) do {
 	case "garrison": {[_grp, _trg, 200, [], true, false, -1, false] call lambs_wp_fnc_taskGarrison;};
-	case "camp": {[_grp, _pos, 50] call lambs_wp_fnc_taskCamp};
 	case "patrol": {[_grp, _pos, 500] call lambs_wp_fnc_taskPatrol};
 };
 

@@ -56,3 +56,7 @@ _vehSave = [
 
 [_veh, 0, ["ACE_MainActions"], _vehDelete] call ace_interact_menu_fnc_addActionToObject;
 [_veh, 0, ["ACE_MainActions"], _vehSave] call ace_interact_menu_fnc_addActionToObject;
+
+if (typeOf _veh == "vn_b_armor_m577_02") then {
+	_veh setVariable ["ace_medical_isMedicalVehicle", true, true];
+};
