@@ -4,7 +4,7 @@
 while {true} do {
 	sleep 30;
 	_hour = date select 3;
-	if ((_hour >= 20) OR (_hour <= 6)) then {
+	if ((_hour >= 16) OR (_hour <= 7)) then {
 		if (timeMultiplier != 60) then {
 			setTimeMultiplier 60;
 		};

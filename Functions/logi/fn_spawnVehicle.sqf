@@ -2,7 +2,8 @@
 params ["_class"];
 
 // Spawn the vehicle 
-_veh = _class createVehicle position itemspawn;
+_pos = [position itemspawn, 0, 100, 10, 0, 10, 0] call BIS_fnc_findSafePos; 
+_veh = _class createVehicle _pos;
 
 // Set Vehicle initial parameters 
 _veh setDamage 0.2;
