@@ -75,7 +75,7 @@ _grids = "getSections" call _gridDB;
 		case "attack": {
 			systemChat format ["Grid %1: Attacking enemy forces!", _target];
 			// Logic to move forces to attack enemy positions
-			[_x, _currentgarrisonSize, selectRandom _target] call lmn_fnc_wdAttack;
+			//[_x, _currentgarrisonSize, selectRandom _target] call lmn_fnc_wdAttack;
 			["write", [_x, "dayEvent", "Attack"]] call _gridDB;
 		};
 		case "defend": {

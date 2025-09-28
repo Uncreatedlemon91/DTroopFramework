@@ -84,6 +84,14 @@ _spawnAmbulance = [
     {true}
 ] call ace_interact_menu_fnc_createAction;
 
+_spawnCommand = [
+    "spawnCommand", 
+    "Spawn HQ", 
+    "", 
+    {["vn_b_armor_m577_01"] remoteExec ["lmn_fnc_spawnVehicle", 2]}, 
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
 _spawnM113 = [
     "spawnM113", 
     "Spawn M113A1", 
@@ -392,6 +400,7 @@ _radioTower = [
 [ItemSpawner, 0, ["ACE_MainActions", "spawnVehicle", "spawnTransport"], _spawnM113] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "spawnVehicle", "spawnTransport"], _spawnAmbulance] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "spawnVehicle", "spawnTransport"], _spawnPatrol] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "spawnVehicle", "spawnTransport"], _spawnCommand] call ace_interact_menu_fnc_addActionToObject;
 // Helicopters
 [ItemSpawner, 0, ["ACE_MainActions", "spawnVehicle"], _spawnHeli] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "spawnVehicle", "spawnHeli"], _spawnHuey1d] call ace_interact_menu_fnc_addActionToObject;

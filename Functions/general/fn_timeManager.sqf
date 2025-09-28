@@ -10,7 +10,7 @@ while {true} do {
 		};
 	} else {
 		if (timeMultiplier != 1) then {
-			setTimeMultiplier 1;
+			setTimeMultiplier 4;
 		};
 	};
 };
