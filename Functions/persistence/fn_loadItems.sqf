@@ -3,7 +3,9 @@ _sections = "getSections" call _db;
 
 // apply saved vehicle locations back to the server 
 {
-	if (_x == false) then {}
+	if (_x == false) then {
+		["deleteSection", _x] call _db;
+	}
 	else {
 		_data = ["read", [_x, "Item Info"]] call _db;
 		_type = _data select 0;
