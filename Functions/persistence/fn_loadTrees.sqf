@@ -9,3 +9,5 @@ _sections = "getSections" call _db;
 	_tree = (nearestTerrainObjects [_data, ["TREE"], 5, true, false]) select 0;
 	hideObjectGlobal _tree;
 } forEach _sections;
+
+

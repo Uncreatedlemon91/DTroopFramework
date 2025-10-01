@@ -34,7 +34,7 @@ _destroyed = false;
 // Give the unit orders to defend the point 
 _task = selectRandom ["garrison", "patrol"];
 switch (_task) do {
-	case "garrison": {[_grp, _trg, 200, [], true, false, -1, false] call lambs_wp_fnc_taskGarrison;};
+	case "garrison": {[_grp, _trg, 200, [], true, false, -2, false] call lambs_wp_fnc_taskGarrison;};
 	case "patrol": {[_grp, _pos, 500] call lambs_wp_fnc_taskPatrol};
 };
 

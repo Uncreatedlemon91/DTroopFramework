@@ -28,8 +28,7 @@ class CfgFunctions
 
 		class persistence
 		{
-			class deleteItem {};
-			class deleteVehicle {};
+			class deleteFromDatabase {};
 			class getPlayerData {};
 			class loadEnvironment {};
 			class loadItems {};
@@ -67,7 +66,6 @@ class CfgFunctions
 		class WarDirector
 		{
 			class wdTick {};
-			class wdAttack {};
 		};
 	};
 };

@@ -62,7 +62,7 @@ _mkr setMarkerAlpha _alpha;
 // Setup the Trigger 
 _aaSite = createTrigger ["EmptyDetector", _pos];
 _aaSite setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-_aaSite setTriggerArea [2000, 2000, 0, false, 500];
+_aaSite setTriggerArea [2000, 2000, 0, false, 300];
 _aaSite setTriggerStatements [
 	"this",
 	"[thisTrigger] remoteExec ['lmn_fnc_spawnArty', 2];",

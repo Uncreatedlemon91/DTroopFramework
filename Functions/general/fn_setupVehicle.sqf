@@ -28,7 +28,7 @@ _veh addEventHandler ["ContainerOpened", {
 
 _veh addEventHandler ["Killed", {
 	params ["_unit", "_killer"];
-	[_unit] remoteExec ["lmn_fnc_saveWreck", 2];
+	[_unit] remoteExec ["lmn_fnc_saveVehicle", 2];
 }];
 
 // Actions to save and delete 
@@ -38,7 +38,7 @@ _vehDelete = [
     "", 
     {
 		params ["_target", "_player", "_params"];
-		[_target] remoteExec ["lmn_fnc_deleteVehicle", 2];
+		[_target, "vehdb"] remoteExec ["lmn_fnc_deleteFromDatabase", 2];
 	},
     {true}
 ] call ace_interact_menu_fnc_createAction;

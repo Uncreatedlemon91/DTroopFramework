@@ -41,6 +41,10 @@ if (_vehicleDatabaseExists) then {
     [] remoteExec ["lmn_fnc_loadVehicles", 2];
 };
 
+
 // Run ongoing Scripts 
 [] remoteExec ["lmn_fnc_saveEnvironment", 2];
 [] remoteExec ["lmn_fnc_timeManager", 2];
+
+// Run the War Director
+[] remoteExec ["lmn_fnc_wdTick", 2];

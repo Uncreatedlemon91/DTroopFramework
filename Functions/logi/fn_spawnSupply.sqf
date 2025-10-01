@@ -214,9 +214,7 @@ clearMagazineCargoGlobal _box;
 
 // Add desired contents to the box 
 {
-	//_box addMagazineCargoGlobal _x;
 	_box addItemCargoGlobal _x;
-	//_box addWeaponCargoGlobal _x;
 } forEach _content;
 
 // Setup the box
