@@ -15,7 +15,7 @@ _sections = "getSections" call _db;
 
 		// Spawn vehicle replica 
 		_item = _type createVehicle _pos;
-		// _item setVariable ["IndexVar", _x, true];
+		_item setVariable ["IndexVar", _x, true];
 		_item allowDamage false;
 		clearItemCargoGlobal _item;
 		clearMagazineCargoGlobal _item;
