@@ -33,19 +33,3 @@ _boxSave = [
 
 [_box, 1] call ace_cargo_fnc_setSize;
 [_box, true, [0,3,1], 0, true, true] call ace_dragging_fnc_setCarryable;
-
-// Event Handlers 
-_box addEventHandler ["ContainerClosed", {
-	params ["_container", "_unit"];
-	[_container] remoteExec ["lmn_fnc_saveItem", 2];
-}];
-
-_box addEventHandler ["ContainerOpened", {
-	params ["_container", "_unit"];
-	[_container] remoteExec ["lmn_fnc_saveItem", 2];
-}];
-
-_box addEventHandler ["Killed", {
-	params ["_unit", "_killer"];
-	[_unit, "itemdb"] remoteExec ["lmn_fnc_deleteFromDatabase", 2];
-}];

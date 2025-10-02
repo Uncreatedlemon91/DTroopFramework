@@ -75,6 +75,8 @@ _grids = "getSections" call _gridDB;
 	switch (_orders) do {
 		case "attack": {
 			// Update the database for the attack
+			_attackingForceSize = random _currentgarrisonSize;
+			_defendingForceSize = _garrisonSize;
 			["write", [_x, "dayEvent", "Attack"]] call _gridDB;
 		};
 		case "defend": {

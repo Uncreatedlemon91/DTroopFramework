@@ -14,7 +14,7 @@ _sections = "getSections" call _db;
 		_weps = _data select 6;
 
 		// Spawn vehicle replica 
-		_item = _type createVehicle _pos;
+		_item = createVehicle [_type, _pos, [], 0, "CAN_COLLIDE"];
 		_item setVariable ["IndexVar", _x, true];
 		_item allowDamage false;
 		clearItemCargoGlobal _item;
@@ -40,6 +40,22 @@ _sections = "getSections" call _db;
 			_item addWeaponCargoGlobal [_classes select _i,_count select _i]
 		};
 		
+		// Event Handlers 
+		_item addEventHandler ["ContainerClosed", {
+			params ["_container", "_unit"];
+			[_container] remoteExec ["lmn_fnc_saveItem", 2];
+		}];
+
+		_item addEventHandler ["ContainerOpened", {
+			params ["_container", "_unit"];
+			[_container] remoteExec ["lmn_fnc_saveItem", 2];
+		}];
+
+		_item addEventHandler ["Killed", {
+			params ["_unit", "_killer"];
+			[_unit, "itemdb"] remoteExec ["lmn_fnc_deleteFromDatabase", 2];
+		}];
+		
 		// ["deleteSection", _x] call _db;
 		[_item] remoteExec ["lmn_fnc_setupItems", 0, true];
 		// [_item] remoteExec ["lmn_fnc_saveItem", 2];
@@ -47,5 +63,7 @@ _sections = "getSections" call _db;
 		sleep 0.01;
 	};
 } forEach _sections;
+
+[] remoteExec ["lmn_fnc_loadVehicles", 2];
 
 // systemChat "[DB] Items Loaded";

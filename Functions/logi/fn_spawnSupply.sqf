@@ -217,5 +217,22 @@ clearMagazineCargoGlobal _box;
 	_box addItemCargoGlobal _x;
 } forEach _content;
 
+// Event Handlers 
+_item addEventHandler ["ContainerClosed", {
+	params ["_container", "_unit"];
+	[_container] remoteExec ["lmn_fnc_saveItem", 2];
+}];
+
+_item addEventHandler ["ContainerOpened", {
+	params ["_container", "_unit"];
+	[_container] remoteExec ["lmn_fnc_saveItem", 2];
+}];
+
+_item addEventHandler ["Killed", {
+	params ["_unit", "_killer"];
+	[_unit, "itemdb"] remoteExec ["lmn_fnc_deleteFromDatabase", 2];
+}];
+
 // Setup the box
 [_box] remoteExec ["lmn_fnc_setupItems", 0, true];
+

@@ -1,0 +1,1 @@
+// Spawns a battlezone in the AO
