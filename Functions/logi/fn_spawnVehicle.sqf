@@ -21,11 +21,6 @@ _veh addEventHandler ["GetIn", {
 	[_vehicle] remoteExec ["lmn_fnc_saveVehicle", 2];
 }];
 
-_veh addEventHandler ["Hit", {
-	params ["_unit", "_source", "_damage", "_instigator"];
-	[_unit] remoteExec ["lmn_fnc_saveVehicle", 2];
-}];
-
 _veh addEventHandler ["GetOut", {
 	params ["_vehicle", "_role", "_unit", "_turret", "_isEject"];
 	[_vehicle] remoteExec ["lmn_fnc_saveVehicle", 2];
