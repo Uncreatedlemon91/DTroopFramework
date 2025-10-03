@@ -16,6 +16,7 @@ if (isNil "_localIndex") then {
 	};
 	_localIndex = _index + 1;
 	["write", ["IndexCount", "Count", _localIndex]] call _db;
+	_item setVariable ["IndexVar", _localIndex, true];
 };
 
 // Get details
