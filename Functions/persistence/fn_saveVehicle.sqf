@@ -6,6 +6,7 @@ _db = ["new", format ["Player Vehicles %1 %2", missionName, worldName]] call oo_
 
 // Setup Index 
 _localIndex = _veh getVariable "IndexVar";
+systemChat format ["Vehicle Index: %1", _localIndex];
 
 // Build index if none exists
 if (isNil "_localIndex") then {
@@ -17,6 +18,7 @@ if (isNil "_localIndex") then {
 	};
 	_localIndex = _index + 1;
 	["write", ["IndexCount", "Count", _localIndex]] call _db;
+	_veh setVariable ["IndexVar", _localIndex, true];
 };
 
 // Wait for damage and model to set  
@@ -38,9 +40,14 @@ _items = getItemCargo _veh;
 _ammo = getMagazineCargo _veh;
 _weps = getWeaponCargo _veh;
 
+// Build core items from vehicles 
+_data = [_type, _pos, _dir, _dmg1, _dmg2, _fuel, _mags, _items, _ammo, _weps];
+
 // Save ACE Fuel base 
 _fuelCargo = [_veh] call ace_refuel_fnc_getFuel;
+if !(isNil "_fuelCargo") then {
+	_data pushback _fuelCargo;
+};
 
 // Save to database
-_data = [_type, _pos, _dir, _dmg1, _dmg2, _fuel, _mags, _items, _ammo, _weps, _fuelCargo];
 ["write", [_localIndex, "Vehicle Info", _data]] call _db;

@@ -64,6 +64,4 @@ _sections = "getSections" call _db;
 	};
 } forEach _sections;
 
-[] remoteExec ["lmn_fnc_loadVehicles", 2];
-
 // systemChat "[DB] Items Loaded";

@@ -20,6 +20,7 @@ _sections = "getSections" call _db;
 		// Spawn vehicle replica 
 		_veh = createVehicle [_type, _pos, [], 0, "CAN_COLLIDE"];
 		_veh setVariable ["IndexVar", _x, true];
+		systemChat format ["Vehicle Index: %1", _x];
 		_veh allowDammage false;
 		_veh setDir _dir;
 		clearItemCargoGlobal _veh;
@@ -27,7 +28,12 @@ _sections = "getSections" call _db;
 		clearBackpackCargoGlobal _veh;
 		clearWeaponCargoGlobal _veh;
 		_veh setFuel _fuel;
-		[_veh, _fuelCargo] call ace_refuel_fnc_setFuel;
+		_veh setPlateNumber _x;
+
+		// Reapply ACE Fuel 
+		if !(isNil "_fuelCargo") then {
+			[_veh, _fuelCargo] call ace_refuel_fnc_setFuel;
+		};
 		
 		// add Ammo
 		{
@@ -99,10 +105,11 @@ _sections = "getSections" call _db;
 		}];
 
 		// Update the database 
+		// deleteVehicle _veh;
 		// ["deleteSection", _x] call _db;
 		[_veh] remoteExec ["lmn_fnc_setupVehicle", 0, true];
 		// [_veh] remoteExec ["lmn_fnc_saveVehicle", 2];
-		sleep 0.01;
+		sleep 0.5;
 	};
 } forEach _sections;
 

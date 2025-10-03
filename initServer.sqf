@@ -38,7 +38,7 @@ if (_envDBExists) then {
     [] remoteExec ["lmn_fnc_loadEnvironment", 2];
 };
 if (_vehicleDatabaseExists) then {
-    //[] remoteExec ["lmn_fnc_loadVehicles", 2];
+    [] remoteExec ["lmn_fnc_loadVehicles", 2];
 };
 
 
