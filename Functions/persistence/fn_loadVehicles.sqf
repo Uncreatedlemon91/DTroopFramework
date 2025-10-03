@@ -15,6 +15,7 @@ _sections = "getSections" call _db;
 		_items = _data select 7;
 		_ammo = _data select 8;
 		_weps = _data select 9;
+		_fuelCargo = _data select 10;
 
 		// Spawn vehicle replica 
 		_veh = createVehicle [_type, _pos, [], 0, "CAN_COLLIDE"];
@@ -26,7 +27,8 @@ _sections = "getSections" call _db;
 		clearBackpackCargoGlobal _veh;
 		clearWeaponCargoGlobal _veh;
 		_veh setFuel _fuel;
-
+		[_veh, _fuelCargo] call ace_refuel_fnc_setFuel;
+		
 		// add Ammo
 		{
 			_mag = _x select 0;

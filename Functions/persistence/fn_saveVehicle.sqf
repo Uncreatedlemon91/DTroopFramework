@@ -29,7 +29,6 @@ _dmg1 = (getAllHitPointsDamage _veh) select 0;
 _dmg2 = (getAllHitPointsDamage _veh) select 2;
 _fuel = fuel _veh;
 _type = typeOf _veh;
-// _netId = netId _veh;
 _mags = magazinesAllTurrets [_veh, true];
 {
 	_x deleteAt 3;
@@ -39,6 +38,9 @@ _items = getItemCargo _veh;
 _ammo = getMagazineCargo _veh;
 _weps = getWeaponCargo _veh;
 
+// Save ACE Fuel base 
+_fuelCargo = [_veh] call ace_refuel_fnc_getFuel;
+
 // Save to database
-_data = [_type, _pos, _dir, _dmg1, _dmg2, _fuel, _mags, _items, _ammo, _weps];
+_data = [_type, _pos, _dir, _dmg1, _dmg2, _fuel, _mags, _items, _ammo, _weps, _fuelCargo];
 ["write", [_localIndex, "Vehicle Info", _data]] call _db;
