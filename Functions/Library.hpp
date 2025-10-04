@@ -66,6 +66,7 @@ class CfgFunctions
 
 		class WarDirector
 		{
+			class wd_CheckLocs {};
 			class wdTick {};
 		};
 	};

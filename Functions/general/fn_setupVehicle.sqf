@@ -19,6 +19,7 @@ _vehSave = [
     {
 		params ["_target", "_player", "_params"];
 		[_target] remoteExec ["lmn_fnc_saveVehicle", 2];
+        systemChat "Vehicle Saved";
 	}, 
     {true}
 ] call ace_interact_menu_fnc_createAction;
