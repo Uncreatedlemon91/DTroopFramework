@@ -90,7 +90,7 @@ _locs = nearestLocations [position _loc, [
 ], 2000];
 _nearLocs = [];
 {
-	_nearLocs pushback (str _loc);
+	_nearLocs pushback (str _x);
 } forEach _locs;
 _nearLocs deleteAt 0;
 
