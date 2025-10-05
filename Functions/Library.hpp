@@ -68,6 +68,7 @@ class CfgFunctions
 		{
 			class wdCheckLocs {};
 			class wdTick {};
+			class wdTransfer {};
 		};
 	};
 };

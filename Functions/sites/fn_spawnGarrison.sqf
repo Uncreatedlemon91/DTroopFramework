@@ -17,8 +17,10 @@ _loc = _trg getVariable "attachedLocation";
 
 // Spawn the unit 
 _pos = position (selectRandom (nearestTerrainObjects [position _trg, ["HOUSE", "BUILDING"], 50, false, false]));
+_canGarrison = true;
 if (isnil "_pos") then {
 	_pos = [position _trg, 0, 40, 5, 0, 10, 0] call BIS_fnc_findSafePos;
+	_canGarrison = false;
 };
 _pos = [_pos select 0, _pos select 1, 0];
 _grp = createGroup _side;
@@ -31,11 +33,17 @@ _destroyed = false;
 	sleep 0.2;
 } forEach _groupClass;
 
-// Give the unit orders to defend the point 
-_task = selectRandom ["garrison", "patrol"];
+// Give the unit orders to defend the point
+_task = ""; 
+if (_canGarrison) then {
+	_task = "garrison";
+} else {
+	_task = "patrol";
+};
+
 switch (_task) do {
-	case "garrison": {[_grp, _trg, 200, [], true, false, -2, false] call lambs_wp_fnc_taskGarrison;};
-	case "patrol": {[_grp, _pos, 500] call lambs_wp_fnc_taskPatrol};
+	case "garrison": {[_grp, _trg, 150, [], true, false, -2, false] call lambs_wp_fnc_taskGarrison;};
+	case "patrol": {[_grp, _pos, 100] call lambs_wp_fnc_taskPatrol};
 };
 
 _grp setBehaviour "SAFE";
@@ -77,9 +85,9 @@ while {_trg getVariable "Activated"} do {
 			_loc = nearestLocation [_locPos, ""];
 
 			// Delete current location data 
-			["deleteSection", _loc] call _locDB;
 			_mkr = ["read", [_loc, "Marker"]] call _locDB;
 			deleteMarker _mkr;
+			["deleteSection", _loc] call _locDB;
 
 			// Rebuild the location with new allegiance
 			[_loc, _newallegiance, true] remoteExec ["lmn_fnc_createLocation", 2];

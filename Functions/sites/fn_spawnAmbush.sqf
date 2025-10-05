@@ -34,9 +34,9 @@ _destroyed = false;
 // Give the unit orders to defend the point 
 _task = selectRandom ["creep", "hunt", "rush"];
 switch (_task) do {
-	case "creep": {[_grp, 500] spawn lambs_wp_fnc_taskCreep};
-	case "hunt": {[_grp, 500] spawn lambs_wp_fnc_taskHunt};
-	case "rush": {[_grp, 500] spawn lambs_wp_fnc_taskRush};
+	case "creep": {[_grp, 250] spawn lambs_wp_fnc_taskCreep};
+	case "hunt": {[_grp, 250] spawn lambs_wp_fnc_taskHunt};
+	case "rush": {[_grp, 250] spawn lambs_wp_fnc_taskRush};
 };
 _grp setCombatMode "RED";
 _grp setBehaviour "SAFE";

@@ -10,38 +10,28 @@ _grids = "getSections" call _gridDB;
 	systemChat format ["Assessing %1", (["read", [_x, "Name"]] call _griddb)];
 
 	// Define Variables to use in logic
-	// _nearLocs = ["read", [_x, "NearLocations"]] call _gridDB;
+	_attack = 0;
+	_reinforce = 0;
+	_build = 0;
+	_transfer = 0;
+	_probe = 0;
 
-	// Get nearby locations 
-	_locs = nearestLocations [position _x, [
-		"NameLocal",
-		"NameVillage",
-		"Name",
-		"VegetationBroadleaf",
-		"Hill",
-		"NameMarine",
-		"ViewPoint",
-		"Strategic",
-		"NameCity",
-		"Airport",
-		"NameMarine",
-		"StrongpointArea",
-		"NameCityCapital"
-	], 2000];
-	_locs deleteAt 0;
-	["write", [_x, "NearLocations", _locs]] call _locDB;
+	_nearLocs = ["read", [_x, "NearLocations"]] call _gridDB;
+	_allegiance = ["read", [_x, "Allegiance"]] call _gridDB;
+	_triggerPos = ["read", [_x, "Pos"]] call _gridDB;
 
-	// Check current situation in the grid
-	//_orders = [_locs, _x] call lmn_fnc_wdCheckLocs; 
-	//_target = _orders select 0;
-	//_order = _orders select 1;
-	/*
+	// Assess the area and determine possible actions
+	_score = [_nearLocs, _x] call lmn_fnc_wdCheckLocs;
+	// systemChat format ["%1", _score];
+
+	// Issue the orders 
+	_target = _score select 0;
+	_order = _score select 1;
+
 	// Issue orders to forces in the grid
 	switch (_order) do {
 		case "attack": {
 			// Update the database for the attack
-			systemChat format ["%1 is attacking %2", _attacker, _defender];
-			// Create a battlezone
 			["write", [_x, "dayEvent", "Attack"]] call _gridDB;
 		};
 		case "defend": {
@@ -51,11 +41,59 @@ _grids = "getSections" call _gridDB;
 			["write", [_x, "dayEvent", "Defend"]] call _gridDB;
 		};
 		case "reinforce": {
-			systemChat format ["Grid %1: Calling reinforcements!", _x];
 			// Logic to call in reinforcements
-			[_x, _currentSide, _triggerPos] call lmn_fnc_prepGarrison;
-			_newGarrisonSize = _currentgarrisonSize + 1;
-			["write", [_x, "GarrisonSize", _newGarrisonSize]] call _gridDB;
+			_reinforceType = selectRandom ["Garrison", "Ambush", "AA", "Artillery"];
+			switch (_reinforceType) do {
+				case "Garrison": {
+					// Setup Logic Variables 
+					_current = ["read", [_x, "GarrisonSize"]] call _gridDB;
+
+					// Add the new Garrison to the area
+					[_x, _allegiance, _triggerPos] call lmn_fnc_prepGarrison;
+					_newCount = _current + 1;
+
+					// Update the database
+					["write", [_x, "GarrisonSize", _newCount]] call _gridDB;
+				};
+				case "Ambush": {
+					// Setup Logic Values 
+					_current = ["read", [_x, "AmbushCount"]] call _gridDB;
+
+					// Add the new Ambush to the area
+					[_x, _allegiance, _triggerPos] call lmn_fnc_prepAmbush;
+					_newCount = _current + 1;
+
+					// Update the database
+					["write", [_x, "AmbushCount", _newCount]] call _gridDB;
+				};
+				case "AA": {
+					// Setup Logic Values 
+					_current = ["read", [_x, "AAsites"]] call _gridDB;
+
+					// Add the new Ambush to the area
+					[_x, _allegiance, _triggerPos] call lmn_fnc_prepAmbush;
+					_newCount = _current + 1;
+
+					// Update the database
+					["write", [_x, "AAsites", _newCount]] call _gridDB;
+				};
+				case "Artillery": {
+					// Setup Logic Values 
+					_current = ["read", [_x, "MortarSites"]] call _gridDB;
+
+					// Add the new Ambush to the area
+					[_x, _allegiance, _triggerPos] call lmn_fnc_prepAmbush;
+					_newCount = _current + 1;
+
+					// Update the database
+					["write", [_x, "MortarSites", _newCount]] call _gridDB;
+				};
+			};
+
+			// Inform for Debug
+			systemChat format ["Grid %1 is receiving a new %2 reinforcement", _x, _reinforceType];
+			
+			// Update the database 
 			["write", [_x, "dayEvent", "Reinforce"]] call _gridDB;
 		};
 		case "build": {
@@ -64,23 +102,17 @@ _grids = "getSections" call _gridDB;
 			// [_x, _currentInfrastructure] call lmn_fnc_gridBuild;
 			["write", [_x, "dayEvent", "Build"]] call _gridDB;
 		};
+		case "transfer": {
+			systemChat format ["Grid %1: Transferring forces to another location!", _x];
+			// Logic to transfer forces to another location
+			[_target, _x] call lmn_fnc_wdTransfer;
+			["write", [_x, "dayEvent", "Transfer"]] call _gridDB;
+		};
 		case "probe": {
 			systemChat format ["Grid %1: Probing enemy defenses!", _x];
 			// Logic to send out reconnaissance or probing attacks
 			// [_x, _currentForces] call lmn_fnc_gridProbe;
 			["write", [_x, "dayEvent", "Probe"]] call _gridDB;
-		};
-		case "airAttack": {
-			systemChat format ["Grid %1: Launching air attack!", _x];
-			// Logic to call in air support
-			// [_x, _currentSide] call lmn_fnc_gridAirAttack;
-			["write", [_x, "dayEvent", "AirAttack"]] call _gridDB;
-		};
-		case "artillery": {
-			systemChat format ["Grid %1: Bombarding enemy positions!", _x];
-			// Logic to call in artillery support
-			// [_x, _currentSide] call lmn_fnc_gridArtillery;
-			["write", [_x, "dayEvent", "Artillery"]] call _gridDB;
 		};
 		case "hold": {
 			systemChat format ["Grid %1: Holding position.", _x];
@@ -92,5 +124,4 @@ _grids = "getSections" call _gridDB;
 			systemChat format ["Grid %1: No action taken.", _x];
 		};
 	};
-	*/
 } forEach _grids;

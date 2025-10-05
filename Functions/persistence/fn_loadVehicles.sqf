@@ -20,7 +20,6 @@ _sections = "getSections" call _db;
 		// Spawn vehicle replica 
 		_veh = createVehicle [_type, _pos, [], 0, "CAN_COLLIDE"];
 		_veh setVariable ["IndexVar", _x, true];
-		systemChat format ["Vehicle Index: %1", _x];
 		_veh allowDammage false;
 		_veh setDir _dir;
 		clearItemCargoGlobal _veh;

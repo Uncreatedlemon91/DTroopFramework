@@ -28,7 +28,7 @@ _unit setVariable ["Stability", random [(_stability - 25), _stability, (_stabili
 _destroyed = false;
 
 // Give the civilian something to do 
-[(group _unit), position _unit, 50] call BIS_fnc_taskPatrol;
+[(group _unit), position _unit, 100] call BIS_fnc_taskPatrol;
 (group _unit) setSpeedMode "LIMITED";
 
 // Add the civilian to curator 
