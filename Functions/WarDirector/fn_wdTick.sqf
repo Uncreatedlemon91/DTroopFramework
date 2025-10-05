@@ -12,7 +12,6 @@ _grids = "getSections" call _gridDB;
 	// Define Variables to use in logic
 	// _nearLocs = ["read", [_x, "NearLocations"]] call _gridDB;
 
-	
 	// Get nearby locations 
 	_locs = nearestLocations [position _x, [
 		"NameLocal",
@@ -33,10 +32,10 @@ _grids = "getSections" call _gridDB;
 	["write", [_x, "NearLocations", _locs]] call _locDB;
 
 	// Check current situation in the grid
-	_orders = [_locs, _x] call lmn_fnc_wdCheckLocs; 
-	_target = _orders select 0;
-	_order = _orders select 1;
-
+	//_orders = [_locs, _x] call lmn_fnc_wdCheckLocs; 
+	//_target = _orders select 0;
+	//_order = _orders select 1;
+	/*
 	// Issue orders to forces in the grid
 	switch (_order) do {
 		case "attack": {
@@ -93,4 +92,5 @@ _grids = "getSections" call _gridDB;
 			systemChat format ["Grid %1: No action taken.", _x];
 		};
 	};
+	*/
 } forEach _grids;
