@@ -34,7 +34,7 @@ _grids = "getSections" call _gridDB;
 		_nearLocs pushback (str _x);
 	} forEach _locs;
 	_nearLocs deleteAt 0;
-	["write", [_loc, "NearLocations", _nearLocs]] call _locDB;
+	["write", [_x, "NearLocations", _nearLocs]] call _locDB;
 
 	// Check current situation in the grid
 	_orders = [_nearLocs, _x] call lmn_fnc_wdCheckLocs; 
@@ -45,9 +45,6 @@ _grids = "getSections" call _gridDB;
 	switch (_order) do {
 		case "attack": {
 			// Update the database for the attack
-			_attackingForceSize = random _currentgarrisonSize;
-			_attacker = _x;
-			_defender = _target
 			systemChat format ["%1 is attacking %2", _attacker, _defender];
 			// Create a battlezone
 			["write", [_x, "dayEvent", "Attack"]] call _gridDB;
