@@ -14,7 +14,7 @@ _grids = "getSections" call _gridDB;
 
 	
 	// Get nearby locations 
-	_locs = nearestLocations [position _loc, [
+	_locs = nearestLocations [position _x, [
 		"NameLocal",
 		"NameVillage",
 		"Name",
@@ -29,15 +29,11 @@ _grids = "getSections" call _gridDB;
 		"StrongpointArea",
 		"NameCityCapital"
 	], 2000];
-	_nearLocs = [];
-	{
-		_nearLocs pushback (str _x);
-	} forEach _locs;
-	_nearLocs deleteAt 0;
-	["write", [_x, "NearLocations", _nearLocs]] call _locDB;
+	_locs deleteAt 0;
+	["write", [_x, "NearLocations", _locs]] call _locDB;
 
 	// Check current situation in the grid
-	_orders = [_nearLocs, _x] call lmn_fnc_wdCheckLocs; 
+	_orders = [_locs, _x] call lmn_fnc_wdCheckLocs; 
 	_target = _orders select 0;
 	_order = _orders select 1;
 
