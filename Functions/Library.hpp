@@ -57,11 +57,13 @@ class CfgFunctions
 			class prepArty {};
 			class prepCiv {};
 			class prepGarrison {};
+			class prepProbe {};
 			class spawnAA {};
 			class spawnAmbush {};
 			class spawnArty {};
 			class spawnCiv {};
 			class spawnGarrison {};
+			class spawnProbe {};
 		};
 
 		class WarDirector

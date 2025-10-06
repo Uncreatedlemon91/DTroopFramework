@@ -110,8 +110,22 @@ _grids = "getSections" call _gridDB;
 		};
 		case "probe": {
 			systemChat format ["Grid %1: Probing enemy defenses!", _x];
+			
 			// Logic to send out reconnaissance or probing attacks
-			// [_x, _currentForces] call lmn_fnc_gridProbe;
+			_targetPos = ["read", [_target, "Pos"]] call _gridDB;
+			_current = ["read", [_target, "EnemyProbes"]] call _gridDB;
+			_newCount = _current + 1;
+
+			// Logic to remove the force from current garrison size. 
+			_currentGarrison = ["read", [_x, "GarrisonSize"]] call _gridDB;
+			_newGarrison = _currentGarrison - 1;
+
+			// Spawn the probe
+			[_target, _allegiance, _targetPos] call lmn_fnc_prepProbe;
+
+			// Update the database 
+			["write", [_target, "EnemyProbes", _newCount]] call _gridDB;
+			["write", [_x, "GarrisonSize", _newGarrison]] call _gridDB;
 			["write", [_x, "dayEvent", "Probe"]] call _gridDB;
 		};
 		case "hold": {
