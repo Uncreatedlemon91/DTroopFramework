@@ -6,7 +6,6 @@ _db = ["new", format ["Player Vehicles %1 %2", missionName, worldName]] call oo_
 
 // Setup Index 
 _localIndex = _veh getVariable "IndexVar";
-systemChat format ["Vehicle Index: %1", _localIndex];
 
 // Build index if none exists
 if (isNil "_localIndex") then {

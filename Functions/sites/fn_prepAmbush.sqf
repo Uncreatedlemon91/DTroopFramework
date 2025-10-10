@@ -2,7 +2,7 @@
 params ["_loc", "_faction", "_locPos"];
 _pos = position (selectRandom (nearestTerrainObjects [_locPos, ["ROAD", "TRAIL", "MAIN ROAD", "BUSH"], 800, false, false]));
 if (isnil "_pos") then {
-	_pos = [_locPos, 0, 1000, 5, 0, 10, 0] call BIS_fnc_findSafePos;
+	_pos = [_locPos, 0, 2000, 5, 0, 10, 0] call BIS_fnc_findSafePos;
 };
 _alpha = 0;
 
@@ -25,7 +25,7 @@ switch (_faction) do {
 };
 
 // Make the unit
-_infantrySize = random [8, 12, 15];
+_infantrySize = random [4, 6, 8];
 _reconSize = random [2, 4, 6];
 _toSpawn = [];
 
@@ -40,7 +40,7 @@ for "_i" from 1 to _reconSize do {
 
 // Setup Trigger
 _prep = createTrigger["EmptyDetector", _pos, true];
-_prep setTriggerActivation [_triggerSide, "PRESENT", true];
+_prep setTriggerActivation ["ANYPLAYER", "PRESENT", true];
 _prep setTriggerArea [250, 250, 0, false, 100];
 _prep setTriggerInterval 5;
 _prep setTriggerStatements [

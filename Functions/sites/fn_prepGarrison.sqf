@@ -1,6 +1,6 @@
 // Sets up a garrison site at a building 
 params ["_loc", "_faction", "_locPos"];
-_pos = [_locPos, 0, 250, 5, 0, 10, 0] call BIS_fnc_findSafePos;
+_pos = [_locPos, 0, 1250, 5, 0, 10, 0] call BIS_fnc_findSafePos;
 _alpha = 0;
 
 // Setup a Marker

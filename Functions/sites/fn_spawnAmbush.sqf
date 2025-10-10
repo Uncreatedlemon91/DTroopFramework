@@ -1,6 +1,6 @@
 // Spawns an ambush for the player. 
 params ["_trg"];
-
+systemchat "[AMBUSH] Trigger Activated";
 // Check if trigger is already active
 _active = _trg getVariable "Activated";
 if (_active) exitwith {

@@ -46,5 +46,8 @@ if (_vehicleDatabaseExists) then {
 [] remoteExec ["lmn_fnc_saveEnvironment", 2];
 [] remoteExec ["lmn_fnc_timeManager", 2];
 
-// Run the War Director
-[] remoteExec ["lmn_fnc_wdTick", 2];
+while {true} do {
+    // Run the War Director
+    [] remoteExec ["lmn_fnc_wdTick", 2];
+    sleep 14400;
+};

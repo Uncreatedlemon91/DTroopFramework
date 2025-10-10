@@ -41,4 +41,4 @@ _veh addEventHandler ["Killed", {
 	[_unit] remoteExec ["lmn_fnc_saveVehicle", 2];
 }];
 
-[_veh] remoteExec ["lmn_fnc_setupVehicle", 2];
+[_veh] remoteExec ["lmn_fnc_setupVehicle", 0, true];

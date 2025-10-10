@@ -34,12 +34,6 @@ _grids = "getSections" call _gridDB;
 			// Update the database for the attack
 			["write", [_x, "dayEvent", "Attack"]] call _gridDB;
 		};
-		case "defend": {
-			systemChat format ["Grid %1: Fortifying defenses!", _x];
-			// Logic to fortify current position
-			// [_x, _currentForces] call lmn_fnc_gridDefend;
-			["write", [_x, "dayEvent", "Defend"]] call _gridDB;
-		};
 		case "reinforce": {
 			// Logic to call in reinforcements
 			_reinforceType = selectRandom ["Garrison", "Ambush", "AA", "Artillery"];
@@ -92,6 +86,12 @@ _grids = "getSections" call _gridDB;
 
 			// Inform for Debug
 			systemChat format ["Grid %1 is receiving a new %2 reinforcement", _x, _reinforceType];
+
+			_intelChance = random 1;
+			if (_intelChance < 0.3) then {
+				// Logic to inform players of the new reinforcement
+				[format["[INTEL] %1 forces have been spotted reinforcing $2", _allegiance, (["read", [_x, "Name"]] call _gridDB)]] remoteExec ["systemChat", 0];
+			};
 			
 			// Update the database 
 			["write", [_x, "dayEvent", "Reinforce"]] call _gridDB;
@@ -107,9 +107,15 @@ _grids = "getSections" call _gridDB;
 			// Logic to transfer forces to another location
 			[_target, _x] call lmn_fnc_wdTransfer;
 			["write", [_x, "dayEvent", "Transfer"]] call _gridDB;
+
+			_intelChance = random 1;
+			if (_intelChance < 0.3) then {
+				// Logic to inform players of the new reinforcement
+				[format["[INTEL] %1 forces have been spotted transferring from %2 to %3", _allegiance, (["read", [_x, "Name"]] call _gridDB), (["read", [_target, "Name"]] call _gridDB)]] remoteExec ["systemChat", 0];
+			};
 		};
 		case "probe": {
-			systemChat format ["Grid %1: Probing enemy defenses!", _x];
+			systemChat format ["Grid %1: Probing %2 defenses!", _x, _target];
 			
 			// Logic to send out reconnaissance or probing attacks
 			_targetPos = ["read", [_target, "Pos"]] call _gridDB;
@@ -127,6 +133,12 @@ _grids = "getSections" call _gridDB;
 			["write", [_target, "EnemyProbes", _newCount]] call _gridDB;
 			["write", [_x, "GarrisonSize", _newGarrison]] call _gridDB;
 			["write", [_x, "dayEvent", "Probe"]] call _gridDB;
+
+			_intelChance = random 1;
+			if (_intelChance < 0.3) then {
+				// Logic to inform players of the new reinforcement
+				[format["[INTEL] %1 are raiding from $2 to %3", _allegiance, (["read", [_x, "Name"]] call _gridDB), (["read", [_target, "Name"]] call _gridDB)]] remoteExec ["systemChat", 0];
+			};
 		};
 		case "hold": {
 			systemChat format ["Grid %1: Holding position.", _x];
@@ -138,4 +150,5 @@ _grids = "getSections" call _gridDB;
 			systemChat format ["Grid %1: No action taken.", _x];
 		};
 	};
+	sleep 120;
 } forEach _grids;

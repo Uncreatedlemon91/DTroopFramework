@@ -6,7 +6,7 @@ _alpha = 0;
 // Setup a Marker
 _mkr = createMarker [format ["%1-%2", _loc, _pos], _pos];
 _mkr setMarkerType "hd_dot";
-_mkr setMarkerColor "COLORBLACK";
+_mkr setMarkerColor "COLORPURPLE";
 _mkr setMarkerAlpha _alpha;
 
 // Determine the Garrison details 
