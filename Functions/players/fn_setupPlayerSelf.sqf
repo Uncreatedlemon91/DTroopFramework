@@ -15,7 +15,7 @@ _treeRemovalAction = [
 
 [_player, 1, ["ACE_SelfActions"], _treeRemovalAction] call ace_interact_menu_fnc_addActionToObject;
 
-// Setup event handler for tracking bullets shot 
+// Setup event handler for Player Deaths 
 _player addEventHandler ["Killed", {
 	params ["_unit", "_killer", "_instigator", "_useEffects"];
     _killerType = typeOf _killer;
@@ -30,3 +30,4 @@ _player addEventHandler ["Killed", {
 
     [_unit, _instigator, _killerType, _ddMMyyyy, _hhmm] remoteExec ["lmn_fnc_recordDeath", 2];
 }];
+

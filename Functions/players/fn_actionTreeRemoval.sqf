@@ -7,7 +7,7 @@ _weapon = currentWeapon _player;
 
 // Check if cutters are legit 
 if (_weapon in _cutters) then {
-	_tree = (nearestTerrainObjects [_player, ["TREE", "SMALL TREE", "FOREST"], 5, true, false]) select 0;
+	_tree = (nearestTerrainObjects [_player, ["TREE", "SMALL TREE", "FOREST", "BUSH"], 5, true, false]) select 0;
 	if (isnil "_tree") exitWith {systemChat "No trees nearby!"};
 	systemChat "Cutting Tree...";
 	[_player, (selectRandom ["REPAIR_VEH_STAND", "REPAIR_VEH_KNEEL"]), "ASIS"] call BIS_fnc_ambientAnim;

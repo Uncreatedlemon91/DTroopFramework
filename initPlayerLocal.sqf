@@ -13,3 +13,17 @@ while {true} do {
 	sleep 20;
 	[player] remoteExec ["lmn_fnc_savePlayer", 2];
 };
+
+// Potential fix for saving items when dropped
+["ace_dragging_stoppedCarry", {
+	params [_unit, _target, _loadCargo];
+	[_target] remoteExec ["lmn_fnc_saveItem", 2];
+	systemChat "Saved Item!";
+}] call CBA_fnc_addEventHandler;
+
+// Potential fix for saving items when dropped
+["ace_dragging_stoppedDrag", {
+	params [_unit, _target];
+	[_target] remoteExec ["lmn_fnc_saveItem", 2];
+	systemChat "Saved Item!";
+}] call CBA_fnc_addEventHandler;
