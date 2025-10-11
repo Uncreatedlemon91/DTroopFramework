@@ -49,5 +49,5 @@ if (_vehicleDatabaseExists) then {
 while {true} do {
     // Run the War Director
     [] remoteExec ["lmn_fnc_wdTick", 2];
-    sleep 14400;
+    sleep 14400; // 4 hour sleep
 };
