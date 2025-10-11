@@ -39,7 +39,6 @@ switch (_task) do {
 	case "rush": {[_grp, 250] spawn lambs_wp_fnc_taskRush};
 };
 _grp setCombatMode "RED";
-_grp setBehaviour "SAFE";
 _grp deleteGroupWhenEmpty true;
 _grp setVariable ["lambs_danger_enableGroupReinforce", true, true];
 
