@@ -99,7 +99,7 @@ _grids = "getSections" call _gridDB;
 		case "build": {
 			systemChat format ["Grid %1: Building infrastructure!", _x];
 			// Logic to build or repair infrastructure
-			// [_x, _currentInfrastructure] call lmn_fnc_gridBuild;
+			// [_x] call lmn_fnc_gridBuild;
 			["write", [_x, "dayEvent", "Build"]] call _gridDB;
 		};
 		case "transfer": {
