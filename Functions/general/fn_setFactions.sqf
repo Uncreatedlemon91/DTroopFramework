@@ -120,7 +120,7 @@ lmn_US = [
 		"vn_b_men_sog_03",
 		"vn_b_men_sog_30"
 	]
-	// Vehicles - 2
+	// Planes - 2
 
 	// Turrets - 3
 ];

@@ -23,13 +23,13 @@ _grp = createGroup Civilian;
 _unit = _grp createUnit [_class, position _trg, [], 4, "FORM"];
 _grp deleteGroupWhenEmpty true;
 
+// Give the civilian something to do 
+[(group _unit), position _unit, 250] call BIS_fnc_taskPatrol;
+(group _unit) setSpeedMode "LIMITED";
+
 // Give the civilian variables 
 _unit setVariable ["Stability", random [(_stability - 25), _stability, (_stability + 25)]];
 _destroyed = false;
-
-// Give the civilian something to do 
-[(group _unit), position _unit, 100] call BIS_fnc_taskPatrol;
-(group _unit) setSpeedMode "LIMITED";
 
 // Add the civilian to curator 
 zeus addCuratorEditableObjects [[_unit], true];
