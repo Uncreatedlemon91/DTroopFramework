@@ -12,6 +12,25 @@ switch (_type) do {
 			["vn_m16_20_t_mag", 50]
 		];
 	};
+	case "M16Rifles": {
+		_model = "vn_b_ammobox_02"; 
+		_content = [
+			["vn_m16", 10]
+		];
+	};
+	case "M60MG": {
+		_model = "vn_b_ammobox_02"; 
+		_content = [
+			["vn_m60", 10]
+		];
+	};
+	case "M79GL": {
+		_model = "vn_b_ammobox_02"; 
+		_content = [
+			["vn_m79", 10],
+			["vn_m79_p", 5]
+		];
+	};
 	case "M60Ammo": {
 		_model = "vn_b_ammobox_02"; 
 		_content = [
@@ -41,14 +60,18 @@ switch (_type) do {
 	case "Grenades": {
 		_model = "vn_b_ammobox_04";
 		_content = [
-			["vn_m67_grenade_mag", 25],
+			["vn_m67_grenade_mag", 50],
 			["vn_m18_white_mag", 20],
 			["vn_m18_green_mag", 20],
 			["vn_m18_red_mag", 20],
 			["vn_m18_purple_mag", 20],
 			["vn_m18_yellow_mag", 20],
 			["vn_m34_grenade_mag", 20],
-			["vn_m14_grenade_mag", 20]
+			["vn_m14_grenade_mag", 20],
+			["vn_m127", 5],
+			["vn_m127_mag", 20],
+			["vn_m128_mag", 20],
+			["vn_m129_mag", 20]
 		];
 	};
 	case "Medical": {
@@ -198,6 +221,8 @@ switch (_type) do {
 		_model = "Land_WoodenCrate_01_F";
 		_content = [
 			["vn_m72_mag", 10],
+			["vn_m72", 2],
+			["vn_m20a1b1_01", 2],
 			["vn_m20a1b1_heat_mag", 5],
 			["vn_m20a1b1_wp_mag", 5]
 		];

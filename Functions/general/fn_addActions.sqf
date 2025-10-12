@@ -192,11 +192,35 @@ _m16Box = [
     {true}
 ] call ace_interact_menu_fnc_createAction;
 
+_m16Wep = [
+    "m16Rifles", 
+    "M16 Rifle Box", 
+    "", 
+    {["M16Rifles"] remoteExec ["lmn_fnc_spawnSupply", 2]}, 
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+_M60Wep = [
+    "M60Wep", 
+    "M60 Box", 
+    "", 
+    {["M60MG"] remoteExec ["lmn_fnc_spawnSupply", 2]}, 
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
 _M60Ammo = [
     "M60Ammo", 
     "M60 Ammo Box", 
     "", 
     {["M60Ammo"] remoteExec ["lmn_fnc_spawnSupply", 2]}, 
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+_M79Wep = [
+    "M79Wep", 
+    "M79 Box", 
+    "", 
+    {["M79GL"] remoteExec ["lmn_fnc_spawnSupply", 2]}, 
     {true}
 ] call ace_interact_menu_fnc_createAction;
 
@@ -415,8 +439,11 @@ _radioTower = [
 // Supplies 
 [ItemSpawner, 0, ["ACE_MainActions"], _supplies] call ace_interact_menu_fnc_addActionToObject;
 // Ammunition 
+[ItemSpawner, 0, ["ACE_MainActions", "supplies"], _m16Wep] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "supplies"], _m16Box] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "supplies"], _m60Wep] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "supplies"], _M60Ammo] call ace_interact_menu_fnc_addActionToObject;
+[ItemSpawner, 0, ["ACE_MainActions", "supplies"], _M79Wep] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "supplies"], _M79Ammo] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "supplies"], _grenades] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "supplies"], _medical] call ace_interact_menu_fnc_addActionToObject;

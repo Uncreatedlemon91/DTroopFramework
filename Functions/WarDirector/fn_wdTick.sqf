@@ -137,7 +137,7 @@ _grids = "getSections" call _gridDB;
 			_intelChance = random 1;
 			if (_intelChance < 0.3) then {
 				// Logic to inform players of the new reinforcement
-				[format["[INTEL] %1 are raiding from $2 to %3", _allegiance, (["read", [_x, "Name"]] call _gridDB), (["read", [_target, "Name"]] call _gridDB)]] remoteExec ["systemChat", 0];
+				[format["[INTEL] %1 are raiding from %2 to %3", _allegiance, (["read", [_x, "Name"]] call _gridDB), (["read", [_target, "Name"]] call _gridDB)]] remoteExec ["systemChat", 0];
 			};
 		};
 		case "hold": {
