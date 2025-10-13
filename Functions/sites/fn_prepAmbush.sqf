@@ -41,7 +41,7 @@ for "_i" from 1 to _reconSize do {
 // Setup Trigger
 _prep = createTrigger["EmptyDetector", _pos, true];
 _prep setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-_prep setTriggerArea [250, 250, 0, false, 100];
+_prep setTriggerArea [750, 750, 0, false, 20];
 _prep setTriggerInterval 5;
 _prep setTriggerStatements [
 	"this",
