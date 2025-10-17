@@ -24,8 +24,20 @@ _vehSave = [
     {true}
 ] call ace_interact_menu_fnc_createAction;
 
+_vehID = [
+    "vehID",
+    "VehicleID", 
+    "",
+    {
+        params ["_target", "_player", "_params"];
+        _id = _target getvariable "IndexVar";
+        systemChat format ["Vehicle ID: %1", _id];
+    };
+];
+
 [_veh, 0, ["ACE_MainActions"], _vehDelete] call ace_interact_menu_fnc_addActionToObject;
 [_veh, 0, ["ACE_MainActions"], _vehSave] call ace_interact_menu_fnc_addActionToObject;
+[_veh, 0, ["ACE_MainActions"], _vehID] call ace_interact_menu_fnc_addActionToObject;
 
 // Vehicle specific settings
 if ((typeOf _veh == "vn_b_armor_m577_02") OR (typeOf _veh == "vn_b_air_ch47_02_02")) then {
