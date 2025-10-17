@@ -1,6 +1,7 @@
 // Locations are listed on the map 
 
 lmn_locations = [
+	"mount",
 	"NameLocal",
 	"NameVillage",
 	"Name",
@@ -19,15 +20,14 @@ lmn_locations = [
 // Scan and setup the markers for each location as well as their variables.
 Missionlocations = nearestLocations [[0,0,0], lmn_locations, worldsize * 4];
 {
-	[_x] remoteExec ["lmn_fnc_createLocation", 2];
+	// Check if the location is Mount, if it is, then only spawn some of them
+	if (typeOf _x == "mount") then {
+		_random = random 100;
+		if (_random < 20) then {
+			[_x] remoteExec ["lmn_fnc_createLocation", 2];
+		};
+	} else {
+		[_x] remoteExec ["lmn_fnc_createLocation", 2];
+	};
 	sleep 0.1;
 } forEach Missionlocations;
-
-// Run the War Director
-[] remoteExec ["lmn_fnc_wdTick", 2];
-[] remoteExec ["lmn_fnc_loadItems", 2];
-
-// Run the War Director
-[] remoteExec ["lmn_fnc_wdTick", 2];
-
-systemChat "[DB] Locations Generated";

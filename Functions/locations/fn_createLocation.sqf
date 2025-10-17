@@ -1,10 +1,11 @@
-params ["_loc", "_allegiance", "_remake"];
+params ["_loc", "_faction", "_remake"];
 
 // Define the databases being used 
 _locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_inidbi;
 
 // Set priority of the location
 _lowPriority = [
+	"mount",
 	"NameLocal",
 	"NameVillage",
 	"Name",
@@ -40,114 +41,48 @@ if (type _loc in _highPriority) then {
 };
 
 // Set the allegiance of the location 
-if (isNil "_allegiance") then {
-	_allegiance = "North";
+if (isNil "_faction") then {
+	_faction = "PAVN";
 };
 _mkr setMarkerType "vn_flag_pavn";
 _mkr setMarkerAlpha 0.4;
 if (isNil "_remake") then {
+	// Assign Southern / Allied Bases
 	if ((position _loc) inArea "SouthAO") then {
-	_allegiance = selectRandomWeighted ["USA", 0.3, "ROK", 0.5, "AUS", 0.2, "NZ", 0.1];
+		_faction = selectRandomWeighted ["USA", 0.3, "ARVN", 0.5];
 	};
+	// Assign US Bases
 	if (((position _loc) inArea "Base") OR ((position _loc) inArea "AirBase")) then {
-		_allegiance = "USA";
+		_faction = "USA";
 	};
+	// Assign ARVN Bases
 	if ((position _loc) inArea "Saigon") then {
-		_allegiance = "ROK";
+		_faction = "ARVN";
 	};
 };
 
-switch (_allegiance) do {
+switch (_faction) do {
 	case "USA": {_mkr setMarkerType "vn_flag_usa";};
-	case "ROK": {_mkr setMarkerType "vn_flag_arvn";};
-	case "AUS": {_mkr setMarkerType "vn_flag_aus";};
-	case "NZ": {_mkr setMarkerType "vn_flag_nz";};
+	case "ARVN": {_mkr setMarkerType "vn_flag_arvn";};
 };
-
-// Set the population 
-_houses = nearestTerrainObjects [position _loc, ["HOUSE"], 800];
-_houseCount = count _houses;
-_population = round (_houseCount / 4);
-if (_population > 40) then {
-	_population = 40;
-};
-
-// Get nearby locations 
-_locs = nearestLocations [position _loc, [
-	"NameLocal",
-	"NameVillage",
-	"Name",
-	"VegetationBroadleaf",
-	"Hill",
-	"NameMarine",
-	"ViewPoint",
-	"Strategic",
-	"NameCity",
-	"Airport",
-	"NameMarine",
-	"StrongpointArea",
-	"NameCityCapital"
-], 2000];
-_nearLocs = [];
-{
-	_nearLocs pushback (str _x);
-} forEach _locs;
-_nearLocs deleteAt 0;
 
 // Set other Variables 
-_ambushes = (round(random 8)) * _priority;
-_garrisonSize = (round(random 8)) * _priority;
-_stability = round(random 100);
-_mortarSites = selectRandom [0, 1, 2];
-_minefields = round(random 2) * _priority;
-_aaSites = (round(random 4)) * _priority;
+_troopCount = 10;
+_maxTroopCount = 50 * _priority;
+_supplyLevel = 10;
+_siteType = type _loc;
+_security = round (random 100);
+
+_data = [
+	text _loc,
+	position _loc,
+	_faction,
+	_troopCount,
+	_maxTroopCount,
+	_supplyLevel,
+	_siteType,
+	_security 
+];
 
 // Save the location 
-["write", [_loc, "Name", text _loc]] call _locDB;
-["write", [_loc, "Pos", position _loc]] call _locDB;
-["write", [_loc, "CreationTime", systemTime]] call _locDB;
-["write", [_loc, "Marker", _mkr]] call _locDB;
-["write", [_loc, "Population", _population]] call _locDB;
-["write", [_loc, "NearLocations", _nearLocs]] call _locDB;
-["write", [_loc, "Priority", _priority]] call _locDB;
-["write", [_loc, "Allegiance", _allegiance]] call _locDB;
-["write", [_loc, "Stability", _stability]] call _locDB;
-["write", [_loc, "dayEvent", ""]] call _locDB;
-["write", [_loc, "AmbushCount", _ambushes]] call _locDB;
-["write", [_loc, "GarrisonSize", _garrisonSize]] call _locDB;
-["write", [_loc, "MortarSites", _mortarSites]] call _locDB;
-["write", [_loc, "MinefieldSites", _minefields]] call _locDB;
-["write", [_loc, "AAsites", _aaSites]] call _locDB;
-
-// All Location specifics 
-// Spawn civilians 
-for "_i" from 1 to _population do {
-	_newSite = [_loc, _stability, position _loc] remoteExec ["lmn_fnc_prepCiv", 2];
-};
-
-// Spawn AA site Locations 
-for "_i" from 1 to _aaSites do {
-	_newSite = [_loc, _allegiance, position _loc] remoteExec ["lmn_fnc_prepAA", 2];
-};
-
-// Spawn Garrison site Locations 
-for "_i" from 1 to _garrisonSize do {
-	_newSite = [_loc, _allegiance, position _loc] remoteExec ["lmn_fnc_prepGarrison", 2];
-};
-
-// Spawn Artillery site locations 
-for "_i" from 1 to _mortarSites do {
-	_newSite = [_loc, _allegiance, position _loc] remoteExec ["lmn_fnc_prepArty", 2];
-};
-
-// Spawn Ambush Sites
-for "_i" from 1 to _ambushes do {
-	_newSite = [_loc, _allegiance, position _loc] remoteExec ["lmn_fnc_prepAmbush", 2];
-};
-
-// "NORTH" Location specifics 
-if (_allegiance == "North") then {
-	for "_i" from 1 to _minefields do {
-		_newSite = [_loc, _allegiance, position _loc] remoteExec ["lmn_fnc_prepTraps", 2];
-	};
-};
+["write", [_loc, "Data", _data]] call _locDB;
