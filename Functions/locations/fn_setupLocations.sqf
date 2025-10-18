@@ -1,7 +1,7 @@
 // Locations are listed on the map 
 
 lmn_locations = [
-	"mount",
+	// "mount",
 	"NameLocal",
 	"NameVillage",
 	"Name",
@@ -21,9 +21,9 @@ lmn_locations = [
 Missionlocations = nearestLocations [[0,0,0], lmn_locations, worldsize * 4];
 {
 	// Check if the location is Mount, if it is, then only spawn some of them
-	if (typeOf _x == "mount") then {
+	if (type _x == "mount") then {
 		_random = random 100;
-		if (_random < 20) then {
+		if (_random < 5) then {
 			[_x] remoteExec ["lmn_fnc_createLocation", 2];
 		};
 	} else {

@@ -3,68 +3,44 @@ _locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_ini
 _sections = "getSections" call _locDB;
 
 {
-	// Current result is saved in variable _x
-	_pos = ["read", [_x, "Pos"]] call _locDB;
-	_allegiance = ["read", [_x, "Allegiance"]] call _locDB;
-	_priority = ["read", [_x, "Priority"]] call _locDB;
-	_population = ["read", [_x, "Population"]] call _locDB;
-	_ambushes = ["read", [_x, "AmbushCount"]] call _locDB;
-	_aaSites = ["read", [_x, "AAsites"]] call _locDB;
-	_garrisonSize = ["read", [_x, "GarrisonSize"]] call _locDB;
-	_stability = ["read", [_x, "Stability"]] call _locDB;
-	_mortarSites = ["read", [_x, "MortarSites"]] call _locDB;
+	_data = ["read", [_x, "Data"]] call _locDB;
 
-	// Create a trigger nearestLocation
-	_location = nearestLocation [_pos, ""];
-	[_location] remoteExec ["lmn_fnc_createLocTrigger", 2];
+	/*
+	0. text _loc,
+	1. position _loc,
+	2. _faction,
+	3. _troopCount,
+	4. _maxTroopCount,
+	5. _supplyLevel,
+	6. _siteType,
+	7. _security 
+	8. _flag
+	*/
 
-	// Create a marker
-	_mkr = createMarkerLocal [format ["%1-%2",text _x, _pos], _pos];
+	// Build the trigger at the location 
+	_trig = createTrigger ["EmptyDetector", _data select 1, true];
+	_trig setTriggerArea [500, 500, 0, false, 300];
+	_trig setTriggerActivation ["ANYPLAYER", "PRESENT", true];
+	_trig setTriggerStatements [
+		"this", 
+		"[thisTrigger] remoteExec ['lmn_fnc_tdTick', 2]",
+		"thisTrigger setVariable ['Activated', false]"
+	];
+
+	// Create Marker 
+	_mkr = createMarker [_data select 0, _data select 1];
+	_mkr setMarkerType (_data select 8);
+	_mkr setMarkerSize [(_data select 9), (_data select 9)];;
 	_mkr setMarkerAlpha 0.4;
-	if (_priority == 1) then {
-		_mkr setMarkerSizeLocal [0.8,0.8];
-	};
-	if (_priority == 2) then {
-		_mkr setMarkerSizeLocal [1,1];
-	};
-	if (_priority == 3) then {
-		_mkr setMarkerSizeLocal [1.2,1.2];
-	};
 
-	switch (_allegiance) do {
-		case "USA": {_mkr setMarkerType "vn_flag_usa";};
-		case "ROK": {_mkr setMarkerType "vn_flag_arvn";};
-		case "AUS": {_mkr setMarkerType "vn_flag_aus";};
-		case "NZ": {_mkr setMarkerType "vn_flag_nz";};
-		case "North": {_mkr setMarkerType "vn_flag_pavn";};
-	};
-
-	// Spawn civilians 
-	for "_i" from 1 to _population do {
-		_newSite = [_x, _stability, _pos] remoteExec ["lmn_fnc_prepCiv", 2];
-	};
-
-	// Spawn ambush locations 
-	for "_i" from 1 to _ambushes do {
-		_newSite = [_x, _allegiance, _pos] remoteExec ["lmn_fnc_prepAmbush", 2];
-	};
-
-	// Spawn AA site Locations 
-	for "_i" from 1 to _aaSites do {
-		_newSite = [_x, _allegiance, _pos] remoteExec ["lmn_fnc_prepAA", 2];
-	};
-
-	// Spawn Garrison site Locations 
-	for "_i" from 1 to _garrisonSize do {
-		_newSite = [_x, _allegiance, _pos] remoteExec ["lmn_fnc_prepGarrison", 2];
-	};
-
-	// Spawn Artillery site locations 
-	for "_i" from 1 to _mortarSites do {
-		_newSite = [_x, _allegiance, _pos] remoteExec ["lmn_fnc_prepArty", 2];
-	};
+	// Set Trigger Variables 
+	_trig setVariable ["Location", _x, true];
+	_trig setVariable ["Faction", _data select 2, true];
+	_trig setVariable ["TroopCount", _data select 3, true];
+	_trig setVariable ["SiteType", _data select 6, true];
+	_trig setVariable ["MaxTroopCount", _data select 4, true];
+	_trig setVariable ["SupplyLevel", _data select 5, true];
+	_trig setVariable ["Security", _data select 7, true];
+	_trig setVariable ["Marker", _mkr, true];
+	_trig setVariable ["Activated", false, true];
 } forEach _sections;
-
-
-
-// systemChat "[DB] Locations Loaded";

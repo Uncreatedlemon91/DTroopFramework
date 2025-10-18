@@ -47,4 +47,7 @@ _objs = "getSections" call _gridDB;
 		case "Resupply": {[_x] remoteExec ["lmn_fnc_wdResupply", 2]};
 		default { };
 	};
+
+	// debug 
+	systemChat format ["[WD] Location %1 Action: %2", _objData select 0, _action];
 } forEach _objs;

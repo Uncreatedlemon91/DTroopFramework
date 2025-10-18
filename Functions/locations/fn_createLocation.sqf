@@ -5,7 +5,6 @@ _locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_ini
 
 // Set priority of the location
 _lowPriority = [
-	"mount",
 	"NameLocal",
 	"NameVillage",
 	"Name",
@@ -25,22 +24,25 @@ _highPriority = [
 ];
 
 _priority = 1;
+_flagSize = 1;
 _mkr = createMarkerLocal [format ["%1-%2",text _loc, position _loc], position _loc];
 if (type _loc in _lowPriority) then {
-	_mkr setMarkerSizeLocal [0.5,0.5];
+	_flagSize = 0.7;
 	_priority = 1;
 };
 if (type _loc in _midPriority) then {
-	_mkr setMarkerSizeLocal [1,1];
 	_priority = 2;
 };
 if (type _loc in _highPriority) then {
-	_mkr setMarkerSizeLocal [1.5,1.5];
+	_flagSize = 1.2;
 	_priority = 3;
 };
-
+_mkr setMarkerSizeLocal [_flagSize, _flagSize];
 _mkr setMarkerAlpha 0.4;
 if (isNil "_faction") then {
+	// Assign Northern Bases
+	_faction = "PAVN";
+
 	// Assign Southern / Allied Bases
 	if ((position _loc) inArea "SouthAO") then {
 		_faction = selectRandomWeighted ["USA", 0.3, "ARVN", 0.5];
@@ -53,15 +55,14 @@ if (isNil "_faction") then {
 	if ((position _loc) inArea "Saigon") then {
 		_faction = "ARVN";
 	};
-	// Assign Northern Bases
-	_faction = "PAVN";
 };
 
+_flag = "vn_flag_pavn";
 switch (_faction) do {
-	case "USA": {_mkr setMarkerType "vn_flag_usa";};
-	case "ARVN": {_mkr setMarkerType "vn_flag_arvn";};
-	case "PAVN": {_mkr setMarkerType "vn_flag_pavn";};
+	case "USA": {_flag = "vn_flag_usa";};
+	case "ARVN": {_flag = "vn_flag_arvn";};
 };
+_mkr setMarkerType _flag;
 
 // Set other Variables 
 _troopCount = 10;
@@ -78,7 +79,9 @@ _data = [
 	_maxTroopCount,
 	_supplyLevel,
 	_siteType,
-	_security 
+	_security,
+	_flag,
+	_flagSize
 ];
 
 // Save the location 
@@ -95,13 +98,13 @@ _trig setTriggerStatements [
 ];
 
 // Set Trigger Variables 
-_trig setVariable ["Location", _loc];
-_trig setVariable ["Faction", _faction];
-_trig setVariable ["TroopCount", _troopCount];
-_trig setVariable ["SiteType", _siteType];
-_trig setVariable ["Priority", _priority];
-_trig setVariable ["MaxTroopCount", _maxTroopCount];
-_trig setVariable ["SupplyLevel", _supplyLevel];
-_trig setVariable ["Security", _security];
-_trig setVariable ["Marker", _mkr];
-_trig setVariable ["Activated", false];
+_trig setVariable ["Location", _loc, true];
+_trig setVariable ["Faction", _faction, true];
+_trig setVariable ["TroopCount", _troopCount, true];
+_trig setVariable ["SiteType", _siteType, true];
+_trig setVariable ["Priority", _priority, true];
+_trig setVariable ["MaxTroopCount", _maxTroopCount, true];
+_trig setVariable ["SupplyLevel", _supplyLevel, true];
+_trig setVariable ["Security", _security, true];
+_trig setVariable ["Marker", _mkr, true];
+_trig setVariable ["Activated", false, true];

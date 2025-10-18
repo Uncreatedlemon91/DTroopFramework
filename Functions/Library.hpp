@@ -65,7 +65,10 @@ class CfgFunctions
 
 		class WarDirector
 		{
+			class tdAmbush {};
+			class tdTick {};
 			class wdCheckLocs {};
+			class wdLogisticsTick {};
 			class wdTick {};
 			class wdTransfer {};
 		};

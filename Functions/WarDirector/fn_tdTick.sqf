@@ -1,27 +1,27 @@
 // This function acts as the tactical commander of the AI forces in an area. 
 params ["_trig"];
 
+systemChat "Trigger Activated";
 // Kill script if the trigger is already activated
-if (_trig getVariable ["Activated", true]) exitWith {};
+_isActive = _trig getVariable "Activated";
 
-// Trigger is not activated, proceed
-// List the trigger to activated
-_trig setVariable ["Activated", true]; 
+if (_isActive == false) then {
+	_trig setVariable ["Activated", true, true];
+};
 
-while {true} do {
+while {_trig getVariable "Activated"} do {
 	// Gather forcepool data 
 	_troopCount = _trig getVariable "TroopCount";
 	_siteType = _trig getVariable "SiteType";
 	_faction = _trig getVariable "Faction";
 
 	// Actions to take 
-	_Ambush = 0;
-	_defend = 0;
-	_attack = 0;
-	_patrol = 0;
+	_Ambush = 1;
+	_defend = 1;
+	_attack = 1;
+	_patrol = 1;
 
 	switch (_siteType) do {
-		case "mount": {_ambush = _ambush + 2; _patrol = _patrol + 1};
 		case "NameLocal": {_defend = _defend + 2; _patrol = _patrol + 1};
 		case "nameVillage": {_defend = _defend + 1; _patrol = _patrol + 2};
 		case "Name": {_attack = _attack + 2; _patrol = _patrol + 1};
@@ -51,8 +51,12 @@ while {true} do {
 		case "Attack": {[_trig] remoteExec ["lmn_fnc_tdAttack", 2]};
 		case "Patrol": {[_trig] remoteExec ["lmn_fnc_tdPatrol", 2]};
 	};
+	
+	// Sync the database 
+	[_trig] remoteExec ["lmn_fnc_saveLocation", 2];
 
 	// Wait for next tick 
-	sleep 300;
+	sleep 10;
 };
 
+systemChat "[WD] Tactical Director Deactivated";

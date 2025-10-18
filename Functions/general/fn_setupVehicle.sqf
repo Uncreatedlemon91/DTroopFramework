@@ -32,8 +32,8 @@ _vehID = [
         params ["_target", "_player", "_params"];
         _id = _target getvariable "IndexVar";
         systemChat format ["Vehicle ID: %1", _id];
-    };
-];
+    }
+] call ace_interact_menu_fnc_createAction;
 
 [_veh, 0, ["ACE_MainActions"], _vehDelete] call ace_interact_menu_fnc_addActionToObject;
 [_veh, 0, ["ACE_MainActions"], _vehSave] call ace_interact_menu_fnc_addActionToObject;

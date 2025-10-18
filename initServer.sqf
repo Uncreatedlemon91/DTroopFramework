@@ -1,7 +1,5 @@
 // Precompile the variables used in the mission 
-[] call lmn_fnc_setEvents;
 [] call lmn_fnc_setFactions;
-[] call lmn_fnc_setCivActions;
 sleep 0.5;
 
 //// Load the save game 
