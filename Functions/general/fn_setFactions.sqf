@@ -1,5 +1,21 @@
 // Sets the factions 
 // PAVN Forces 
+lmn_pavn_reconTeam = [
+	
+];
+
+lmn_pavn_ambushers = [
+	
+];
+
+lmn_pavn_sniperTeam = [
+	[
+		"vn_o_men_nva_24",
+		"vn_o_men_nva_48",
+		"vn_o_men_nva_46"
+	],
+	5
+];
 lmn_PAVN = [
 	// Infantry 0
 	[
