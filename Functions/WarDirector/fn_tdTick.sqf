@@ -55,6 +55,9 @@ while {_trig getVariable "Activated"} do {
 	// Sync the database 
 	[_trig] remoteExec ["lmn_fnc_saveLocation", 2];
 
+	// Testing 
+	_squads = "true" configClasses (configfile >> "CfgGroups" >> "East" >> "VN_PAVN" >> "vn_o_group_men_nva_dc");
+	systemChat format ["Squads: %1", _squads];
 	// Wait for next tick 
 	sleep 10;
 };

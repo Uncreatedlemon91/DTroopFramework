@@ -31,7 +31,7 @@ lmn_PAVN = [
 		"vn_o_men_nva_15",
 		"vn_o_men_nva_50",
 		"vn_o_men_nva_20",
-		"vn_o_men_nva_17",
+		"vn_o_men_nva_17", 
 		"vn_o_men_nva_18",
 		"vn_o_men_nva_27",
 		"vn_o_men_nva_23",
