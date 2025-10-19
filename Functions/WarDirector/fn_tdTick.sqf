@@ -1,7 +1,6 @@
 // This function acts as the tactical commander of the AI forces in an area. 
 params ["_trig"];
 
-systemChat "Trigger Activated";
 // Kill script if the trigger is one of these things: 
 // - No longer active 
 // - Has no troop reserves left 
@@ -9,9 +8,9 @@ systemChat "Trigger Activated";
 _isActive = _trig getVariable "Activated";
 _troopCount = _trig getVariable "TroopCount";
 _activeTroops = _trig getVariable "ActiveTroops";
-if (_isActive) exitWith {};
-if (_troopCount <= 0) exitWith {};
-if (_activeTroops >= (10 * _playerCount)) exitWith {};
+if (_isActive) exitWith {systemChat "[TD] Already Active!"};
+if (_troopCount <= 0) exitWith {systemChat "[TD] NO MORE TROOPS!"}; // Convert this location 
+if (_activeTroops >= (10 * _playerCount)) exitWith {systemChat "[TD] Too many troops in the AO!"};
 
 // Change the trigger to 'active'
 _trig setVariable ["Activated", true, true];
