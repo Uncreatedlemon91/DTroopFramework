@@ -2,18 +2,25 @@
 params ["_trig"];
 
 systemChat "Trigger Activated";
-// Kill script if the trigger is already activated
+// Kill script if the trigger is already activated or out of forcepool
 _isActive = _trig getVariable "Activated";
+_troopCount = _trig getVariable "TroopCount";
+if (_isActive) exitWith {};
+if (_troopCount == 0) exitWith {};
 
-if (_isActive == false) then {
-	_trig setVariable ["Activated", true, true];
-};
+// Change the trigger to 'active'
+_trig setVariable ["Activated", true, true];
 
 while {_trig getVariable "Activated"} do {
 	// Gather forcepool data 
 	_troopCount = _trig getVariable "TroopCount";
 	_siteType = _trig getVariable "SiteType";
 	_faction = _trig getVariable "Faction";
+	_loc = _trig getVariable "Location";
+
+	// Get list of players in the trigger area
+	_players = list _trig;
+	_playerCount = count _players;
 
 	// Actions to take 
 	_Ambush = 1;
@@ -36,6 +43,16 @@ while {_trig getVariable "Activated"} do {
 		case "NameCityCapital": {_defend = _defend + 3; _attack = _attack + 1};
 	};
 
+	// Add a factor based on player count 
+	if (_playerCount < 3) then {
+		_ambush = _ambush + 2;
+		_patrol = _patrol + 1;
+	};
+	if (_playerCount >= 4) then {
+		_Attack = _attack + 2;
+		_defend = _defend + 2;
+	};
+	
 	// Decide action based on random weighted values
 	_action = selectRandomWeighted [
 		"Ambush", _ambush,
@@ -53,13 +70,10 @@ while {_trig getVariable "Activated"} do {
 	};
 	
 	// Sync the database 
-	[_trig] remoteExec ["lmn_fnc_saveLocation", 2];
+	[_loc, _trig] remoteExec ["lmn_fnc_saveLocation", 2];
 
-	// Testing 
-	_squads = "true" configClasses (configfile >> "CfgGroups" >> "East" >> "VN_PAVN" >> "vn_o_group_men_nva_dc");
-	systemChat format ["Squads: %1", _squads];
-	// Wait for next tick 
-	sleep 10;
+	// Loop the script  
+	sleep 30;
 };
 
 systemChat "[WD] Tactical Director Deactivated";

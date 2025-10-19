@@ -14,6 +14,8 @@ class CfgFunctions
 		class locations 
 		{
 			class createLocation {};
+			class loadLocations {};
+			class saveLocation {};
 			class setupLocations {};
 		};
 
@@ -29,7 +31,6 @@ class CfgFunctions
 			class getPlayerData {};
 			class loadEnvironment {};
 			class loadItems {};
-			class loadLocations {};
 			class loadPlayer {};
 			class loadTrees {};
 			class loadVehicles {};

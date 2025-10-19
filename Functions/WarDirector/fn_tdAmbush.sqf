@@ -1,60 +1,50 @@
 // Tactical commander that directs an Ambush assault 
 params ["_trig"];
 
-// Gather forcepool data 
+// Stop script if no Troops available in reserve
 _troopCount = _trig getVariable "TroopCount";
-
-// Get list of players in the trigger area
-_players = list _trig;
-_playerCount = count _players;
-systemChat format ["[TD] Players in Area: %1", _playerCount];
-
-// Decide how many forces to send / engage with
-_troopsToSend = random [_playerCount, _playerCount + 5, _playerCount + 10];
-if !((_troopsToSend > 0) AND (_troopsToSend <= _troopCount)) exitWith {
-	systemChat "[TD] Not enough troops to execute Ambush.";
-};
-
-// Reduce the troop count in the trigger
-_newTroopCount = _troopCount - _troopsToSend;
-_trig setVariable ["TroopCount", _newTroopCount, true];
-
-// Execute Ambush
-systemChat format ["[TD] Executing Ambush at %1 with %2 troops", _trig getVariable "Location", _troopsToSend];
+if (_troopCount == 0) exitWith {};
 
 // Select faction 
 _faction = _trig getVariable "Faction";
 _spawnFaction = "";
 _spawnSide = "";
+_cfgClass = "";
 switch (_faction) do {
-	case "USA": {_spawnFaction = lmn_US; _spawnSide = west};
-	case "PAVN": {_spawnFaction = lmn_PAVN; _spawnSide = east};
-	case "ARVN": {_spawnFaction = lmn_ARVN; _spawnSide = independent};
+	case "USA": {_spawnFaction = lmn_US; _spawnSide = west; _cfgClass = configfile >> "CfgGroups" >> "West" >> "VN_MACV" >> "vn_b_group_men_sog"};
+	case "PAVN": {_spawnFaction = lmn_PAVN; _spawnSide = east; _cfgClass = configfile >> "CfgGroups" >> "East" >> "VN_VC" >> "vn_o_group_men_vc_local"};
+	case "ARVN": {_spawnFaction = lmn_ARVN; _spawnSide = independent; _cfgClass = configfile >> "CfgGroups" >> "Indep" >> "VN_ARVN" >> "vn_i_group_men_ranger"};
 };
 _troopGroup = createGroup _spawnSide;
 _troopGroup deleteGroupWhenEmpty true;
+_troopGroup setVariable ["lambs_danger_enableGroupReinforce", true, true];
 
 // Select the troops to send 
-for "_i" from 1 to _troopsToSend do {
-	// Select troop type 
-	_troopType = selectRandomWeighted [
-		(_spawnFaction select 0), 5,
-		(_spawnFaction select 1), 3
-	];
-	_troopModel = selectRandom _troopType;
-
-	// Create the troop 
-	_spawnPos = _trig getVariable "Location" findEmptyPosition [0,50,5];
-	_troopUnit = _troopGroup createUnit [_troopModel, _spawnPos, [], 0, "FORM"];
-
-	sleep 0.1;
-};
+_squad = selectRandom ("true" configClasses (_cfgClass));
+_units = "true" configClasses (_squad);
+systemChat format ["%1", _units];
+{
+	_class = getText (_x >> 'vehicle');
+	_unit = _troopGroup createUnit [_class, position _trig, [], 10, "FORM"];
+	zeus addCuratorEditableObjects [[_unit], true];
+	sleep 0.02;
+} forEach _units;
 
 // Assign a mission to the troops 
-_tasking = selectRandom ["ambushCreep", "ambushRush"];
+_tasking = selectRandom ["ambushCreep", "ambushRush", "ambushHunt"];
 switch (_tasking) do {
-	case "ambushCreep": {[_troopUnit, position player, 20] spawn lambs_wp_fnc_taskCreep};
-	case "ambushRush": {[_troopUnit, position player, 20] spawn lambs_wp_fnc_taskRush};
+	case "ambushCreep": {[_troopGroup, 600] spawn lambs_wp_fnc_taskCreep};
+	case "ambushRush": {[_troopGroup, 600] spawn lambs_wp_fnc_taskRush};
+	case "ambushHunt": {[_troopGroup, 600] spawn lambs_wp_fnc_taskHunt};
 };
 
 // Add group level event handlers to reduce Troop Count on casualties 
+_troopGroup setVariable ["attachedTrigger", _trig];
+_troopGroup addEventHandler ["UnitKilled", {
+	params ["_group", "_unit", "_killer", "_instigator", "_useEffects"];
+	_trig = _group getVariable "attachedTrigger";
+	_currentForceCount = _trig getVariable "TroopCount";
+	_newCount = _currentForceCount - 1;
+	_trig setVariable ["TroopCount", _newCount];
+}];
+

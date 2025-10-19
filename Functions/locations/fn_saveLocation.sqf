@@ -1,14 +1,4 @@
-params ["_loc"];
-
-// Grab data from trigger
-_trig getVariable "Location";
-_trig getVariable "Faction";
-_trig getVariable "TroopCount";
-_trig getVariable "SiteType";
-_trig getVariable "MaxTroopCount";
-_trig getVariable "SupplyLevel";
-_trig getVariable "Security";
-_trig getVariable "Marker";
+params ["_loc", "_trig"];
 
 // Package the data
 _data = [

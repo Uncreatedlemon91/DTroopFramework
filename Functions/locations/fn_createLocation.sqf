@@ -89,7 +89,7 @@ _data = [
 
 // Build the trigger at the location 
 _trig = createTrigger ["EmptyDetector", position _loc, true];
-_trig setTriggerArea [500, 500, 0, false, 300];
+_trig setTriggerArea [1250, 1250, 0, false, 100];
 _trig setTriggerActivation ["ANYPLAYER", "PRESENT", true];
 _trig setTriggerStatements [
 	"this", 
