@@ -1,7 +1,3 @@
-// Precompile the variables used in the mission 
-[] call lmn_fnc_setFactions;
-sleep 0.5;
-
 //// Load the save game 
 // Recall Databases
 _vehDB = ["new", format ["Player Vehicles %1 %2", missionName, worldName]] call oo_inidbi;
@@ -21,10 +17,8 @@ _envDBExists = "exists" call _envDB;
 
 if (_locDBExists) then {
     [] remoteExec ["lmn_fnc_loadLocations", 2];
-    // systemchat "[DB] Locations Loading...";
 } else {
     [] remoteExec ["lmn_fnc_setupLocations", 2];
-    // systemChat "[DB] Generation Locations...";
 };
 if (_itemDBExists) then {
     [] remoteExec ["lmn_fnc_loadItems", 2];

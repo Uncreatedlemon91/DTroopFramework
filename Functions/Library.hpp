@@ -5,7 +5,6 @@ class CfgFunctions
 		class general 
 		{
 			class addActions {};
-			class setFactions {};
 			class setupItems {};
 			class setupVehicle {};
 			class timeManager {};

@@ -2,11 +2,16 @@
 params ["_trig"];
 
 systemChat "Trigger Activated";
-// Kill script if the trigger is already activated or out of forcepool
+// Kill script if the trigger is one of these things: 
+// - No longer active 
+// - Has no troop reserves left 
+// - Has 10 x more than players in the region 
 _isActive = _trig getVariable "Activated";
 _troopCount = _trig getVariable "TroopCount";
+_activeTroops = _trig getVariable "ActiveTroops";
 if (_isActive) exitWith {};
-if (_troopCount == 0) exitWith {};
+if (_troopCount <= 0) exitWith {};
+if (_activeTroops >= (10 * _playerCount)) exitWith {};
 
 // Change the trigger to 'active'
 _trig setVariable ["Activated", true, true];
@@ -52,6 +57,12 @@ while {_trig getVariable "Activated"} do {
 		_Attack = _attack + 2;
 		_defend = _defend + 2;
 	};
+
+	// Add a factor for troop count in the region 
+	if (_activeTroops < 10) then {
+		_defend = _defend + 2;
+		_ambush = _ambush + 1;
+	};
 	
 	// Decide action based on random weighted values
 	_action = selectRandomWeighted [
@@ -63,10 +74,10 @@ while {_trig getVariable "Activated"} do {
 
 	// Decide how many forces to send / engage with 
 	switch (_action) do {
-		case "Ambush": {[_trig] remoteExec ["lmn_fnc_tdAmbush", 2]};
-		case "Defend": {[_trig] remoteExec ["lmn_fnc_tdDefend", 2]};
-		case "Attack": {[_trig] remoteExec ["lmn_fnc_tdAttack", 2]};
-		case "Patrol": {[_trig] remoteExec ["lmn_fnc_tdPatrol", 2]};
+		case "Ambush": {[_trig, _playerCount] remoteExec ["lmn_fnc_tdAmbush", 2]};
+		case "Defend": {[_trig, _playerCount] remoteExec ["lmn_fnc_tdDefend", 2]};
+		case "Attack": {[_trig, _playerCount] remoteExec ["lmn_fnc_tdAttack", 2]};
+		case "Patrol": {[_trig, _playerCount] remoteExec ["lmn_fnc_tdPatrol", 2]};
 	};
 	
 	// Sync the database 
