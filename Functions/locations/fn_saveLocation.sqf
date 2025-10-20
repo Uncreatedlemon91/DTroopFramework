@@ -1,4 +1,4 @@
-params ["_loc", "_trig"];
+params ["_location", "_trig"];
 
 // Package the data
 _data = [
@@ -13,4 +13,5 @@ _data = [
 ];
 
 // Save data to the database
-["write", [_loc, "Data", _data]] call _locDB;
+_locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_inidbi;
+["write", [_data select 0, "Data", _data]] call _locDB;

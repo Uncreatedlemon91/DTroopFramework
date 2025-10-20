@@ -24,7 +24,7 @@ _nightTime = 60;
 _dayTime = 6;
 while {true} do {
 	sleep 30;
-	if ((sunOrMoon =< 0.2) AND (timeMultiplier != _nightTime)) then {
+	if ((sunOrMoon <= 0.2) AND (timeMultiplier != _nightTime)) then {
 		setTimeMultiplier _nightTime;
 	};
 

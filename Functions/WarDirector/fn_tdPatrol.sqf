@@ -15,6 +15,7 @@ if (_playerCount > 10) then {
 
 // Select faction 
 _faction = _trig getVariable "Faction";
+_spawnPos = [position _trig, 0, 100, 5, 0, 3] call BIS_fnc_findSafePos;
 
 for "_i" from 1 to _groupsToSend do {
 	_spawnFaction = "";
@@ -22,7 +23,7 @@ for "_i" from 1 to _groupsToSend do {
 	_cfgClass = "";
 	switch (_faction) do {
 		case "USA": {_spawnSide = west; _cfgClass = configfile >> "CfgGroups" >> "West" >> "VN_MACV" >> "vn_b_group_men_sog"};
-		case "PAVN": {_spawnSide = east; _cfgClass = configfile >> "CfgGroups" >> "East" >> "VN_VC" >> "vn_o_group_men_vc_local"};
+		case "PAVN": {_spawnSide = east; _cfgClass = configfile >> "CfgGroups" >> "East" >> "VN_PAVN" >> "vn_o_group_men_nva_field"};
 		case "ARVN": {_spawnSide = independent; _cfgClass = configfile >> "CfgGroups" >> "Indep" >> "VN_ARVN" >> "vn_i_group_men_ranger"};
 	};
 	_troopGroup = createGroup _spawnSide;
@@ -32,26 +33,24 @@ for "_i" from 1 to _groupsToSend do {
 	// Select the troops to send 
 	_squad = selectRandom ("true" configClasses (_cfgClass));
 	_units = "true" configClasses (_squad);
-	systemChat format ["%1", _units];
 	{
 		_class = getText (_x >> 'vehicle');
-		_unit = _troopGroup createUnit [_class, position _trig, [], 10, "FORM"];
+		_unit = _troopGroup createUnit [_class, _spawnPos, [], 10, "FORM"];
 		zeus addCuratorEditableObjects [[_unit], true];
+		// Add unit to Troop roster of trigger 
+		_activeUnits = _trig getVariable ["ActiveUnits", []];
+		_activeUnits pushback _x; 
+		_trig setVariable ["ActiveUnits", _activeUnits];
 		sleep 0.02;
 	} forEach _units;
 
 	// Assign a mission to the troops 
-	[_troopGroup, 600] spawn lambs_wp_fnc_taskPatrol
+	[_troopGroup, _spawnPos, 600] call BIS_fnc_taskPatrol;
 
 	// Update the trigger to reflect how many forces are active 
 	_activeTroops = _trig getVariable ["ActiveTroops", 0];
 	_newCount = _activeTroops + (count units _troopGroup);
 	_trig setVariable ["ActiveTroops", _newCount];
-
-	// Update the trigger for all the groups that are active for cleanup purposes
-	_activeGroups = _trig getVariable ["ActiveGroups", []];
-	_activeGroups pushback _troopGroup;
-	_trig setVariable ["ActiveGroups", _troopGroup];
 
 	// Add group level event handlers to reduce Troop Count on casualties 
 	_troopGroup setVariable ["attachedTrigger", _trig];

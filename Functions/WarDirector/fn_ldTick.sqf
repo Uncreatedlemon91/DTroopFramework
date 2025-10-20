@@ -21,9 +21,9 @@ _locs = "getSections" call _locDB;
 _usSupply = 0;
 _arvnSupply = 0;
 _nvaSupply = 0;
-_prioritized = [];
+
+// Get Data from the objective
 {
-	// Get Data from the objective
 	_data = ["read", [_x, "Data"]] call _locDB;
 	_supply = _data select 5;
 	_faction = _data select 2;
@@ -34,14 +34,11 @@ _prioritized = [];
 		case "PAVN": {_nvaSupply = _nvaSupply + _supply};
 	};
 
-	// Set if the location should be prioritized
-	if (_flagSize > 1) then {
-		_prioritized pushback _x;
-	} else {
-		_nonPrioritized pushback _x;
-	};
-
 	// Sleep to loop script
 	sleep 0.02;
 } forEach _locs;
+
+// Receive Supply to Distribute 
+_additionalSupply = random [10, 30, 50];
+
 
