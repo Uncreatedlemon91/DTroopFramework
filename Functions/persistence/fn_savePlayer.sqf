@@ -19,3 +19,25 @@ if (isNil "_uid") then {
 // Save to database
 _data = [_name, _pos, _dir, _uid, _loadout, _medical, _weapon];
 ["write", [_uid, "Player Info", _data]] call _db;
+
+// Get map markers for the player 
+_markers = allMapMarkers;
+_saveMarker = [];
+{
+	if (markerAlpha != 0.4) then {
+		_markerName = str _x;
+		_markerType = markerType _x;
+		_markerAlpha = markerAlpha _x;
+		_markerColor = markerColor _x;
+		_markerText = markerText _x;
+		_markerPos = getMarkerPos _x;
+		_data = [
+			_markerName, _markerType, _markerAlpha, _markerColor, _markerText, _markerPos
+		];
+		_saveMarker pushback _data;
+	}
+} forEach _markers;
+
+// Save Markers to DB 
+["write", [_uid, "Player Markers", _saveMarker]] call _db;
+

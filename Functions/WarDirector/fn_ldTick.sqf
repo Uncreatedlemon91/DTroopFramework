@@ -44,4 +44,3 @@ _prioritized = [];
 	// Sleep to loop script
 	sleep 0.02;
 } forEach _locs;
-

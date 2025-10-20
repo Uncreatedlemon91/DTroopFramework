@@ -1,5 +1,5 @@
 // Load the player from the database 
-params ["_data", "_player"];
+params ["_data", "_player", "_markers"];
 
 _pos = _data select 1;
 _dir = _data select 2;
@@ -13,4 +13,15 @@ _player setUnitLoadout _loadout;
 [_player, _medical] call ace_medical_fnc_deserializeState;
 _player selectWeapon _weapon;
 
+// Add markers to map 
+{
+	// Current result is saved in variable _x
+	// _markerName,  _markerType, _markerAlpha, _markerColor, _markerText, _markerPos
+	_mkr = createMarkerLocal [_x select 0, _x select 5];
+	_mkr setMarkerTypeLocal (_x select 1);
+	_mkr setMarkerAlphaLocal (_x select 2);
+	_mkr setMarkerColorLocal (_x select 3);
+	_mkr setMarkerText (_x select 4);
+	sleep 0.01;	
+} forEach _markers;
 systemChat format ["Welcome back %1", (_data select 0)];

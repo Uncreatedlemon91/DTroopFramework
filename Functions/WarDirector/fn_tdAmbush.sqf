@@ -13,9 +13,15 @@ if (_playerCount > 10) then {
 	_groupsToSend = random [3, 4, 5];
 };
 
+// Select a player location to ambush
+_players = list _trig;
+_targetPlayer = selectRandom _players;
+
+// Find spawn point 
+_spawnPos = [position _targetPlayer, 100, 150, 5, 0, 3] call BIS_fnc_findSafePos;
+
 // Select faction 
 _faction = _trig getVariable "Faction";
-_spawnPos = [position _trig, 0, 100, 5, 0, 3] call BIS_fnc_findSafePos;
 
 for "_i" from 1 to _groupsToSend do {
 	_spawnFaction = "";
@@ -35,8 +41,13 @@ for "_i" from 1 to _groupsToSend do {
 	_units = "true" configClasses (_squad);
 	{
 		_class = getText (_x >> 'vehicle');
-		_unit = _troopGroup createUnit [_class, _spawnPos, [], 10, "FORM"];
+		_pos = position (selectRandom (nearestTerrainObjects [_spawnPos, ["TREE", "BUSH"], 50, false, false]));
+		_unit = _troopGroup createUnit [_class, _pos, [], 10, "FORM"];
 		zeus addCuratorEditableObjects [[_unit], true];
+		// Add unit to Troop roster of trigger 
+		_activeUnits = _trig getVariable ["ActiveUnits", []];
+		_activeUnits pushback _x; 
+		_trig setVariable ["ActiveUnits", _activeUnits];
 		sleep 0.02;
 	} forEach _units;
 

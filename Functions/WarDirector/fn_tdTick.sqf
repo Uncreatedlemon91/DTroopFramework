@@ -87,4 +87,16 @@ while {_trig getVariable "Activated"} do {
 	sleep 30;
 };
 
+// Deactivate the trigger 
+// Despawn trigger units 
+_activeUnits = _trig getVariable ["ActiveUnits", []];
+{
+	if (vehicle _x != _x) then {
+		deleteVehicle (vehicle _x);
+	};
+	deleteVehicle _x;
+	sleep 0.02;
+} forEach _activeUnits;
+
+// Debug
 systemChat "[WD] Tactical Director Deactivated";
