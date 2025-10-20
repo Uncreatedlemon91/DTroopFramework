@@ -7,6 +7,7 @@ class CfgFunctions
 			class addActions {};
 			class setupItems {};
 			class setupVehicle {};
+			class spawnCivilian {};
 			class timeManager {};
 		};
 

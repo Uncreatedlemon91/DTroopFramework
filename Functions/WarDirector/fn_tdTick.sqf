@@ -7,6 +7,11 @@ if (_isActive) exitWith {systemChat "[TD] Already Active!"};
 
 // Change the trigger to 'active'
 _trig setVariable ["Activated", true, true];
+
+// Spawn the ambient life modules 
+["_trg"] remoteExec ["lmn_fnc_spawnCivilian", 2];
+
+// Loop while it is activated 
 while {_trig getVariable "Activated"} do {
 	// Confirm that this script should be working
 	_troopCount = _trig getVariable "TroopCount";

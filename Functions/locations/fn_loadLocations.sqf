@@ -13,8 +13,9 @@ _sections = "getSections" call _locDB;
 	4. _maxTroopCount,
 	5. _supplyLevel,
 	6. _siteType,
-	7. _security 
-	8. _flag
+	7. _security,
+	8. _flag,
+	9. _civCount
 	*/
 
 	// Build the trigger at the location 
@@ -41,6 +42,7 @@ _sections = "getSections" call _locDB;
 	_trig setVariable ["MaxTroopCount", _data select 4, true];
 	_trig setVariable ["SupplyLevel", _data select 5, true];
 	_trig setVariable ["Security", _data select 7, true];
+	_trig setVariable ["CivCount", _data select 9, true];
 	_trig setVariable ["Marker", _mkr, true];
 	_trig setVariable ["Activated", false, true];
 } forEach _sections;

@@ -25,17 +25,21 @@ _highPriority = [
 
 _priority = 1;
 _flagSize = 1;
+_civMax = 1;
 _mkr = createMarkerLocal [format ["%1-%2",text _loc, position _loc], position _loc];
 if (type _loc in _lowPriority) then {
 	_flagSize = 0.7;
 	_priority = 1;
+	_civMax = 5;
 };
 if (type _loc in _midPriority) then {
 	_priority = 2;
+	_civMax = 20
 };
 if (type _loc in _highPriority) then {
 	_flagSize = 1.2;
 	_priority = 3;
+	_civMax = 5
 };
 _mkr setMarkerSizeLocal [_flagSize, _flagSize];
 _mkr setMarkerAlpha 0.4;
@@ -70,6 +74,7 @@ _maxTroopCount = 50 * _priority;
 _supplyLevel = 10;
 _siteType = type _loc;
 _security = round (random 100);
+_civCount = round(random _civMax);
 
 _data = [
 	text _loc,
@@ -81,7 +86,8 @@ _data = [
 	_siteType,
 	_security,
 	_flag,
-	_flagSize
+	_flagSize,
+	_civCount
 ];
 
 // Save the location 
@@ -107,4 +113,5 @@ _trig setVariable ["MaxTroopCount", _maxTroopCount, true];
 _trig setVariable ["SupplyLevel", _supplyLevel, true];
 _trig setVariable ["Security", _security, true];
 _trig setVariable ["Marker", _mkr, true];
+_trig setVariable ["CivCount", _civCount, true];
 _trig setVariable ["Activated", false, true];
