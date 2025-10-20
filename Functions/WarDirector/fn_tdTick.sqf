@@ -2,20 +2,19 @@
 params ["_trig"];
 
 // Kill script if the trigger is one of these things: 
-// - No longer active 
-// - Has no troop reserves left 
-// - Has 10 x more than players in the region 
 _isActive = _trig getVariable "Activated";
-_troopCount = _trig getVariable "TroopCount";
-_activeTroops = _trig getVariable "ActiveTroops";
 if (_isActive) exitWith {systemChat "[TD] Already Active!"};
-if (_troopCount <= 0) exitWith {systemChat "[TD] NO MORE TROOPS!"}; // Convert this location 
-if (_activeTroops >= (10 * _playerCount)) exitWith {systemChat "[TD] Too many troops in the AO!"};
 
 // Change the trigger to 'active'
 _trig setVariable ["Activated", true, true];
-
 while {_trig getVariable "Activated"} do {
+	// Confirm that this script should be working
+	_troopCount = _trig getVariable "TroopCount";
+	_activeTroops = _trig getVariable ["ActiveTroops", 0];
+	if (_troopCount <= 0) exitWith {systemChat "[TD] NO MORE TROOPS!"}; // Convert this location 
+	if (_activeTroops >= (10 * _playerCount)) exitWith {systemChat "[TD] Too many troops in the AO!"};
+	if (_activeTroops >= _troopCount) exitWith {systemChat "[TD] All forces are deployed!"};
+
 	// Gather forcepool data 
 	_troopCount = _trig getVariable "TroopCount";
 	_siteType = _trig getVariable "SiteType";
