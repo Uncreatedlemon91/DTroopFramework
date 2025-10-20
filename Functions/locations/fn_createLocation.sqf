@@ -85,7 +85,7 @@ _data = [
 ];
 
 // Save the location 
-["write", [_loc, "Data", _data]] call _locDB;
+["write", [text _loc, "Data", _data]] call _locDB;
 
 // Build the trigger at the location 
 _trig = createTrigger ["EmptyDetector", position _loc, true];
