@@ -25,6 +25,12 @@ class CfgFunctions
 			class spawnVehicle {};
 		};
 
+		class LogiDirector
+		{
+			class ldSendTroops {};
+			class ldTick {};
+		};
+
 		class persistence
 		{
 			class deleteFromDatabase {};
@@ -64,16 +70,17 @@ class CfgFunctions
 			class spawnProbe {};
 		};
 
-		class WarDirector
+		class TacticalDirector
 		{
 			class tdAmbush {};
 			class tdAttack {};
 			class tdDefend {};
 			class tdPatrol {};
-			class tdTick {};
-			class ldTick {};
+			class tdTick {}; 
+		}
+		class WarDirector
+		{
 			class wdTick {};
-			class wdTransfer {};
 		};
 	};
 };

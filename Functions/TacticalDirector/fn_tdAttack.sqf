@@ -66,4 +66,7 @@ for "_i" from 1 to _groupsToSend do {
 		_newCount = _currentForceCount - 1;
 		_trig setVariable ["TroopCount", _newCount];
 	}];
+
+	// Sleep to increase performance 
+	sleep 0.02;
 };

@@ -95,12 +95,12 @@ _data = [
 
 // Build the trigger at the location 
 _trig = createTrigger ["EmptyDetector", position _loc, true];
-_trig setTriggerArea [750, 750, 0, false, 300];
+_trig setTriggerArea [1500, 1500, 0, false, 300];
 _trig setTriggerActivation ["ANYPLAYER", "PRESENT", true];
 _trig setTriggerStatements [
 	"this", 
 	"[thisTrigger] remoteExec ['lmn_fnc_tdTick',2];",
-	"thisTrigger setVariable ['Activated', false]"
+	"thisTrigger setVariable ['Activated', false, true]"
 ];
 
 // Set Trigger Variables 

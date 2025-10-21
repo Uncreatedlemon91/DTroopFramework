@@ -13,10 +13,15 @@ if (_playerCount > 10) then {
 	_groupsToSend = random [3, 4, 5];
 };
 
+// Select a player location to ambush
+_players = list _trig;
+_targetPlayer = selectRandom _players;
+
+// Find spawn point 
+_spawnPos = [position _targetPlayer, 100, 150, 5, 0, 3] call BIS_fnc_findSafePos;
+
 // Select faction 
 _faction = _trig getVariable "Faction";
-_spawnPos = [position _trig, 0, 100, 5, 0, 3] call BIS_fnc_findSafePos;
-_spawnPos = [_spawnPos select 0, _spawnPos select 1, 0];
 
 for "_i" from 1 to _groupsToSend do {
 	_spawnFaction = "";
@@ -36,20 +41,27 @@ for "_i" from 1 to _groupsToSend do {
 	_units = "true" configClasses (_squad);
 	{
 		_class = getText (_x >> 'vehicle');
-		_unit = _troopGroup createUnit [_class, _spawnPos, [], 10, "FORM"];
+		_pos = position (selectRandom (nearestTerrainObjects [_spawnPos, ["TREE", "BUSH"], 50, false, false]));
+		_pos = [_pos select 0, _pos select 1, 0];
+		_unit = _troopGroup createUnit [_class, _pos, [], 10, "FORM"];
 		zeus addCuratorEditableObjects [[_unit], true];
 		// Add unit to Troop roster of trigger 
 		_activeUnits = _trig getVariable ["ActiveUnits", []];
-		_activeUnits pushback _unit;  
+		_activeUnits pushback _unit; 
 		_trig setVariable ["ActiveUnits", _activeUnits];
 		sleep 0.02;
 	} forEach _units;
 
 	// Assign a mission to the troops 
-	_tasking = selectRandom ["defendGarrison", "defendPatrol"];
+	_tasking = selectRandom ["ambushCreep", "ambushHunt"];
+	if (_faction != "PAVN") then {
+		_tasking = selectRandom ["ambushPatrol", "ambushCamp"];
+	};
 	switch (_tasking) do {
-		case "defendGarrison": {[_troopGroup, position _trig, 250] call lambs_wp_fnc_taskGarrison;};
-		case "defendPatrol": {[_troopGroup, _spawnPos, 600] call BIS_fnc_taskPatrol;};
+		case "ambushCreep": {[_troopGroup, 600] spawn lambs_wp_fnc_taskCreep};
+		case "ambushHunt": {[_troopGroup, 600] spawn lambs_wp_fnc_taskHunt};
+		case "ambushPatrol": {[_troopGroup, _spawnPos, 600] call BIS_fnc_taskPatrol;};
+		case "ambushCamp": {[_troopGroup, 500] spawn lambs_wp_fnc_taskCreep;}
 	};
 
 	// Update the trigger to reflect how many forces are active 
@@ -66,4 +78,7 @@ for "_i" from 1 to _groupsToSend do {
 		_newCount = _currentForceCount - 1;
 		_trig setVariable ["TroopCount", _newCount];
 	}];
+
+	// Sleep to reduce server issues 
+	sleep 0.02;
 };
