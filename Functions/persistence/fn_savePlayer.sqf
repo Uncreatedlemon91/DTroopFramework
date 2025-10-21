@@ -24,7 +24,7 @@ _data = [_name, _pos, _dir, _uid, _loadout, _medical, _weapon];
 _markers = allMapMarkers;
 _saveMarker = [];
 {
-	if (markerAlpha != 0.4) then {
+	if ((markerAlpha _x) != 0.4) then {
 		_markerName = str _x;
 		_markerType = markerType _x;
 		_markerAlpha = markerAlpha _x;

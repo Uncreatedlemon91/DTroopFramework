@@ -9,7 +9,7 @@ _civCount = _trig getVariable "CivCount";
 for "_i" from 1 to _civCount do {
 	// Find a position to spawn the Civilian 
 	_spawnPos = [position _trig, 10, 100, 5, 0, 10, 0] call BIS_fnc_findSafePos;
-	_group = createGroup Civilian
+	_group = createGroup Civilian;
 	_group deleteGroupWhenEmpty true;
 
 	// Select model for civilian 

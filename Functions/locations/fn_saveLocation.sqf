@@ -9,7 +9,8 @@ _data = [
 	(_trig getVariable "MaxTroopCount"),
 	(_trig getVariable "SupplyLevel"),
 	(_trig getVariable "Security"),
-	(_trig getVariable "Marker")
+	(_trig getVariable "Marker"),
+	(_trig getVariable "CivCount")
 ];
 
 // Save data to the database

@@ -105,3 +105,4 @@ _activeUnits = _trig getVariable ["ActiveUnits", []];
 
 // Debug
 systemChat "[WD] Tactical Director Deactivated";
+_trig setVariable ["Activated", false, true];

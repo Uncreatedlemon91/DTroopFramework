@@ -16,6 +16,7 @@ if (_playerCount > 10) then {
 // Select faction 
 _faction = _trig getVariable "Faction";
 _spawnPos = [position _trig, 0, 100, 5, 0, 3] call BIS_fnc_findSafePos;
+_spawnPos = [_spawnPos select 0, _spawnPos select 1, 0];
 
 for "_i" from 1 to _groupsToSend do {
 	_spawnFaction = "";
@@ -39,7 +40,7 @@ for "_i" from 1 to _groupsToSend do {
 		zeus addCuratorEditableObjects [[_unit], true];
 		// Add unit to Troop roster of trigger 
 		_activeUnits = _trig getVariable ["ActiveUnits", []];
-		_activeUnits pushback _x; 
+		_activeUnits pushback _unit; 
 		_trig setVariable ["ActiveUnits", _activeUnits];
 		sleep 0.02;
 	} forEach _units;

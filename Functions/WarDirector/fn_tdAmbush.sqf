@@ -42,11 +42,12 @@ for "_i" from 1 to _groupsToSend do {
 	{
 		_class = getText (_x >> 'vehicle');
 		_pos = position (selectRandom (nearestTerrainObjects [_spawnPos, ["TREE", "BUSH"], 50, false, false]));
+		_pos = [_pos select 0, _pos select 1, 0];
 		_unit = _troopGroup createUnit [_class, _pos, [], 10, "FORM"];
 		zeus addCuratorEditableObjects [[_unit], true];
 		// Add unit to Troop roster of trigger 
 		_activeUnits = _trig getVariable ["ActiveUnits", []];
-		_activeUnits pushback _x; 
+		_activeUnits pushback _unit; 
 		_trig setVariable ["ActiveUnits", _activeUnits];
 		sleep 0.02;
 	} forEach _units;
