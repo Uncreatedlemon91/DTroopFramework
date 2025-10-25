@@ -18,14 +18,14 @@ _treeRemovalAction = [
 // Setup event handler for Player Deaths 
 _player addEventHandler ["Killed", {
 	params ["_unit", "_killer", "_instigator", "_useEffects"];
-    _curDate = date;
+    _curDate = systemtime;
     _ddMMyyyy = format [
-        "%3/%2/%1", 
+        "%2/%1/%0", 
         _curDate select 0,
         (if (_curDate select 1 < 10) then { "0" } else { "" }) + str (_curDate select 1),
         (if (_curDate select 2 < 10) then { "0" } else { "" }) + str (_curDate select 2)
     ];
-    _hhmm = format ["%1:%2", _curDate select 4, _curDate select 5];
+    _hhmm = format ["%1:%2", _curDate select 3, _curDate select 4];
 
     [name _unit, _ddMMyyyy, _hhmm] remoteExec ["lmn_fnc_recordDeath", 2];
 }];
