@@ -29,6 +29,7 @@ while {_trig getVariable "Activated"} do {
 	_activeTroops = _trig getVariable ["ActiveTroops", []];
 	if (_troopCount <= 0) exitWith {systemChat "[TD] NO MORE TROOPS!"}; // Convert this location 
 	if ((count _activeTroops) >= _troopCount) then {systemChat "[TD] All forces are deployed!"; _noSpawn = true};
+	if (count _activeTroops > (_playerCount * 20)) then {_noSpawn = true};
 
 	if (_noSpawn) then {} else {
 		// Actions to take 
@@ -67,6 +68,13 @@ while {_trig getVariable "Activated"} do {
 			_defend = _defend + 2;
 			_ambush = _ambush + 1;
 		};
+
+		// Add a factor based on closest players 
+		_targetRandomPlayer = selectRandom _players;
+		_dist = _targetRandomPlayer distance _trig;
+		if (_dist > 600) then {
+			_ambush = _ambush + 5;
+		};
 		
 		// Decide action based on random weighted values
 		_action = selectRandomWeighted [
@@ -89,7 +97,7 @@ while {_trig getVariable "Activated"} do {
 	};
 
 	// Loop the script  
-	sleep 30;
+	sleep 60;
 };
 
 // Deactivate the trigger 
