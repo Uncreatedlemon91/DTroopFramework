@@ -69,12 +69,12 @@ switch (_faction) do {
 _mkr setMarkerType _flag;
 
 // Set other Variables 
-_troopCount = random [50, 100, 150];
-_maxTroopCount = _troopCount * _priority;
-_supplyLevel = random [100, 200, 300];
+_troopCount = round (random [50, 100, 150]);
+_maxTroopCount = round (_troopCount * _priority);
+_supplyLevel = round (random [100, 200, 300]);
 _siteType = type _loc;
 _security = round (random 100);
-_civCount = round(random _civMax);
+_civCount = round (random _civMax);
 
 _data = [
 	text _loc,
@@ -91,7 +91,7 @@ _data = [
 ];
 
 // Save the location 
-["write", [text _loc, "Data", _data]] call _locDB;
+["write", [_loc, "Data", _data]] call _locDB;
 
 // Build the trigger at the location 
 _trig = createTrigger ["EmptyDetector", position _loc, true];

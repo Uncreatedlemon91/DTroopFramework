@@ -2,49 +2,53 @@
 // It will look for logistical needs and generate tasks for the players to complete as well as 
 // dispatching it's own AI units. 
 
-// Create the database 
-_db = ["new", format ["Logistics %1 %2", missionName, worldName]] call oo_inidbi;
-_usResources = ["read", ["Resources", "US", "None"]] call _db;
-_arvnResources = ["read", ["Resources", "ARVN", "None"]] call _db;
-_nvaResources = ["read", ["Resources", "NVA", "None"]] call _db;
-
-// If the database is empty, then create it 
-if (_usResources == "None") then {
-	["write", ["Resources", "US", random 100]] call _db;
-	["write", ["Resources", "ARVN", random 100]] call _db;
-	["write", ["Resources", "NVA", random 100]] call _db;
-};
-
 // Get the supply levels from the sites on the map 
 _locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_inidbi;
 _locs = "getSections" call _locDB;
 
 // Loop the locations
 {
-	_location = ["read", [_x, "Location"]] call _locDB;
-	_trig = nearestObject [position _location, "EmptyDetector"];
+	_data = ["read", [_x, "Data"]] call _locDB;
+	_location = _data select 1;
+	_trig = nearestObject [_location, "EmptyDetector"];
+	systemchat format ["%1", _trig];
 
 	// Get existing variables 
 	_supplyLevel = _trig getVariable "SupplyLevel";
-	_troopLevel = _trig getVariable "TroopLevel";
+	_troopLevel = _trig getVariable "TroopCount";
 	_maxTroopCount = _trig getVariable "MaxTroopCount";
 	_faction = _trig getVariable "Faction";
 
-	// Find nearby locations 
+	systemchat format ["%1", _troopLevel];
+	// PHASE ONE - Self Preservation 
+
+
+	// PHASE TWO - Interact with nearby locations 
 	_nearTrigs = nearestObjects [position _trig, ["EmptyDetector"], 1500, true];
 	{
 		// Grab near location's details 
-		_trigTroopLevel = _x getVariable "TroopLevel";
+		_trigTroopLevel = _x getVariable "TroopCount";
 		_trigMaxTroopLevel = _x getVariable "MaxTroopCount";
 		_trigFaction = _x getVariable "Faction";
 
-		// Make decision to move troops 
+		// Other Location is friendly 
 		if (_faction == _trigFaction) then {
-			// Look to send troops 
+			// Should we send troops to the other location?
 			if ((_troopLevel > _trigTroopLevel) AND (_trigTroopLevel < _trigMaxTroopLevel) AND (_troopLevel > 30)) exitwith {
 				[_trig, _x] remoteExec ["lmn_fnc_ldSendTroops", 2];
+				systemChat "[LD] Sending Troops";
+			};
+		};
+
+		// Other location is hostile 
+		if (_faction != _trigFaction) then {
+			// Assess an attack 
+			if (_troopLevel > _trigTroopLevel) AND (_troopLevel > 40) exitWith {
+				[_trig, _x] remoteExec ["lmn_fnc_ldAttackSite", 2];
+				systemChat "[LD] Attacking";
 			};
 		};
 		
 	} forEach _nearTrigs;
+	sleep 5;
 } forEach _locs;

@@ -13,6 +13,8 @@ _data = [
 	(_trig getVariable "CivCount")
 ];
 
+systemChat format ["%1", _data];
+
 // Save data to the database
 _locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_inidbi;
 ["write", [_data select 0, "Data", _data]] call _locDB;

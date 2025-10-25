@@ -9,7 +9,7 @@ if (_isActive) exitWith {systemChat "[TD] Already Active!"};
 _trig setVariable ["Activated", true, true];
 
 // Spawn the ambient life modules 
-["_trg"] remoteExec ["lmn_fnc_spawnCivilian", 2];
+[_trig] remoteExec ["lmn_fnc_spawnCivilian", 2];
 
 // Loop while it is activated 
 while {_trig getVariable "Activated"} do {
@@ -26,9 +26,9 @@ while {_trig getVariable "Activated"} do {
 	// Confirm that this script should be working
 	_noSpawn = false;
 	_troopCount = _trig getVariable "TroopCount";
-	_activeTroops = _trig getVariable ["ActiveTroops", 0];
+	_activeTroops = _trig getVariable ["ActiveTroops", []];
 	if (_troopCount <= 0) exitWith {systemChat "[TD] NO MORE TROOPS!"}; // Convert this location 
-	if (_activeTroops >= _troopCount) then {systemChat "[TD] All forces are deployed!"; _noSpawn = true};
+	if ((count _activeTroops) >= _troopCount) then {systemChat "[TD] All forces are deployed!"; _noSpawn = true};
 
 	if (_noSpawn) then {} else {
 		// Actions to take 
@@ -63,7 +63,7 @@ while {_trig getVariable "Activated"} do {
 		};
 
 		// Add a factor for troop count in the region 
-		if (_activeTroops < 10) then {
+		if ((count _activeTroops) < 10) then {
 			_defend = _defend + 2;
 			_ambush = _ambush + 1;
 		};

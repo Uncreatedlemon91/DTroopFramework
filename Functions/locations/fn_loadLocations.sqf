@@ -19,7 +19,7 @@ _sections = "getSections" call _locDB;
 	*/
 
 	// Build the trigger at the location 
-	_trig = createTrigger ["EmptyDetector", _data select 1, true];
+	_trig = createTrigger ["EmptyDetector", (_data select 1), true];
 	_trig setTriggerArea [1500, 1500, 0, false, 300];
 	_trig setTriggerActivation ["ANYPLAYER", "PRESENT", true];
 	_trig setTriggerStatements [
@@ -45,4 +45,5 @@ _sections = "getSections" call _locDB;
 	_trig setVariable ["CivCount", _data select 9, true];
 	_trig setVariable ["Marker", _mkr, true];
 	_trig setVariable ["Activated", false, true];
+	sleep 0.2;
 } forEach _sections;

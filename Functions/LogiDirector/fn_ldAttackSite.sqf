@@ -1,7 +1,5 @@
-// Sends troops from one location to another. These are physical units that move around the map. 
+// Function to prep units to attack another zone 
 params ["_source", "_destination"];
-
-systemChat "Spawning Reinforcments!";
 
 // Get Variables 
 _faction = _source getVariable "Faction";

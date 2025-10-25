@@ -53,8 +53,8 @@ for "_i" from 1 to _groupsToSend do {
 	};
 
 	// Update the trigger to reflect how many forces are active 
-	_activeTroops = _trig getVariable ["ActiveTroops", 0];
-	_newCount = _activeTroops + (count units _troopGroup);
+	_activeTroops = _trig getVariable ["ActiveTroops", []];
+	_newCount = (count _activeTroops) + (count units _troopGroup);
 	_trig setVariable ["ActiveTroops", _newCount];
 
 	// Add group level event handlers to reduce Troop Count on casualties 
