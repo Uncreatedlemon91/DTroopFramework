@@ -45,5 +45,14 @@ _sections = "getSections" call _locDB;
 	_trig setVariable ["CivCount", _data select 9, true];
 	_trig setVariable ["Marker", _mkr, true];
 	_trig setVariable ["Activated", false, true];
+	
+	// Debug 
+	_mkrTrg = createMarker [str _trig, position _trig];
+	_mkrTrg setMarkerType "hd_dot";
+	_mkrTrg setMarkerColor "COLORBLACK";
 	sleep 0.2;
 } forEach _sections;
+
+// Run Directors
+sleep 4;
+[] remoteExec ["lmn_fnc_ldTick", 2];

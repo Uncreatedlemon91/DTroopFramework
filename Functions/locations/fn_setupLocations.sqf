@@ -29,5 +29,5 @@ Missionlocations = nearestLocations [[0,0,0], lmn_locations, worldsize * 4];
 	} else {
 		[_x] remoteExec ["lmn_fnc_createLocation", 2];
 	};
-	sleep 0.1;
+	sleep 0.5;
 } forEach Missionlocations;

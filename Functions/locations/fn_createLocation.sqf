@@ -76,23 +76,6 @@ _siteType = type _loc;
 _security = round (random 100);
 _civCount = round (random _civMax);
 
-_data = [
-	text _loc,
-	position _loc,
-	_faction,
-	_troopCount,
-	_maxTroopCount,
-	_supplyLevel,
-	_siteType,
-	_security,
-	_flag,
-	_flagSize,
-	_civCount
-];
-
-// Save the location 
-["write", [_loc, "Data", _data]] call _locDB;
-
 _oppositeSide = "";
 if ((_faction == "US") OR (_faction == "ARVN")) then {
 	_oppositeSide = "EAST";
@@ -123,3 +106,30 @@ _trig setVariable ["Security", _security, true];
 _trig setVariable ["Marker", _mkr, true];
 _trig setVariable ["CivCount", _civCount, true];
 _trig setVariable ["Activated", false, true];
+
+// Debug 
+_mkrTrg = createMarker [str _trig, position _trig];
+_mkrTrg setMarkerType "hd_dot";
+_mkrTrg setMarkerColor "COLORBLACK";
+
+// Save to database 
+_data = [
+	"NoLongerUsed",
+	position _loc,
+	_faction,
+	_troopCount,
+	_maxTroopCount,
+	_supplyLevel,
+	_siteType,
+	_security,
+	_flag,
+	_flagSize,
+	_civCount
+];
+
+// Save the location 
+["write", [_loc, "Data", _data]] call _locDB;
+
+// Run Directors
+sleep 4;
+[] remoteExec ["lmn_fnc_ldTick", 2];
