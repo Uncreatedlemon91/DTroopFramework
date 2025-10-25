@@ -21,6 +21,14 @@ _locs = "getSections" call _locDB;
 
 	systemchat format ["%1", _troopLevel];
 	// PHASE ONE - Self Preservation 
+	// Check supply
+	if (_supplyLevel < 50) then {
+		_needsSupply pushback _x;
+	};
+	// Check troops
+	if (_troopLevel < 30) then {
+		_needTroops pushback _x;
+	};
 
 
 	// PHASE TWO - Interact with nearby locations 
@@ -48,7 +56,20 @@ _locs = "getSections" call _locDB;
 				systemChat "[LD] Attacking";
 			};
 		};
-		
 	} forEach _nearTrigs;
+	
+	// PHASE THREE - If location is in the Depot regions, spawn forces 
+	if ((position _trig inArea "NORTH") AND (_faction == "PAVN") AND (_troopLevel < _maxTroopCount)) then {
+		_newLevel = _troopLevel + round(random 30);
+		_trig setVariable ["TroopCount", _newLevel, true];
+	};
+	if ((position _trig inArea "SOUTH") AND (_faction == "ARVN") AND (_troopLevel < _maxTroopCount)) then {
+		_newLevel = _troopLevel + round(random 30);
+		_trig setVariable ["TroopCount", _newLevel, true];
+	};
+	if ((position _trig inArea "US") AND (_faction == "US") AND (_troopLevel < _maxTroopCount)) then {
+		_newLevel = _troopLevel + round(random 30);
+		_trig setVariable ["TroopCount", _newLevel, true];
+	};
 	sleep 5;
 } forEach _locs;

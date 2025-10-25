@@ -27,10 +27,21 @@ while {_trig getVariable "Activated"} do {
 	_noSpawn = false;
 	_troopCount = _trig getVariable "TroopCount";
 	_activeTroops = _trig getVariable ["ActiveTroops", []];
-	if (_troopCount <= 0) exitWith {systemChat "[TD] NO MORE TROOPS!"}; // Convert this location 
+	if (_troopCount <= 0) exitWith {
+		systemChat "[TD] NO MORE TROOPS!";
+		_newFaction = "";
+		if ((_faction == "US") OR (_faction == "ARVN")) then {
+			_newFaction = "PAVN";
+		};
+		if (_faction == "PAVN") then {
+			_newFaction = selectRandom ["US", "ARVN"];
+		};
+		[_trig, _newFaction] remoteExec ["lmn_fnc_tdFlipped", 2];  // Convert this location 
+	};
 	if ((count _activeTroops) >= _troopCount) then {systemChat "[TD] All forces are deployed!"; _noSpawn = true};
-	if (count _activeTroops > (_playerCount * 20)) then {_noSpawn = true};
+	if ((count _activeTroops) > (_playerCount * 20)) then {_noSpawn = true};
 
+	// Continue with script
 	if (_noSpawn) then {} else {
 		// Actions to take 
 		_Ambush = 1;

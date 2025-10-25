@@ -25,7 +25,7 @@ for "_i" from 1 to _groupsToSend do {
 	switch (_faction) do {
 		case "USA": {_spawnSide = west; _cfgClass = configfile >> "CfgGroups" >> "West" >> "VN_MACV" >> "vn_b_group_men_sog"};
 		case "PAVN": {_spawnSide = east; _cfgClass = configfile >> "CfgGroups" >> "East" >> "VN_VC" >> "vn_o_group_men_vc_local"};
-		case "ARVN": {_spawnSide = independent; _cfgClass = configfile >> "CfgGroups" >> "Indep" >> "VN_ARVN" >> "vn_i_group_men_ranger"};
+		case "ARVN": {_spawnSide = west; _cfgClass = configfile >> "CfgGroups" >> "Indep" >> "VN_ARVN" >> "vn_i_group_men_ranger"};
 	};
 	_troopGroup = createGroup _spawnSide;
 	_troopGroup deleteGroupWhenEmpty true;
