@@ -3,9 +3,8 @@ params ["_data", "_mission", "_trig"];
 
 // Select faction 
 _faction = _data select 2;
-_spawnPos = [(_data select 1), 0, 100, 5, 0, 3] call BIS_fnc_findSafePos;
+_spawnPos = [(_data select 1), 0, 50, 5, 0, 3] call BIS_fnc_findSafePos;
 _spawnPos = [_spawnPos select 0, _spawnPos select 1, 0];
-_activeUnits = _data select 12;
 
 _spawnFaction = "";
 _spawnSide = "";
@@ -22,6 +21,7 @@ _troopGroup setVariable ["lambs_danger_enableGroupReinforce", true, true];
 // Select the troops to send 
 _squad = selectRandom ("true" configClasses (_cfgClass));
 _units = "true" configClasses (_squad);
+_activeUnits = _trig getVariable ["ActiveTroops", []];
 {
 	_class = getText (_x >> 'vehicle');
 	_unit = _troopGroup createUnit [_class, _spawnPos, [], 10, "FORM"];
@@ -30,15 +30,14 @@ _units = "true" configClasses (_squad);
 	_activeUnits pushback _unit; 
 	sleep 0.02;
 } forEach _units;
-
-_trig setVariable ["ActiveTroops", _activeUnits];
-
+_trig setVariable ["ActiveTroops", _activeUnits, true];
 
 // Assign a mission to the troops 
 switch (_mission) do {
-	case "Patrol": {[_troopGroup, _spawnPos, 600] call BIS_fnc_taskPatrol};
-	case "Ambush": {if (_faction != "PAVN") then {[_troopGroup, _spawnPos, 600] call BIS_fnc_taskPatrol} else {[_troopGroup, 600] spawn lambs_wp_fnc_taskCreep}};
-	case "Hunt": {if (_faction != "PAVN") then {[_troopGroup, _spawnPos, 600] call BIS_fnc_taskPatrol} else {[_troopGroup, 600] spawn lambs_wp_fnc_taskHunt}};
+	case "Patrol": {[_troopGroup, _spawnPos, 400] call BIS_fnc_taskPatrol};
+	case "Ambush": {if (_faction != "PAVN") then {[_troopGroup, _spawnPos, 400] call BIS_fnc_taskPatrol} else {[_troopGroup, 1200] spawn lambs_wp_fnc_taskCreep}};
+	case "Hunt": {if (_faction != "PAVN") then {[_troopGroup, _spawnPos, 400] call BIS_fnc_taskPatrol} else {[_troopGroup, 1200] spawn lambs_wp_fnc_taskHunt}};
+	case "Attack": {[_troopGroup, 1200] spawn lambs_wp_fnc_taskRush};
 	case "Defend": {[_troopGroup, _spawnPos, 250] call lambs_wp_fnc_taskGarrison};
 };
 
@@ -47,6 +46,7 @@ _troopGroup setVariable ["attachedLocation", _data select 11];
 _troopGroup addEventHandler ["UnitKilled", {
 	params ["_group", "_unit", "_killer", "_instigator", "_useEffects"];
 	_loc = _group getVariable "attachedLocation";
+	_trig = _group getVariable "attachedTrigger";
 	_db = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_inidbi;
 	_data = ["read", [_loc, "Data"]] call _db;
 
@@ -54,4 +54,10 @@ _troopGroup addEventHandler ["UnitKilled", {
 	_newCount = _currentForceCount - 1;
 	_data set [3, _newCount];
 	[_data] remoteExec ["lmn_fnc_saveDatabase", 2];
+
+	// Update the trigger 
+	_activeTroops = _trig getVariable ["ActiveTroops", []];
+	_index = _activeTroops find _unit;
+	_activeTroops deleteAt _index;
+	_trig setVariable ["ActiveTroops", _activeTroops, true];
 }];

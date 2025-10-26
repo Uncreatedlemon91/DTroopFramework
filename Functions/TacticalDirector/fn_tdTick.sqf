@@ -16,7 +16,6 @@ while {_trig getVariable "Activated"} do {
 	// Get update database entry 
 	_db = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_inidbi;
 	_data = ["read", [(_trig getVariable "Location"), "Data"]] call _db;
-	systemChat format ["Loc: %1", _data];
 
 	// Get list of players in the trigger area
 	_players = list _trig;
@@ -26,7 +25,7 @@ while {_trig getVariable "Activated"} do {
 	_troopCount = _data select 3;
 	_siteType = _data select 6;
 	_faction = _data select 2;
-	_activeTroops = _data select 12;
+	_activeTroops = _trig getVariable ["ActiveTroops", []];
 
 	// Confirm that this script should be working
 	_noSpawn = false;
@@ -52,19 +51,20 @@ while {_trig getVariable "Activated"} do {
 		_defend = 1;
 		_attack = 1;
 		_patrol = 1;
+		_hunt = 1;
 
 		switch (_siteType) do {
 			case "NameLocal": {_defend = _defend + 2; _patrol = _patrol + 1};
 			case "nameVillage": {_defend = _defend + 1; _patrol = _patrol + 2};
 			case "Name": {_attack = _attack + 2; _patrol = _patrol + 1};
-			case "VegetationBroadleaf": {_patrol = _patrol + 2; _ambush = _ambush + 3};
-			case "Hill": {_ambush = _ambush + 2; _patrol = _patrol + 1};
+			case "VegetationBroadleaf": {_patrol = _patrol + 2; _ambush = _ambush + 3; _hunt = _hunt + 3};
+			case "Hill": {_ambush = _ambush + 2; _patrol = _patrol + 1; _hunt = _hunt + 3};
 			case "NameMarine": {_attack = _attack + 2; _defend = _defend + 1};
 			case "ViewPoint": {_ambush = _ambush + 1; _patrol = _patrol + 2};
 			case "Strategic": {_attack = _attack + 2; _defend = _defend + 2};
 			case "NameCity": {_defend = _defend + 2; _patrol = _patrol + 1};
 			case "Airport": {_attack = _attack + 1; _defend = _defend + 3};
-			case "StrongpointArea": {_defend = _defend + 3; _patrol = _patrol + 1};
+			case "StrongpointArea": {_defend = _defend + 3; _patrol = _patrol + 1; _hunt = _hunt + 3};
 			case "NameCityCapital": {_defend = _defend + 3; _attack = _attack + 1};
 		};
 
@@ -72,6 +72,7 @@ while {_trig getVariable "Activated"} do {
 		if (_playerCount < 3) then {
 			_ambush = _ambush + 2;
 			_patrol = _patrol + 1;
+			_hunt = _hunt + 3;
 		};
 		if (_playerCount >= 4) then {
 			_Attack = _attack + 2;
@@ -89,11 +90,13 @@ while {_trig getVariable "Activated"} do {
 		_dist = _targetRandomPlayer distance (_data select 1);
 		if (_dist > 600) then {
 			_ambush = _ambush + 5;
+			_hunt = _hunt + 3;
 		};
 		
 		// Decide action based on random weighted values
 		_action = selectRandomWeighted [
 			"Ambush", _ambush,
+			"Hunt", _hunt,
 			"Defend", _defend,
 			"Attack", _attack,
 			"Patrol", _patrol
@@ -105,6 +108,7 @@ while {_trig getVariable "Activated"} do {
 			case "Defend": {[_data, "Defend", _trig] remoteExec ["lmn_fnc_tdSpawnTroops", 2]};
 			case "Attack": {[_data, "Attack", _trig] remoteExec ["lmn_fnc_tdSpawnTroops", 2]};
 			case "Patrol": {[_data, "Patrol", _trig] remoteExec ["lmn_fnc_tdSpawnTroops", 2]};
+			case "Hunt": {[_data, "Hunt", _trig] remoteExec ["lmn_fnc_tdSpawnTroops", 2]};
 		};
 	};
 

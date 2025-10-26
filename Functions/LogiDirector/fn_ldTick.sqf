@@ -12,6 +12,7 @@ _locs = "getSections" call _locDB;
 {
 	_data = ["read", [_x, "Data"]] call _locDB;
 	_locationPos = _data select 1;
+	_loc = _data select 11;
 	// systemChat format ["_trig: %1", _trig];
 	// Get existing variables 
 	_supplyLevel = _data select 5;
@@ -72,7 +73,7 @@ _locs = "getSections" call _locDB;
 		_newLevel = _troopLevel + round(random 30);
 		_trig setVariable ["TroopCount", _newLevel, true];
 	};*/
-	systemChat format ["Completed %", _data select 11];
+	systemChat format ["Completed %", _loc];
 	sleep 10;
 } forEach _locs;
 

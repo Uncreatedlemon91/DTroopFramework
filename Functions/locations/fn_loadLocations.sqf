@@ -22,7 +22,7 @@ _sections = "getSections" call _locDB;
 	_mkr setMarkerAlpha 0.4;
 
 	// Set Trigger Variables 
-	_trig setVariable ["Location", text _loc, true];
+	_trig setVariable ["Location", _data select 11, true];
 	_trig setVariable ["Activated", false, true];
 
 	sleep 0.2;
