@@ -84,18 +84,10 @@ _nearLocs = [];
 	_nearLocs pushback text _x;	
 } forEach _locs;
 
-_oppositeSide = "";
-if ((_faction == "US") OR (_faction == "ARVN")) then {
-	_oppositeSide = "EAST";
-};
-if (_faction == "PAVN") then {
-	_oppositeSide = "WEST";
-};
-
 // Build the trigger at the location 
 _trig = createTrigger ["EmptyDetector", position _loc, true];
-_trig setTriggerArea [1500, 1500, 0, false, 300];
-_trig setTriggerActivation [_oppositeSide, "PRESENT", true];
+_trig setTriggerArea [1000, 1000, 0, false, 300];
+_trig setTriggerActivation ["ANYPLAYER", "PRESENT", true];
 _trig setTriggerStatements [
 	"this", 
 	"[thisTrigger] remoteExec ['lmn_fnc_tdTick',2];",
