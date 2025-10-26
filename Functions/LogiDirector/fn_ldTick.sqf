@@ -18,8 +18,35 @@ _locs = "getSections" call _locDB;
 	_troopLevel = _data select 3;
 	_maxTroopCount = _data select 4;
 	_faction = _data select 2;
+	_siteType = _data select 6;
 
 	// PHASE ONE - Self Preservation 
+	if ((_siteType == "Airport") AND (_faction == "USA")) then {
+		// Add a mission to drop off troops and supplies 
+		_newTroopLevel = _troopLevel + round (random 100);
+		_newSupplyLevel = _supplyLevel + round (random 100);
+		_data set [3, _newTroopLevel];
+		_data set [5, _newSupplyLevel];
+		[_data] remoteExec ["lmn_fnc_saveLocation", 2];
+	};
+
+	if ((_siteType == "NameCity") AND (_faction == "PAVN")) then {
+		// Add a mission to drop off troops and supplies 
+		_newTroopLevel = _troopLevel + round (random 100);
+		_newSupplyLevel = _supplyLevel + round (random 100);
+		_data set [3, _newTroopLevel];
+		_data set [5, _newSupplyLevel];
+		[_data] remoteExec ["lmn_fnc_saveLocation", 2];
+	};
+
+	if ((_siteType == "NameCity") AND (_faction == "ARVN")) then {
+		// Add a mission to drop off troops and supplies 
+		_newTroopLevel = _troopLevel + round (random 100);
+		_newSupplyLevel = _supplyLevel + round (random 100);
+		_data set [3, _newTroopLevel];
+		_data set [5, _newSupplyLevel];
+		[_data] remoteExec ["lmn_fnc_saveLocation", 2];
+	};
 
 	// PHASE TWO - Interact with nearby locations 
 	_nearLoc = selectRandom (_data select 0);
