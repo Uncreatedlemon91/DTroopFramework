@@ -10,6 +10,7 @@ _locs = "getSections" call _locDB;
 
 // Loop the locations
 {
+	SystemChat format ["[LD] %1" , _x];
 	_data = ["read", [_x, "Data"]] call _locDB;
 
 	// Get existing variables 
@@ -34,6 +35,7 @@ _locs = "getSections" call _locDB;
 	// Other Location is friendly 
 	if (_faction == _trigFaction) then {
 		// Should we send troops to the other location?
+		systemChat "Faction is the same";
 		if ((_troopLevel > _trigTroopLevel) AND (_trigTroopLevel < _trigMaxTroopLevel) AND (_troopLevel > 30)) then {
 			[_data, _nearLocData] remoteExec ["lmn_fnc_ldSendTroops", 2];
 			systemChat "[LD] Sending Troops";
@@ -42,13 +44,13 @@ _locs = "getSections" call _locDB;
 
 	// Other location is hostile 
 	if (_faction != _trigFaction) then {
+		systemChat "Factions are different!";
 		// Assess an attack 
-		if (_troopLevel > _trigTroopLevel) AND (_troopLevel > 40) then {
+		if ((_troopLevel > _trigTroopLevel) AND (_troopLevel > 40)) then {
 			[_data, _nearLocData] remoteExec ["lmn_fnc_ldAttackSite", 2];
 			systemChat "[LD] Attacking";
 		};
 	};
-	systemChat format ["Completed %", _loc];
 	sleep 10;
 } forEach _locs;
 

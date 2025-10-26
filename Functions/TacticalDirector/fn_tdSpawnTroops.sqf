@@ -34,11 +34,11 @@ _trig setVariable ["ActiveTroops", _activeUnits, true];
 
 // Assign a mission to the troops 
 switch (_mission) do {
-	case "Patrol": {[_troopGroup, _spawnPos, 400] call BIS_fnc_taskPatrol};
-	case "Ambush": {if (_faction != "PAVN") then {[_troopGroup, _spawnPos, 400] call BIS_fnc_taskPatrol} else {[_troopGroup, 1200] spawn lambs_wp_fnc_taskCreep}};
-	case "Hunt": {if (_faction != "PAVN") then {[_troopGroup, _spawnPos, 400] call BIS_fnc_taskPatrol} else {[_troopGroup, 1200] spawn lambs_wp_fnc_taskHunt}};
+	case "Patrol": {[_troopGroup, _spawnPos, 200] call BIS_fnc_taskPatrol};
+	case "Ambush": {if (_faction != "PAVN") then {[_troopGroup, _spawnPos, 200] call BIS_fnc_taskPatrol} else {[_troopGroup, 1200] spawn lambs_wp_fnc_taskCreep}};
+	case "Hunt": {if (_faction != "PAVN") then {[_troopGroup, _spawnPos, 200] call BIS_fnc_taskPatrol} else {[_troopGroup, 1200] spawn lambs_wp_fnc_taskHunt}};
 	case "Attack": {[_troopGroup, 1200] spawn lambs_wp_fnc_taskRush};
-	case "Defend": {[_troopGroup, _spawnPos, 250] call lambs_wp_fnc_taskGarrison};
+	case "Defend": {[_troopGroup, _spawnPos, 150] call lambs_wp_fnc_taskGarrison};
 };
 
 // Add group level event handlers to reduce Troop Count on casualties 
@@ -53,7 +53,7 @@ _troopGroup addEventHandler ["UnitKilled", {
 	_currentForceCount = _data select 3;
 	_newCount = _currentForceCount - 1;
 	_data set [3, _newCount];
-	[_data] remoteExec ["lmn_fnc_saveDatabase", 2];
+	[_data] remoteExec ["lmn_fnc_saveLocation", 2];
 
 	// Update the trigger 
 	_activeTroops = _trig getVariable ["ActiveTroops", []];

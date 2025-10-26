@@ -2,8 +2,8 @@
 params ["_source", "_destination"];
 
 // Get Variables 
-_faction = _source getVariable "Faction";
-_troopCount = _source getVariable "TroopLevel";
+_faction = _source select 2;
+_troopCount = _source select 3;
 _spawnSide = "";
 _cfgClass = "";
 
@@ -30,22 +30,28 @@ _troopGroup setVariable ["lambs_danger_enableGroupReinforce", true, true];
 } forEach _units;
 
 // Give troop a location to get to 
-_wp1 = _troopGroup addWaypoint [position _destination, 20, 1];
+_wp1 = _troopGroup addWaypoint [_destination select 1, 20, 1];
 [_troopGroup, _wp1] setWaypointBehaviour "CARELESS";
 _wp1 setWaypointType "MOVE";
 
 // Remove the count of troops from the trigger 
 _groupCount = count (units _troopGroup);
 _newTroopCount = _troopCount - _groupCount;
-_source setVariable ["TroopLevel", _newTroopCount, true];
+_source set [3, _newTroopCount];
+
+// Sync database 
+[_source] remoteExec ["lmn_fnc_saveLocation", 2];
 
 // Delete the unit and add them to the destination if they get there succesfully 
-waitUntil { (getPos (leader _troopGroup) distance (_destination)) < 30; };
+waitUntil { (getPos (leader _troopGroup) distance (_destination select 1)) < 30; };
 
 {
 	deleteVehicle _x;
 } forEach units _troopGroup;
 
-_oldTroopLevel = _destination getVariable "TroopLevel";
-_newTroopLevel = _groupCount + _oldTroopLevel;
-_destination setVariable ["TroopLevel", _newTroopLevel, true];
+_oldTroopLevel = _destination select 3;
+_newTroopLevel = _groupCount - _oldTroopLevel;
+_destination set [3, _newTroopLevel];
+
+// Sync database 
+[_destination] remoteExec ["lmn_fnc_saveLocation", 2];

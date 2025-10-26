@@ -10,10 +10,10 @@ _sections = "getSections" call _locDB;
 	_trig setTriggerArea [1000, 1000, 0, false, 300];
 	_trig setTriggerActivation ["ANYPLAYER", "PRESENT", true];
 	_trig setTriggerStatements [
-		"this", 
-		"[thisTrigger] remoteExec ['lmn_fnc_tdTick', 2]",
-		"thisTrigger setVariable ['Activated', false]"
-	];
+	"this", 
+	"[thisTrigger] remoteExec ['lmn_fnc_tdTick',2];",
+	"thisTrigger setVariable ['Activated', false, true]"
+];
 
 	// Create Marker 
 	_mkr = createMarker [str (_data select 1), _data select 1];
