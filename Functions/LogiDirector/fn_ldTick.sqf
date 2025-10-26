@@ -11,9 +11,7 @@ _locs = "getSections" call _locDB;
 // Loop the locations
 {
 	_data = ["read", [_x, "Data"]] call _locDB;
-	_locationPos = _data select 1;
-	_loc = _data select 11;
-	// systemChat format ["_trig: %1", _trig];
+
 	// Get existing variables 
 	_supplyLevel = _data select 5;
 	_troopLevel = _data select 3;
@@ -21,15 +19,6 @@ _locs = "getSections" call _locDB;
 	_faction = _data select 2;
 
 	// PHASE ONE - Self Preservation 
-	// Check supply
-	if (_supplyLevel < 50) then {
-		_needsSupply pushback _x;
-	};
-	// Check troops
-	if (_troopLevel < 30) then {
-		_needTroops pushback _x;
-	};
-
 
 	// PHASE TWO - Interact with nearby locations 
 	_nearLoc = selectRandom (_data select 0);
@@ -59,20 +48,6 @@ _locs = "getSections" call _locDB;
 			systemChat "[LD] Attacking";
 		};
 	};
-	
-	// PHASE THREE - If location is in the Depot regions, spawn forces 
-	/*if ((position _trig inArea "NORTH") AND (_faction == "PAVN") AND (_troopLevel < _maxTroopCount)) then {
-		_newLevel = _troopLevel + round(random 30);
-		_trig setVariable ["TroopCount", _newLevel, true];
-	};
-	if ((position _trig inArea "SOUTH") AND (_faction == "ARVN") AND (_troopLevel < _maxTroopCount)) then {
-		_newLevel = _troopLevel + round(random 30);
-		_trig setVariable ["TroopCount", _newLevel, true];
-	};
-	if ((position _trig inArea "US") AND (_faction == "US") AND (_troopLevel < _maxTroopCount)) then {
-		_newLevel = _troopLevel + round(random 30);
-		_trig setVariable ["TroopCount", _newLevel, true];
-	};*/
 	systemChat format ["Completed %", _loc];
 	sleep 10;
 } forEach _locs;

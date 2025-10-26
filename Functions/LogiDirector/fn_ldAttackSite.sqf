@@ -10,7 +10,7 @@ _cfgClass = "";
 // Change variables based on faction 
 switch (_faction) do {
 	case "USA": {_spawnSide = west; _cfgClass = configfile >> "CfgGroups" >> "West" >> "VN_MACV" >> "vn_b_group_men_sog"};
-	case "PAVN": {_spawnSide = east; _cfgClass = selectRandom [configfile >> "CfgGroups" >> "East" >> "VN_PAVN" >> "vn_o_group_motor_nva", configfile >> "CfgGroups" >> "East" >> "VN_PAVN" >> "vn_o_group_men_nva_field", configfile >> "CfgGroups" >> "East" >> "VN_PAVN" >> "vn_o_group_mech_nva"]};
+	case "PAVN": {_spawnSide = east; _cfgClass = configfile >> "CfgGroups" >> "East" >> "VN_PAVN" >> "vn_o_group_men_nva_field"};
 	case "ARVN": {_spawnSide = independent; _cfgClass = configfile >> "CfgGroups" >> "Indep" >> "VN_ARVN" >> "vn_i_group_men_ranger"};
 };
 
