@@ -28,6 +28,7 @@ class CfgFunctions
 		class LogiDirector
 		{
 			class ldSendTroops {};
+			class ldAttackSite {};
 			class ldTick {};
 		};
 
@@ -76,6 +77,7 @@ class CfgFunctions
 			class tdAttack {};
 			class tdDefend {};
 			class tdPatrol {};
+			class tdSpawnTroops {};
 			class tdTick {}; 
 		}
 		class WarDirector

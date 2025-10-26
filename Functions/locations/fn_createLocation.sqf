@@ -75,6 +75,14 @@ _supplyLevel = round (random [100, 200, 300]);
 _siteType = type _loc;
 _security = round (random 100);
 _civCount = round (random _civMax);
+_activeTroops = [];
+
+// Get nearby locations and save them in an array 
+_locs = nearestLocations [position _loc, lmn_locations, 1500];
+_nearLocs = [];
+{
+	_nearLocs pushback text _x;	
+} forEach _locs;
 
 _oppositeSide = "";
 if ((_faction == "US") OR (_faction == "ARVN")) then {
@@ -95,26 +103,12 @@ _trig setTriggerStatements [
 ];
 
 // Set Trigger Variables 
-_trig setVariable ["Location", _loc, true];
-_trig setVariable ["Faction", _faction, true];
-_trig setVariable ["TroopCount", _troopCount, true];
-_trig setVariable ["SiteType", _siteType, true];
-_trig setVariable ["Priority", _priority, true];
-_trig setVariable ["MaxTroopCount", _maxTroopCount, true];
-_trig setVariable ["SupplyLevel", _supplyLevel, true];
-_trig setVariable ["Security", _security, true];
-_trig setVariable ["Marker", _mkr, true];
-_trig setVariable ["CivCount", _civCount, true];
+_trig setVariable ["Location", text _loc, true];
 _trig setVariable ["Activated", false, true];
-
-// Debug 
-_mkrTrg = createMarker [str _trig, position _trig];
-_mkrTrg setMarkerType "hd_dot";
-_mkrTrg setMarkerColor "COLORBLACK";
 
 // Save to database 
 _data = [
-	"NoLongerUsed",
+	_nearLocs,
 	position _loc,
 	_faction,
 	_troopCount,
@@ -124,12 +118,10 @@ _data = [
 	_security,
 	_flag,
 	_flagSize,
-	_civCount
+	_civCount,
+	text _loc,
+	_activeTroops
 ];
 
 // Save the location 
-["write", [_loc, "Data", _data]] call _locDB;
-
-// Run Directors
-sleep 4;
-[] remoteExec ["lmn_fnc_ldTick", 2];
+["write", [text _loc, "Data", _data]] call _locDB;

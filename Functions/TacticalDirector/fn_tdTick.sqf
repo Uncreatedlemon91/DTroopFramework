@@ -9,26 +9,30 @@ if (_isActive) exitWith {systemChat "[TD] Already Active!"};
 _trig setVariable ["Activated", true, true];
 
 // Spawn the ambient life modules 
-[_trig] remoteExec ["lmn_fnc_spawnCivilian", 2];
+// [_trig] remoteExec ["lmn_fnc_spawnCivilian", 2];
 
 // Loop while it is activated 
 while {_trig getVariable "Activated"} do {
+	// Get update database entry 
+	_db = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_inidbi;
+	_data = ["read", [(_trig getVariable "Location"), "Data"]] call _db;
+	systemChat format ["Loc: %1", _data];
+
 	// Get list of players in the trigger area
 	_players = list _trig;
 	_playerCount = count _players;
 
 	// Gather forcepool data 
-	_troopCount = _trig getVariable "TroopCount";
-	_siteType = _trig getVariable "SiteType";
-	_faction = _trig getVariable "Faction";
-	_loc = _trig getVariable "Location";
+	_troopCount = _data select 3;
+	_siteType = _data select 6;
+	_faction = _data select 2;
+	_activeTroops = _data select 12;
 
 	// Confirm that this script should be working
 	_noSpawn = false;
-	_troopCount = _trig getVariable "TroopCount";
-	_activeTroops = _trig getVariable ["ActiveTroops", []];
-	if (_troopCount <= 0) exitWith {
+	if (_troopCount <= 0) then {
 		systemChat "[TD] NO MORE TROOPS!";
+		_noSpawn = true;
 		_newFaction = "";
 		if ((_faction == "US") OR (_faction == "ARVN")) then {
 			_newFaction = "PAVN";
@@ -36,10 +40,10 @@ while {_trig getVariable "Activated"} do {
 		if (_faction == "PAVN") then {
 			_newFaction = selectRandom ["US", "ARVN"];
 		};
-		[_trig, _newFaction] remoteExec ["lmn_fnc_tdFlipped", 2];  // Convert this location 
+		// [_trig, _newFaction] remoteExec ["lmn_fnc_tdFlipped", 2];  // Convert this location 
 	};
-	if ((count _activeTroops) >= _troopCount) then {systemChat "[TD] All forces are deployed!"; _noSpawn = true};
-	if ((count _activeTroops) > (_playerCount * 20)) then {_noSpawn = true};
+	if (count _activeTroops > _troopCount) then {systemChat "[TD] All forces are deployed!"; _noSpawn = true};
+	if (count _activeTroops > (_playerCount * 20)) then {systemChat "[TD] More forces than players in the AO!"; _noSpawn = true};
 
 	// Continue with script
 	if (_noSpawn) then {} else {
@@ -75,14 +79,14 @@ while {_trig getVariable "Activated"} do {
 		};
 
 		// Add a factor for troop count in the region 
-		if ((count _activeTroops) < 10) then {
+		if (count _activeTroops < 10) then {
 			_defend = _defend + 2;
 			_ambush = _ambush + 1;
 		};
 
 		// Add a factor based on closest players 
 		_targetRandomPlayer = selectRandom _players;
-		_dist = _targetRandomPlayer distance _trig;
+		_dist = _targetRandomPlayer distance (_data select 1);
 		if (_dist > 600) then {
 			_ambush = _ambush + 5;
 		};
@@ -97,14 +101,11 @@ while {_trig getVariable "Activated"} do {
 
 		// Decide how many forces to send / engage with 
 		switch (_action) do {
-			case "Ambush": {[_trig, _playerCount] remoteExec ["lmn_fnc_tdAmbush", 2]};
-			case "Defend": {[_trig, _playerCount] remoteExec ["lmn_fnc_tdDefend", 2]};
-			case "Attack": {[_trig, _playerCount] remoteExec ["lmn_fnc_tdAttack", 2]};
-			case "Patrol": {[_trig, _playerCount] remoteExec ["lmn_fnc_tdPatrol", 2]};
+			case "Ambush": {[_data, "Ambush", _trig] remoteExec ["lmn_fnc_tdSpawnTroops", 2]};
+			case "Defend": {[_data, "Defend", _trig] remoteExec ["lmn_fnc_tdSpawnTroops", 2]};
+			case "Attack": {[_data, "Attack", _trig] remoteExec ["lmn_fnc_tdSpawnTroops", 2]};
+			case "Patrol": {[_data, "Patrol", _trig] remoteExec ["lmn_fnc_tdSpawnTroops", 2]};
 		};
-		
-		// Sync the database 
-		[_loc, _trig] remoteExec ["lmn_fnc_saveLocation", 2];
 	};
 
 	// Loop the script  
@@ -113,14 +114,14 @@ while {_trig getVariable "Activated"} do {
 
 // Deactivate the trigger 
 // Despawn trigger units 
-_activeUnits = _trig getVariable ["ActiveUnits", []];
+_activeTroops = _trig getVariable ["ActiveTroops", []];
 {
 	if (vehicle _x != _x) then {
 		deleteVehicle (vehicle _x);
 	};
 	deleteVehicle _x;
 	sleep 0.02;
-} forEach _activeUnits;
+} forEach _activeTroops;
 
 // Debug
 systemChat "[WD] Tactical Director Deactivated";

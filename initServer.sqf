@@ -37,3 +37,7 @@ if (_vehicleDatabaseExists) then {
 // Run ongoing Scripts 
 [] remoteExec ["lmn_fnc_saveEnvironment", 2];
 [] remoteExec ["lmn_fnc_timeManager", 2];
+
+// Start Directors 
+sleep 10;
+[] remoteExec ["lmn_fnc_ldTick", 2];

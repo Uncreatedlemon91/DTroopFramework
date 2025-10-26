@@ -53,9 +53,11 @@ for "_i" from 1 to _civCount do {
 	[_group, _spawnPos, 600] call BIS_fnc_taskPatrol;
 
 	// Add the civilian to the trigger's spawned units array
-	_currentUnits = _trig getVariable ["ActiveTroops",[]];
-	_currentUnits pushback _unit;
-	_trig setVariable ["ActiveTroops", _currentUnits, true];
+	_activeUnits = _trig getVariable ["ActiveUnits", []];
+	_activeUnits pushback _unit; 
+	_trig setVariable ["ActiveUnits", _activeUnits, true];
+	_newCount = count _activeUnits;
+	_trig setVariable ["ActiveTroops", _newCount, true];
 
 	// Sleep delay for performance 
 	sleep 0.02;
