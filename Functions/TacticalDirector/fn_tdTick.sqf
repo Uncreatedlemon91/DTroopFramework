@@ -39,10 +39,14 @@ while {_trig getVariable "Activated"} do {
 		if (_faction == "PAVN") then {
 			_newFaction = selectRandom ["US", "ARVN"];
 		};
-		// [_trig, _newFaction] remoteExec ["lmn_fnc_tdFlipped", 2];  // Convert this location 
+		_loc = nearestLocation [position _trig, _siteType];
+		_mkr = _trig getVariable "Marker";
+		[_loc, _newFaction] remoteExec ["lmn_fnc_createFaction", 2];  // Convert this location 
+		deleteVehicle _trig;
+		deleteMarker _mkr;
 	};
 	if (count _activeTroops > _troopCount) then {systemChat "[TD] All forces are deployed!"; _noSpawn = true};
-	if (count _activeTroops > (_playerCount * 20)) then {systemChat "[TD] More forces than players in the AO!"; _noSpawn = true};
+	if (count _activeTroops > (_playerCount * 8)) then {systemChat "[TD] More forces than players in the AO!"; _noSpawn = true};
 
 	// Continue with script
 	if (_noSpawn) then {} else {
@@ -118,6 +122,7 @@ while {_trig getVariable "Activated"} do {
 
 // Deactivate the trigger 
 // Despawn trigger units 
+_trig setVariable ["Activated", false, true];
 _activeTroops = _trig getVariable ["ActiveTroops", []];
 {
 	if (vehicle _x != _x) then {
@@ -126,7 +131,7 @@ _activeTroops = _trig getVariable ["ActiveTroops", []];
 	deleteVehicle _x;
 	sleep 0.02;
 } forEach _activeTroops;
+_trig setVariable ["ActiveTroops", [], true];
 
 // Debug
 systemChat "[WD] Tactical Director Deactivated";
-_trig setVariable ["Activated", false, true];

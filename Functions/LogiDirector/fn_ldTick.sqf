@@ -23,29 +23,35 @@ _locs = "getSections" call _locDB;
 	// PHASE ONE - Self Preservation 
 	if ((_siteType == "Airport") AND (_faction == "USA")) then {
 		// Add a mission to drop off troops and supplies 
-		_newTroopLevel = _troopLevel + round (random 100);
-		_newSupplyLevel = _supplyLevel + round (random 100);
-		_data set [3, _newTroopLevel];
-		_data set [5, _newSupplyLevel];
-		[_data] remoteExec ["lmn_fnc_saveLocation", 2];
+		if (_troopLevel > _maxTroopCount) then {} else {
+			_newTroopLevel = _troopLevel + round (random 100);
+			_newSupplyLevel = _supplyLevel + round (random 100);
+			_data set [3, _newTroopLevel];
+			_data set [5, _newSupplyLevel];
+			[_data] remoteExec ["lmn_fnc_saveLocation", 2];
+		};	
 	};
 
 	if ((_siteType == "NameCity") AND (_faction == "PAVN")) then {
 		// Add a mission to drop off troops and supplies 
-		_newTroopLevel = _troopLevel + round (random 100);
-		_newSupplyLevel = _supplyLevel + round (random 100);
-		_data set [3, _newTroopLevel];
-		_data set [5, _newSupplyLevel];
-		[_data] remoteExec ["lmn_fnc_saveLocation", 2];
+		if (_troopLevel > _maxTroopCount) then {} else {
+			_newTroopLevel = _troopLevel + round (random 100);
+			_newSupplyLevel = _supplyLevel + round (random 100);
+			_data set [3, _newTroopLevel];
+			_data set [5, _newSupplyLevel];
+			[_data] remoteExec ["lmn_fnc_saveLocation", 2];
+		};		
 	};
 
 	if ((_siteType == "NameCity") AND (_faction == "ARVN")) then {
 		// Add a mission to drop off troops and supplies 
-		_newTroopLevel = _troopLevel + round (random 100);
-		_newSupplyLevel = _supplyLevel + round (random 100);
-		_data set [3, _newTroopLevel];
-		_data set [5, _newSupplyLevel];
-		[_data] remoteExec ["lmn_fnc_saveLocation", 2];
+		if (_troopLevel > _maxTroopCount) then {} else {
+			_newTroopLevel = _troopLevel + round (random 100);
+			_newSupplyLevel = _supplyLevel + round (random 100);
+			_data set [3, _newTroopLevel];
+			_data set [5, _newSupplyLevel];
+			[_data] remoteExec ["lmn_fnc_saveLocation", 2];
+		};	
 	};
 
 	// PHASE TWO - Interact with nearby locations 
@@ -72,10 +78,12 @@ _locs = "getSections" call _locDB;
 	// Other location is hostile 
 	if (_faction != _trigFaction) then {
 		systemChat "Factions are different!";
-		// Assess an attack 
-		if ((_troopLevel > _trigTroopLevel) AND (_troopLevel > 40)) then {
-			[_data, _nearLocData] remoteExec ["lmn_fnc_ldAttackSite", 2];
-			systemChat "[LD] Attacking";
+		if ((_faction == "PAVN") OR (_trigFaction == "PAVN")) then {
+			// Assess an attack 
+			if ((_troopLevel > _trigTroopLevel) AND (_troopLevel > 40)) then {
+				[_data, _nearLocData] remoteExec ["lmn_fnc_ldAttackSite", 2];
+				systemChat "[LD] Attacking";
+			};
 		};
 	};
 	sleep 10;

@@ -10,7 +10,7 @@ _spawnFaction = "";
 _spawnSide = "";
 _cfgClass = "";
 switch (_faction) do {
-	case "USA": {_spawnSide = west; _cfgClass = configfile >> "CfgGroups" >> "West" >> "VN_MACV" >> "vn_b_group_men_sog"};
+	case "USA": {_spawnSide = west; _cfgClass = configfile >> "CfgGroups" >> "West" >> "VN_MACV" >> "vn_b_group_men_army"};
 	case "PAVN": {_spawnSide = east; _cfgClass = configfile >> "CfgGroups" >> "East" >> "VN_PAVN" >> "vn_o_group_men_nva_field"};
 	case "ARVN": {_spawnSide = independent; _cfgClass = configfile >> "CfgGroups" >> "Indep" >> "VN_ARVN" >> "vn_i_group_men_ranger"};
 };
@@ -42,7 +42,8 @@ switch (_mission) do {
 };
 
 // Add group level event handlers to reduce Troop Count on casualties 
-_troopGroup setVariable ["attachedLocation", _data select 11];
+_troopGroup setVariable ["attachedLocation", _data select 11, true];
+_troopGroup setVariable ["attachedTrigger", _trig, true];
 _troopGroup addEventHandler ["UnitKilled", {
 	params ["_group", "_unit", "_killer", "_instigator", "_useEffects"];
 	_loc = _group getVariable "attachedLocation";

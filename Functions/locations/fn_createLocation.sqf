@@ -97,6 +97,7 @@ _trig setTriggerStatements [
 // Set Trigger Variables 
 _trig setVariable ["Location", text _loc, true];
 _trig setVariable ["Activated", false, true];
+_trig setVariable ["Marker", _mkr, true];
 
 // Save to database 
 _data = [

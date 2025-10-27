@@ -15,7 +15,9 @@ switch (_type) do {
 	case "M16Rifles": {
 		_model = "vn_b_ammobox_02"; 
 		_content = [
-			["vn_m16", 10]
+			["vn_m16", 10],
+			["vn_b_m16", 10],
+			["vn_bipod_m16", 2]
 		];
 	};
 	case "M60MG": {
@@ -109,6 +111,10 @@ switch (_type) do {
 			["acex_intelitems_notepad", 10],
 			["ACE_wirecutter", 10],
 			["ACE_artilleryTable", 10],
+			["vn_m_m51_etool_01", 10],
+			["vn_fkb1", 10],
+			["vn_mk21_binocs", 4],
+			["vn_camera_01", 2],
 			["ACE_DefusalKit", 10]
 		];
 	};

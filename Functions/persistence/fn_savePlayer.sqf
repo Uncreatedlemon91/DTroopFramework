@@ -39,5 +39,6 @@ _saveMarker = [];
 } forEach _markers;
 
 // Save Markers to DB 
+["deleteKey", [_uid, "Player Markers"]] call _db;
 ["write", [_uid, "Player Markers", _saveMarker]] call _db;
 
