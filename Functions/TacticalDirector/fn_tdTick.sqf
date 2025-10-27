@@ -33,17 +33,18 @@ while {_trig getVariable "Activated"} do {
 		systemChat "[TD] NO MORE TROOPS!";
 		_noSpawn = true;
 		_newFaction = "";
-		if ((_faction == "US") OR (_faction == "ARVN")) then {
+		if ((_faction == "USA") OR (_faction == "ARVN")) then {
 			_newFaction = "PAVN";
 		};
 		if (_faction == "PAVN") then {
-			_newFaction = selectRandom ["US", "ARVN"];
+			_newFaction = selectRandom ["USA", "ARVN"];
 		};
 		_loc = nearestLocation [position _trig, _siteType];
+		systemChat format ["Loc: %1", _loc];
 		_mkr = _trig getVariable "Marker";
-		[_loc, _newFaction] remoteExec ["lmn_fnc_createFaction", 2];  // Convert this location 
 		deleteVehicle _trig;
 		deleteMarker _mkr;
+		[_loc, _newFaction] remoteExec ["lmn_fnc_createLocation", 2];  // Convert this location 
 	};
 	if (count _activeTroops > _troopCount) then {systemChat "[TD] All forces are deployed!"; _noSpawn = true};
 	if (count _activeTroops > (_playerCount * 8)) then {systemChat "[TD] More forces than players in the AO!"; _noSpawn = true};

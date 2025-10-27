@@ -33,7 +33,6 @@ _troopGroup setVariable ["lambs_danger_enableGroupReinforce", true, true];
 
 // Give troop a location to get to 
 _wp1 = _troopGroup addWaypoint [_destination select 1, 20, 1];
-_wp1 setWaypointBehaviour "CARELESS";
 _wp1 setWaypointType "MOVE";
 
 // Remove the count of troops from the trigger 

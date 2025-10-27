@@ -24,6 +24,7 @@ _sections = "getSections" call _locDB;
 	// Set Trigger Variables 
 	_trig setVariable ["Location", _data select 11, true];
 	_trig setVariable ["Activated", false, true];
+	_trig setVariable ["Marker", _mkr, true];
 
 	sleep 0.2;
 } forEach _sections;

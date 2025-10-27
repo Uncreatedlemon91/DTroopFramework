@@ -15,7 +15,7 @@ switch (_faction) do {
 };
 
 // Set spawn location and spawn unit 
-_spawnPos = [position _trig, 0, 100, 5, 0, 3] call BIS_fnc_findSafePos;
+_spawnPos = [_source select 1, 0, 100, 5, 0, 3] call BIS_fnc_findSafePos;
 _spawnPos = [_spawnPos select 0, _spawnPos select 1, 0];
 _squad = selectRandom ("true" configClasses (_cfgClass));
 _units = "true" configClasses (_squad);
@@ -31,7 +31,7 @@ _troopGroup setVariable ["lambs_danger_enableGroupReinforce", true, true];
 
 // Give troop a location to get to 
 _wp1 = _troopGroup addWaypoint [_destination select 1, 20, 1];
-[_troopGroup, _wp1] setWaypointBehaviour "CARELESS";
+_wp1 setWaypointBehaviour "AWARE";
 _wp1 setWaypointType "MOVE";
 
 // Remove the count of troops from the trigger 
@@ -50,8 +50,12 @@ waitUntil { (getPos (leader _troopGroup) distance (_destination select 1)) < 30;
 } forEach units _troopGroup;
 
 _oldTroopLevel = _destination select 3;
-_newTroopLevel = _groupCount - _oldTroopLevel;
+_newTroopLevel = _oldTroopLevel - _groupCount;
 _destination set [3, _newTroopLevel];
 
 // Sync database 
 [_destination] remoteExec ["lmn_fnc_saveLocation", 2];
+
+if (_newTroopLevel <= 0) then {
+	
+}

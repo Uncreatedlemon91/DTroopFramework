@@ -83,6 +83,7 @@ _nearLocs = [];
 {
 	_nearLocs pushback text _x;	
 } forEach _locs;
+_nearLocs deleteAt 0;
 
 // Build the trigger at the location 
 _trig = createTrigger ["EmptyDetector", position _loc, true];
