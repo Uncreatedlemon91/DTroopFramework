@@ -42,9 +42,9 @@ _source set [3, _newTroopCount];
 
 // Sync database 
 [_source] remoteExec ["lmn_fnc_saveLocation", 2];
-_travelling = true;
 
 // Delete the unit and add them to the destination if they get there succesfully 
+_travelling = true;
 while {_travelling} do {
 	_ldr = leader _troopGroup;
 	_ldrPos = getPos _ldr;
@@ -60,7 +60,7 @@ while {_travelling} do {
 } forEach units _troopGroup;
 
 _oldTroopLevel = _destination select 3;
-_newTroopLevel = _groupCount + _oldTroopLevel;
+_newTroopLevel = _oldTroopLevel + _groupCount;
 _destination set [3, _newTroopLevel];
 
 // Sync database 

@@ -19,23 +19,26 @@ _spawnPos = [_source select 1, 0, 100, 5, 0, 3] call BIS_fnc_findSafePos;
 _spawnPos = [_spawnPos select 0, _spawnPos select 1, 0];
 _squad = selectRandom ("true" configClasses (_cfgClass));
 _units = "true" configClasses (_squad);
-_troopGroup = createGroup _spawnSide;
-_troopGroup deleteGroupWhenEmpty true;
-_troopGroup setVariable ["lambs_danger_enableGroupReinforce", true, true];
-{
-	_class = getText (_x >> 'vehicle');
-	_unit = _troopGroup createUnit [_class, _spawnPos, [], 10, "FORM"];
-	zeus addCuratorEditableObjects [[_unit], true];	
-	sleep 0.02;
-} forEach _units;
 
-// Give troop a location to get to 
-_wp1 = _troopGroup addWaypoint [_destination select 1, 20, 1];
-_wp1 setWaypointBehaviour "AWARE";
-_wp1 setWaypointType "MOVE";
+// Create a trigger that will move to the location 
+_trig = createTrigger ["EmptyDetector", _spawnPos];
+_trig setTriggerActivation ["ANYPLAYER", "PRESENT", true];
+_trig setTriggerArea [350, 350, 0, false, 100];
+_trig setVariable ["TriggerUnits", _units, true];
+_trig setVariable ["TriggerSpawnSide", _spawnSide, true];
+_trig setVariable ["TriggerSource", _source, true];
+_trig setVariable ["TriggerDestination", _destination, true];
+
+[_trig, _destination select 1] remoteExec ["lmn_fnc_triggerToMove", 2];
+
+_trig setTriggerStatements [
+	"this", 
+	"[thisTrigger] remoteExec ['lmn_fnc_ldSpawnGroup', 2]",
+	"thisTrigger setVariable ['Activated', false, true]",
+];
 
 // Remove the count of troops from the trigger 
-_groupCount = count (units _troopGroup);
+_groupCount = count _units;
 _newTroopCount = _troopCount - _groupCount;
 _source set [3, _newTroopCount];
 
@@ -43,8 +46,17 @@ _source set [3, _newTroopCount];
 [_source] remoteExec ["lmn_fnc_saveLocation", 2];
 
 // Delete the unit and add them to the destination if they get there succesfully 
-waitUntil { (getPos (leader _troopGroup) distance (_destination select 1)) < 30; };
-
+_travelling = true;
+while {_travelling} do {
+	_ldr = leader _troopGroup;
+	_ldrPos = getPos _ldr;
+	_dest = _destination select 1;
+	_dist = _ldrPos distance2D _dest;
+	if (_dist < 30) then {
+		_travelling = false;
+	}; 
+	sleep 5;
+};
 {
 	deleteVehicle _x;
 } forEach units _troopGroup;
@@ -55,7 +67,3 @@ _destination set [3, _newTroopLevel];
 
 // Sync database 
 [_destination] remoteExec ["lmn_fnc_saveLocation", 2];
-
-if (_newTroopLevel <= 0) then {
-	
-}
