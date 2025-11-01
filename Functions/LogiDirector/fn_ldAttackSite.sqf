@@ -34,7 +34,7 @@ _trig setVariable ["TriggerDestination", _destination, true];
 _trig setTriggerStatements [
 	"this", 
 	"[thisTrigger] remoteExec ['lmn_fnc_ldSpawnGroup', 2]",
-	"thisTrigger setVariable ['Activated', false, true]",
+	"thisTrigger setVariable ['Activated', false, true]"
 ];
 
 // Remove the count of troops from the trigger 

@@ -55,6 +55,12 @@ class CfgFunctions
 			class setupPlayerSelf {};
 		};
 
+		class roles
+		{
+			class getPlayerWhitelistedRoles {};
+			class getRole {};
+		};
+
 		class sites 
 		{
 			class prepAA {};
@@ -80,9 +86,5 @@ class CfgFunctions
 			class tdSpawnTroops {};
 			class tdTick {}; 
 		}
-		class WarDirector
-		{
-			class wdTick {};
-		};
 	};
 };

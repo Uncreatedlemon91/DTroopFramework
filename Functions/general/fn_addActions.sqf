@@ -409,6 +409,8 @@ _radioTower = [
     {true}
 ] call ace_interact_menu_fnc_createAction;
 
+// Add actions for roles 
+
 // Addactions to logistics point
 // Vehicles 
 [ItemSpawner, 0, ["ACE_MainActions"], _spawnVehicles] call ace_interact_menu_fnc_addActionToObject;
