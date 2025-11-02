@@ -14,6 +14,17 @@ _player setUnitLoadout _loadout;
 // Add the relevant variables 
 _player setVariable ["CurrentKit", _kit];
 
+_medicalRoles = [];
+_engineerRoles = [Mechanic];
+
+if (_kit in _medicalRoles) then {
+	_player setVariable ["ace_medical_medicclass", 1, true];
+};
+
+if (_kit in _engineerRoles) then {
+	_player setVariable ["ace_isEngineer", 1, true];
+};
+
 // Save current loadout to the player's database profile 
 _db = ["new", format ["Player Profiles %1 %2", missionName, worldName]] call oo_inidbi;
 _uid = getPlayerUID _player;
