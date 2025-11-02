@@ -5,6 +5,7 @@ class CfgFunctions
 		class general 
 		{
 			class addActions {};
+			class getNearPlayers {};
 			class setupItems {};
 			class setupVehicle {};
 			class spawnCivilian {};
@@ -47,10 +48,11 @@ class CfgFunctions
 			class saveTree {};
 			class saveVehicle {};
 		};
-		
+
 		class players 
 		{
 			class actionTreeRemoval {};
+			class addPersonnelActions {};
 			class recordDeath {};
 			class setupPlayerSelf {};
 		};

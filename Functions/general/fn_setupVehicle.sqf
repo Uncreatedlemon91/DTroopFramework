@@ -47,3 +47,8 @@ if ((typeOf _veh == "vn_b_armor_m577_02") OR (typeOf _veh == "vn_b_air_ch47_02_0
 if (typeOf _veh == "vn_b_air_ch47_03_02") then {
     [_veh, 24] call ace_cargo_fnc_setSpace;
 };
+
+if (typeOf _veh == "vn_b_armor_m577_01") then {
+    // Add the Personnel Functions to the vehicle.
+    [_veh] remoteExec ["lmn_fnc_addPersonnelActions", 0, true];
+};
