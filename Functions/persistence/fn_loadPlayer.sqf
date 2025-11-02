@@ -1,5 +1,5 @@
 // Load the player from the database 
-params ["_data", "_player", "_markers"];
+params ["_data", "_player", "_markers", "_kit"];
 
 _pos = _data select 1;
 _dir = _data select 2;
@@ -12,6 +12,19 @@ _player setDir _dir;
 _player setUnitLoadout _loadout;
 [_player, _medical] call ace_medical_fnc_deserializeState;
 _player selectWeapon _weapon;
+
+// Add ace variables based on kit 
+// Define roles 
+_medicalRoles = [];
+_engineerRoles = ["Mechanic"];
+
+if (_kit in _medicalRoles) then {
+	_player setVariable ["ace_medical_medicclass", 1, true];
+};
+
+if (_kit in _engineerRoles) then {
+	_player setVariable ["ace_isEngineer", 1, true];
+};
 
 // Add markers to map 
 {

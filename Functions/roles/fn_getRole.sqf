@@ -2,9 +2,9 @@
 params ["_kit", "_player"];
 
 // Check if the player has the role 
-_hasRole = [_player, _kit] call lmn_fnc_getWhitelistedRoles;
-if (_hasRole) exitWith {systemChat "You do not have this role unlocked!"};
-
+//_hasRole = [_player, _kit] call lmn_fnc_getPlayerWhitelistedRoles;
+//if !(_hasRole) exitWith {["You do not have this role unlocked!"] remoteExec ["systemChat", netId _player]};
+systemChat format ["Kit: %1", _kit];
 // Get the loadout from the loadout character 
 _loadout = getUnitLoadout _kit;
 
@@ -17,7 +17,4 @@ _player setVariable ["CurrentKit", _kit];
 // Save current loadout to the player's database profile 
 _db = ["new", format ["Player Profiles %1 %2", missionName, worldName]] call oo_inidbi;
 _uid = getPlayerUID _player;
-["write", [_uid, "Player Kit", _kit]] call _db;
-
-// Notify the player of succesful kit change 
-systemChat format ["%1 kit applied", _kit];
+["write", [_uid, "Player Kit", str _kit]] call _db;

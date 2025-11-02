@@ -57,6 +57,7 @@ class CfgFunctions
 
 		class roles
 		{
+			class addActionToItem {};
 			class getPlayerWhitelistedRoles {};
 			class getRole {};
 		};
