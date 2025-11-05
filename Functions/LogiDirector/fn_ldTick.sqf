@@ -40,7 +40,7 @@ _locs = "getSections" call _locDB;
 			_data set [3, _newTroopLevel];
 			_data set [5, _newSupplyLevel];
 			[_data] remoteExec ["lmn_fnc_saveLocation", 2];
-		};		
+		};
 	};
 
 	if ((_siteType == "NameCity") AND (_faction == "ARVN")) then {
@@ -51,7 +51,7 @@ _locs = "getSections" call _locDB;
 			_data set [3, _newTroopLevel];
 			_data set [5, _newSupplyLevel];
 			[_data] remoteExec ["lmn_fnc_saveLocation", 2];
-		};	
+		};
 	};
 
 	// PHASE TWO - Interact with nearby locations 

@@ -15,8 +15,12 @@ class CfgFunctions
 		class locations 
 		{
 			class createLocation {};
+			class createLocation2 {};
+			class getNearLocations {};
 			class loadLocations {};
 			class saveLocation {};
+			class setLocationFaction {};
+			class setLocationID {};
 			class setupLocations {};
 		};
 
