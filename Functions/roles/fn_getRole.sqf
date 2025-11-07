@@ -1,5 +1,5 @@
 // Gets the players applies the selected loadout to the player. 
-params ["_kit", "_player"];
+params ["_kit", "_player", "_box"];
 
 /*// Check if the player has the role 
 _hasRole = [_player, _kit] call lmn_fnc_getPlayerWhitelistedRoles;
@@ -51,3 +51,8 @@ if (_kit in _engineerRoles) then {
 _db = ["new", format ["Player Profiles %1 %2", missionName, worldName]] call oo_inidbi;
 _uid = getPlayerUID _player;
 ["write", [_uid, "Player Kit", str _kit]] call _db;
+
+// Delete the box 
+if (typeOf _box == "vn_b_ammobox_supply_04") then {
+	[_box, "itemdb"] remoteExec ["lmn_fnc_deleteFromDatabase", 2];
+};

@@ -25,12 +25,16 @@ _boxSave = [
     {true}
 ] call ace_interact_menu_fnc_createAction;
 
+// Actions added to the box 
 [_box, 0, ["ACE_MainActions"], _boxDelete] call ace_interact_menu_fnc_addActionToObject;
 [_box, 0, ["ACE_MainActions"], _boxSave] call ace_interact_menu_fnc_addActionToObject;
 
 // Setup ACE Stuff 
 [_box, true, [0, 2, 0], 20] call ace_dragging_fnc_setDraggable;
 [_box, true, [0, 3, 1], 10] call ace_dragging_fnc_setCarryable;
-
 [_box, 1] call ace_cargo_fnc_setSize;
 [_box, true, [0,3,1], 0, true, true] call ace_dragging_fnc_setCarryable;
+
+if (typeof _box == "vn_b_ammobox_supply_04") then {
+    [_box] remoteExec ["lmn_fnc_addActionToItem", 0, true];
+};
