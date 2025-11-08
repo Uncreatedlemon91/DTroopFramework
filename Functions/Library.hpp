@@ -30,11 +30,10 @@ class CfgFunctions
 			class spawnVehicle {};
 		};
 
-		class LogiDirector
+		class FactionDirector
 		{
-			class ldSendTroops {};
-			class ldAttackSite {};
-			class ldTick {};
+			class createHUBsupply {};
+			class USdirector {};
 		};
 
 		class persistence
@@ -55,14 +54,6 @@ class CfgFunctions
 			class loadPlayer {};
 			class recordDeath {};
 			class savePlayer {};
-		};
-
-		class regiments
-		{
-			class createRegiment {};
-			class getRegiment {};
-			class loadRegiments {};
-			class saveRegiment {};
 		};
 
 		class roles

@@ -37,4 +37,4 @@ if (_vehicleDatabaseExists) then {
 
 // Start Directors 
 sleep 10;
-[] remoteExec ["lmn_fnc_ldTick", 2];
+[] remoteExec ["lmn_fnc_USdirector", 2];

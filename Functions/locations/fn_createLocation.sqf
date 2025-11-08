@@ -6,6 +6,9 @@ _locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_ini
 
 // Define the variables for the location 
 _id = [] call lmn_fnc_setLocationID;
+
+_loc setVariable ["lmn_locationID", _id, true];
+
 _siteType = type _loc;
 ["write", [_id, "Site Type", _siteType]] call _locDB;
 
@@ -29,6 +32,9 @@ _security = round (random [-100, 0, 100]);
 
 _locationMarker = createMarker [format ["loc_%1", _id], _position];
 ["write", [_id, "Location Marker", _locationMarker]] call _locDB;
+
+_supply = round (random 1000);
+["write", [_id, "Supply", _supply]] call _locDB;
 
 // Update the Marker 
 _locationMarker setMarkerTypeLocal (_faction select 1);
