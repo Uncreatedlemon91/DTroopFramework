@@ -1,5 +1,10 @@
 // Moves offmap supplies to the HUB location
 params ["_location", "_faction"];
+
+// Set random delay to stagger missions 
+sleep (random 120);
+
+// Get Database
 _locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_inidbi;
 
 // Get location details
@@ -24,6 +29,8 @@ if (_faction == "USA") then {
 // Build supply convoy 
 _vehicle = [getMarkerPos _supplySource, 0, _supplyVehicle, _side] call BIS_fnc_spawnVehicle;
 _plane = _vehicle select 0;
+[_plane, "b_air"] spawn lmn_fnc_attachMarker;
+
 // Add event handlers 
 _plane addEventHandler ["LandedStopped", {
 	params ["_plane", "_airportID", "_airportObject"];

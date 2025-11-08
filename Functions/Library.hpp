@@ -5,6 +5,7 @@ class CfgFunctions
 		class general 
 		{
 			class addActions {};
+			class attachMarker {};
 			class getNearPlayers {};
 			class setupItems {};
 			class setupVehicle {};

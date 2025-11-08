@@ -28,9 +28,17 @@ _locationsLogiHub = [];
 
 		// Check Heat Level 
 		_heatLevel = ["read", [_x, "Heat Level"]] call _locDB;
-		if (_heatLevel > 700) then {
-			_locationsHighHeat pushback _x;
+		if (_heatLevel < 200) then {
+			_locationsLowHeat pushback _x;
 			systemchat format ["[US Director] Location %1 has high enemy activity (%2).", _name, _heatLevel];
+		};
+		if ((_heatLevel > 199) AND (_heatLevel < 600)) then {
+			_locationsMedHeat pushback _x;
+			systemchat format ["[US Director] Location %1 has medium enemy activity (%2).", _name, _heatLevel];
+		};
+		if (_heatLevel > 599) then {
+			_locationsHighHeat pushback _x;
+			systemchat format ["[US Director] Location %1 has low enemy activity (%2).", _name, _heatLevel];
 		};
 
 		// Check Security Level 
@@ -51,23 +59,56 @@ _locationsLogiHub = [];
 } forEach _sections;
 
 // With these lists, make decisions on what to do next
-
 // Phase One: Resupply the HUBs 
 {
-	// Current result is saved in variable _x
 	_supplyLevel = ["read", [_x, "Supply"]] call _locDB;
-	if (_supplyLevel < 750) then {
+	if (_supplyLevel < 1000) then {
 		// Send a supply convoy to this location 
 		[_x, "USA"] remoteExec ["lmn_fnc_createHUBsupply", 2];
 		systemchat format ["[US Director] Sending supply convoy to Logistics HUB at %1.", ["read", [_x, "Site Name"]] call _locDB];
 		sleep 2;
 	};
+
+	// Phase Two : Resupply from HUB to low supply locations
+	_hub = _x;
+	{
+		if (_supplyLevel > 200) then {
+			[_x, "USA", _hub] remoteExec ["lmn_fnc_HUBtoLocSupply", 2];
+			systemchat format ["[US Director] Sending supply convoy to location %1.", ["read", [_x, "Site Name"]] call _locDB];
+		};
+		sleep 2;
+	} forEach _locationsLowSupply;
+
+	// Phase Three: Looks to create a new Battalion if there are remainder of supplies at the HUB
+	if (_supplyLevel > 400) then {
+		["USA", _hub] remoteExec ["lmn_fnc_createBattalion", 2];
+		_newSupply = _supplyLevel - 300;
+		["write", [_x, "Supply", _newSupply]] call _locDB;
+		systemchat format ["[US Director] Creating new Battalion at Logistics HUB at %1.", ["read", [_x, "Site Name"]] call _locDB];
+	};
+	sleep 2;
 } forEach _locationsLogiHub;
 
-// Phase Two: Resupply Low supply locations 
+// Phase Four: Get Battalion updates 
+_battalionDB = ["new", format ["Battalions %1 %2", missionName, worldName]] call oo_inidbi;
+_battalions = "getSections" call _battalionDB;
+_usBattalions = [];
+_reserves = [];
 {
-	// Current result is saved in variable _x
-	[_x, "USA"] remoteExec ["lmn_fnc_HUBtoLocSupply", 2];
-	systemchat format ["[US Director] Sending supply convoy to location %1.", ["read", [_x, "Site Name"]] call _locDB];
+	_faction = ["read", [_x, "Faction"]] call _battalionDB;
+	_posture = ["read", [_x, "Posture"]] call _battalionDB;
+	if (_faction == "USA") then {
+		_usBattalions pushback _x;
+		if (_posture == "Reserves") then {
+			_reserves pushback _x;
+		};
+	};
+} forEach _battalions;
+
+// Phase Six: Deploy Reserves to High Heat regions 
+{
+	_location = selectRandom _locationsHighHeat;
+	[_x, _location] remoteExec ["lmn_fnc_deployBattalion", 2];
+	systemchat format ["[US Director] Deploying Battalion %1 to location %2.", _battalionToDeploy, ["read", [_x, "Site Name"]] call _locDB];
 	sleep 2;
-} forEach _locationsLowSupply;
+} forEach _reserves;

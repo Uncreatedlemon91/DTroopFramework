@@ -5,6 +5,9 @@ params ["_faction", "_location"];
 _db = ["new", format ["Battalions %1 %2", missionName, worldName]] call oo_inidbi;
 _sections = "getSections" call _db;
 
+// Get location database
+_locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_inidbi;
+
 // Create variables for the battalion
 _id = (count _sections) + 1;
 _name = "";
@@ -12,15 +15,15 @@ _type = "";
 _composition = [];
 _mapMarker = "";
 _veterancy = selectRandom [
-	"PRIVATE"
-	"CORPORAL"
-	"SERGEANT"
-	"LIEUTENANT"
-	"CAPTAIN"
-	"MAJOR"
-	"COLONEL"
+	0.5,
+	0.6,
+	0.7,
+	0.8,
+	0.9,
+	1
 ];
-_status = "Staging";
+_posture = "Staging";
+_position = ["read", [_location, "Position"]] call _locDB;
 
 // Update variables 
 switch (_faction) do {
@@ -77,5 +80,20 @@ switch (_faction) do {
 ["write", [_id, "Type", _type]] call _db;
 ["write", [_id, "Composition", _composition]] call _db;
 ["write", [_id, "MapMarker", _mapMarker]] call _db;
-["write", [_id, "Status", _status]] call _db;
+["write", [_id, "Posture", _posture]] call _db;
 ["write", [_id, "HQLocation", _location]] call _db;
+["write", [_id, "Position", _position]] call _db;
+
+// Create a trigger to represent the battalion on the map 
+_trg = createTrigger ["EmptyDetector", _position];
+_trg setTriggerArea [350, 350, 0, false, 200];
+_trg setTriggerActivation ["ANYPLAYER", "PRESENT", true];
+_trg setTriggerStatements [
+	"this",
+	"[thisTrigger] remoteExec ['lmn_fnc_spawnBattalion', 2]",
+	"thisTrigger setVariable ['lmnDeployed', false]"
+];
+
+// Add variables to the trigger 
+_trg setVariable ["lmnBattalionID", _id];
+_trg setVariable ["lmnFaction", _faction];
