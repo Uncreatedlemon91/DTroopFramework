@@ -5,11 +5,11 @@ params ["_item", "_markerType", "_markerText"];
 _mkr = createMarker [format ["lmn_marker_%1_%2", _markerType, _item], getPos _item];
 _mkr setMarkerType _markerType;
 _mkr setMarkerText _markerText;
-_mkr setMarkerSize [0.5, 0.5];
+_mkr setMarkerSize [0.3, 0.3];
 
 // Follow item with marker 
 while {alive _item} do {
-	_mkr setPos (getPos _item);
+	_mkr setMarkerPos (getPos _item);
 	sleep 0.02;
 };
 

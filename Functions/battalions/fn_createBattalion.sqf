@@ -22,27 +22,27 @@ _veterancy = selectRandom [
 	0.9,
 	1
 ];
-_posture = "Staging";
+_posture = "Reserve";
 _position = ["read", [_location, "Position"]] call _locDB;
 
 // Update variables 
 switch (_faction) do {
 	case "USA": {
 		_type = selectRandom ["Infantry", "Armor"];
-		_name = format ["%1 Battalion, %2th %3 Regiment", round (random 4), round (Random 200), _type];
+		_name = format ["%1 Battalion, %2th %3 Regiment", round (random 4) + 1, round (Random 200) + 1, _type];
 		switch (_type) do {
 			case "Infantry": {
 				_composition = [
-					[configfile >> "CfgGroups" >> "West" >> "VN_MACV" >> "vn_b_group_men_army" >> "vn_b_group_men_army_01", 32],
-					[configfile >> "CfgGroups" >> "West" >> "VN_MACV" >> "vn_b_group_men_army" >> "vn_b_group_men_army_08", 1]
+					["Infantry Squad", 12],
+					["Recon Squad", 4]
 				];
 				_mapMarker = "b_inf";
 			 };
 			case "Armor": {
 				_composition = [
-					[configfile >> "CfgGroups" >> "West" >> "VN_MACV" >> "vn_b_group_armor_army" >> "vn_b_group_armor_army_02", 5],
-					[configfile >> "CfgGroups" >> "West" >> "VN_MACV" >> "vn_b_group_armor_army" >> "vn_b_group_armor_army_07", 4],
-					[configfile >> "CfgGroups" >> "West" >> "VN_MACV" >> "vn_b_group_men_army" >> "vn_b_group_men_army_01", 15]
+					["Infantry Squad", 6],
+					["Tank Squad", 4],
+					["Mechanized Squad", 4]
 				];
 				_mapMarker = "b_armor";
 			};
@@ -50,22 +50,19 @@ switch (_faction) do {
 	};
 	case "PAVN": {
 		_type = selectRandom ["Infantry", "Special Forces"];
-		_name = format ["%1 Battalion, %2th %3 Regiment", selectRandom ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th"], selectRandom ["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th", "9th", "10th"], _type];
+		_name = format ["%1 Battalion, %2th %3 Regiment", round (random 4) + 1, round (Random 200) + 1, _type];
 		switch (_type) do {
 			case "Infantry": {
 				_composition = [
-					[configfile >> "CfgGroups" >> "East" >> "VN_PAVN" >> "vn_o_group_men_nva" >> "vn_o_group_men_nva_01", 30],
-					[configfile >> "CfgGroups" >> "East" >> "VN_PAVN" >> "vn_o_group_men_nva" >> "vn_o_group_men_nva_04", 10],
-					[configfile >> "CfgGroups" >> "East" >> "VN_PAVN" >> "vn_o_group_men_nva" >> "vn_o_group_men_nva_07", 5],
-					[configfile >> "CfgGroups" >> "East" >> "VN_PAVN" >> "vn_o_group_motor_nva_65" >> "vn_o_group_motor_nva_65_01", 5],
-					[configfile >> "CfgGroups" >> "East" >> "VN_PAVN" >> "vn_o_group_motor_nva_65" >> "vn_o_group_motor_nva_65_03"5]
+					["Infantry Squad", 12],
+					["Recon Squad", 4]
 				];
 				_mapMarker = "o_inf";
 			};
 			case "Special Forces": {
 				_composition = [
-					[configfile >> "CfgGroups" >> "East" >> "VN_PAVN" >> "vn_o_group_men_nva_dc" >> "vn_o_group_men_nva_dc_01", 15],
-					[configfile >> "CfgGroups" >> "East" >> "VN_PAVN" >> "vn_o_group_men_nva_dc" >> "vn_o_group_men_nva_dc_02", 10]
+					["Infantry Squad", 12],
+					["Recon Squad", 4]
 				];
 				_mapMarker = "o_recon";
 			};
@@ -84,16 +81,5 @@ switch (_faction) do {
 ["write", [_id, "HQLocation", _location]] call _db;
 ["write", [_id, "Position", _position]] call _db;
 
-// Create a trigger to represent the battalion on the map 
-_trg = createTrigger ["EmptyDetector", _position];
-_trg setTriggerArea [350, 350, 0, false, 200];
-_trg setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-_trg setTriggerStatements [
-	"this",
-	"[thisTrigger] remoteExec ['lmn_fnc_spawnBattalion', 2]",
-	"thisTrigger setVariable ['lmnDeployed', false]"
-];
-
-// Add variables to the trigger 
-_trg setVariable ["lmnBattalionID", _id];
-_trg setVariable ["lmnFaction", _faction];
+// Create the trigger
+[_position, _id, _faction] call lmn_fnc_setBattTrigger;

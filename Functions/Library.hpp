@@ -2,6 +2,14 @@ class CfgFunctions
 {
 	class Lmn
 	{
+		class battalions 
+		{
+			class createBattalion {};
+			class getGroupDetails {};
+			class loadBattalions {};
+			class setBattTrigger {};
+			class spawnBattalion {};
+		};
 		class general 
 		{
 			class addActions {};
@@ -33,6 +41,7 @@ class CfgFunctions
 
 		class FactionDirector
 		{
+			class createConvoy {};
 			class createHUBsupply {};
 			class USdirector {};
 		};

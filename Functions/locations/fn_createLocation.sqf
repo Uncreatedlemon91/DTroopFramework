@@ -7,8 +7,6 @@ _locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_ini
 // Define the variables for the location 
 _id = [] call lmn_fnc_setLocationID;
 
-_loc setVariable ["lmn_locationID", _id, true];
-
 _siteType = type _loc;
 ["write", [_id, "Site Type", _siteType]] call _locDB;
 
