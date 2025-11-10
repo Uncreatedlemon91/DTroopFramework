@@ -72,15 +72,5 @@ class CfgFunctions
 			class getPlayerWhitelistedRoles {};
 			class getRole {};
 		};
-
-		class TacticalDirector
-		{
-			class tdAmbush {};
-			class tdAttack {};
-			class tdDefend {};
-			class tdPatrol {};
-			class tdSpawnTroops {};
-			class tdTick {}; 
-		}
 	};
 };
