@@ -91,30 +91,6 @@ while {true} do {
 		sleep 2;
 	} forEach _locationsLogiHub;
 
-	// Phase Four: Get Battalion updates 
-	_battalionDB = ["new", format ["Battalions %1 %2", missionName, worldName]] call oo_inidbi;
-	_battalions = "getSections" call _battalionDB;
-	_usBattalions = [];
-	_reserves = [];
-	{
-		_faction = ["read", [_x, "Faction"]] call _battalionDB;
-		_posture = ["read", [_x, "Posture"]] call _battalionDB;
-		if (_faction == "USA") then {
-			_usBattalions pushback _x;
-			if (_posture == "Reserves") then {
-				_reserves pushback _x;
-			};
-		};
-	} forEach _battalions;
-
-	// Phase Six: Deploy Reserves
-	{
-		_location = selectRandom _locations;
-		[_x, _location] remoteExec ["lmn_fnc_deployBattalion", 2];
-		systemchat format ["[US Director] Deploying Battalion %1 to location %2.", _battalionToDeploy, ["read", [_x, "Site Name"]] call _locDB];
-		sleep 2;
-	} forEach _reserves;
-
 	// Loop delay
 	sleep 10;
 };

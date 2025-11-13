@@ -3,7 +3,7 @@ params ["_position", "_id", "_faction", "_mapMarker", "_name"];
 
 // Create a trigger to represent the battalion on the map 
 _trg = createTrigger ["EmptyDetector", _position];
-_trg setTriggerArea [350, 350, 0, false, 200];
+_trg setTriggerArea [600, 600, 0, false, 200];
 _trg setTriggerActivation ["ANYPLAYER", "PRESENT", true];
 _trg setTriggerStatements [
 	"this",

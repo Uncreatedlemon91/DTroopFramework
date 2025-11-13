@@ -1,15 +1,23 @@
 // Gets nearby locations and returns them 
-params ["_object"];
+params ["_position", "_radius"];
 
-// Calculcate local positions 
-_localPos = position _object;
-_nearLocations = [];
-{
-	_locPos = position _x;
-	_distance = _localPos distance _locPos;
-	if (_distance < 5000 && _x != _object) then {
-		_nearLocations pushBack _x;
-	};
-} forEach allLocations;
+_nearLocs = nearestLocations [_position, [
+	"NameLocal",
+	"NameVillage",
+	"Name",
+	"VegetationBroadleaf",
+	"Hill",
+	"NameMarine",
+	"ViewPoint",
+	"Strategic",
+	"NameCity",
+	"Airport",
+	"NameMarine",
+	"StrongpointArea",
+	"NameCityCapital"
+], _radius];
+_loc = selectRandom _nearLocs;
+_dest = position _loc;
 
-_nearLocations;
+_data = [_loc, _dest];
+_data;

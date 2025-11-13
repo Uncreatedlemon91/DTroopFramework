@@ -327,5 +327,3 @@ _Lantern = [
 [ItemSpawner, 0, ["ACE_MainActions", "items"], _Lamp] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "items"], _Lantern] call ace_interact_menu_fnc_addActionToObject;
 [ItemSpawner, 0, ["ACE_MainActions", "items"], _wheels] call ace_interact_menu_fnc_addActionToObject;
-[ItemSpawner, 0, ["ACE_MainActions", "items"], _personalBox] call ace_interact_menu_fnc_addActionToObject;
-[ItemSpawner, 0, ["ACE_MainActions", "items"], _ropeBox] call ace_interact_menu_fnc_addActionToObject;

@@ -11,5 +11,8 @@ _sections = "getSections" call _db;
 	_mapMarker = ["read", [_x, "MapMarker"]] call _db;
 
 	[_position, _x, _faction, _mapMarker, _name] remoteExec ["lmn_fnc_setBattTrigger", 2];
+
+	// Load the commander for the battalion 
+	[_x] remoteExec ["lmn_fnc_logicUS", 2];
 	sleep 0.02;
 } forEach _sections;

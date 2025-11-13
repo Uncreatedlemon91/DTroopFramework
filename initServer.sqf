@@ -38,7 +38,6 @@ if (_battalionDatabaseExists) then {
 // Run ongoing Scripts 
 [] remoteExec ["lmn_fnc_saveEnvironment", 2];
 [] remoteExec ["lmn_fnc_timeManager", 2];
-[] remoteExec ["lmn_fnc_addActionToItem", 0, true];
 
 // Start Directors 
 sleep 10;

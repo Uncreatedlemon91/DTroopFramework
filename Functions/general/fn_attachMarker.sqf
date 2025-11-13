@@ -10,7 +10,7 @@ _mkr setMarkerSize [0.3, 0.3];
 // Follow item with marker 
 while {alive _item} do {
 	_mkr setMarkerPos (getPos _item);
-	sleep 0.02;
+	sleep 0.5;
 };
 
 // Delete marker when item is destroyed
