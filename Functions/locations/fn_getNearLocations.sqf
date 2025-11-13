@@ -1,6 +1,11 @@
 // Gets nearby locations and returns them 
 params ["_position", "_radius"];
 
+// Rewrite to pull from database instead 
+// Use Faction Key / HEAT key / Position Key
+// Return the [Enemy, enemyHighHeat, Friendly, friendlyHighHeat, friendlyLowSecurity]
+// Prioritize HEAT / Friendly Low Security / Location
+
 _nearLocs = nearestLocations [_position, [
 	"NameLocal",
 	"NameVillage",

@@ -82,7 +82,7 @@ switch (_faction) do {
 ["write", [_id, "Position", _position]] call _db;
 
 // Create the trigger
-[_position, _id, _faction] call lmn_fnc_setBattTrigger;
+_trg = [_position, _id, _faction] call lmn_fnc_setBattTrigger;
 
 // Run the logic for the Battalion
-[_id] remoteExec ["lmn_fnc_logicUS", 2];
+[_id, _trg] remoteExec ["lmn_fnc_logicUS", 2];

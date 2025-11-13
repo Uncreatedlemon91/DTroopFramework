@@ -37,7 +37,7 @@ switch (_faction) do {
 
 	// Get units in the group type
 	for "_i" from 1 to _groupCount do {
-		_spawnPos = [_position, 0, 150, 10, 0, 0] call BIS_fnc_findSafePos;
+		_spawnPos = [_position, 0, 300, 10, 0, 0] call BIS_fnc_findSafePos;
 		_group = createGroup _side;
 		_group deleteGroupWhenEmpty true;
 		{

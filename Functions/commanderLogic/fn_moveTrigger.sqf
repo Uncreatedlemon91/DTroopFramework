@@ -3,6 +3,8 @@ params ["_trig", "_dest"];
 
 while {alive _trig} do {
 	if !(_trig getVariable "lmn_TrigActive") then {
+		// systemChat "Moving!";
+		_trig setVariable ["lmnTrigPosture", "Moving", true];
 		_currentPos = getpos _trig;
 		_dirVector = _currentPos vectorDiff _dest;
 		_dirNorm = vectorNormalized _dirVector;

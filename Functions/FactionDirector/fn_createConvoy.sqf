@@ -50,7 +50,7 @@ _newSupply = _oldSupply + _supplyQty;
 ["write", [_dest, "Supply", _newSupply]] call _locDB;
 
 // Send the convoy back 
-_exfilPos = [_startPos, 0, 100, 20, 0, 20, 0] call BIS_fnc_findSafePos;
+_exfilPos = [_spawnPos, 0, 100, 20, 0, 20, 0] call BIS_fnc_findSafePos;
 [_grp, _exfilPos, _heli] spawn BIS_fnc_wpLand;
 waitUntil {
 	sleep 5;

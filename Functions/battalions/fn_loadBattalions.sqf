@@ -10,9 +10,11 @@ _sections = "getSections" call _db;
 	_name = ["read", [_x, "Name"]] call _db;
 	_mapMarker = ["read", [_x, "MapMarker"]] call _db;
 
-	[_position, _x, _faction, _mapMarker, _name] remoteExec ["lmn_fnc_setBattTrigger", 2];
+	_trg = [_position, _x, _faction, _mapMarker, _name] call lmn_fnc_setBattTrigger;
 
-	// Load the commander for the battalion 
-	[_x] remoteExec ["lmn_fnc_logicUS", 2];
+	// Run the logic for the Battalion
+	[_x, _trg] remoteExec ["lmn_fnc_logicUS", 2];
+
+	// Loop
 	sleep 0.02;
 } forEach _sections;

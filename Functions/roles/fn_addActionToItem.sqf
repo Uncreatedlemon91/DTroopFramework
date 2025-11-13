@@ -78,8 +78,16 @@ _mechanic = [
     {true}
 ] call ace_interact_menu_fnc_createAction;
 
+_mg = [
+    "MG",
+    "Machine Gunner",
+    "",
+    {[MG, _player, _target] remoteExec ["lmn_fnc_getRole", 2];},
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
 // Add the roles to the actions
-_Tier0roles = [_base, _rifleman, _lat, _ar, _mgasst, _crewchief, _mechanic];
+_Tier0roles = [_base, _rifleman, _lat, _ar, _mgasst, _crewchief, _mechanic, _mg];
 {
     [_item, 0, ["ACE_MainActions", "Change Kit", "Tier0"], _x] call ace_interact_menu_fnc_addActionToObject;
 } forEach _Tier0roles;

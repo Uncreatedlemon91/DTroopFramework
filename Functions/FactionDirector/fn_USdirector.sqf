@@ -82,7 +82,17 @@ while {true} do {
 		} forEach _locationsLowSupply;
 
 		// Phase Three: Looks to create a new Battalion if there are remainder of supplies at the HUB
-		if (_supplyLevel > 400) then {
+		_Bdb = ["new", format ["Battalions %1 %2", missionName, worldName]] call oo_inidbi;
+		_batts = "getSections" call _Bdb;
+		_battalionCount = 0;
+		{
+			_faction = ["read", [_x, "Faction"]] call _bdb;
+			if (_faction == "USA") then {
+				_battalionCount = _battalionCount + 1;
+			};
+		} forEach _batts;
+		_calBattalions = (count _locations) / 3;
+		if ((_supplyLevel > 400) AND (_battalionCount < _calBattalions)) then {
 			["USA", _hub] remoteExec ["lmn_fnc_createBattalion", 2];
 			_newSupply = _supplyLevel - 300;
 			["write", [_x, "Supply", _newSupply]] call _locDB;
