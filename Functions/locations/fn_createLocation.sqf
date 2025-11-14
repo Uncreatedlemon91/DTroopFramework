@@ -25,8 +25,16 @@ _heatLevel = 0;
 _civCount = [_loc] call lmn_fnc_setCivilianCount;
 ["write", [_id, "Civilian Count", _civCount]] call _locDB;
 
-_security = round (random [-100, 0, 100]);
-["write", [_id, "Security", _security]] call _locDB;
+switch (_faction) do {
+	case "USA": {
+		_security = round(random 100);
+		["write", [_id, "Security", _security]] call _locDB;
+	};
+	case "PAVN": {
+		_security = round(random -100);
+		["write", [_id, "Security", _security]] call _locDB;
+	};
+};
 
 _locationMarker = createMarker [format ["loc_%1", _id], _position];
 ["write", [_id, "Location Marker", _locationMarker]] call _locDB;

@@ -29,9 +29,10 @@ while {alive _trig} do {
 			_squad = selectRandom _squads;
 		};
 		systemChat format ["%1 is getting supplies!", _name];
-		[_squad, _position, _mapMarker] remoteExec ["lmn_fnc_batt_getSupply", 2];
+		[_faction, _squad, _position, _mapMarker] remoteExec ["lmn_fnc_batt_getSupply", 2];
 	};
 
+	// If full health, and in reserves, move out. 
 	if ((_posture == "Reserve") AND (count _needs == 0)) then {
 		// Move to another location 
 		_nearLoc = [_position, 2000] call lmn_fnc_getNearLocations;
@@ -45,6 +46,14 @@ while {alive _trig} do {
 	// Resume travels if posture is moving 
 	if ((_posture == "Moving") AND ((_trig getVariable "lmnTrigPosture") != "Moving")) then {
 		[_trig, _dest] remoteExec ["lmn_fnc_moveTrigger"];
+	};
+
+	// Send a patrol if stationary and 'on mission'. 
+	if (_posture == "Mission") then {
+		_squad = selectRandom _squads;
+		if ((_squad select 1) > 2) then {
+			[_squad, _position, _mapMarker] remoteExec ["lmn_fnc_batt_Patrol", 2];
+		};
 	};
 	
 	// Sync Database 

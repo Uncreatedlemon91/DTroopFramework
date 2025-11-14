@@ -1,11 +1,9 @@
 // Orders an Infantry squad to go to a nearby location in order to get supplies
-params ["_squad", "_position", "_markerType"];
-
-// Select a squad to go on patrol to gather supplies, ideally infantry 
-
+params ["_faction", "_squad", "_position", "_markerType"];
 
 // Select a nearby location to get supply 
-_nearLoc = [_position, 1000] call lmn_fnc_getNearLocations;
+_nearLoc = [_position, 1000, _faction] call lmn_fnc_getNearLocations;
+_loc = _nearLoc select 0;
 _dest = _nearLoc select 1;
 
 // Setup a virtual instance of the troop 

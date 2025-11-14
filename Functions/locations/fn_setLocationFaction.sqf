@@ -2,11 +2,11 @@
 params ["_loc"];
 
 // Find if the location is positioned inside an Area Marker 
-_faction = "VN_PAVN";
+_faction = "PAVN";
 _flagType = "vn_flag_PAVN";
 
 if (position _loc inArea "southAO") then {
-	_faction = "VN_MACV";
+	_faction = "USA";
 	_flagType = "vn_flag_usa";
 	/*
 	_faction = selectRandomWeighted ["VN_MACV", 0.4, "VN_ARVN", 0.6];

@@ -20,7 +20,7 @@ if !([_comp, _fullStrength] call BIS_fnc_arrayCompare) then {
 		} forEach _fullStrength;
 
 		if (_count > 0) then {
-			_availableUnits pushback _type;
+			_availableUnits pushback _x;
 		};
 	} forEach _comp;
 };
