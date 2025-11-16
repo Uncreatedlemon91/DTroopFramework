@@ -12,7 +12,11 @@ _locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_ini
 _id = (count _sections) + 1;
 _name = "";
 _type = "";
-_composition = [];
+_infantrySquads = 10;
+_tankSquads = 0;
+_mechanizedSquads = 3;
+_reconSquads = 2;
+_mortarSquads = 2;
 _mapMarker = "";
 _veterancy = selectRandom [
 	0.5,
@@ -32,18 +36,19 @@ switch (_faction) do {
 		_name = format ["%1 Battalion, %2th %3 Regiment", round (random 4) + 1, round (Random 200) + 1, _type];
 		switch (_type) do {
 			case "Infantry": {
-				_composition = [
-					["Infantry Squad", 12],
-					["Recon Squad", 4]
-				];
+				_infantrySquads = 10, 10;
+				_tankSquads = 0;
+				_mechanizedSquads = 3;
+				_reconSquads = 2;
+				_mortarSquads = 2;
 				_mapMarker = "b_inf";
 			 };
 			case "Armor": {
-				_composition = [
-					["Infantry Squad", 6],
-					["Tank Squad", 4],
-					["Mechanized Squad", 4]
-				];
+				_infantrySquads = 5;
+				_tankSquads = 4;
+				_mechanizedSquads = 2;
+				_reconSquads = 3;
+				_mortarSquads = 1;
 				_mapMarker = "b_armor";
 			};
 		};
@@ -53,17 +58,19 @@ switch (_faction) do {
 		_name = format ["%1 Battalion, %2th %3 Regiment", round (random 4) + 1, round (Random 200) + 1, _type];
 		switch (_type) do {
 			case "Infantry": {
-				_composition = [
-					["Infantry Squad", 12],
-					["Recon Squad", 4]
-				];
+				_infantrySquads = 10;
+				_tankSquads = 0;
+				_mechanizedSquads = 3;
+				_reconSquads = 2;
+				_mortarSquads = 2;
 				_mapMarker = "o_inf";
 			};
 			case "Special Forces": {
-				_composition = [
-					["Infantry Squad", 12],
-					["Recon Squad", 4]
-				];
+				_infantrySquads = 10;
+				_tankSquads = 0;
+				_mechanizedSquads = 3;
+				_reconSquads = 2;
+				_mortarSquads = 2;
 				_mapMarker = "o_recon";
 			};
 		};
@@ -75,8 +82,11 @@ switch (_faction) do {
 ["write", [_id, "Veterancy", _veterancy]] call _db;
 ["write", [_id, "Faction", _faction]] call _db;
 ["write", [_id, "Type", _type]] call _db;
-["write", [_id, "Composition", _composition]] call _db;
-["write", [_id, "FullStrength", _composition]] call _db;
+["write", [_id, "Infantry Squads", [_infantrySquads, _infantrySquads]]] call _db;
+["write", [_id, "Tank Squad", [_tankSquads, _tankSquads]]] call _db;
+["write", [_id, "Mechanized Squads", [_mechanizedSquads, _mechanizedSquads]]] call _db;
+["write", [_id, "Recon Squads", [_reconSquads, _reconSquads]]] call _db;
+["write", [_id, "Mortar Squads", [_mortarSquads, _mortarSquads]]] call _db;
 ["write", [_id, "MapMarker", _mapMarker]] call _db;
 ["write", [_id, "Posture", _posture]] call _db;
 ["write", [_id, "Position", _position]] call _db;
@@ -85,4 +95,4 @@ switch (_faction) do {
 _trg = [_position, _id, _faction] call lmn_fnc_setBattTrigger;
 
 // Run the logic for the Battalion
-[_id, _trg] remoteExec ["lmn_fnc_logicUS", 2];
+[_id, _trg] remoteExec ["lmn_fnc_batt_logic", 2];

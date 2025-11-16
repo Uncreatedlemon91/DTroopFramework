@@ -23,21 +23,21 @@ _nearHighHeat = [];
 		// Nearby location, get the faction of it 
 		_faction = ["read", [_x, "Faction"]] call _locDb;
 		if (_faction == _battFaction) then {
-			_friendlyLocs append [_x, _pos];
+			_friendlyLocs pushback [_x, _pos];
 		} else {
-			_hostileLocs append [_x, _pos];
+			_hostileLocs pushback [_x, _pos];
 		};
 
 		// Find low security zones 
 		_sec = ["read", [_x, "Security"]] call _locDb;
 		if ((_sec < 50) OR (_sec > -50)) then {
-			_nearLowSec append [_x, _pos];
+			_nearLowSec pushback [_x, _pos];
 		};
 
 		// Find High Heat 
 		_heat = ["read", [_x, "Heat Level"]] call _locDb;
 		if (_heat > 0) then {
-			_nearHighHeat append [_x, _pos];
+			_nearHighHeat pushback [_x, _pos];
 		};
 	};
 } forEach _locs;

@@ -18,7 +18,7 @@ while {true} do {
 		// Check for the faction controlling the location 
 		_faction = ["read", [_x, "Faction"]] call _locDB;
 		_name = ["read", [_x, "Site Name"]] call _locDB;
-		if (_faction == "VN_MACV") then {
+		if (_faction == "USA") then {
 			_locations pushback _x;
 
 			// Check Supply Level 
@@ -30,22 +30,22 @@ while {true} do {
 
 			// Check Heat Level 
 			_heatLevel = ["read", [_x, "Heat Level"]] call _locDB;
-			if (_heatLevel < 200) then {
+			if (_heatLevel < 26) then {
 				_locationsLowHeat pushback _x;
-				systemchat format ["[US Director] Location %1 has low enemy activity (%2).", _name, _heatLevel];
+				// systemchat format ["[US Director] Location %1 has low enemy activity (%2).", _name, _heatLevel];
 			};
-			if ((_heatLevel > 199) AND (_heatLevel < 600)) then {
+			if ((_heatLevel > 25) AND (_heatLevel < 75)) then {
 				_locationsMedHeat pushback _x;
-				systemchat format ["[US Director] Location %1 has medium enemy activity (%2).", _name, _heatLevel];
+				// systemchat format ["[US Director] Location %1 has medium enemy activity (%2).", _name, _heatLevel];
 			};
-			if (_heatLevel > 599) then {
+			if (_heatLevel > 75) then {
 				_locationsHighHeat pushback _x;
-				systemchat format ["[US Director] Location %1 has high enemy activity (%2).", _name, _heatLevel];
+				// systemchat format ["[US Director] Location %1 has high enemy activity (%2).", _name, _heatLevel];
 			};
 
 			// Check Security Level 
 			_securityLevel = ["read", [_x, "Security"]] call _locDB;
-			if (_securityLevel < 300) then {
+			if (_securityLevel < 25) then {
 				_locationsLowSecurity pushback _x;
 				systemchat format ["[US Director] Location %1 has low security (%2).", _name, _securityLevel];
 			};

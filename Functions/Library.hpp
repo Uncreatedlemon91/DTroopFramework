@@ -14,8 +14,8 @@ class CfgFunctions
 		{
 			class batt_getStrength {};
 			class batt_getSupply {};
+			class batt_Logic {};
 			class batt_Patrol {};
-			class logicUS {};
 			class moveTrigger {};
 		}
 		class general 

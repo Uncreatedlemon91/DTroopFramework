@@ -13,9 +13,8 @@ _sections = "getSections" call _locDB;
 	// Define variables 
 	_flagType = "";
 	switch (_faction) do {
-		case "VN_ARVN": {_flagType = "vn_flag_arvn"};
-		case "VN_PAVN": {_flagType = "vn_flag_PAVN"};
-		case "VN_MACV": {_flagType = "vn_flag_usa"};
+		case "PAVN": {_flagType = "vn_flag_PAVN"};
+		case "USA": {_flagType = "vn_flag_usa"};
 	};
 
 	// Create Marker 

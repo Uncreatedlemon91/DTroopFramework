@@ -28,7 +28,8 @@ _veh = [_spawnPos, 0, _supplyVeh, _grp] call BIS_fnc_spawnVehicle;
 _heli = _veh select 0;
 
 // Attach a marker 
-[_heli, "b_air", format ["Flight To %1", ["read", [_dropOff, "Site Name"]] call _locDB]] spawn lmn_fnc_attachMarker; 
+_mkrText = format ["Flight To %1", ["read", [_dropOff, "Site Name"]] call _locDb];
+[_heli, "b_air", _mkrText] spawn lmn_fnc_attachMarker; 
 
 // Update Database for HUB 
 _oldSupply = ["read", [_hub, "Supply"]] call _locDB;

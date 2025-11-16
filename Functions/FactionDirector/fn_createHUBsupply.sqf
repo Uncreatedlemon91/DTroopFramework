@@ -29,7 +29,7 @@ if (_faction == "USA") then {
 // Build supply convoy 
 _vehicle = [getMarkerPos _supplySource, 0, _supplyVehicle, _side] call BIS_fnc_spawnVehicle;
 _plane = _vehicle select 0;
-[_plane, "b_plane"] spawn lmn_fnc_attachMarker;
+[_plane, "b_plane", "Resupply Flight"] spawn lmn_fnc_attachMarker;
 
 // Add event handlers 
 _plane addEventHandler ["LandedStopped", {

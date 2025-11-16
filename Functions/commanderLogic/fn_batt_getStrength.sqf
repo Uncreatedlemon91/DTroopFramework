@@ -1,30 +1,40 @@
 // Checks the battalion strength and if they need reinforcements or not. 
-params ["_comp", "_fullStrength"];
+params ["_batt"];
+
+// Get the database 
+_db = ["new", format ["Battalions %1 %2", missionName, worldName]] call oo_inidbi;
 
 // Set Variables 
-_needs = [];
-_availableUnits = [];
+_infantry = ["read", [_batt, "Infantry Squads"]] call _db;
+_tanks = ["read", [_batt, "Tank Squads"]] call _db;
+_mechanized = ["read", [_batt, "Mechanized Squads"]] call _db;
+_recon = ["read", [_batt, "Recon Squads"]] call _db;
+_mortars = ["read", [_batt, "Mortar Squads"]] call _db;
 
-if !([_comp, _fullStrength] call BIS_fnc_arrayCompare) then {
-	// We are not full strength. Discover what we're missing by comparing to the full strength measurement.
-	{
-		_type = _x select 0;
-		_count = _x select 1;
-		{
-			if ((_x select 0) == _type) then {
-				_fullCount = _x select 1;
-				if (_fullCount > _count) then {
-					_needs pushback _type;
-				};
-			};
-		} forEach _fullStrength;
-
-		if (_count > 0) then {
-			_availableUnits pushback _x;
-		};
-	} forEach _comp;
+// Check current strength against full strength 
+if (_infantry select 0 < _infantry select 1) exitWith {
+	// Need more infantry Squads 
+	"Infantry Squads";
 };
 
-// Return 
-_data = [_needs, _availableUnits];
-_data;
+if (_tanks select 0 < _tanks select 1) then {
+	// Need more infantry Squads 
+	"Tank Squads";
+};
+
+if (_mechanized select 0 < _mechanized select 1) then {
+	// Need more infantry Squads 
+	"Mechanized Squads";
+};
+
+if (_recon select 0 < _recon select 1) then {
+	// Need more infantry Squads 
+	"Recon Squads";
+};
+
+if (_mortars select 0 < _mortars select 1) then {
+	// Need more infantry Squads 
+	"Mortar Squads";
+};
+
+"Full Size";
