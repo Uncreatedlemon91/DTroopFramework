@@ -8,7 +8,7 @@ _db = ["new", format ["Battalions %1 %2", missionName, worldName]] call oo_inidb
 while {alive _trig} do {
 	_posture = ["read", [_batt, "Posture"]] call _db;
 
-	if (_posture == "In Mission") then {
+	if (_posture == "Operational") then {
 		// Check if it needs supplies, if so, send out a patrol to gain supplies 
 		[_batt] remoteExec ["lmn_fnc_squadGetSupply", 2];
 
@@ -21,6 +21,10 @@ while {alive _trig} do {
 		// Send out Recon patrols 
 		// [_batt] remoteExec ["lmn_fnc_squadRecon", 2];
 	}:
+
+	if (_posture == "Reserve") then {
+		
+	};
 
 	// Sync Database 
 	["write", [_batt, "Position", position _trig]] call _db;
