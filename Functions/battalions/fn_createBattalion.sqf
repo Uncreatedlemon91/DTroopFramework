@@ -36,7 +36,7 @@ switch (_faction) do {
 		_name = format ["%1 Battalion, %2th %3 Regiment", round (random 4) + 1, round (Random 200) + 1, _type];
 		switch (_type) do {
 			case "Infantry": {
-				_infantrySquads = 10, 10;
+				_infantrySquads = 10;
 				_tankSquads = 0;
 				_mechanizedSquads = 3;
 				_reconSquads = 2;
@@ -77,19 +77,23 @@ switch (_faction) do {
 	};
 };
 
+_forceSize = _infantrySquads + _tankSquads + _mechanizedSquads + _reconSquads + _mortarSquads;
+
 // Save to the data base 
 ["write", [_id, "Name", _name]] call _db;
 ["write", [_id, "Veterancy", _veterancy]] call _db;
 ["write", [_id, "Faction", _faction]] call _db;
 ["write", [_id, "Type", _type]] call _db;
-["write", [_id, "Infantry Squads", [_infantrySquads, _infantrySquads]]] call _db;
-["write", [_id, "Tank Squad", [_tankSquads, _tankSquads]]] call _db;
-["write", [_id, "Mechanized Squads", [_mechanizedSquads, _mechanizedSquads]]] call _db;
-["write", [_id, "Recon Squads", [_reconSquads, _reconSquads]]] call _db;
-["write", [_id, "Mortar Squads", [_mortarSquads, _mortarSquads]]] call _db;
+["write", [_id, "Infantry Squads", _infantrySquads]] call _db;
+["write", [_id, "Tank Squads", _tankSquads]] call _db;
+["write", [_id, "Mechanized Squads", _mechanizedSquads]] call _db;
+["write", [_id, "Recon Squads", _reconSquads]] call _db;
+["write", [_id, "Mortar Squads", _mortarSquads]] call _db;
 ["write", [_id, "MapMarker", _mapMarker]] call _db;
 ["write", [_id, "Posture", _posture]] call _db;
 ["write", [_id, "Position", _position]] call _db;
+["write", [_id, "CurrentForceSize", _forceSize]] call _db;
+["write", [_id, "MaxForceSize", _forceSize]] call _db;
 
 // Create the trigger
 _trg = [_position, _id, _faction] call lmn_fnc_setBattTrigger;

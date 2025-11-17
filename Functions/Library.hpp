@@ -10,19 +10,12 @@ class CfgFunctions
 			class setBattTrigger {};
 			class spawnBattalion {};
 		};
-		class commanderLogic 
-		{
-			class batt_getStrength {};
-			class batt_getSupply {};
-			class batt_Logic {};
-			class batt_Patrol {};
-			class moveTrigger {};
-		}
 		class general 
 		{
 			class addActions {};
 			class attachMarker {};
 			class getNearPlayers {};
+			class moveTrigger {};
 			class setupItems {};
 			class setupVehicle {};
 			class spawnCivilian {};
@@ -80,5 +73,12 @@ class CfgFunctions
 			class getPlayerWhitelistedRoles {};
 			class getRole {};
 		};
+		class squads 
+		{
+			class squadBuild {};
+			class squadGetSupply {};
+			class squadPatrol {};
+			class squadRecon {};
+		}
 	};
 };
