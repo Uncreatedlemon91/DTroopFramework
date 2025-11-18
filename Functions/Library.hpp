@@ -4,11 +4,18 @@ class CfgFunctions
 	{
 		class battalions 
 		{
+			class battalionLogic {};
 			class createBattalion {};
 			class getGroupDetails {};
 			class loadBattalions {};
 			class setBattTrigger {};
 			class spawnBattalion {};
+		};
+		class FactionDirector
+		{
+			class createConvoy {};
+			class createHUBsupply {};
+			class USdirector {};
 		};
 		class general 
 		{
@@ -39,14 +46,6 @@ class CfgFunctions
 			class spawnSupply {};
 			class spawnVehicle {};
 		};
-
-		class FactionDirector
-		{
-			class createConvoy {};
-			class createHUBsupply {};
-			class USdirector {};
-		};
-
 		class persistence
 		{
 			class deleteFromDatabase {};

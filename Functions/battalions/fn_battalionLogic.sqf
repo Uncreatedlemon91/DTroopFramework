@@ -20,7 +20,7 @@ while {alive _trig} do {
 
 		// Send out Recon patrols 
 		// [_batt] remoteExec ["lmn_fnc_squadRecon", 2];
-	}:
+	};
 
 	if (_posture == "Reserve") then {
 		

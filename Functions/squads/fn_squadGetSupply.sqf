@@ -59,24 +59,26 @@ if ((_needsReinforcement) AND (_hasSquadsToSend)) then {
 	_trig setTriggerStatements [
 		"this", 
 		"[thisTrigger] remoteExec ['lmn_fnc_spawnSquad', 2]",
-		"thisTrigger setVariable ['lmn_TrigActive, fakse]"
+		"thisTrigger setVariable ['lmn_TrigActive', false, true]"
 	];
 
 	// Set Trigger Variables 
 	_trig setVariable ["TriggerSquad", _squadToSend];
-	_trig setVariable ["lmn_TrigActive", false];
+	_trig setVariable ["lmn_TrigActive", false, true];
 
 	// Move the trigger to supply area 
 	[_trig, _locPos] remoteExec ["lmn_fnc_moveTrigger", 2];
 
 	// Attach a marker 
-	_markerType = ["read", [_batt, "Marker Type"]] call _Db;
+	_markerType = ["read", [_batt, "MapMarker"]] call _Db;
 	[_trig, _markerType, format ["%1-Supply Retrieval"]] remoteExec ["lmn_fnc_attachMarker", 2];
 
 	// Wait until the trigger is near to the destination 
-	waitUntil {sleep 5; (position _trig distance _locPos) < 50};
+	// waitUntil {sleep 5; (position _trig distance _locPos) < 75};
+	while {(position _trig distance _locPos) > 75} do {sleep 5};
 
 	// Once arrived, remain on station for a while , remove supply from the location 
+	systemChat "Getting Supplies";
 	_locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_inidbi;
 	_supply = ["read", [_selectedLoc select 0, "Supply"]] call _locDB;
 	if (_supply > 25) then {
@@ -84,13 +86,15 @@ if ((_needsReinforcement) AND (_hasSquadsToSend)) then {
 		["write", [_selectedLoc select 0, "Supply", _newSupply]] call _locDB;
 	};
 	_gatheredSupplies = true;
-	sleep (60 * 5);
+	// sleep (60 * 5);
+	sleep 10;
+	systemChat "On way back!";
 
 	// Start journey back to the Batt HQ 
 	[_trig, _battHQ] remoteExec ["lmn_fnc_moveTrigger", 2];
 
 	// Wait until the trigger is back to Battalion HQ 
-	waitUntil {sleep 5; (position _trig distance _batthq) < 50};
+	while {(position _trig distance _battHQ) > 75} do {sleep 5};
 
 	// Arrival back at HQ 
 	// Check if mission was success, if so, increase force pool 

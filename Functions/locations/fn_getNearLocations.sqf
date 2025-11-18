@@ -41,6 +41,6 @@ _nearHighHeat = [];
 		};
 	};
 } forEach _locs;
-
+_friendlyLocs deleteAt 0;
 _data = [_friendlyLocs, _hostileLocs, _nearLowSec, _nearHighHeat];
 _data;

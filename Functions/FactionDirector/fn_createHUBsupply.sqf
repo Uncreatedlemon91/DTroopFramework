@@ -39,6 +39,7 @@ _plane addEventHandler ["LandedStopped", {
 
 // Send convoy to location
 [_vehicle select 2, _sitePos, _plane] spawn BIS_fnc_wpLand;
+_plane flyInHeight 1000;
 
 // Notify players
 systemchat format ["[US Director] Supply convoy dispatched from %1 to Logistics HUB at %2.", _supplySource, _siteName];
