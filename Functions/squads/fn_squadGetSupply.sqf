@@ -100,8 +100,11 @@ if ((_needsReinforcement) AND (_hasSquadsToSend)) then {
 	// Check if mission was success, if so, increase force pool 
 	if (_gatheredSupplies) then {
 		_currentForce = ["read", [_batt, _newSquadType]] call _db;
+		_currentForceSize = ["read", [_batt, "CurrentForceSize"]] call _db;
 		_newForce = _currentForce + 1; 
+		_newForceSize = _currentForceSize + 1;
 		["write", [_batt, _newSquadType, _newForce]] call _db;
+		["write", [_batt, "CurrentForceSize", _newForceSize]] call _db;
 	};
 
 	// Re-add the squad tasked with the role to the battalion orbat
