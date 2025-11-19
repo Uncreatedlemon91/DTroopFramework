@@ -10,6 +10,9 @@ _sections = "getSections" call _db;
 	_name = ["read", [_x, "Name"]] call _db;
 	_mapMarker = ["read", [_x, "MapMarker"]] call _db;
 
+	// Reset mission flags 
+	["write", [_x, "NotOnSupplyMission", true]] call _db;
+
 	_trg = [_position, _x, _faction, _mapMarker, _name] call lmn_fnc_setBattTrigger;
 
 	// Run the logic for the Battalion

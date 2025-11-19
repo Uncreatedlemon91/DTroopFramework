@@ -38,19 +38,25 @@ if ((_infantrySquads > 0) OR (_mechanizedSquads > 0)) then {
 	};
 };
 
+// Check if a supply mission is already underway 
+_isNotOnMission = ["read", [_batt, "NotOnSupplyMission", true]] call _db;
+
 // Final check to run the mission or not
-if ((_needsReinforcement) AND (_hasSquadsToSend)) then {
+if ((_needsReinforcement) AND (_hasSquadsToSend) AND (_isNotOnMission)) then {
 	// Execute the mission 
+	["write", [_batt, "NotOnSupplyMission", false]] call _db;
 	_battHQ = ["read", [_batt, "Position"]] call _db;
 	_faction = ["read", [_batt, "Faction"]] call _db;
-	_nearLocs = [_battHQ, 1500, _faction] call lmn_fnc_getNearLocations;
+	_nearLocs = [_battHQ, 2500, _faction] call lmn_fnc_getNearLocations;
 	_friendlyLocs = _nearLocs select 0;
 	_selectedLoc = selectRandom _friendlyLocs;
 	_locPos = _selectedLoc select 1;
 
 	// Remove a squad from battalion force pool 
-	_currentSquadCount = ["read", [_batt, _squadToSend]] call _db;
+	/*_currentSquadCount = ["read", [_batt, _squadToSend]] call _db;
+	["write", [_batt, "CurrentForceSize", _currentForceSize - 1]] call _db;
 	["write", [_batt, _squadToSend, _currentSquadCount - 1]] call _db;
+	*/
 	
 	// Create a trigger for the squad 
 	_trig = [_battHQ, _squadToSend] call lmn_fnc_squadCreateTrigger;
@@ -69,11 +75,12 @@ if ((_needsReinforcement) AND (_hasSquadsToSend)) then {
 	systemChat "Getting Supplies";
 	_locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_inidbi;
 	_supply = ["read", [_selectedLoc select 0, "Supply"]] call _locDB;
+	_gatheredSupplies = false;
 	if (_supply > 25) then {
 		_newSupply = _supply - 25;
 		["write", [_selectedLoc select 0, "Supply", _newSupply]] call _locDB;
+		_gatheredSupplies = true;
 	};
-	_gatheredSupplies = true;
 	// sleep (60 * 5);
 	sleep 10;
 	systemChat "On way back!";
@@ -86,22 +93,25 @@ if ((_needsReinforcement) AND (_hasSquadsToSend)) then {
 
 	// Arrival back at HQ 
 	// Check if mission was success, if so, increase force pool 
-	_currentForceSize = ["read", [_batt, "CurrentForceSize"]] call _db;
-	_additionalForces = 1;
 	if (_gatheredSupplies) then {
 		_currentForce = ["read", [_batt, _newSquadType]] call _db;
+		_currentForceSize = ["read", [_batt, "CurrentForceSize"]] call _db;
 		_newForce = _currentForce + 1; 
-		_additionalForces = _additionalForces + 1;
 		["write", [_batt, _newSquadType, _newForce]] call _db;
+		["write", [_batt, "CurrentForceSize", _currentForceSize + 1]] call _db;
 	};
 
 	// Re-add the squad tasked with the role to the battalion orbat
-	_currentSquadCount = ["read", [_batt, _squadToSend]] call _db;
+	/*_currentSquadCount = ["read", [_batt, _squadToSend]] call _db;
 	["write", [_batt, _squadToSend, _currentSquadCount + 1]] call _db;
 	["write", [_batt, "CurrentForceSize", _currentForceSize + _additionalForces]] call _db;
+	*/
 
 	// Dismiss the trigger and marker 
 	deleteVehicle _trig;
+
+	// Turn off mission flag 
+	["write", [_batt, "NotOnSupplyMission", true]] call _db;
 };
 
 if !(_hasSquadsToSend) then {

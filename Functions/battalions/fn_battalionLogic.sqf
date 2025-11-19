@@ -29,7 +29,7 @@ while {alive _trig} do {
 
 	if (_posture == "Desperate") then {
 		// Evacuate the battalion with helicopters. Loses all Armored and Mortar assets. 
-	}
+	};
 
 	// Sync Database 
 	["write", [_batt, "Position", position _trig]] call _db;

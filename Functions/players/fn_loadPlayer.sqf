@@ -4,13 +4,13 @@ params ["_data", "_player"];
 _pos = _data select 0;
 _dir = _data select 1;
 _loadout = _data select 2;
-_medical = _data select 3;
+// _medical = _data select 3;
 _kit = _data select 4;
 
 _player setPosAtl _pos;
 _player setDir _dir;
 _player setUnitLoadout _loadout;
-[_player, _medical] call ace_medical_fnc_deserializeState;
+//[_player, _medical] call ace_medical_fnc_deserializeState;
 
 // Add ace variables based on kit 
 // Define roles 

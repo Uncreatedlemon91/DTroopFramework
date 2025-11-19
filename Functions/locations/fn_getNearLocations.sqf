@@ -10,8 +10,12 @@ _friendlyLocs = [];
 _hostileLocs = [];
 _nearLowSec = [];
 _nearHighHeat = [];
-_friendlyLowSec =[];
-
+_friendlyLowSec = [];
+_lowSec = 0;
+switch (_battFaction) do {
+	case "USA": {_lowSec = 50};
+	case "PAVN":  {_lowSec = -50};
+};
 {
 	// Current result is saved in variable _x
 	_pos = ["read", [_x, "Position"]] call _locDb;
