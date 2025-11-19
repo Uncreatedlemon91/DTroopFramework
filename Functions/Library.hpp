@@ -39,6 +39,7 @@ class CfgFunctions
 			class setLocationFaction {};
 			class setLocationID {};
 			class setupLocations {};
+			class updateSecurity {};
 		};
 
 		class logi
@@ -75,6 +76,7 @@ class CfgFunctions
 		class squads 
 		{
 			class squadBuild {};
+			class squadCreateTrigger {};
 			class squadGetSupply {};
 			class squadPatrol {};
 			class squadRecon {};

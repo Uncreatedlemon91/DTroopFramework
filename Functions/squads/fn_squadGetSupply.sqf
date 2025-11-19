@@ -53,28 +53,16 @@ if ((_needsReinforcement) AND (_hasSquadsToSend)) then {
 	["write", [_batt, _squadToSend, _currentSquadCount - 1]] call _db;
 	
 	// Create a trigger for the squad 
-	_trig = createTrigger ["EmptyDetector", _battHQ, true];
-	_trig setTriggerArea [350, 350, 0, false, 300];
-	_trig setTriggerActivation ["ANYPLAYER", "PRESENT", true];
-	_trig setTriggerStatements [
-		"this", 
-		"[thisTrigger] remoteExec ['lmn_fnc_spawnSquad', 2]",
-		"thisTrigger setVariable ['lmn_TrigActive', false, true]"
-	];
-
-	// Set Trigger Variables 
-	_trig setVariable ["TriggerSquad", _squadToSend];
-	_trig setVariable ["lmn_TrigActive", false, true];
+	_trig = [_battHQ, _squadToSend] call lmn_fnc_squadCreateTrigger;
 
 	// Move the trigger to supply area 
 	[_trig, _locPos] remoteExec ["lmn_fnc_moveTrigger", 2];
 
 	// Attach a marker 
 	_markerType = ["read", [_batt, "MapMarker"]] call _Db;
-	[_trig, _markerType, format ["%1-Supply Retrieval"]] remoteExec ["lmn_fnc_attachMarker", 2];
+	[_trig, _markerType, format ["%1-Supply Retrieval", ["read", [_batt, "Name"]] call _db]] remoteExec ["lmn_fnc_attachMarker", 2];
 
 	// Wait until the trigger is near to the destination 
-	// waitUntil {sleep 5; (position _trig distance _locPos) < 75};
 	while {(position _trig distance _locPos) > 75} do {sleep 5};
 
 	// Once arrived, remain on station for a while , remove supply from the location 
@@ -98,18 +86,19 @@ if ((_needsReinforcement) AND (_hasSquadsToSend)) then {
 
 	// Arrival back at HQ 
 	// Check if mission was success, if so, increase force pool 
+	_currentForceSize = ["read", [_batt, "CurrentForceSize"]] call _db;
+	_additionalForces = 1;
 	if (_gatheredSupplies) then {
 		_currentForce = ["read", [_batt, _newSquadType]] call _db;
-		_currentForceSize = ["read", [_batt, "CurrentForceSize"]] call _db;
 		_newForce = _currentForce + 1; 
-		_newForceSize = _currentForceSize + 1;
+		_additionalForces = _additionalForces + 1;
 		["write", [_batt, _newSquadType, _newForce]] call _db;
-		["write", [_batt, "CurrentForceSize", _newForceSize]] call _db;
 	};
 
 	// Re-add the squad tasked with the role to the battalion orbat
 	_currentSquadCount = ["read", [_batt, _squadToSend]] call _db;
 	["write", [_batt, _squadToSend, _currentSquadCount + 1]] call _db;
+	["write", [_batt, "CurrentForceSize", _currentForceSize + _additionalForces]] call _db;
 
 	// Dismiss the trigger and marker 
 	deleteVehicle _trig;

@@ -1,11 +1,6 @@
 // Gets nearby locations and returns them 
 params ["_position", "_radius", "_battFaction"];
 
-// Rewrite to pull from database instead 
-// Use Faction Key / HEAT key / Position Key
-// Return the [Enemy, enemyHighHeat, Friendly, friendlyHighHeat, friendlyLowSecurity]
-// Prioritize HEAT / Friendly Low Security / Location
-
 // Get the database entries 
 _locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_inidbi;
 _locs = "getSections" call _locdb;
@@ -15,6 +10,7 @@ _friendlyLocs = [];
 _hostileLocs = [];
 _nearLowSec = [];
 _nearHighHeat = [];
+_friendlyLowSec =[];
 
 {
 	// Current result is saved in variable _x
@@ -34,6 +30,11 @@ _nearHighHeat = [];
 			_nearLowSec pushback [_x, _pos];
 		};
 
+		// Find friendly locations with low sec 
+		if ((_sec < _lowSec) AND (_faction == _battFaction)) then {
+			_friendlyLowSec pushback [_x, _pos];
+		};
+
 		// Find High Heat 
 		_heat = ["read", [_x, "Heat Level"]] call _locDb;
 		if (_heat > 0) then {
@@ -41,6 +42,10 @@ _nearHighHeat = [];
 		};
 	};
 } forEach _locs;
+
+// Clean up data
 _friendlyLocs deleteAt 0;
-_data = [_friendlyLocs, _hostileLocs, _nearLowSec, _nearHighHeat];
+
+// Export Data 
+_data = [_friendlyLocs, _hostileLocs, _nearLowSec, _nearHighHeat, _friendlyLowSec];
 _data;

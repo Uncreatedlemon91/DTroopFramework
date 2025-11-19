@@ -13,7 +13,7 @@ while {alive _trig} do {
 		[_batt] remoteExec ["lmn_fnc_squadGetSupply", 2];
 
 		// Check nearby locations for patrol targets and send out patrols 
-		// [_batt] remoteExec ["lmn_fnc_squadPatrol", 2];
+		[_batt] remoteExec ["lmn_fnc_squadPatrol", 2];
 
 		// Build up defenses in the area 
 		// [_batt] remoteExec ["lmn_fnc_squadBuild", 2];
