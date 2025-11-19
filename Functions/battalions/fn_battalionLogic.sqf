@@ -23,8 +23,13 @@ while {alive _trig} do {
 	};
 
 	if (_posture == "Reserve") then {
+		// Moves the battalion to a frontline location. Small chance to maintain Reserve Status
 		
 	};
+
+	if (_posture == "Desperate") then {
+		// Evacuate the battalion with helicopters. Loses all Armored and Mortar assets. 
+	}
 
 	// Sync Database 
 	["write", [_batt, "Position", position _trig]] call _db;

@@ -80,3 +80,7 @@ if ((_hasSquadsToSend) AND (_hasLowSecLocs)) then {
 	// Delete the Trigger 
 	deleteVehicle _trig;
 };
+
+if !(_hasLowSecLocs) then {
+	["write", [_batt, "Posture", "Reserve"]] call _db;
+};

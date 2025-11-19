@@ -104,3 +104,6 @@ if ((_needsReinforcement) AND (_hasSquadsToSend)) then {
 	deleteVehicle _trig;
 };
 
+if !(_hasSquadsToSend) then {
+	["write", [_batt, "Posture", "Desperate"]] call _db;
+};
