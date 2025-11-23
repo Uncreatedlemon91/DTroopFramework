@@ -5,11 +5,11 @@ params ["_trig", "_dest"];
 _stopDistanceSq = 10 * 10; // Use squared distance for better performance (e.g., 10 meters)
 _moveSpeed = 25; // Meters per second
 _distance = (getPosWorld _trig) distance _dest;
-
+_trig setvariable ["TriggerDest", _dest, true];
 
 while {_distance > (_moveSpeed * 2)} do {
     // Check for the active status
-    if !(_trig getVariable ["lmn_TrigActive", false]) then {
+    if !(_trig getVariable ["TriggerActive", false]) then {
         // Calculate the vector from the current position TO the destination
         private _dirVector = _dest vectorDiff getPosWorld _trig; // Corrected: _dest - _trig
 

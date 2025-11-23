@@ -11,6 +11,7 @@ _hasSquadsToSend = false;
 // Determine the local areas' security 
 _position = ["read", [_batt, "Position"]] call _db;
 _faction = ["read", [_batt, "Faction"]] call _db;
+_veterancy = ["read", [_batt, "Veterancy"]] call _db;
 _nearLocs = [_position, 2000, _faction] call lmn_fnc_getNearLocations;
 _targetLocs = _nearLocs select 4;
 if ((count _targetLocs) < 1) then {
@@ -53,7 +54,7 @@ if ((_hasSquadsToSend) AND (_hasLowSecLocs)) then {
 	*/
 
 	// Create a squad trigger and attach marker 
-	_trig = [_position, _squadToSend] call lmn_fnc_squadCreateTrigger;
+	_trig = [_position, _squadToSend, _veterancy] call lmn_fnc_squadCreateTrigger;
 	_markerType = ["read", [_batt, "MapMarker"]] call _db;
 	[_trig, _markerType, format ["%1-Security Patrol", ["read", [_batt, "Name"]] call _db]] remoteExec ["lmn_fnc_attachMarker", 2]; 
 

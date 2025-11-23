@@ -8,13 +8,13 @@ _trg setTriggerActivation ["ANYPLAYER", "PRESENT", true];
 _trg setTriggerStatements [
 	"this",
 	"[thisTrigger] remoteExec ['lmn_fnc_spawnBattalion', 2]",
-	"thisTrigger setVariable ['lmn_TrigActive', false, true]"
+	"thisTrigger setVariable ['TriggerActive', false, true]"
 ];
 
 // Add variables to the trigger 
 _trg setVariable ["lmnBattalionID", _id];
 _trg setVariable ["lmnFaction", _faction];
-_trg setVariable ["lmn_TrigActive", false, true];
+_trg setVariable ["TriggerActive", false, true];
 _trg setVariable ["ActiveGroups", [], true];
 _trg setVariable ["lmnTrigPosture", "", true];
 
