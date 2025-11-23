@@ -42,6 +42,7 @@ if (_battalionDatabaseExists) then {
 // Start Directors 
 sleep 10;
 [] remoteExec ["lmn_fnc_USdirector", 2];
+[] remoteExec ["lmn_fnc_PAVNdirector", 2];
 
 // Setup global EH's 
 ["ace_dragging_stoppedCarry", {

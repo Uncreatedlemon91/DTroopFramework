@@ -15,6 +15,7 @@ class CfgFunctions
 		{
 			class createConvoy {};
 			class createHUBsupply {};
+			class PAVNdirector {};
 			class USdirector {};
 		};
 		class general 
