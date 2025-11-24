@@ -1,9 +1,6 @@
 // Moves offmap supplies to the HUB location
 params ["_location", "_faction"];
 
-// Set random delay to stagger missions 
-// sleep (random 120);
-
 // Get Database
 _locDB = ["new", format ["Locations %1 %2", missionName, worldName]] call oo_inidbi;
 
@@ -24,7 +21,6 @@ if (_faction == "USA") then {
 	];
 	_supplyVehicle = "vnx_b_air_ac119_03_01";
 	_side = west;
-
 		
 	// Build supply convoy 
 	_vehicle = [getMarkerPos _supplySource, 0, _supplyVehicle, _side] call BIS_fnc_spawnVehicle;

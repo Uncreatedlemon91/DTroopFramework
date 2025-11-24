@@ -45,3 +45,16 @@ _supply = round (random 1000);
 // Update the Marker 
 _locationMarker setMarkerTypeLocal (_faction select 1);
 _locationMarker setMarkerSize [0.5, 0.5];
+
+// Create a Trigger that holds the gameplay data 
+_trig = createTrigger ["EmptyDetector", _position, true];
+_trig setVariable ["TriggerSite", _loc];
+_trig setVariable ["TriggerType", "Location"];
+_trig setVariable ["TriggerID", _id];
+_trig setVariable ["TriggerSiteType", _siteType];
+_trig setVariable ["TriggerName", _siteName];
+_trig setVariable ["TriggerFaction", _faction];
+_trig setVariable ["TriggerHeatLevel", _heatLevel];
+_trig setVariable ["TriggerCivCount", _civCount];
+_trig setVariable ["TriggerSecurity", _security];
+_trig setVariable ["TriggerSupply", _supply];
