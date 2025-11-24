@@ -8,14 +8,13 @@ _battalionDB = ["new", format ["Battalions %1 %2", missionName, worldName]] call
 _battalionID = _trg getVariable "lmnBattalionID";
 _faction = ["read", [_battalionID, "Faction"]] call _battalionDB;
 _position = ["read", [_battalionID, "Position"]] call _battalionDB;
-_composition = ["read", [_battalionID, "Composition"]] call _battalionDB;
 _veterancy = ["read", [_battalionID, "Veterancy"]] call _battalionDB;
 _posture = ["read", [_battalionID, "Posture"]] call _battalionDB;
 
 // Create Variables 
 _side = "";
 _activeGroups = [];
-
+/*
 // Update Variables 
 _trg setVariable ["lmnDeployed", true, true];
 switch (_faction) do {
@@ -97,7 +96,7 @@ switch (_faction) do {
 	};
 } forEach _composition;
 
-while {_trg getVariable "lmnDeployed"} do {
+while {_trg getVariable "TriggerActive"} do {
 	// Nothing, spawned in.
 	sleep 10;
 };

@@ -14,7 +14,7 @@ _changeKit = [
 // Add Tier 0 Category
 _tier0Category = [
     "Tier0",
-    "Tier 0 Loadouts",
+    "Loadouts",
     "",
     {},
     {true}
@@ -82,12 +82,36 @@ _mg = [
     "MG",
     "Machine Gunner",
     "",
-    {[MG, _player, _target] remoteExec ["lmn_fnc_getRole", 2];},
+    {[MG, _player, _target] remoteExec ["lmn_fnc_getRole", 2]},
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+_cls = [
+    "CLS",
+    "Combat Life Saver",
+    "",
+    {[CLS, _player, _target] remoteExec ["lmn_fnc_getRole", 2]},
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+_combatMedic = [
+    "CM",
+    "Combat Medic",
+    "",
+    {[CombatMed, _player, _target] remoteExec ["lmn_fnc_getRole", 2]},
+    {true}
+] call ace_interact_menu_fnc_createAction;
+
+_pltMedic = [
+    "PltMed",
+    "Platoon Medic",
+    "",
+    {[CombatMed, _player, _target] remoteExec ["lmn_fnc_getRole", 2]},
     {true}
 ] call ace_interact_menu_fnc_createAction;
 
 // Add the roles to the actions
-_Tier0roles = [_base, _rifleman, _lat, _ar, _mgasst, _crewchief, _mechanic, _mg];
+_Tier0roles = [_base, _rifleman, _lat, _ar, _mgasst, _crewchief, _mechanic, _mg, _cls, _combatMedic, _pltMedic];
 {
     [_item, 0, ["ACE_MainActions", "Change Kit", "Tier0"], _x] call ace_interact_menu_fnc_addActionToObject;
 } forEach _Tier0roles;

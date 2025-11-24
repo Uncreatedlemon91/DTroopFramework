@@ -9,23 +9,30 @@ _destination = _trig getVariable "TriggerDest";
 _active = _trig getVariable "TriggerActive";
 
 // Exit if the trigger is active already 
-if {_active} exitWith {systemChat "Trigger already Active!"};
+if (_active) exitWith {systemChat "Trigger already Active!"};
 
 // Set Trigger to active 
-_trig setVariable ["TriggerActive", true, true];
+_trig setVariable ["TriggerActive", true];
+
+// Translate Faction to Side 
+_side = "";
+switch (_faction) do {
+	case "USA": {_side = west};
+	case "PAVN": {_side = east};
+};
 
 // Define the group to be spawned in
-_units = [_squadType, _faction] call lmn_fnc_getGroup;
+_units = [_squadType, _faction] call lmn_fnc_getGroupDetails;
 
 // Spawn the group and assign values 
-_spawnPos = [_position, 0, 300, 10, 0, 0] call BIS_fnc_findSafePos;
+_spawnPos = [position _trig, 0, 200, 10, 0, 0] call BIS_fnc_findSafePos;
 _group = createGroup _side;
 _group deleteGroupWhenEmpty true;
 {
 	_unitClass = getText (_x >> 'vehicle');
-	_vehicleClasses = ["Tank Squad", "Mechanized Squad"];
+	_vehicleClasses = ["Tank Squads", "Mechanized Squads"];
 	_unit = "";
-	if (_groupType in _vehicleClasses) then {
+	if (_squadType in _vehicleClasses) then {
 		// The unit is vehicle based 
 		_spawnPos = [_spawnPos, 0, 150, 10, 0, 0] call BIS_fnc_findSafePos;
 		_unit = [_spawnPos, 0, _unitClass, _group] call BIS_fnc_spawnVehicle;
@@ -41,10 +48,13 @@ _group deleteGroupWhenEmpty true;
 		_unit setSkill ["reloadSpeed", _veterancy];
 		_unit setSkill ["commanding", _veterancy];
 		zeus addCuratorEditableObjects [[_unit], true];
-	};
-	
+	};	
 	sleep 0.05;
 } forEach _units;
+
+_activeGroups = _trig getVariable ["ActiveGroups", []];
+_activeGroups pushback _group;
+_trig setVariable ["ActiveGroups", _activeGroups, true];
 
 // Provide orders to the squad 
 [_group, _destination, 50] call BIS_fnc_taskPatrol;

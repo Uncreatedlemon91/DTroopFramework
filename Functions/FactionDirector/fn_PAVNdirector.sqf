@@ -25,7 +25,7 @@ while {true} do {
 			_supplyLevel = ["read", [_x, "Supply"]] call _locDB;
 			if (_supplyLevel < 250) then {
 				_locationsLowSupply pushback _x;
-				systemchat format ["[PAVN Director] Location %1 has low supplies (%2).", _name, _supplyLevel];
+				// systemchat format ["[PAVN Director] Location %1 has low supplies (%2).", _name, _supplyLevel];
 			};
 
 			// Check Heat Level 
@@ -47,13 +47,13 @@ while {true} do {
 			_securityLevel = ["read", [_x, "Security"]] call _locDB;
 			if (_securityLevel < 25) then {
 				_locationsLowSecurity pushback _x;
-				systemchat format ["[PAVN Director] Location %1 has low security (%2).", _name, _securityLevel];
+				// systemchat format ["[PAVN Director] Location %1 has low security (%2).", _name, _securityLevel];
 			};
 
 			_siteType = ["read", [_x, "Site Type"]] call _locDB;
 			if (_siteType == "NameCity") then {
 				_locationsLogiHub pushback _x;
-				systemchat format ["[PAVN Director] Location %1 is a Logistics HUB.", _name];
+				// systemchat format ["[PAVN Director] Location %1 is a Logistics HUB.", _name];
 			};
 		};
 
@@ -68,7 +68,7 @@ while {true} do {
 			// Send a supply convoy to this location 
 			[_x, "PAVN"] remoteExec ["lmn_fnc_createHUBsupply", 2];
 			systemchat format ["[PAVN Director] Sending supply convoy to Logistics HUB at %1.", ["read", [_x, "Site Name"]] call _locDB];
-			sleep 2;
+			sleep 0.02;
 		};
 
 		// Phase Two : Resupply from HUB to low supply locations
@@ -102,5 +102,5 @@ while {true} do {
 	} forEach _locationsLogiHub;
 
 	// Loop delay
-	sleep 10;
+	sleep 180;
 };

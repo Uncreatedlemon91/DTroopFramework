@@ -10,6 +10,7 @@ _side = "";
 _supplyQty = 0;
 _dropOff = ["read", [_dest, "Position"]] call _locDB;
 _startPos = ["read", [_hub, "Position"]] call _locDB;
+_mkrType = "";
 
 // Update variables 
 switch (_faction) do {
@@ -17,6 +18,13 @@ switch (_faction) do {
 		_side = west;
 		_supplyQty = 50;
 		_supplyVeh = "vn_b_air_ch47_04_01"; // Chinook
+		_mkrType = "b_air";
+	};
+	case "PAVN": {
+		_side = east;
+		_supplyQty = 50;
+		_supplyVeh = "vn_o_air_mi2_03_05"; // Placeholder
+		_mkrType = "o_air";
 	};
 };
 
@@ -29,7 +37,7 @@ _heli = _veh select 0;
 
 // Attach a marker 
 _mkrText = format ["Flight To %1", ["read", [_dropOff, "Site Name"]] call _locDb];
-[_heli, "b_air", _mkrText] spawn lmn_fnc_attachMarker; 
+[_heli, _mkrType, _mkrText] spawn lmn_fnc_attachMarker; 
 
 // Update Database for HUB 
 _oldSupply = ["read", [_hub, "Supply"]] call _locDB;

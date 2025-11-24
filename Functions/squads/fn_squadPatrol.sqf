@@ -37,6 +37,7 @@ if ((count _forcesToSend) > 0) then {
 
 // Determine if the mission should be sent out 
 if ((_hasSquadsToSend) AND (_hasLowSecLocs)) then {
+	["write", [_batt, "ActiveMissions", (["read", [_batt, "ActiveMissions", 0]] call _db) + 1]] call _db;
 	// Select the target location and get it's position 
 	_targetLoc = selectRandom _targetLocs;
 	_targetID = _targetLoc select 0;
@@ -54,7 +55,7 @@ if ((_hasSquadsToSend) AND (_hasLowSecLocs)) then {
 	*/
 
 	// Create a squad trigger and attach marker 
-	_trig = [_position, _squadToSend, _veterancy] call lmn_fnc_squadCreateTrigger;
+	_trig = [_position, _squadToSend, _veterancy, _faction] call lmn_fnc_squadCreateTrigger;
 	_markerType = ["read", [_batt, "MapMarker"]] call _db;
 	[_trig, _markerType, format ["%1-Security Patrol", ["read", [_batt, "Name"]] call _db]] remoteExec ["lmn_fnc_attachMarker", 2]; 
 
@@ -67,8 +68,7 @@ if ((_hasSquadsToSend) AND (_hasLowSecLocs)) then {
 	// Once arrived, delay while the unit conducts a patrol 
 	_duration = round (random [5, 10, 15]); 
 	systemChat "Conducting Patrol operations!";
-	//sleep (_duration * 60);
-	sleep 10;
+	sleep (_duration * 60);
 
 	// Once patrols are completed, return back to Battalion HQ 
 	systemChat "Patrol is returning to HQ!";
@@ -85,6 +85,9 @@ if ((_hasSquadsToSend) AND (_hasLowSecLocs)) then {
 
 	// Increase the security of the area 
 	[_targetID, _faction, 5] call lmn_fnc_updateSecurity;
+
+	// Decrease flag for how many active missions are up
+	["write", [_batt, "ActiveMissions", (["read", [_batt, "ActiveMissions", 0]] call _db) - 1]] call _db;
 
 	// Delete the Trigger 
 	deleteVehicle _trig;

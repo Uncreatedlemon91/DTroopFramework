@@ -108,7 +108,7 @@ if (_faction == "PAVN") then {
 
 	waitUntil {
 		sleep 1;
-		_distance = (getMarkerPos _supplySource) distance (getPos _plane);
+		_distance = (getMarkerPos _supplySource) distance (getPos _veh);
 		_distance < 200;
 	};
 
@@ -116,8 +116,8 @@ if (_faction == "PAVN") then {
 	{
 		// Current result is saved in variable _x
 		deleteVehicle _x;
-	} forEach crew _plane;
-	deleteVehicle _plane;
+	} forEach crew _veh;
+	deleteVehicle _veh;
 	deleteGroup (_vehicle select 2);
 
 };

@@ -78,9 +78,11 @@ class CfgFunctions
 		{
 			class squadBuild {};
 			class squadCreateTrigger {};
+			class squadDespawn {};
 			class squadGetSupply {};
 			class squadPatrol {};
 			class squadRecon {};
+			class squadSpawn {};
 		}
 	};
 };

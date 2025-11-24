@@ -59,7 +59,8 @@ if ((_needsReinforcement) AND (_hasSquadsToSend) AND (_isNotOnMission)) then {
 	*/
 	
 	// Create a trigger for the squad 
-	_trig = [_battHQ, _squadToSend] call lmn_fnc_squadCreateTrigger;
+	_veterancy = ["read", [_batt, "Veterancy"]] call _db;
+	_trig = [_battHQ, _squadToSend, _veterancy, _faction] call lmn_fnc_squadCreateTrigger;
 
 	// Move the trigger to supply area 
 	[_trig, _locPos] remoteExec ["lmn_fnc_moveTrigger", 2];

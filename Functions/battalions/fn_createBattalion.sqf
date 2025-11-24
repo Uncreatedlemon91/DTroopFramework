@@ -99,4 +99,4 @@ _forceSize = _infantrySquads + _tankSquads + _mechanizedSquads + _reconSquads + 
 _trg = [_position, _id, _faction, _mapMarker, _name] call lmn_fnc_setBattTrigger;
 
 // Run the logic for the Battalion
-[_id, _trg] remoteExec ["lmn_fnc_battalionLogic", 2];
+[_id, _trg, _faction] remoteExec ["lmn_fnc_battalionLogic", 2];
