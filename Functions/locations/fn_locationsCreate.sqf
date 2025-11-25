@@ -13,7 +13,6 @@ _allLocations = nearestLocations [_worldCenter, _types, _maxRadius];
 	// Location variables 
 	_faction = "PAVN";
 	_mkrType = "vn_flag_pavn";
-	_supplies = 1;
 	_mkrSize = [0.5, 0.5];
 	_security = round(random 100);
 	_heat = 0;
@@ -22,30 +21,21 @@ _allLocations = nearestLocations [_worldCenter, _types, _maxRadius];
 	if ((position _x) inArea ("blufor")) then {
 		_faction = "USA";
 		_mkrType = "vn_flag_usa";
-		if (type _x == "Airport") then {
-			_supplies = 100;
-		};
 	};
 	if ((position _x) inArea ("indfor")) then {
 		_faction = "ARVN";
 		_mkrType = "vn_flag_arvn";
-		if (type _x == "NameCityCapital") then {
-			_supplies = 100;
-		};
 	};
 	if ((position _x) inArea ("opfor")) then {
 		_faction = "PAVN";
 		_mkrType = "vn_flag_pavn";
-		if (type _x == "NameCityCapital") then {
-			_supplies = 100;
-		};
 	};
 
 	// Create the marker
 	_mkr = createMarkerLocal [text _x, position _x];
 	_mkr setMarkerTypeLocal _mkrType;
 	_mkr setMarkerSize _mkrSize;
-	LemonLocations set [_mkr, [_faction, _mkrType, _supplies, position _x, _mkrSize, _security, _heat, type _x]];
+	LemonLocations set [_mkr, [_faction, _mkrType, position _x, _mkrSize, _security, _heat, type _x]];
 	sleep 0.01;
 } forEach _allLocations;
 
