@@ -2,7 +2,7 @@
 params ["_faction", "_location"];
 
 // Create the battalion name 
-_name = format ["%1-%2 Battalion HQ", round(random 5), round (random 500)];
+_name = format ["%1/%2 Battalion HQ", selectRandom [1, 2, 3, 4, 5], round (random 500)];
 
 // Create the composition of the force 
 _infantryStrength = round (random 10);
@@ -18,12 +18,12 @@ switch (_faction) do {
 	case "ARVN": {_mkrType = "n_hq"};
 	case "PAVN": {_mkrType = "o_hq"};
 };
-_data = [_name, _mkrType, _location, _composition];
+_data = [_faction, _name, _mkrType, _location, _composition];
 
 // Setup a marker to the battalion 
 _mkr = createMarkerLocal [_name, _location];
 _mkr setMarkerTypeLocal _mkrType;
-_mkr setMarkerSizeLocal [0.3, 0.3];
+_mkr setMarkerSizeLocal [0.5, 0.5];
 _mkr setMarkerText _name;
 
 // Add marker to the Hashmap 

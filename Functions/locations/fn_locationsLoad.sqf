@@ -10,9 +10,9 @@ if !(_exists) exitWith {[] remoteExec ["lmn_fnc_locationsCreate", 2]};
 	_data = ["read", [_x, "Data"]] call _db;
 	
 	// Create new marker 
-	_mkr = createMarkerLocal [_x, (_data select 3)];
+	_mkr = createMarkerLocal [_x, (_data select 2)];
 	_mkr setMarkerTypelocal (_data select 1);
-	_mkr setMarkerSize (_data select 4);
+	_mkr setMarkerSize (_data select 3);
 
 	// Setup the hashmap 
 	LemonLocations set [_x, _data];

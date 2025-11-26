@@ -7,8 +7,8 @@ while {true} do {
 	} forEach LemonBattalions;
 
 	// Notify the admin 
-	["[Battalions] - Saved"] remoteExec ["systemChat", 0];
+	//["[Battalions] - Saved"] remoteExec ["systemChat", 0];
 
 	// Sleep before saving again 
-	sleep 300;
+	sleep 10;
 };

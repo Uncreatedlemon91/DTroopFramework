@@ -5,6 +5,7 @@ class CfgFunctions
 		class battalions {
 			class battalionCreate {};
 			class battalionLoad {};
+			class battalionLogic {};
 			class battalionMove {};
 			class battalionSave {};
 		}
@@ -16,6 +17,13 @@ class CfgFunctions
 			class locationsCreate {};
 			class locationsLoad {};
 			class locationsSave {};
+		};
+		class squads {
+			class squadAttachMarker {};
+			class squadCheckPlayers {};
+			class squadMoveMarker {};
+			class squadSecurityPatrol {};
+			class squadSpawn {};
 		};
 	};
 };

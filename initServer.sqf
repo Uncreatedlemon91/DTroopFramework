@@ -1,8 +1,9 @@
 // Prep the hashmaps
-LemonActiveMarkers = createHashMap;
+LemonActiveSquads = createHashMap;
 LemonLocations = createHashMap;
 LemonBattalions = createHashMap;
 LemonTaskOrders = createHashMap;
+LemonInfrastructure = createHashMap;
 
 // Setup global EH's 
 ["ace_dragging_stoppedCarry", {
@@ -24,7 +25,6 @@ LemonTaskOrders = createHashMap;
 // Start Modules
 [] remoteExec ["lmn_fnc_locationsLoad", 2];
 [] remoteExec ["lmn_fnc_battalionLoad", 2];
-
 
 // Save modules 
 [] remoteExec ["lmn_fnc_battalionSave", 2];
