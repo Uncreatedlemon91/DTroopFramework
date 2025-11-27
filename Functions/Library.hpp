@@ -2,87 +2,28 @@ class CfgFunctions
 {
 	class Lmn
 	{
-		class battalions 
-		{
+		class battalions {
+			class battalionCreate {};
+			class battalionLoad {};
 			class battalionLogic {};
-			class createBattalion {};
-			class getGroupDetails {};
-			class loadBattalions {};
-			class setBattTrigger {};
-			class spawnBattalion {};
-		};
-		class FactionDirector
-		{
-			class createConvoy {};
-			class createHUBsupply {};
-			class PAVNdirector {};
-			class USdirector {};
-		};
-		class general 
-		{
-			class addActions {};
-			class attachMarker {};
-			class getNearPlayers {};
-			class moveTrigger {};
-			class setupItems {};
-			class setupVehicle {};
-			class spawnCivilian {};
-			class timeManager {};
-		};
-
-		class locations 
-		{
-			class createLocation {};
-			class getNearLocations {};
-			class loadLocations {};
-			class saveLocation {};
-			class setCivilianCount {};
-			class setLocationFaction {};
-			class setLocationID {};
-			class setupLocations {};
-			class updateSecurity {};
-		};
-
-		class logi
-		{
-			class spawnSupply {};
-			class spawnVehicle {};
-		};
-		class persistence
-		{
-			class deleteFromDatabase {};
-			class loadEnvironment {};
-			class loadItems {};
-			class loadVehicles {};
-			class saveEnvironment {};
-			class saveItem {};
-			class saveVehicle {};
-		};
-
-		class players 
-		{
-			class addPersonnelActions {};
-			class getPlayerData {};
-			class loadPlayer {};
-			class recordDeath {};
-			class savePlayer {};
-		};
-
-		class roles
-		{
-			class addActionToItem {};
-			class getPlayerWhitelistedRoles {};
-			class getRole {};
-		};
-		class squads 
-		{
-			class squadBuild {};
-			class squadCreateTrigger {};
-			class squadDespawn {};
-			class squadGetSupply {};
-			class squadPatrol {};
-			class squadRecon {};
-			class squadSpawn {};
+			class battalionMove {};
+			class battalionSave {};
 		}
+		class director {
+			class directorAssess {};
+			class directorSendMission {};
+		};
+		class locations {
+			class locationsCreate {};
+			class locationsLoad {};
+			class locationsSave {};
+		};
+		class squads {
+			class squadAttachMarker {};
+			class squadCheckPlayers {};
+			class squadMoveMarker {};
+			class squadSecurityPatrol {};
+			class squadSpawn {};
+		};
 	};
 };

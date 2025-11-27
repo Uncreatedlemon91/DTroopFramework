@@ -1,60 +1,35 @@
-// Function to spawn a squad near a squad trigger 
-params ["_trig"];
+// Spawns the squad, deletes the old marker and creates a new one 
+params ["_mkr"];
 
-// Get the variables from the trigger 
-_squadType = _trig getVariable "TriggerSquad";
-_faction = _trig getVariable "TriggerFaction";
-_veterancy = _trig getVariable "TriggerVeterancy";
-_destination = _trig getVariable "TriggerDest";
-_active = _trig getVariable "TriggerActive";
+// Get the Hashmap Data 
+_data = LemonActiveSquads get _mkr;
+_battData = _data select 0;
+_missionPacket = _data select 1;
+_missionLocation = _data select 2;
+_groupType = _data select 3;
+_active = _data select 4;
+_mkrType = _data select 5;
 
-// Exit if the trigger is active already 
-if (_active) exitWith {systemChat "Trigger already Active!"};
+if (_active) exitWith {systemChat "Unit already Spawned!"};
 
-// Set Trigger to active 
-_trig setVariable ["TriggerActive", true];
+// Spawn the unit 
+_data set [4, true];
+LemonActiveSquads set [_mkr, _data];
 
-// Translate Faction to Side 
 _side = "";
-switch (_faction) do {
+switch (_battData select 0) do {
 	case "USA": {_side = west};
+	case "ARVN": {_side = independent};
 	case "PAVN": {_side = east};
 };
+_grp = [getMarkerPos _mkr, _side, _groupType] call BIS_fnc_spawnGroup; // Need to remove this as it's too costly without a sleep command
+_grp deleteGroupWhenEmpty true;
 
-// Define the group to be spawned in
-_units = [_squadType, _faction] call lmn_fnc_getGroupDetails;
+// Update Marker 
+[_mkr, getMarkerPos _mkr, 0, 0] call BIS_fnc_moveMarker;
 
-// Spawn the group and assign values 
-_spawnPos = [position _trig, 0, 200, 10, 0, 0] call BIS_fnc_findSafePos;
-_group = createGroup _side;
-_group deleteGroupWhenEmpty true;
-{
-	_unitClass = getText (_x >> 'vehicle');
-	_vehicleClasses = ["Tank Squads", "Mechanized Squads"];
-	_unit = "";
-	if (_squadType in _vehicleClasses) then {
-		// The unit is vehicle based 
-		_spawnPos = [_spawnPos, 0, 150, 10, 0, 0] call BIS_fnc_findSafePos;
-		_unit = [_spawnPos, 0, _unitClass, _group] call BIS_fnc_spawnVehicle;
-		zeus addCuratorEditableObjects [[_unit select 0], true];
-	} else {	
-		// The unit is infantry based.
-		_unit = _group createUnit [_unitClass, _spawnPos, [], 0, "NONE"];
-		_unit setSkill ["general", _veterancy];
-		_unit setSkill ["aimingAccuracy", (_veterancy - 0.2)];
-		_unit setSkill ["spotDistance", 1];
-		_unit setSkill ["spotTime", 0.8];
-		_unit setSkill ["courage", _veterancy];
-		_unit setSkill ["reloadSpeed", _veterancy];
-		_unit setSkill ["commanding", _veterancy];
-		zeus addCuratorEditableObjects [[_unit], true];
-	};	
-	sleep 0.05;
-} forEach _units;
+// Move the marker with group leader 
+[_mkr, _grp] remoteExec ["lmn_fnc_squadAttachMarker", 2];
 
-_activeGroups = _trig getVariable ["ActiveGroups", []];
-_activeGroups pushback _group;
-_trig setVariable ["ActiveGroups", _activeGroups, true];
-
-// Provide orders to the squad 
-[_group, _destination, 50] call BIS_fnc_taskPatrol;
+// Give orders to the unit
+[_grp, _missionLocation select 2, 150] call BIS_fnc_taskPatrol;
